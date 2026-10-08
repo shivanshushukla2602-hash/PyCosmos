@@ -1,0 +1,125 @@
+/* ==========================================================================
+   PYCOSMOS CENTRALIZED BRAND THEME SYSTEM
+   Official Python Identity: Blue (#3776AB) + Yellow (#FFD43B) Only
+   ========================================================================== */
+
+:root {
+  /* ═══ 1. BRAND COLOR TOKENS ═══ */
+  --py-blue: #3776AB;
+  --py-blue-deep: #2B5B84;
+  --py-blue-light: #4E95D4;
+  --py-yellow: #FFD43B;
+  --py-yellow-soft: #FFE873;
+  --py-yellow-hover: #FACC15;
+
+  /* ═══ 2. DARK THEME SURFACES & ACCENTS (Default) ═══ */
+  --bg-main: #0A1018;
+  --surface: #111A27;
+  --surface-2: #17233A;
+  --surface-hover: #1C2B47;
+  --border-color: #1F2E44;
+  --border-glow: rgba(55, 118, 171, 0.35);
+  --border-blue: rgba(55, 118, 171, 0.45);
+  --border-yellow: rgba(255, 212, 59, 0.4);
+
+  /* ═══ 3. HIGH-CONTRAST TYPOGRAPHY TOKENS (WCAG AA Compliant) ═══ */
+  --text-primary: #F1F5FB;     /* Ratio: ~17:1 on #0A1018 */
+  --text-secondary: #CBD5E1;   /* Clean readable secondary */
+  --text-muted: #A9B7CC;       /* Ratio: >7.5:1 on #0A1018 */
+  --text-dark: #0A1018;        /* Dark text for yellow button */
+
+  /* ═══ 4. SYSTEM ROLES: BLUE = STRUCTURE, YELLOW = ACTION & SUCCESS ═══ */
+  /* Blue = Nav, Cards, Links, Dividers, Structure */
+  --color-structure: var(--py-blue);
+  --color-structure-deep: var(--py-blue-deep);
+  --color-structure-glow: rgba(55, 118, 171, 0.25);
+
+  /* Yellow = Primary CTA, Streaks, Completed state, Active pill */
+  --color-action: var(--py-yellow);
+  --color-action-soft: var(--py-yellow-soft);
+  --color-action-glow: rgba(255, 212, 59, 0.3);
+
+  /* Only Red for Critical Errors / Destructive actions */
+  --color-error: #EF4444;
+  --color-error-bg: rgba(239, 68, 68, 0.12);
+
+  /* Legacy mappings mapped strictly to Python Blue & Yellow */
+  --accent-emerald: var(--py-yellow);
+  --accent-amber: var(--py-yellow);
+  --accent-rose: var(--color-error);
+
+  /* ═══ 5. TYPOGRAPHY FAMILIES & SCALING ═══ */
+  --font-heading: 'Space Grotesk', 'Sora', sans-serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  --text-base-size: 16px;
+  --text-card-desc: 14px;
+
+  /* ═══ 6. RADII & SHADOWS ═══ */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;       /* 16px = rounded-2xl for cards */
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  --shadow-card: 0 8px 30px rgba(0, 0, 0, 0.45);
+  --shadow-card-hover: 0 14px 40px -10px rgba(55, 118, 171, 0.35);
+  --shadow-yellow-glow: 0 0 24px rgba(255, 212, 59, 0.35);
+
+  --transition-fast: 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-smooth: 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* ═══ 7. NAVBAR VARIABLES ═══ */
+  --bg-navbar: rgba(17, 26, 39, 0.88);
+  --bg-nav-links: rgba(23, 35, 58, 0.7);
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   OFFICIAL PYTHON LOGO LIGHT THEME SYSTEM (Blue & Yellow Identity)
+   ══════════════════════════════════════════════════════════════════════════ */
+body.light-theme {
+  --bg-main: #F4F7FB;
+  --surface: #FFFFFF;
+  --surface-2: #EAF1F8;
+  --surface-hover: #DFEAF4;
+  --border-color: #CFDDEB;
+  --border-glow: rgba(55, 118, 171, 0.2);
+  --border-blue: rgba(55, 118, 171, 0.4);
+  --border-yellow: rgba(200, 138, 0, 0.4);
+
+  --text-primary: #0A1018;
+  --text-secondary: #334E68;
+  --text-muted: #5A718C;      /* WCAG AA > 5.5:1 on light */
+  --text-dark: #0A1018;
+
+  --py-blue: #2B5B84;
+  --py-blue-deep: #1A3C58;
+  --py-blue-light: #3776AB;
+  
+  /* High-contrast readable golden amber for light mode */
+  --py-yellow: #C88A00;
+  --py-yellow-soft: #D99B00;
+  --py-yellow-hover: #B47C00;
+
+  --color-structure: #2B5B84;
+  --color-structure-deep: #1A3C58;
+  --color-structure-glow: rgba(43, 91, 132, 0.15);
+
+  --color-action: #C88A00;
+  --color-action-soft: #D99B00;
+  --color-action-glow: rgba(200, 138, 0, 0.25);
+
+  --color-error: #DC2626;
+  --color-error-bg: rgba(220, 38, 38, 0.1);
+
+  --accent-emerald: var(--py-yellow);
+  --accent-amber: var(--py-yellow);
+
+  --bg-navbar: rgba(255, 255, 255, 0.92);
+  --bg-nav-links: rgba(234, 241, 248, 0.85);
+
+  --shadow-card: 0 6px 24px rgba(10, 16, 24, 0.06);
+  --shadow-card-hover: 0 12px 32px -8px rgba(43, 91, 132, 0.22);
+  --shadow-yellow-glow: 0 0 20px rgba(200, 138, 0, 0.25);
+}

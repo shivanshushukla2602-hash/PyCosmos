@@ -1,0 +1,80 @@
+<svg width="64" height="64" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="favDorsal" x1="15%" y1="10%" x2="85%" y2="90%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="50%" stop-color="#0284c7" />
+      <stop offset="100%" stop-color="#1e3a8a" />
+    </linearGradient>
+    <linearGradient id="favBelly" x1="10%" y1="10%" x2="90%" y2="90%">
+      <stop offset="0%" stop-color="#fde047" />
+      <stop offset="50%" stop-color="#f59e0b" />
+      <stop offset="100%" stop-color="#d97706" />
+    </linearGradient>
+    <radialGradient id="favEye" cx="40%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="60%" stop-color="#fde047" />
+      <stop offset="100%" stop-color="#ca8a04" />
+    </radialGradient>
+  </defs>
+
+  <!-- Ambient Glow -->
+  <circle cx="60" cy="60" r="50" fill="#0284c7" opacity="0.15" />
+
+  <!-- Serpent Body (Dorsal Sapphire) -->
+  <path
+    d="M 88 24
+       C 74 15, 52 14, 40 24
+       C 27 34, 25 52, 33 66
+       C 39 76, 51 80, 58 78
+       C 66 76, 73 70, 75 62
+       C 77 54, 72 46, 62 45
+       C 50 44, 42 54, 44 67
+       C 45 78, 54 88, 67 92
+       C 80 96, 92 90, 94 77
+       C 96 66, 88 56, 76 54
+       C 68 53, 62 57, 58 63
+       C 55 68, 58 74, 64 74
+       C 70 74, 73 69, 71 65
+       C 70 63, 67 62, 65 63
+       C 62 64, 62 67, 65 68
+       C 68 69, 74 65, 71 58
+       C 67 52, 57 52, 51 58
+       C 45 64, 47 75, 55 81
+       C 65 87, 80 85, 84 73
+       C 87 63, 79 53, 67 50
+       C 53 47, 36 57, 36 73
+       C 36 88, 50 100, 68 100
+       C 86 100, 102 86, 99 64
+       C 97 45, 80 34, 63 35
+       C 52 35, 44 41, 41 49
+       C 38 41, 44 32, 54 26
+       C 64 20, 80 20, 91 29
+       Z"
+    fill="url(#favDorsal)"
+  />
+
+  <!-- Underbelly (Ventral Amber) -->
+  <path
+    d="M 54 26 C 44 32, 38 41, 41 49 C 44 41, 52 35, 63 35 C 57 32, 53 29, 54 26 Z
+       M 36 73 C 36 57, 53 47, 67 50 C 60 48, 48 53, 44 65 C 42 71, 43 78, 48 83 C 42 79, 36 76, 36 73 Z
+       M 68 100 C 50 100, 36 88, 36 73 C 38 82, 48 93, 62 95 C 74 97, 86 92, 90 84 C 88 92, 79 99, 68 100 Z"
+    fill="url(#favBelly)"
+  />
+
+  <!-- Snake Head, Snout & Jaw -->
+  <path
+    d="M 82 17 C 89 16, 98 18, 105 23 C 109 26, 111 28, 112 31 C 111 33, 107 35, 102 36 C 97 37, 92 35, 87 34 C 84 37, 79 38, 75 36 C 72 34, 72 30, 74 26 C 75 22, 78 18, 82 17 Z"
+    fill="url(#favDorsal)"
+  />
+  <path d="M 87 34 C 93 36, 101 37, 106 36 C 108 37, 106 39, 101 41 C 95 43, 88 41, 83 38 C 81 37, 84 35, 87 34 Z" fill="#0284c7" />
+
+  <!-- Piercing Snake Eye with Slit Pupil -->
+  <ellipse cx="91" cy="24.5" rx="4.5" ry="3.8" fill="url(#favEye)" />
+  <path d="M 91 21 C 92 22.5, 92 26.5, 91 28 C 90 26.5, 90 22.5, 91 21 Z" fill="#090d16" />
+
+  <!-- Forked Tongue -->
+  <path d="M 103 34 L 112 34 M 112 34 L 119 29 M 112 34 L 119 39" stroke="#ef4444" stroke-width="2.2" stroke-linecap="round" />
+
+  <!-- Center Forge Spark -->
+  <polygon points="62,58 64,64 70,66 64,68 62,74 60,68 54,66 60,64" fill="#ffffff" />
+</svg>
