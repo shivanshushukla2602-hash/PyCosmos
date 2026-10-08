@@ -358,7 +358,7 @@ export default function HomePage({
             transition={{ duration: 0.5, delay: 0.3 }}
             className="hero-subtitle"
           >
-            <strong>PyCosmos: a whole universe of Python in one place.</strong> From absolute fundamentals to production-ready Python mastery. Follow our interactive visual roadmap, solve topic-wise quizzes, run live WebAssembly code, and explore the complete Python ecosystem.
+            From absolute fundamentals to production-ready Python mastery. Follow our interactive visual roadmap, solve topic-wise quizzes, run live WebAssembly code, and explore the complete Python ecosystem.
           </motion.p>
 
           {/* CTA Action Buttons */}
