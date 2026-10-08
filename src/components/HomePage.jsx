@@ -340,28 +340,6 @@ export default function HomePage({
             >
               <PyCosmosLogo size={84} animated={true} />
             </motion.div>
-            <div style={{
-              marginTop: '0.9rem',
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '0.6rem',
-              padding: '0.5rem 1.25rem',
-              background: 'rgba(55, 118, 171, 0.16)',
-              border: '1px solid rgba(255, 212, 59, 0.35)',
-              borderRadius: '999px',
-              backdropFilter: 'blur(10px)',
-              boxShadow: '0 4px 20px rgba(0, 0, 0, 0.3)'
-            }}>
-              <span style={{ fontSize: '0.95rem' }}>✨</span>
-              <span style={{
-                color: 'var(--text-primary)',
-                fontWeight: 700,
-                fontSize: '0.86rem',
-                letterSpacing: '0.02em'
-              }}>
-                <strong style={{ color: 'var(--py-yellow)' }}>PyCosmos:</strong> a whole universe of Python in one place.
-              </span>
-            </div>
           </motion.div>
 
           <motion.h1
