@@ -28,6 +28,7 @@ export default function Navbar({
   setSearchQuery,
   streakCount = 1,
   bookmarkCount = 0,
+  isBookmarksOpen = false,
   onOpenBookmarks,
   theme,
   setTheme,
@@ -197,12 +198,17 @@ export default function Navbar({
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={onOpenBookmarks}
-            className="navbar-icon-btn"
+            className={`navbar-icon-btn ${isBookmarksOpen ? 'active' : ''}`}
             title={`Revision Bookmarks (${bookmarkCount})`}
             type="button"
             aria-label="Bookmarks"
+            aria-expanded={isBookmarksOpen}
           >
-            <Bookmark size={17} />
+            <Bookmark
+              size={17}
+              fill={bookmarkCount > 0 ? "var(--py-yellow)" : "none"}
+              color={bookmarkCount > 0 ? "var(--py-yellow)" : "currentColor"}
+            />
             {bookmarkCount > 0 && (
               <span className="navbar-badge-counter">{bookmarkCount}</span>
             )}

@@ -12,6 +12,17 @@ export default function BookmarksDrawer({
 }) {
   const bookmarkedTopics = topics.filter((t) => bookmarkedIds.includes(t.id));
 
+  // Close on Escape key press
+  React.useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape' && isOpen) {
+        onClose();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose]);
+
   return (
     <AnimatePresence>
       {isOpen && (

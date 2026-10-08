@@ -270,7 +270,8 @@ export default function App() {
         setSearchQuery={setSearchQuery}
         streakCount={streakCount}
         bookmarkCount={bookmarkedIds.length}
-        onOpenBookmarks={() => setIsBookmarksOpen(true)}
+        isBookmarksOpen={isBookmarksOpen}
+        onOpenBookmarks={() => setIsBookmarksOpen((prev) => !prev)}
         theme={theme}
         setTheme={setTheme}
         currentUser={currentUser}
