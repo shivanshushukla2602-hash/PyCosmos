@@ -1,0 +1,7 @@
+{
+  "window.title": "PyCosmos — ${dirty}${activeEditorShort}${separator}${rootName}",
+  "workbench.colorCustomizations": {
+    "titleBar.activeBackground": "#0A1018",
+    "titleBar.activeForeground": "#FFD43B"
+  }
+}
