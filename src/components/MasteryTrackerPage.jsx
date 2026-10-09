@@ -18,7 +18,15 @@ import {
   RotateCcw,
   Check,
   BookOpen,
-  X
+  X,
+  Terminal,
+  Workflow,
+  Cpu,
+  Zap,
+  Shield,
+  Target,
+  Activity,
+  Sliders
 } from 'lucide-react';
 import { MASTERY_LEVELS, PROGRESSION_TRACKS } from '../data/masteryLevels';
 import { TOPICS_BY_ID } from '../data/topicsData';
@@ -93,6 +101,99 @@ export default function MasteryTrackerPage({
 
   const nextTargetLevel = MASTERY_LEVELS.find((l) => getLevelStatus(l).status !== 'completed');
 
+  // 6 ARCHITECTURAL PILLARS FOR SVG RADAR CHART
+  const PILLARS = [
+    { id: 'runtime', name: 'Runtime & Primitives', levels: [1, 2, 3, 4, 5], color: '#38bdf8' },
+    { id: 'functional', name: 'Functions & Iterators', levels: [6, 7, 8], color: '#34d399' },
+    { id: 'oop', name: 'OOP & Metaprogramming', levels: [9, 10, 11, 12, 13], color: '#ffd43b' },
+    { id: 'async', name: 'Async & Concurrency', levels: [14, 15, 16, 17], color: '#f43f5e' },
+    { id: 'internals', name: 'CPython Internals & GIL', levels: [18, 19, 20, 21, 22], color: '#c084fc' },
+    { id: 'systems', name: 'Production Systems', levels: [23, 24, 25, 26, 27], color: '#60a5fa' }
+  ];
+
+  const pillarStats = PILLARS.map((p) => {
+    const lvlObjects = MASTERY_LEVELS.filter((lvl) => p.levels.includes(lvl.level));
+    const done = lvlObjects.filter((lvl) => getLevelStatus(lvl).status === 'completed').length;
+    const total = lvlObjects.length;
+    const percent = total > 0 ? Math.round((done / total) * 100) : 0;
+    return { ...p, done, total, percent };
+  });
+
+  const [activePillarHover, setActivePillarHover] = useState(null);
+
+  // Radar chart SVG geometry
+  const radarCX = 135;
+  const radarCY = 135;
+  const radarR = 92;
+
+  const getHexPoints = (radiusRatio) => {
+    const r = radarR * radiusRatio;
+    return PILLARS.map((_, i) => {
+      const angle = (i * 60 - 90) * (Math.PI / 180);
+      return `${radarCX + r * Math.cos(angle)},${radarCY + r * Math.sin(angle)}`;
+    }).join(' ');
+  };
+
+  const radarDataPoints = pillarStats.map((stat, i) => {
+    const angle = (i * 60 - 90) * (Math.PI / 180);
+    const r = radarR * (0.16 + (stat.percent / 100) * 0.84);
+    const x = radarCX + r * Math.cos(angle);
+    const y = radarCY + r * Math.sin(angle);
+    const outerX = radarCX + (radarR + 18) * Math.cos(angle);
+    const outerY = radarCY + (radarR + 18) * Math.sin(angle);
+    return { x, y, outerX, outerY, angle, stat, i };
+  });
+
+  const radarPolygonStr = radarDataPoints.map((p) => `${p.x},${p.y}`).join(' ');
+
+  // 4-Tier Belt Definition
+  const TIERS = [
+    {
+      id: 'apprentice',
+      tierNum: 1,
+      title: 'Apprentice Voyager',
+      range: 'L1 - L6',
+      color: '#f59e0b',
+      perk: 'CPython & Primitives Unlocked',
+      minLevels: 0,
+      isUnlocked: true,
+      isCurrent: completedLevels < 7
+    },
+    {
+      id: 'architect',
+      tierNum: 2,
+      title: 'Systems Architect',
+      range: 'L7 - L13',
+      color: '#38bdf8',
+      perk: 'OOP & Metaprogramming Cleared',
+      minLevels: 7,
+      isUnlocked: completedLevels >= 7,
+      isCurrent: completedLevels >= 7 && completedLevels < 14
+    },
+    {
+      id: 'grandmaster',
+      tierNum: 3,
+      title: 'Python Grandmaster',
+      range: 'L14 - L20',
+      color: '#ffd43b',
+      perk: 'Async, Concurrency & GIL Cleared',
+      minLevels: 14,
+      isUnlocked: completedLevels >= 14,
+      isCurrent: completedLevels >= 14 && completedLevels < 21
+    },
+    {
+      id: 'paragon',
+      tierNum: 4,
+      title: 'Cosmic Paragon',
+      range: 'L21 - L27',
+      color: '#c084fc',
+      perk: 'Full Bytecode & Architecture Mastered',
+      minLevels: 21,
+      isUnlocked: completedLevels >= 21,
+      isCurrent: completedLevels >= 21
+    }
+  ];
+
   const resetFilters = () => {
     setSearchQuery('');
     setFilterCategory('all');
@@ -110,63 +211,262 @@ export default function MasteryTrackerPage({
       transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
       className="mastery-tracker-page"
     >
-      {/* 1. HERO HEADER WITH SNAKE EMBLEM & METRICS */}
-      <div className="tracker-hero-banner">
-        <div className="tracker-hero-content">
+      {/* 1. BESPOKE ARCHITECTURAL RADAR & TELEMETRY COMMAND BRIDGE */}
+      <div className="radar-telemetry-command-banner">
+        {/* TOP TITLE ROW */}
+        <div className="command-banner-header">
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
-            style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}
+            style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}
           >
             <div style={{ position: 'relative' }}>
-              <div className="hero-snake-bloom" style={{ width: '80px', height: '80px' }} />
-              <PyCosmosLogo size={46} animated={true} />
+              <div className="hero-snake-bloom" style={{ width: '64px', height: '64px' }} />
+              <PyCosmosLogo size={38} animated={true} />
             </div>
             <span style={{ fontSize: '0.78rem', fontWeight: 800, letterSpacing: '0.08em', color: 'var(--py-yellow)', textTransform: 'uppercase' }}>
               27-LEVEL PYTHON MASTERY MATRIX
             </span>
           </motion.div>
 
-          <h1 style={{ fontSize: '2.5rem', fontWeight: 900, marginBottom: '0.4rem' }}>
+          <h1 style={{ fontSize: '2.4rem', fontWeight: 900, margin: '0.1rem 0 0.4rem', color: 'var(--text-primary)' }}>
             Python <span className="forge-gradient-text">Mastery Tracker</span>
           </h1>
-          <p style={{ maxWidth: '720px', lineHeight: 1.6 }}>
-            Track your systematic progression across all 27 technical milestones—from fundamental CPython execution mechanics up to asynchronous concurrency and production AI/ML architectures.
+          <p style={{ maxWidth: '780px', lineHeight: 1.55, color: 'var(--text-secondary)', fontSize: '0.92rem', margin: 0 }}>
+            Systematic progression across all 27 technical milestones—from fundamental CPython execution mechanics to asynchronous concurrency and production architectures.
           </p>
+        </div>
 
-          {/* Quick Metrics Bar with AnimatedCounter */}
-          <div className="tracker-metrics-row">
-            <div className="tracker-stat-box" style={{ borderLeft: '4px solid var(--py-yellow)' }}>
-              <span className="stat-label">Overall Mastery</span>
-              <span className="stat-val highlight"><AnimatedCounter value={overallPercent} />%</span>
+        {/* BESPOKE COMMAND DECK: RADAR MATRIX (LEFT) + TELEMETRY HUD (RIGHT) */}
+        <div className="radar-telemetry-grid">
+          {/* LEFT: 6-PILLAR INTERACTIVE SVG RADAR CHART */}
+          <div className="radar-chart-card">
+            <div className="radar-card-header">
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
+                <Activity size={15} color="#38bdf8" />
+                <span className="radar-card-title">6-Pillar Skill Radar Matrix</span>
+              </div>
+              <span className="radar-live-badge">TELEMETRY LIVE</span>
             </div>
-            <div className="tracker-stat-box" style={{ borderLeft: '4px solid #22c55e' }}>
-              <span className="stat-label">Completed Levels</span>
-              <span className="stat-val"><AnimatedCounter value={completedLevels} /> / {totalLevels}</span>
+
+            <div className="radar-svg-wrapper">
+              <svg width="270" height="270" viewBox="0 0 270 270" className="radar-svg">
+                <defs>
+                  <linearGradient id="radarPolyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="rgba(56, 189, 248, 0.45)" />
+                    <stop offset="50%" stopColor="rgba(255, 212, 59, 0.35)" />
+                    <stop offset="100%" stopColor="rgba(192, 132, 252, 0.4)" />
+                  </linearGradient>
+                  <filter id="radarGlow" x="-20%" y="-20%" width="140%" height="140%">
+                    <feGaussianBlur stdDeviation="3" result="blur" />
+                    <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                  </filter>
+                </defs>
+
+                {/* Concentric Grid Hexagons */}
+                <polygon points={getHexPoints(0.25)} fill="none" stroke="rgba(255, 255, 255, 0.05)" strokeWidth="1" />
+                <polygon points={getHexPoints(0.5)} fill="none" stroke="rgba(255, 255, 255, 0.07)" strokeWidth="1" strokeDasharray="3 3" />
+                <polygon points={getHexPoints(0.75)} fill="none" stroke="rgba(255, 255, 255, 0.09)" strokeWidth="1" />
+                <polygon points={getHexPoints(1.0)} fill="none" stroke="rgba(56, 189, 248, 0.22)" strokeWidth="1.5" />
+
+                {/* Axis Spokes from center to outer vertices */}
+                {radarDataPoints.map((pt, i) => (
+                  <line
+                    key={i}
+                    x1={radarCX}
+                    y1={radarCY}
+                    x2={radarCX + radarR * Math.cos(pt.angle)}
+                    y2={radarCY + radarR * Math.sin(pt.angle)}
+                    stroke="rgba(255, 255, 255, 0.08)"
+                    strokeWidth="1"
+                  />
+                ))}
+
+                {/* Animated Dynamic Data Polygon */}
+                <motion.polygon
+                  points={radarPolygonStr}
+                  fill="url(#radarPolyGrad)"
+                  stroke="#38bdf8"
+                  strokeWidth="2.5"
+                  filter="url(#radarGlow)"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 1.2, ease: 'easeOut' }}
+                  style={{ originX: `${radarCX}px`, originY: `${radarCY}px` }}
+                />
+
+                {/* Vertices & Hover Nodes */}
+                {radarDataPoints.map((pt, i) => {
+                  const isHovered = activePillarHover === pt.stat.id;
+                  return (
+                    <g
+                      key={pt.stat.id}
+                      onMouseEnter={() => setActivePillarHover(pt.stat.id)}
+                      onMouseLeave={() => setActivePillarHover(null)}
+                      style={{ cursor: 'pointer' }}
+                    >
+                      <circle
+                        cx={pt.x}
+                        cy={pt.y}
+                        r={isHovered ? 6 : 4}
+                        fill={pt.stat.color}
+                        stroke="#0f172a"
+                        strokeWidth="2"
+                        style={{
+                          transition: 'all 0.2s ease',
+                          filter: isHovered ? `drop-shadow(0 0 6px ${pt.stat.color})` : 'none'
+                        }}
+                      />
+                    </g>
+                  );
+                })}
+              </svg>
+
+              {/* Dynamic Pillar Tooltip / Pill readout */}
+              <div className="radar-pillars-chips">
+                {pillarStats.map((p) => {
+                  const isHovered = activePillarHover === p.id;
+                  return (
+                    <div
+                      key={p.id}
+                      className={`radar-pillar-chip ${isHovered ? 'hovered' : ''}`}
+                      onMouseEnter={() => setActivePillarHover(p.id)}
+                      onMouseLeave={() => setActivePillarHover(null)}
+                      style={{ '--chip-accent': p.color }}
+                    >
+                      <span className="chip-dot" style={{ background: p.color }} />
+                      <span className="chip-name">{p.name}</span>
+                      <strong className="chip-pct">{p.percent}%</strong>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
-            <div className="tracker-stat-box" style={{ borderLeft: '4px solid #f59e0b' }}>
-              <span className="stat-label">In-Flight Levels</span>
-              <span className="stat-val"><AnimatedCounter value={inProgressLevels} /></span>
+          </div>
+
+          {/* RIGHT: COMMAND TELEMETRY METRICS & TARGET POD */}
+          <div className="telemetry-hud-card">
+            <div className="telemetry-top-stats">
+              {/* Stat 1: Overall Mastery */}
+              <div className="hud-metric-pod primary-pod">
+                <div className="metric-pod-label">
+                  <Sparkles size={13} color="var(--py-yellow)" />
+                  <span>OVERALL MASTERY</span>
+                </div>
+                <div className="metric-pod-value highlight">
+                  <AnimatedCounter value={overallPercent} />%
+                </div>
+                <div className="pod-linear-track">
+                  <motion.div
+                    className="pod-linear-fill"
+                    initial={{ width: 0 }}
+                    animate={{ width: `${overallPercent}%` }}
+                    transition={{ duration: 1.2, ease: 'easeOut' }}
+                    style={{ background: 'linear-gradient(90deg, #38bdf8, #ffd43b)' }}
+                  />
+                </div>
+              </div>
+
+              {/* Stat 2: Completed Levels */}
+              <div className="hud-metric-pod">
+                <div className="metric-pod-label">
+                  <CheckCircle2 size={13} color="#22c55e" />
+                  <span>LEVELS CLEARED</span>
+                </div>
+                <div className="metric-pod-value">
+                  <AnimatedCounter value={completedLevels} />
+                  <span className="metric-denom"> / {totalLevels}</span>
+                </div>
+                <span className="pod-subtext">{totalLevels - completedLevels} levels remaining</span>
+              </div>
+
+              {/* Stat 3: In-Flight */}
+              <div className="hud-metric-pod">
+                <div className="metric-pod-label">
+                  <Clock size={13} color="#f59e0b" />
+                  <span>ACTIVE IN-FLIGHT</span>
+                </div>
+                <div className="metric-pod-value">
+                  <AnimatedCounter value={inProgressLevels} />
+                </div>
+                <span className="pod-subtext">Currently learning</span>
+              </div>
             </div>
-            <div className="tracker-stat-box" style={{ borderLeft: '4px solid var(--py-blue-light)' }}>
-              <span className="stat-label">Next Target</span>
-              <span className="stat-val" style={{ fontSize: '1.1rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                {nextTargetLevel ? `L${nextTargetLevel.level}: ${nextTargetLevel.area}` : 'All Mastered'}
-              </span>
+
+            {/* NEXT TARGET MISSION BOX */}
+            <div className="hud-target-pod">
+              <div className="target-pod-header">
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
+                  <Target size={15} color="var(--py-yellow)" />
+                  <span className="target-badge-label">NEXT OBJECTIVE TARGET</span>
+                </div>
+                {nextTargetLevel && (
+                  <span className="target-level-pill">Level {nextTargetLevel.level}</span>
+                )}
+              </div>
+
+              {nextTargetLevel ? (
+                <div className="target-pod-body">
+                  <h4 className="target-topic-title">{nextTargetLevel.area}</h4>
+                  <p className="target-topic-desc">{nextTargetLevel.description}</p>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSearchQuery(nextTargetLevel.area);
+                    }}
+                    className="target-jump-btn"
+                  >
+                    <span>Focus on Level {nextTargetLevel.level}</span>
+                    <ArrowRight size={13} />
+                  </button>
+                </div>
+              ) : (
+                <div className="target-pod-body">
+                  <h4 className="target-topic-title" style={{ color: '#22c55e' }}>All 27 Milestones Mastered!</h4>
+                  <p className="target-topic-desc">You have achieved supreme Python engineering mastery across all domains.</p>
+                </div>
+              )}
             </div>
           </div>
         </div>
 
-        {/* Global Forge Progress Bar */}
-        <div className="global-progress-track">
-          <div className="track-bar-bg" style={{ height: '12px' }}>
-            <motion.div
-              className="track-bar-fill"
-              initial={{ width: 0 }}
-              animate={{ width: `${overallPercent}%` }}
-              transition={{ duration: 1.2, ease: 'easeOut' }}
-            />
+        {/* ── HOLOGRAPHIC 4-TIER BELT SHOWCASE ── */}
+        <div className="holographic-tier-belt">
+          <div className="tier-belt-header">
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
+              <Award size={15} color="var(--py-yellow)" />
+              <span className="tier-belt-title">Holographic Mastery Tier Belt</span>
+            </div>
+            <span className="tier-belt-sub">Unlocked automatically as you master the 27 levels</span>
+          </div>
+
+          <div className="tier-cards-track">
+            {TIERS.map((tier) => (
+              <motion.div
+                key={tier.id}
+                whileHover={{ y: -3, scale: 1.015 }}
+                className={`holographic-tier-card ${tier.isCurrent ? 'is-current' : tier.isUnlocked ? 'is-unlocked' : 'is-locked'}`}
+                style={{ '--tier-color': tier.color }}
+              >
+                <div className="tier-card-status-bar">
+                  <span className="tier-range-badge">{tier.range}</span>
+                  {tier.isCurrent && <span className="tier-current-tag">ACTIVE TIER</span>}
+                  {!tier.isCurrent && tier.isUnlocked && <span className="tier-completed-tag">CLEARED ✓</span>}
+                  {!tier.isUnlocked && <span className="tier-locked-tag">LOCKED</span>}
+                </div>
+
+                <div className="tier-card-body">
+                  <div className="tier-card-icon-emblem" style={{ color: tier.color, background: `${tier.color}15`, border: `1px solid ${tier.color}35` }}>
+                    <Trophy size={18} />
+                  </div>
+                  <div>
+                    <h5 className="tier-card-title">{tier.title}</h5>
+                    <span className="tier-card-perk">{tier.perk}</span>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </div>

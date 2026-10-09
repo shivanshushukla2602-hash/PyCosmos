@@ -31,7 +31,11 @@ import {
   Flame,
   FileCode2,
   Circle,
-  X
+  X,
+  Calendar,
+  Sliders,
+  Target,
+  Activity
 } from 'lucide-react';
 import { CATEGORIES } from '../data/topicsData';
 import { celebrate } from '../utils/celebrate';
@@ -125,6 +129,7 @@ export default function ChecklistPage({
   const [difficultyFilter, setDifficultyFilter] = useState('all'); // 'all' | 'Beginner' | 'Intermediate' | 'Advanced'
   const [searchQuery, setSearchQuery] = useState('');
   const [viewMode, setViewMode] = useState('list'); // 'list' | 'subtopics'
+  const [studyPace, setStudyPace] = useState(2); // topics per day
 
   const toggleCategoryCollapse = (cat) => {
     setCollapsedCategories((prev) => ({ ...prev, [cat]: !prev[cat] }));
@@ -436,36 +441,230 @@ export default function ChecklistPage({
           </div>
         </div>
 
-        {/* 3. METRICS ROW */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(210px, 1fr))', gap: '1rem', marginBottom: '2rem' }}>
-          <motion.div whileHover={{ y: -3 }} className="tracker-stat-box" style={{ borderLeft: '4px solid var(--py-yellow)' }}>
-            <span className="stat-label">Topics Mastered</span>
-            <span className="stat-val highlight">
-              <AnimatedCounter value={completedCount} /> / {totalTopics}
-            </span>
-          </motion.div>
+        {/* 3. BESPOKE DIAGNOSTIC HEALTH STATION & VELOCITY PACE SIMULATOR */}
+        {(() => {
+          const remainingTopics = Math.max(0, totalTopics - completedCount);
+          const projectedDays = Math.ceil(remainingTopics / (studyPace || 1));
+          const targetDateObj = new Date();
+          targetDateObj.setDate(targetDateObj.getDate() + projectedDays);
+          const projectedDateStr = targetDateObj.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 
-          <motion.div whileHover={{ y: -3 }} className="tracker-stat-box" style={{ borderLeft: '4px solid #22c55e' }}>
-            <span className="stat-label">Subtopics Completed</span>
-            <span className="stat-val">
-              <AnimatedCounter value={completedSubtopicsCount} />
-            </span>
-          </motion.div>
+          const healthGrade =
+            percentCompleted >= 90 ? 'A+' :
+            percentCompleted >= 75 ? 'A' :
+            percentCompleted >= 50 ? 'B' :
+            percentCompleted >= 25 ? 'C' : 'Initiate';
 
-          <motion.div whileHover={{ y: -3 }} className="tracker-stat-box" style={{ borderLeft: '4px solid #f59e0b' }}>
-            <span className="stat-label">Currently Learning</span>
-            <span className="stat-val">
-              <AnimatedCounter value={learningSubtopicsCount} />
-            </span>
-          </motion.div>
+          const donutR = 54;
+          const donutCirc = 2 * Math.PI * donutR;
+          const doneRatio = totalSubtopicsCount > 0 ? completedSubtopicsCount / totalSubtopicsCount : 0;
+          const learningRatio = totalSubtopicsCount > 0 ? learningSubtopicsCount / totalSubtopicsCount : 0;
 
-          <motion.div whileHover={{ y: -3 }} className="tracker-stat-box" style={{ borderLeft: '4px solid #64748b' }}>
-            <span className="stat-label">Not Started</span>
-            <span className="stat-val">
-              <AnimatedCounter value={totalSubtopicsCount - completedSubtopicsCount - learningSubtopicsCount} />
-            </span>
-          </motion.div>
-        </div>
+          return (
+            <div className="checklist-health-station-card">
+              <div className="health-station-grid">
+                {/* LEFT POD: MULTI-SEGMENT DONUT HEALTH GAUGE */}
+                <div className="health-donut-pod">
+                  <div className="donut-pod-header">
+                    <Activity size={15} color="#38bdf8" />
+                    <span className="donut-pod-title">Curriculum Health Diagnostic</span>
+                  </div>
+
+                  <div className="donut-chart-flex">
+                    <div className="donut-svg-wrapper">
+                      <svg width="138" height="138" viewBox="0 0 138 138" className="health-donut-svg">
+                        <defs>
+                          <linearGradient id="donutDoneGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stopColor="#38bdf8" />
+                            <stop offset="100%" stopColor="#22c55e" />
+                          </linearGradient>
+                        </defs>
+
+                        {/* Background track */}
+                        <circle cx="69" cy="69" r={donutR} fill="none" stroke="rgba(255, 255, 255, 0.06)" strokeWidth="11" />
+
+                        {/* Mastered Segment (Green/Cyan) */}
+                        <motion.circle
+                          cx="69"
+                          cy="69"
+                          r={donutR}
+                          fill="none"
+                          stroke="url(#donutDoneGrad)"
+                          strokeWidth="11"
+                          strokeLinecap="round"
+                          strokeDasharray={`${doneRatio * donutCirc} ${donutCirc}`}
+                          initial={{ strokeDasharray: `0 ${donutCirc}` }}
+                          animate={{ strokeDasharray: `${doneRatio * donutCirc} ${donutCirc}` }}
+                          transition={{ duration: 1.2, ease: 'easeOut' }}
+                          transform="rotate(-90 69 69)"
+                        />
+
+                        {/* Learning Segment (Amber) */}
+                        {learningSubtopicsCount > 0 && (
+                          <motion.circle
+                            cx="69"
+                            cy="69"
+                            r={donutR}
+                            fill="none"
+                            stroke="#f59e0b"
+                            strokeWidth="11"
+                            strokeLinecap="round"
+                            strokeDasharray={`${learningRatio * donutCirc} ${donutCirc}`}
+                            strokeDashoffset={-doneRatio * donutCirc}
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ duration: 1 }}
+                            transform="rotate(-90 69 69)"
+                          />
+                        )}
+                      </svg>
+
+                      {/* Donut Center Display */}
+                      <div className="donut-center-content">
+                        <span className="donut-grade-badge">{healthGrade}</span>
+                        <span className="donut-percent-num">
+                          <AnimatedCounter value={percentCompleted} />%
+                        </span>
+                        <span className="donut-sub-label">HEALTH</span>
+                      </div>
+                    </div>
+
+                    {/* Donut Legend */}
+                    <div className="donut-segment-legend">
+                      <div className="segment-legend-row">
+                        <span className="segment-dot-indicator" style={{ background: '#22c55e' }} />
+                        <div className="segment-legend-text">
+                          <span className="segment-name">Mastered</span>
+                          <strong className="segment-num">{completedSubtopicsCount} subtopics</strong>
+                        </div>
+                      </div>
+                      <div className="segment-legend-row">
+                        <span className="segment-dot-indicator" style={{ background: '#f59e0b' }} />
+                        <div className="segment-legend-text">
+                          <span className="segment-name">In-Flight Learning</span>
+                          <strong className="segment-num">{learningSubtopicsCount} subtopics</strong>
+                        </div>
+                      </div>
+                      <div className="segment-legend-row">
+                        <span className="segment-dot-indicator" style={{ background: 'rgba(255, 255, 255, 0.25)' }} />
+                        <div className="segment-legend-text">
+                          <span className="segment-name">Unstarted</span>
+                          <strong className="segment-num">{totalSubtopicsCount - completedSubtopicsCount - learningSubtopicsCount} subtopics</strong>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* RIGHT POD: SPRINT VELOCITY PACE SLIDER & FORECAST */}
+                <div className="sprint-pace-pod">
+                  <div className="sprint-pod-header">
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
+                      <Sliders size={15} color="var(--py-yellow)" />
+                      <span className="sprint-pod-title">Sprint Velocity Pace Simulator</span>
+                    </div>
+                    <span className="sprint-time-tag">~{studyPace * 30} mins / day</span>
+                  </div>
+
+                  <div className="pace-slider-box">
+                    <div className="pace-label-line">
+                      <span className="pace-question-text">Target Study Pace:</span>
+                      <span className="pace-active-display">
+                        <strong>{studyPace}</strong> {studyPace === 1 ? 'topic' : 'topics'} / day
+                      </span>
+                    </div>
+
+                    <div className="pace-range-wrapper">
+                      <input
+                        type="range"
+                        min="1"
+                        max="5"
+                        step="1"
+                        value={studyPace}
+                        onChange={(e) => setStudyPace(parseInt(e.target.value, 10))}
+                        className="horizon-range-slider pace-slider-input"
+                        aria-label="Set study pace in topics per day"
+                      />
+                      <div className="pace-ticks-row">
+                        {[1, 2, 3, 4, 5].map((p) => (
+                          <button
+                            key={p}
+                            type="button"
+                            onClick={() => setStudyPace(p)}
+                            className={`pace-tick-chip ${studyPace === p ? 'active' : ''}`}
+                          >
+                            {p} {p === 1 ? 'topic' : 'topics'}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Dynamic Projection Forecast Banner */}
+                  <div className="pace-projection-banner">
+                    <div className="projection-col">
+                      <span className="projection-label">Topics Remaining</span>
+                      <span className="projection-val highlight">{remainingTopics} topics</span>
+                    </div>
+                    <div className="projection-divider" />
+                    <div className="projection-col">
+                      <span className="projection-label">Projected Days</span>
+                      <span className="projection-val">
+                        {remainingTopics === 0 ? '0 days' : `~${projectedDays} days`}
+                      </span>
+                    </div>
+                    <div className="projection-divider" />
+                    <div className="projection-col">
+                      <span className="projection-label">Target Completion</span>
+                      <span className="projection-val target-date">
+                        {remainingTopics === 0 ? 'Achieved! 🏆' : projectedDateStr}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* TRIO OF BESPOKE STATUS TELEMETRY PODS */}
+              <div className="checklist-trio-pods">
+                <div className="trio-pod-item gold-pod">
+                  <div className="trio-pod-icon">
+                    <Star size={16} fill="#ffd43b" color="#ffd43b" />
+                  </div>
+                  <div className="trio-pod-content">
+                    <span className="trio-pod-label">TOPICS CONQUERED</span>
+                    <span className="trio-pod-val">
+                      <AnimatedCounter value={completedCount} /> <small>/ {totalTopics}</small>
+                    </span>
+                  </div>
+                </div>
+
+                <div className="trio-pod-item emerald-pod">
+                  <div className="trio-pod-icon">
+                    <CheckCircle2 size={16} color="#22c55e" />
+                  </div>
+                  <div className="trio-pod-content">
+                    <span className="trio-pod-label">SUBTOPICS MASTERED</span>
+                    <span className="trio-pod-val">
+                      <AnimatedCounter value={completedSubtopicsCount} /> <small>/ {totalSubtopicsCount}</small>
+                    </span>
+                  </div>
+                </div>
+
+                <div className="trio-pod-item amber-pod">
+                  <div className="trio-pod-icon">
+                    <Flame size={16} color="#f59e0b" />
+                  </div>
+                  <div className="trio-pod-content">
+                    <span className="trio-pod-label">IN-FLIGHT ACTIVE</span>
+                    <span className="trio-pod-val">
+                      <AnimatedCounter value={learningSubtopicsCount} /> <small>topics</small>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          );
+        })()}
 
         {/* 4. FILTER CONTROLLER BAR */}
         <div className="tracker-filter-bar" style={{ marginBottom: '1.25rem' }}>
