@@ -3217,7 +3217,7 @@ body.light-theme .roadmap-stat-chip {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--bg-main);
+  background: transparent;
   position: relative;
   overflow-x: hidden;
   padding: 3rem 1.5rem;

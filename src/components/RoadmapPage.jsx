@@ -112,31 +112,16 @@ export default function RoadmapPage({
           </div>
         </motion.div>
 
-        <motion.h1
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.45, delay: 0.15 }}
-          className="roadmap-main-title"
-        >
+        <h1 className="roadmap-main-title">
           Python <span className="forge-gradient-text">Preparation Roadmap</span>
-        </motion.h1>
+        </h1>
 
-        <motion.p
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.45, delay: 0.2 }}
-          className="roadmap-main-subtitle"
-        >
+        <p className="roadmap-main-subtitle">
           Follow the structured 5-stage progression path from basic syntax up to high-performance system engineering. Master every core concept with verified hands-on practice.
-        </motion.p>
+        </p>
 
         {/* Quick Curriculum Metric Pills */}
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.45, delay: 0.25 }}
-          className="roadmap-stat-chips-row"
-        >
+        <div className="roadmap-stat-chips-row">
           <div className="roadmap-stat-chip" style={{ color: 'var(--py-blue-light)' }}>
             <Compass size={15} />
             <span>5 Progressive Stages</span>
@@ -153,7 +138,7 @@ export default function RoadmapPage({
             <Clock size={15} />
             <span>~65 Estimated Study Hours</span>
           </div>
-        </motion.div>
+        </div>
       </div>
 
       {/* 2. OVERALL ROADMAP PROGRESS HEADER (BAR/DONUT BREAKDOWN) */}
@@ -163,12 +148,7 @@ export default function RoadmapPage({
       <RoadmapStepper categories={ROADMAP_CATEGORIES} completedMap={completedMap} />
 
       {/* 4. INTERACTIVE SEARCH & STAGE FILTERS CONTROLLER */}
-      <motion.div
-        initial={{ opacity: 0, y: 15 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, delay: 0.2 }}
-        className="roadmap-filter-card"
-      >
+      <div className="roadmap-filter-card">
         <div className="roadmap-filter-top-row">
           {/* Search Input Box */}
           <div className="roadmap-search-box">
@@ -289,7 +269,7 @@ export default function RoadmapPage({
             <span>Not Started</span>
           </button>
         </div>
-      </motion.div>
+      </div>
 
       {/* 5. LEVEL SECTIONS & SERPENTINE TIMELINE */}
       <div className="roadmap-timeline-wrapper">

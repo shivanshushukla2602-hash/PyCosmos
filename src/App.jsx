@@ -252,7 +252,12 @@ export default function App() {
 
   // If not logged in, render AuthPage as the FIRST PAGE!
   if (!currentUser) {
-    return <AuthPage onLogin={handleLogin} theme={theme} setTheme={setTheme} />;
+    return (
+      <div className="app-container" style={{ position: 'relative' }}>
+        <AmbientBackground />
+        <AuthPage onLogin={handleLogin} theme={theme} setTheme={setTheme} />
+      </div>
+    );
   }
 
   const currentTopic = TOPICS.find((t) => t.id === selectedTopicId) || TOPICS[0];
@@ -260,8 +265,8 @@ export default function App() {
 
   return (
     <div className="app-container" style={{ position: 'relative' }}>
-      {/* Ambient Background scoped to Home Page */}
-      {currentView === 'home' && <AmbientBackground />}
+      {/* Ambient Motion Background across entire website */}
+      <AmbientBackground />
 
       <Navbar
         currentView={currentView}
