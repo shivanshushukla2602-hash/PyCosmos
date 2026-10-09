@@ -15,7 +15,6 @@ import AuthPage from './components/AuthPage';
 import MasteryTrackerPage from './components/MasteryTrackerPage';
 import { TOPICS } from './data/topicsData';
 import { Check } from 'lucide-react';
-import { AnimatePresence } from 'framer-motion';
 import PageTransition from './components/PageTransition';
 import Footer from './components/Footer';
 
@@ -54,6 +53,13 @@ export default function App() {
   });
 
   const [currentView, setCurrentView] = useState('home'); // 'home'|'roadmap'|'mastery'|'learn'|'checklist'|'quizzes'|'dashboard'|'cheatsheet'|'resources'
+
+  // Always scroll to the start of the page whenever switching sections
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    if (document.documentElement) document.documentElement.scrollTop = 0;
+    if (document.body) document.body.scrollTop = 0;
+  }, [currentView]);
 
   const [selectedTopicId, setSelectedTopicId] = useState(() => {
     return TOPICS[0]?.id || 'setup-and-fundamentals';
@@ -284,8 +290,7 @@ export default function App() {
       />
 
       {/* RENDER VIEW ACCORDING TO NAVIGATION */}
-      <AnimatePresence mode="wait">
-        <PageTransition key={currentView}>
+      <PageTransition key={currentView}>
           {currentView === 'home' && (
             <HomePage
               completedCount={completedCount}
@@ -391,7 +396,6 @@ export default function App() {
             <ResourcesPage />
           )}
         </PageTransition>
-      </AnimatePresence>
 
       {/* GLOBAL FOOTER (CONSISTENT ACROSS ALL VIEWS) */}
       <Footer onNavigate={setCurrentView} />

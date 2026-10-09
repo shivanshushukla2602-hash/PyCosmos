@@ -342,32 +342,17 @@ export default function HomePage({
             </motion.div>
           </motion.div>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="hero-title"
-          >
+          <h1 className="hero-title">
             Master Python Programming <br />
             <span className="forge-gradient-text">A Whole Universe of Python</span> in One Place
-          </motion.h1>
+          </h1>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="hero-subtitle"
-          >
+          <p className="hero-subtitle">
             From absolute fundamentals to production-ready Python mastery. Follow our interactive visual roadmap, solve topic-wise quizzes, run live WebAssembly code, and explore the complete Python ecosystem.
-          </motion.p>
+          </p>
 
           {/* CTA Action Buttons */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.35 }}
-            className="hero-actions"
-          >
+          <div className="hero-actions">
             <motion.button
               {...BUTTON_HOVER_VARIANT}
               className="btn btn-yellow btn-shimmer-wrap"
@@ -394,15 +379,10 @@ export default function HomePage({
               <Code size={20} />
               <span>{completedCount > 0 ? 'Continue Learning' : 'Start Basics'}</span>
             </motion.button>
-          </motion.div>
+          </div>
 
           {/* Integrated macOS Code Window inside Hero */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.45 }}
-            className="hero-code-terminal-card"
-          >
+          <div className="hero-code-terminal-card">
             {/* macOS Titlebar & Tabs */}
             <div className="terminal-titlebar">
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
@@ -511,7 +491,7 @@ export default function HomePage({
                 )}
               </div>
             </div>
-          </motion.div>
+          </div>
 
           {/* Scroll-down indicator */}
           <motion.div

@@ -35,7 +35,12 @@ export default function RoadmapProgressHeader({ categories, completedMap }) {
   const overallPercent = totalTopics > 0 ? Math.round((totalCompleted / totalTopics) * 100) : 0;
 
   return (
-    <div className="roadmap-progress-card">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+      className="roadmap-progress-card"
+    >
       <div className="roadmap-progress-main">
         <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', flexWrap: 'wrap' }}>
           <ProgressRing percentage={overallPercent} size={110} stroke={9} />
@@ -95,6 +100,6 @@ export default function RoadmapProgressHeader({ categories, completedMap }) {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

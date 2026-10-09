@@ -148,7 +148,12 @@ export default function RoadmapPage({
       <RoadmapStepper categories={ROADMAP_CATEGORIES} completedMap={completedMap} />
 
       {/* 4. INTERACTIVE SEARCH & STAGE FILTERS CONTROLLER */}
-      <div className="roadmap-filter-card">
+      <motion.div
+        initial={{ opacity: 0, y: 15 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, delay: 0.2 }}
+        className="roadmap-filter-card"
+      >
         <div className="roadmap-filter-top-row">
           {/* Search Input Box */}
           <div className="roadmap-search-box">
@@ -269,7 +274,7 @@ export default function RoadmapPage({
             <span>Not Started</span>
           </button>
         </div>
-      </div>
+      </motion.div>
 
       {/* 5. LEVEL SECTIONS & SERPENTINE TIMELINE */}
       <div className="roadmap-timeline-wrapper">
