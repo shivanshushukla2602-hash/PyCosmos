@@ -95,7 +95,7 @@ const TIMELINE_MILESTONES = [
 
 export default function HistoryPage() {
   return (
-    <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '2rem 1.5rem 5rem' }}>
+    <div className="history-page-container">
       {/* HERO HEADER */}
       <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
         <motion.div

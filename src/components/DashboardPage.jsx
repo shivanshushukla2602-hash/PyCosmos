@@ -170,9 +170,8 @@ export default function DashboardPage({
     <motion.div
       initial={{ opacity: 0, y: 15 }}
       animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -15 }}
       transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-      style={{ maxWidth: '1120px', margin: '0 auto', padding: '2rem 1.5rem 5rem' }}
+      className="dashboard-page-container"
     >
       {/* ═════════════════════════════════════════════════════════════════════
           1. HERO HEADER WITH PYCOSMOS BRANDING & LEVEL RING

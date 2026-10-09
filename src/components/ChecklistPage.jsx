@@ -285,55 +285,56 @@ export default function ChecklistPage({
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -15 }}
       transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-      style={{ paddingBottom: '5rem' }}
     >
       {/* 1. STICKY TOP PROGRESS BAR WITH GLASSMORPHISM */}
       <div className="sticky-top-progress" style={{ backdropFilter: 'blur(14px)', background: 'rgba(13, 17, 23, 0.92)' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', fontSize: '0.85rem', fontWeight: 700, flexWrap: 'wrap' }}>
-          <ListTodo size={18} color="var(--py-yellow)" />
-          <span style={{ color: 'var(--text-primary)' }}>Topic Mastery:</span>
-          <span style={{ color: 'var(--py-yellow)', fontFamily: 'var(--font-mono)' }}>
-            <AnimatedCounter value={completedCount} />/{totalTopics} ({percentCompleted}%)
-          </span>
-          <span style={{ color: 'var(--text-secondary)', marginLeft: '0.35rem', fontSize: '0.8rem' }}>
-            • Subtopics: {completedSubtopicsCount}/{totalSubtopicsCount}
-          </span>
-        </div>
+        <div className="sticky-top-progress-inner">
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', fontSize: '0.85rem', fontWeight: 700, flexWrap: 'wrap' }}>
+            <ListTodo size={18} color="var(--py-yellow)" />
+            <span style={{ color: 'var(--text-primary)' }}>Topic Mastery:</span>
+            <span style={{ color: 'var(--py-yellow)', fontFamily: 'var(--font-mono)' }}>
+              <AnimatedCounter value={completedCount} />/{totalTopics} ({percentCompleted}%)
+            </span>
+            <span style={{ color: 'var(--text-secondary)', marginLeft: '0.35rem', fontSize: '0.8rem' }}>
+              • Subtopics: {completedSubtopicsCount}/{totalSubtopicsCount}
+            </span>
+          </div>
 
-        <div style={{ flex: 1, maxWidth: '280px', height: '8px', background: 'rgba(255, 255, 255, 0.08)', borderRadius: '9999px', overflow: 'hidden' }}>
-          <motion.div
-            style={{ height: '100%', background: 'linear-gradient(90deg, #38bdf8, #fbbf24, #f59e0b)', borderRadius: '9999px' }}
-            initial={{ width: 0 }}
-            animate={{ width: `${percentCompleted}%` }}
-            transition={{ duration: 0.6, ease: 'easeOut' }}
-          />
-        </div>
+          <div style={{ flex: 1, maxWidth: '280px', height: '8px', background: 'rgba(255, 255, 255, 0.08)', borderRadius: '9999px', overflow: 'hidden' }}>
+            <motion.div
+              style={{ height: '100%', background: 'linear-gradient(90deg, #38bdf8, #fbbf24, #f59e0b)', borderRadius: '9999px' }}
+              initial={{ width: 0 }}
+              animate={{ width: `${percentCompleted}%` }}
+              transition={{ duration: 0.6, ease: 'easeOut' }}
+            />
+          </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-          <button
-            onClick={() => setShowResetModal(true)}
-            style={{
-              background: 'rgba(218, 54, 51, 0.12)',
-              border: '1px solid rgba(218, 54, 51, 0.3)',
-              color: '#f87171',
-              borderRadius: '6px',
-              padding: '0.3rem 0.7rem',
-              fontSize: '0.75rem',
-              fontWeight: 700,
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.35rem',
-              transition: 'background 0.2s ease'
-            }}
-          >
-            <RotateCcw size={12} />
-            <span>Reset</span>
-          </button>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <button
+              onClick={() => setShowResetModal(true)}
+              style={{
+                background: 'rgba(218, 54, 51, 0.12)',
+                border: '1px solid rgba(218, 54, 51, 0.3)',
+                color: '#f87171',
+                borderRadius: '6px',
+                padding: '0.3rem 0.7rem',
+                fontSize: '0.75rem',
+                fontWeight: 700,
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.35rem',
+                transition: 'background 0.2s ease'
+              }}
+            >
+              <RotateCcw size={12} />
+              <span>Reset</span>
+            </button>
+          </div>
         </div>
       </div>
 
-      <div style={{ maxWidth: '1120px', margin: '0 auto', padding: '2rem 1.5rem' }}>
+      <div className="checklist-content-container">
         {/* 2. HEADER SECTION WITH PYCOSMOS BRANDING */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '2.25rem', flexWrap: 'wrap', gap: '1.25rem' }}>
           <div>

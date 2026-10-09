@@ -443,7 +443,7 @@ export default function CheatSheetPage({ onShowToast }) {
         </div>
       </div>
 
-      <div style={{ maxWidth: '1120px', margin: '0 auto', padding: '2rem 1.5rem' }}>
+      <div className="cheatsheet-content-container">
         {/* HEADER SECTION WITH PYCOSMOS BRANDING */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '2.5rem', flexWrap: 'wrap', gap: '1.5rem' }}>
           <div>

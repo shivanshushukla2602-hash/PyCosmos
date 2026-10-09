@@ -271,7 +271,7 @@ export default function ResourcesPage() {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -15 }}
       transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-      style={{ maxWidth: '1120px', margin: '0 auto', padding: '2rem 1.5rem 5rem' }}
+      className="resources-page-container"
     >
       {/* 1. HERO HEADER WITH PYCOSMOS BRANDING */}
       <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>

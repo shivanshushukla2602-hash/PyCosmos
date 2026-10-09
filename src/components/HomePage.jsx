@@ -308,7 +308,7 @@ export default function HomePage({
     .filter(Boolean);
 
   return (
-    <div style={{ paddingBottom: '5rem', position: 'relative' }}>
+    <div style={{ position: 'relative' }}>
       {/* 1. FULL-VIEWPORT HERO SECTION WITH KINETIC ANIMATIONS */}
       <section
         style={{
@@ -318,7 +318,7 @@ export default function HomePage({
           alignItems: 'center',
           justifyContent: 'center',
           textAlign: 'center',
-          padding: '3rem 1.5rem 2.5rem',
+          padding: '2.5rem 2rem 2.5rem',
           position: 'relative'
         }}
       >
@@ -516,7 +516,7 @@ export default function HomePage({
         </div>
       </section>
 
-      <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 1.5rem' }}>
+      <div className="home-content-container">
         {/* 2. "YOUR JOURNEY SO FAR" SERPENTINE ROADMAP SECTION */}
         <section style={{ marginBottom: '4.5rem' }}>
           <div style={{ textAlign: 'center', marginBottom: '2rem' }}>

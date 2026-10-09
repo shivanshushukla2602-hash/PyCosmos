@@ -73,6 +73,12 @@
   /* ═══ 7. NAVBAR VARIABLES ═══ */
   --bg-navbar: rgba(17, 26, 39, 0.88);
   --bg-nav-links: rgba(23, 35, 58, 0.7);
+
+  /* ═══ 8. UNIFIED PAGE LAYOUT SPACING TOKENS (EQUAL SPACING ACROSS ALL VIEWS) ═══ */
+  --page-max-width: 1200px;
+  --page-pad-top: 2.5rem;
+  --page-pad-bottom: 4.5rem;
+  --page-pad-x: 2rem;
 }
 
 /* ══════════════════════════════════════════════════════════════════════════

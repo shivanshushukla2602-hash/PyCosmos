@@ -1297,9 +1297,11 @@ body.light-theme .heatmap-cell.level-4 { background-color: #216e39 !important; }
 
 /* ROADMAP REDESIGN & TIMELINE PATH CSS */
 .roadmap-container-redesigned {
-  max-width: 1150px;
+  max-width: var(--page-max-width, 1200px);
   margin: 0 auto;
-  padding: 2.5rem 1.5rem 5rem;
+  padding: var(--page-pad-top, 2.5rem) var(--page-pad-x, 2rem) var(--page-pad-bottom, 4.5rem);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .roadmap-hero-header {
@@ -1966,10 +1968,10 @@ body.light-theme .roadmap-stat-chip {
 /* LEARN PAGE & SIDEBAR REDESIGN CSS */
 .layout-body {
   display: flex;
-  gap: 1.5rem;
-  max-width: 1300px;
+  gap: 1.75rem;
+  max-width: var(--page-max-width, 1200px);
   margin: 0 auto;
-  padding: 1.5rem 1.25rem 4rem;
+  padding: var(--page-pad-top, 2.5rem) var(--page-pad-x, 2rem) var(--page-pad-bottom, 4.5rem);
   width: 100%;
   box-sizing: border-box;
 }
@@ -1977,7 +1979,8 @@ body.light-theme .roadmap-stat-chip {
 @media (max-width: 900px) {
   .layout-body {
     flex-direction: column;
-    padding: 1rem 1rem 3rem;
+    gap: 1.25rem;
+    padding: 1.75rem 1rem 3rem;
   }
 }
 
@@ -2956,17 +2959,25 @@ body.light-theme .roadmap-stat-chip {
 /* Sticky Top Progress Bar */
 .sticky-top-progress {
   position: sticky;
-  top: 68px;
+  top: 54px;
   z-index: 40;
   background: rgba(13, 17, 23, 0.92);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border-color);
-  padding: 0.45rem 1.5rem;
+  padding: 0;
+  margin: 0;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.sticky-top-progress-inner {
+  max-width: var(--page-max-width, 1200px);
+  margin: 0 auto;
+  padding: 0.5rem var(--page-pad-x, 2rem);
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1.25rem;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
 }
 
 /* Custom Checkbox */
@@ -3180,8 +3191,10 @@ body.light-theme .roadmap-stat-chip {
   display: flex;
   align-items: center;
   gap: 0.4rem;
-  max-width: 1100px;
+  max-width: var(--page-max-width, 1200px);
   margin: 0 auto;
+  padding: 0 var(--page-pad-x, 2rem);
+  box-sizing: border-box;
 }
 
 .cheatsheet-nav-tab {
@@ -4087,9 +4100,11 @@ body.light-theme .demo-avatar-circle {
    ========================================================================== */
 
 .mastery-tracker-page {
-  max-width: 1160px;
+  max-width: var(--page-max-width, 1200px);
   margin: 0 auto;
-  padding: 2rem 1.5rem 6rem;
+  padding: var(--page-pad-top, 2.5rem) var(--page-pad-x, 2rem) var(--page-pad-bottom, 4.5rem);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .tracker-hero-banner {
@@ -5193,9 +5208,11 @@ body.light-theme .demo-avatar-circle {
    ========================================================================== */
 
 .quiz-page-container {
-  max-width: 920px;
+  max-width: var(--page-max-width, 1200px);
   margin: 0 auto;
-  padding: 2rem 1.25rem 5rem;
+  padding: var(--page-pad-top, 2.5rem) var(--page-pad-x, 2rem) var(--page-pad-bottom, 4.5rem);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 /* Setup Banner */
@@ -7106,3 +7123,64 @@ body.light-theme .footer-attribution strong {
     display: none !important;
   }
 }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   STANDARDIZED UNIFIED PAGE CONTAINER SYSTEM (EQUAL SPACING ON ALL SIDES)
+   ══════════════════════════════════════════════════════════════════════════ */
+.page-container-standard,
+.dashboard-page-container,
+.resources-page-container,
+.history-page-container,
+.checklist-content-container,
+.cheatsheet-content-container {
+  max-width: var(--page-max-width, 1200px);
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: var(--page-pad-top, 2.5rem);
+  padding-bottom: var(--page-pad-bottom, 4.5rem);
+  padding-left: var(--page-pad-x, 2rem);
+  padding-right: var(--page-pad-x, 2rem);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.home-content-container {
+  max-width: var(--page-max-width, 1200px);
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 0;
+  padding-bottom: var(--page-pad-bottom, 4.5rem);
+  padding-left: var(--page-pad-x, 2rem);
+  padding-right: var(--page-pad-x, 2rem);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .page-container-standard,
+  .roadmap-container-redesigned,
+  .mastery-tracker-page,
+  .quiz-page-container,
+  .dashboard-page-container,
+  .resources-page-container,
+  .history-page-container,
+  .checklist-content-container,
+  .cheatsheet-content-container,
+  .layout-body {
+    padding-top: 1.75rem !important;
+    padding-bottom: 3rem !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  .home-content-container {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    padding-bottom: 3rem !important;
+  }
+
+  .sticky-top-progress-inner {
+    padding: 0.5rem 1rem !important;
+  }
+}
+
