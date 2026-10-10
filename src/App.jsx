@@ -52,18 +52,44 @@ export default function App() {
     }
   });
 
-  const [currentView, setCurrentView] = useState('home'); // 'home'|'roadmap'|'mastery'|'learn'|'checklist'|'quizzes'|'dashboard'|'cheatsheet'|'resources'
+  const [currentView, setCurrentView] = useState(() => {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const urlView = params.get('view');
+      if (urlView) return urlView;
+    } catch {}
+    return 'home';
+  });
+
+  const [selectedTopicId, setSelectedTopicId] = useState(() => {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const urlTopic = params.get('topic');
+      if (urlTopic) return urlTopic;
+    } catch {}
+    return TOPICS[0]?.id || 'setup-and-fundamentals';
+  });
 
   // Always scroll to the start of the page whenever switching sections
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
     if (document.documentElement) document.documentElement.scrollTop = 0;
     if (document.body) document.body.scrollTop = 0;
-  }, [currentView]);
-
-  const [selectedTopicId, setSelectedTopicId] = useState(() => {
-    return TOPICS[0]?.id || 'setup-and-fundamentals';
-  });
+    try {
+      const url = new URL(window.location);
+      if (currentView !== 'home') {
+        url.searchParams.set('view', currentView);
+      } else {
+        url.searchParams.delete('view');
+      }
+      if (currentView === 'learn' && selectedTopicId) {
+        url.searchParams.set('topic', selectedTopicId);
+      } else {
+        url.searchParams.delete('topic');
+      }
+      window.history.replaceState({}, '', url);
+    } catch {}
+  }, [currentView, selectedTopicId]);
 
   const [quizMode, setQuizMode] = useState('topic'); // 'topic' | 'live_api' | 'full'
 

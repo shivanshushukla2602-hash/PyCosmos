@@ -9049,4 +9049,1548 @@ body.light-theme .horizon-range-slider {
   background: #e2e8f0;
 }
 
+/* ═══════════════════════════════════════════════════════════════════════════
+   REDESIGNED LEARN SECTION — BESPOKE PYTHON LOGO BRAND THEME
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── SIDEBAR CONTAINER ── */
+.py-sidebar-container {
+  width: 290px;
+  min-width: 290px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 76px;
+  max-height: calc(100vh - 96px);
+  overflow-y: auto;
+  background: linear-gradient(180deg, rgba(13, 17, 23, 0.96), rgba(15, 23, 42, 0.96));
+  border: 1px solid rgba(48, 105, 152, 0.28);
+  border-radius: var(--radius-xl);
+  padding: 1.25rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+  box-sizing: border-box;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(48, 105, 152, 0.4) transparent;
+}
+
+@media (max-width: 960px) {
+  .py-sidebar-container {
+    width: 100%;
+    min-width: 100%;
+    position: relative;
+    top: 0;
+    max-height: none;
+  }
+}
+
+.py-sidebar-top-deck {
+  margin-bottom: 1rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.py-sidebar-brand-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.py-sidebar-title {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  display: block;
+  line-height: 1.1;
+}
+
+.py-sidebar-tagline {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  display: block;
+}
+
+.py-sidebar-counter-chip {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--py-yellow);
+  background: rgba(255, 212, 59, 0.12);
+  border: 1px solid rgba(255, 212, 59, 0.3);
+  padding: 0.15rem 0.5rem;
+  border-radius: 9999px;
+  font-family: var(--font-mono);
+}
+
+.py-sidebar-global-track {
+  height: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 9999px;
+  overflow: hidden;
+  margin-bottom: 0.75rem;
+}
+
+.py-sidebar-global-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #306998, #ffd43b);
+  border-radius: 9999px;
+  transition: width 0.8s ease;
+}
+
+.py-sidebar-search-box {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(48, 105, 152, 0.3);
+  border-radius: 10px;
+  padding: 0.45rem 0.75rem;
+}
+
+.py-sidebar-search-box:focus-within {
+  border-color: var(--py-yellow);
+  box-shadow: 0 0 10px rgba(255, 212, 59, 0.2);
+}
+
+.py-sidebar-search-input {
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-size: 0.82rem;
+  width: 100%;
+  outline: none;
+}
+
+.py-sidebar-clear-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+}
+
+/* Sidebar Tree */
+.py-sidebar-tree-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.py-sidebar-category-group {
+  margin-bottom: 0.25rem;
+}
+
+.py-sidebar-category-header {
+  width: 100%;
+  background: none;
+  border: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.45rem 0.4rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.py-sidebar-category-header:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.cat-header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.py-cat-title {
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  text-align: left;
+}
+
+.cat-header-right {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.py-cat-count {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+.py-cat-mini-bar {
+  width: 24px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.py-cat-mini-fill {
+  height: 100%;
+  background: var(--py-yellow);
+  border-radius: 9999px;
+}
+
+.py-sidebar-topic-list {
+  list-style: none;
+  padding: 0.2rem 0 0.35rem 1.1rem;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  border-left: 1.5px solid rgba(48, 105, 152, 0.25);
+  margin-left: 0.65rem;
+}
+
+.py-sidebar-topic-item {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.4rem 0.55rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  position: relative;
+}
+
+.py-sidebar-topic-item:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.py-sidebar-topic-item.is-active {
+  background: linear-gradient(90deg, rgba(48, 105, 152, 0.28), rgba(255, 212, 59, 0.04));
+  border-left: 3px solid var(--py-yellow);
+  padding-left: 0.45rem;
+}
+
+.py-topic-status-check {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.py-topic-title-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.py-sidebar-topic-item.is-active .py-topic-title-label {
+  color: var(--text-primary);
+  font-weight: 800;
+}
+
+.py-topic-ref-tag {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  background: rgba(255, 255, 255, 0.04);
+  padding: 0.1rem 0.35rem;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+/* ── TOP NAVIGATION & BREADCRUMBS ── */
+.topic-top-navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.prev-next-bar {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.nav-arrow-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  padding: 0.4rem 0.75rem;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.nav-arrow-btn:hover:not(:disabled) {
+  background: rgba(48, 105, 152, 0.2);
+  border-color: var(--py-blue-light);
+  color: var(--text-primary);
+}
+
+.nav-arrow-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* ── HERO BANNER: BESPOKE PYTHON BRAND CARD ── */
+.py-topic-hero-card {
+  background: linear-gradient(135deg, rgba(13, 17, 23, 0.98), rgba(22, 33, 62, 0.9), rgba(48, 105, 152, 0.24));
+  border: 1px solid rgba(48, 105, 152, 0.38);
+  border-radius: var(--radius-xl);
+  padding: 2rem 2.25rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+.py-topic-meta-ribbon {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.py-meta-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+}
+
+.py-category-badge {
+  background: rgba(48, 105, 152, 0.2);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  color: #38bdf8;
+}
+
+.py-level-badge {
+  background: rgba(255, 212, 59, 0.12);
+  border: 1px solid rgba(255, 212, 59, 0.35);
+  color: var(--py-yellow);
+}
+
+.py-core-badge {
+  background: rgba(255, 212, 59, 0.15);
+  border: 1px solid rgba(255, 212, 59, 0.4);
+  color: var(--py-yellow);
+}
+
+.py-doc-badge {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--text-muted);
+}
+
+.py-hero-title-row {
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+}
+
+.py-hero-emblem-box {
+  width: 54px;
+  height: 54px;
+  border-radius: 14px;
+  background: rgba(48, 105, 152, 0.18);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 0 20px rgba(48, 105, 152, 0.2);
+}
+
+.py-topic-headline {
+  font-size: 2.1rem;
+  font-weight: 900;
+  color: var(--text-primary);
+  margin: 0 0 0.45rem;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.py-topic-summary {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0;
+  max-width: 820px;
+}
+
+.py-hero-actions-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.actions-left-group,
+.actions-right-group {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.py-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 0.55rem 1rem;
+  border-radius: 10px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.py-btn-secondary:hover {
+  background: rgba(48, 105, 152, 0.2);
+  border-color: var(--py-blue-light);
+  color: var(--py-blue-light);
+}
+
+.py-btn-secondary.bookmark-btn.is-bookmarked {
+  border-color: var(--py-yellow);
+  background: rgba(255, 212, 59, 0.1);
+}
+
+.py-master-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--py-yellow);
+  color: #0d1117;
+  border: 1px solid var(--py-yellow);
+  padding: 0.6rem 1.25rem;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow: 0 4px 18px rgba(255, 212, 59, 0.35);
+  transition: all 0.2s ease;
+}
+
+.py-master-btn:hover {
+  background: #ffe873;
+  box-shadow: 0 6px 24px rgba(255, 212, 59, 0.5);
+}
+
+.py-master-btn.is-completed {
+  background: rgba(34, 197, 94, 0.2);
+  color: #22c55e;
+  border-color: rgba(34, 197, 94, 0.4);
+  box-shadow: none;
+}
+
+/* ── STICKY SECTION JUMP NAV BAR ── */
+.py-section-jump-nav-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  overflow-x: auto;
+  background: rgba(13, 17, 23, 0.92);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(48, 105, 152, 0.25);
+  border-radius: 12px;
+  padding: 0.5rem 0.75rem;
+  margin-bottom: 2rem;
+  scrollbar-width: none;
+}
+
+.py-section-jump-nav-bar::-webkit-scrollbar {
+  display: none;
+}
+
+.jump-nav-label {
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+  margin-right: 0.25rem;
+  white-space: nowrap;
+}
+
+.py-jump-pill {
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 0.25rem 0.65rem;
+  border-radius: 6px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+
+.py-jump-pill:hover {
+  background: rgba(48, 105, 152, 0.2);
+  color: var(--py-yellow);
+  border-color: rgba(48, 105, 152, 0.4);
+}
+
+.py-jump-pill.highlight-pill {
+  border-color: rgba(255, 212, 59, 0.35);
+  color: var(--py-yellow);
+  background: rgba(255, 212, 59, 0.08);
+}
+
+/* ── CORE MODULE CARD SHELL ── */
+.py-module-card {
+  background: rgba(13, 17, 23, 0.88);
+  border: 1px solid rgba(48, 105, 152, 0.25);
+  border-radius: 18px;
+  padding: 1.5rem 1.75rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+}
+
+.py-module-header {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.py-module-badge-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: rgba(48, 105, 152, 0.15);
+  border: 1px solid rgba(48, 105, 152, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.py-module-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.py-module-subtitle {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-top: 0.15rem;
+  display: block;
+}
+
+/* ── MODULE 1: DUAL OVERVIEW GRID ── */
+.py-overview-dual-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+@media (max-width: 800px) {
+  .py-overview-dual-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.py-overview-box {
+  background: rgba(10, 14, 20, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 1.25rem;
+}
+
+.py-overview-box.def-box {
+  border-left: 3px solid var(--py-blue-light);
+}
+
+.py-overview-box.rationale-box {
+  border-left: 3px solid var(--py-yellow);
+}
+
+.overview-box-header {
+  margin-bottom: 0.65rem;
+}
+
+.box-tag {
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+}
+
+.box-tag.blue-tag {
+  background: rgba(48, 105, 152, 0.2);
+  color: var(--py-blue-light);
+}
+
+.box-tag.yellow-tag {
+  background: rgba(255, 212, 59, 0.15);
+  color: var(--py-yellow);
+}
+
+.overview-box-title {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0 0 0.4rem;
+}
+
+.overview-box-text {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ── MODULE 2: CODE STUDIO FRAME ── */
+.py-syntax-switcher-bar {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.py-tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--text-muted);
+  padding: 0.45rem 0.85rem;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.py-tab-btn:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-primary);
+}
+
+.py-tab-btn.active {
+  background: rgba(48, 105, 152, 0.25);
+  border-color: var(--py-blue-light);
+  color: var(--text-primary);
+}
+
+.py-code-studio-frame {
+  background: #090d16;
+  border: 1px solid rgba(48, 105, 152, 0.3);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+.py-code-studio-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(16, 24, 39, 0.9);
+  padding: 0.55rem 0.85rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.studio-window-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.studio-window-controls .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.dot-close { background: #ff5f56; }
+.dot-min { background: #ffbd2e; }
+.dot-max { background: #27c93f; }
+
+.studio-filename-tag {
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  margin-left: 0.5rem;
+}
+
+.studio-bar-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.studio-lang-badge {
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: var(--py-yellow);
+  background: rgba(255, 212, 59, 0.12);
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+.py-copy-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.74rem;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0.2rem 0.45rem;
+  border-radius: 4px;
+  transition: all 0.15s ease;
+}
+
+.py-copy-btn:hover {
+  color: var(--text-primary);
+}
+
+.py-copy-btn.copied {
+  color: #22c55e;
+}
+
+.py-code-body-wrapper {
+  display: flex;
+  overflow-x: auto;
+}
+
+.py-code-gutter {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 0.65rem 1rem 0.85rem;
+  background: rgba(0, 0, 0, 0.25);
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  user-select: none;
+}
+
+.gutter-line-num {
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.2);
+  font-family: var(--font-mono);
+  line-height: 1.6;
+  text-align: right;
+}
+
+.py-code-pre {
+  margin: 0;
+  padding: 1rem 1.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.86rem;
+  line-height: 1.6;
+  color: #e2e8f0;
+  white-space: pre;
+}
+
+/* ── MODULE 3: CPYTHON INTERNALS PIPELINE STEPS ── */
+.py-internals-hero-card {
+  border-color: rgba(255, 212, 59, 0.3);
+}
+
+.py-pipeline-intro-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 212, 59, 0.2);
+  border-radius: 10px;
+  padding: 0.65rem 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.pipeline-intro-text {
+  font-size: 0.85rem;
+  font-family: var(--font-mono);
+  color: var(--py-yellow);
+}
+
+.py-pipeline-steps-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+}
+
+@media (max-width: 900px) {
+  .py-pipeline-steps-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .py-pipeline-steps-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.py-pipeline-step-card {
+  background: rgba(10, 14, 20, 0.65);
+  border: 1px solid rgba(48, 105, 152, 0.3);
+  border-radius: 14px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.py-pipeline-step-card:hover,
+.py-pipeline-step-card.hovered {
+  border-color: var(--py-yellow);
+  box-shadow: 0 6px 20px rgba(255, 212, 59, 0.15);
+}
+
+.pipeline-step-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.pipeline-phase-badge {
+  font-size: 0.68rem;
+  font-weight: 800;
+  color: var(--py-yellow);
+  background: rgba(255, 212, 59, 0.12);
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+}
+
+.pipeline-dot-indicator {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--py-blue-light);
+}
+
+.pipeline-step-title {
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0 0 0.35rem;
+  line-height: 1.3;
+}
+
+.pipeline-step-desc {
+  font-size: 0.76rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
+  margin: 0;
+}
+
+.py-raw-internals-box {
+  background: #090d16;
+  border: 1px solid rgba(48, 105, 152, 0.3);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.py-raw-internals-box pre {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: #38bdf8;
+  line-height: 1.6;
+}
+
+/* Diagram Container in Section 5 */
+.py-diagram-container {
+  background: #060a12;
+  border: 1px solid rgba(48, 105, 152, 0.35);
+  border-radius: 16px;
+  padding: 1.25rem;
+  overflow: hidden;
+}
+
+.py-diagram-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.py-diagram-title-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.py-diagram-title {
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.py-diagram-tag {
+  font-size: 0.68rem;
+  font-weight: 800;
+  color: var(--py-yellow);
+  background: rgba(255, 212, 59, 0.12);
+  padding: 0.15rem 0.5rem;
+  border-radius: 9999px;
+}
+
+.py-diagram-svg-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 12px;
+  padding: 0.75rem;
+  box-sizing: border-box;
+}
+
+.py-diagram-svg {
+  width: 100%;
+  height: auto;
+  max-height: 250px;
+}
+
+.py-diagram-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.85rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.py-diagram-pill-flow {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.diagram-step-pill {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+}
+
+.diagram-step-pill.active-pill {
+  color: var(--py-yellow);
+  border: 1px solid rgba(255, 212, 59, 0.3);
+}
+
+.py-diagram-note {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+/* ── MODULE 4: GRADUATED EXAMPLES STUDIO ── */
+.py-example-tier-tabs {
+  display: flex;
+  gap: 0.6rem;
+  margin-bottom: 1.25rem;
+  overflow-x: auto;
+  padding-bottom: 0.25rem;
+}
+
+.py-tier-tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--text-muted);
+  padding: 0.5rem 0.95rem;
+  border-radius: 10px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+
+.py-tier-tab-btn:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-primary);
+}
+
+.py-tier-tab-btn.active {
+  background: rgba(48, 105, 152, 0.25);
+  border-color: var(--py-yellow);
+  color: var(--py-yellow);
+}
+
+.py-active-example-view {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.active-example-meta {
+  display: flex;
+  align-items: baseline;
+  gap: 0.65rem;
+}
+
+.active-tier-pill {
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: var(--py-yellow);
+  background: rgba(255, 212, 59, 0.12);
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+}
+
+.active-example-heading {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.py-example-explanation-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  background: rgba(255, 212, 59, 0.06);
+  border: 1px solid rgba(255, 212, 59, 0.2);
+  border-radius: 12px;
+  padding: 0.85rem 1.1rem;
+  font-size: 0.84rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* ── MODULE 5: GOTCHAS & ANTIPATTERNS LAB ── */
+.py-gotchas-card {
+  border-color: rgba(255, 212, 59, 0.25);
+}
+
+.py-mistakes-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.py-mistake-box {
+  background: rgba(10, 14, 20, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 1.25rem;
+}
+
+.py-mistake-title {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0 0 1rem;
+}
+
+.py-split-code-deck {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 0.85rem;
+}
+
+@media (max-width: 768px) {
+  .py-split-code-deck {
+    grid-template-columns: 1fr;
+  }
+}
+
+.py-split-col {
+  background: #070b12;
+  border-radius: 10px;
+  padding: 0.75rem;
+  overflow-x: auto;
+}
+
+.py-split-col.wrong-col {
+  border: 1px solid rgba(244, 63, 94, 0.35);
+}
+
+.py-split-col.correct-col {
+  border: 1px solid rgba(34, 197, 94, 0.35);
+}
+
+.split-label-row {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  margin-bottom: 0.45rem;
+}
+
+.split-label-row.wrong-label {
+  color: #f43f5e;
+}
+
+.split-label-row.correct-label {
+  color: #22c55e;
+}
+
+.py-split-pre {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: #e2e8f0;
+}
+
+.py-why-fails-callout {
+  background: rgba(255, 212, 59, 0.06);
+  border: 1px solid rgba(255, 212, 59, 0.2);
+  border-radius: 8px;
+  padding: 0.65rem 0.95rem;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* ── MODULE 6: HEAD-TO-HEAD COMPARISONS ── */
+.py-diff-cards-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.py-diff-card {
+  background: rgba(10, 14, 20, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 1.25rem;
+}
+
+.py-diff-items-header {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 0.75rem;
+}
+
+.diff-pill {
+  font-size: 0.74rem;
+  font-weight: 800;
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+}
+
+.diff-pill.pill-a {
+  background: rgba(48, 105, 152, 0.25);
+  color: var(--py-blue-light);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+}
+
+.diff-pill.pill-b {
+  background: rgba(255, 212, 59, 0.15);
+  color: var(--py-yellow);
+  border: 1px solid rgba(255, 212, 59, 0.3);
+}
+
+.diff-versus-text {
+  font-size: 0.7rem;
+  font-weight: 900;
+  color: var(--text-muted);
+}
+
+.py-diff-title {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0 0 0.65rem;
+}
+
+.py-diff-points {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.py-diff-points li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.diff-bullet-marker {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--py-blue-light);
+  margin-top: 0.45rem;
+  flex-shrink: 0;
+}
+
+/* ── MODULE 7: INDUSTRY BLUEPRINTS ── */
+.py-industry-blueprint-box {
+  background: rgba(10, 14, 20, 0.6);
+  border: 1px solid rgba(48, 105, 152, 0.3);
+  border-radius: 14px;
+  padding: 1.25rem 1.5rem;
+}
+
+.blueprint-tags-row {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.blueprint-tag {
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: var(--py-blue-light);
+  background: rgba(48, 105, 152, 0.18);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  padding: 0.15rem 0.5rem;
+  border-radius: 6px;
+}
+
+.blueprint-body-text {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* ── MODULE 8: SENIOR INTERVIEW Q&A ── */
+.py-interview-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.py-interview-card {
+  background: rgba(10, 14, 20, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 1.25rem;
+}
+
+.interview-q-header {
+  margin-bottom: 0.65rem;
+}
+
+.interview-q-badge {
+  font-size: 0.68rem;
+  font-weight: 800;
+  color: var(--py-yellow);
+  background: rgba(255, 212, 59, 0.12);
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+  display: inline-block;
+  margin-bottom: 0.35rem;
+}
+
+.interview-q-title {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0;
+  line-height: 1.35;
+}
+
+.interview-trap-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  background: rgba(245, 158, 11, 0.08);
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  border-radius: 8px;
+  padding: 0.65rem 0.85rem;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.75rem;
+  line-height: 1.45;
+}
+
+.interview-ans-box {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.interview-ans-box p {
+  margin: 0.25rem 0 0;
+}
+
+/* ── MODULE 9: SUBTOPICS CHECKLIST DECK ── */
+.py-subtopic-counter {
+  font-size: 0.74rem;
+  font-weight: 800;
+  color: var(--py-blue-light);
+  background: rgba(48, 105, 152, 0.2);
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+  font-family: var(--font-mono);
+}
+
+.py-subtopics-interactive-deck {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 0.65rem;
+}
+
+.py-subtopic-chip {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 0.55rem 0.75rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.15s ease;
+}
+
+.py-subtopic-chip:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: var(--py-blue-light);
+}
+
+.py-subtopic-chip.status-completed {
+  border-color: rgba(34, 197, 94, 0.4);
+  background: rgba(34, 197, 94, 0.08);
+  color: var(--text-primary);
+}
+
+.py-subtopic-chip.status-learning {
+  border-color: rgba(255, 212, 59, 0.4);
+  background: rgba(255, 212, 59, 0.08);
+  color: var(--py-yellow);
+}
+
+.subtopic-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  flex: 1;
+}
+
+/* ── MODULE 11: PRACTICE QUIZ ASSESSMENT CARD ── */
+.py-quiz-assessment-card {
+  background: linear-gradient(135deg, rgba(13, 17, 23, 0.95), rgba(48, 105, 152, 0.25), rgba(255, 212, 59, 0.08));
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  border-radius: 18px;
+  padding: 1.75rem 2rem;
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+}
+
+.quiz-assessment-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex: 1;
+  min-width: 280px;
+}
+
+.quiz-assessment-badge-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: rgba(255, 212, 59, 0.15);
+  border: 1px solid rgba(255, 212, 59, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.quiz-assessment-title {
+  font-size: 1.2rem;
+  font-weight: 900;
+  color: var(--text-primary);
+  margin: 0 0 0.3rem;
+}
+
+.quiz-assessment-desc {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.quiz-assessment-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.py-btn-yellow-glow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: var(--py-yellow);
+  color: #0d1117;
+  border: 1px solid var(--py-yellow);
+  padding: 0.6rem 1.2rem;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow: 0 4px 18px rgba(255, 212, 59, 0.35);
+  transition: all 0.2s ease;
+}
+
+.py-btn-yellow-glow:hover {
+  background: #ffe873;
+  box-shadow: 0 6px 24px rgba(255, 212, 59, 0.5);
+}
+
+.py-btn-blue-glow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: linear-gradient(135deg, #306998, #1e3a5f);
+  color: #f8fafc;
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  padding: 0.6rem 1.2rem;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 4px 18px rgba(48, 105, 152, 0.35);
+  transition: all 0.2s ease;
+}
+
+.py-btn-blue-glow:hover {
+  border-color: #38bdf8;
+  box-shadow: 0 6px 24px rgba(48, 105, 152, 0.5);
+}
+
+/* ── MODULE 12: HIGH-YIELD REVISION SHEET ── */
+.py-revision-card {
+  border-color: rgba(48, 105, 152, 0.3);
+}
+
+.py-revision-checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.py-revision-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  background: rgba(10, 14, 20, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  padding: 0.65rem 0.95rem;
+}
+
+.py-revision-bullet {
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  background: rgba(255, 212, 59, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+}
+
+.py-revision-text {
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  line-height: 1.5;
+}
+
+/* ── BOTTOM PREV / NEXT NAVIGATION ── */
+.py-bottom-nav-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding-top: 1.5rem;
+  margin-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ── LIGHT THEME OVERRIDES FOR LEARN SECTION ── */
+body.light-theme .py-sidebar-container,
+body.light-theme .py-topic-hero-card,
+body.light-theme .py-module-card,
+body.light-theme .py-quiz-assessment-card,
+body.light-theme .py-diagram-container {
+  background: #ffffff;
+  border-color: #cbd5e1;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+}
+
+body.light-theme .py-sidebar-search-box,
+body.light-theme .py-overview-box,
+body.light-theme .py-code-studio-frame,
+body.light-theme .py-pipeline-step-card,
+body.light-theme .py-pipeline-intro-bar,
+body.light-theme .py-mistake-box,
+body.light-theme .py-diff-card,
+body.light-theme .py-industry-blueprint-box,
+body.light-theme .py-interview-card,
+body.light-theme .py-revision-item,
+body.light-theme .py-diagram-svg-wrapper {
+  background: #f8fafc;
+  border-color: #e2e8f0;
+}
+
+body.light-theme .py-code-studio-bar {
+  background: #f1f5f9;
+}
+
+body.light-theme .py-code-pre {
+  color: #0f172a;
+}
+
+
 
