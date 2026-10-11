@@ -26,13 +26,38 @@ import {
   Shield,
   Target,
   Activity,
-  Sliders
+  Sliders,
+  ChevronRight,
+  Compass,
+  GitBranch,
+  Database,
+  FileCode,
+  Box,
+  Package,
+  Server,
+  Brain,
+  Flag,
+  Share2
 } from 'lucide-react';
 import { MASTERY_LEVELS, PROGRESSION_TRACKS } from '../data/masteryLevels';
 import { TOPICS_BY_ID } from '../data/topicsData';
 import { celebrate } from '../utils/celebrate';
 import { AnimatedCounter } from './AnimatedCounter';
 import PyCosmosLogo from './PyCosmosLogo';
+
+// Stage icons & bespoke theme accents for the 10 Progression Stages
+const STAGE_CONFIGS = [
+  { icon: Flame, color: '#38bdf8', glow: 'rgba(56, 189, 248, 0.35)', codename: 'Core Ignition' },
+  { icon: Database, color: '#ffd43b', glow: 'rgba(255, 212, 59, 0.35)', codename: 'Memory Vault' },
+  { icon: Workflow, color: '#34d399', glow: 'rgba(52, 211, 153, 0.35)', codename: 'Execution Flow' },
+  { icon: FileCode, color: '#a78bfa', glow: 'rgba(167, 139, 250, 0.35)', codename: 'System Interface' },
+  { icon: Box, color: '#f43f5e', glow: 'rgba(244, 63, 94, 0.35)', codename: 'Object Architecture' },
+  { icon: Cpu, color: '#fb923c', glow: 'rgba(251, 146, 60, 0.35)', codename: 'CPython Core' },
+  { icon: Package, color: '#60a5fa', glow: 'rgba(96, 165, 250, 0.35)', codename: 'Batteries Included' },
+  { icon: Shield, color: '#4ade80', glow: 'rgba(74, 222, 128, 0.35)', codename: 'Production Hardening' },
+  { icon: Brain, color: '#e879f9', glow: 'rgba(232, 121, 249, 0.35)', codename: 'Intelligence Mesh' },
+  { icon: Flag, color: '#facc15', glow: 'rgba(250, 204, 21, 0.35)', codename: 'Apex Engineering' },
+];
 
 export default function MasteryTrackerPage({
   completedMap = {},
@@ -44,7 +69,7 @@ export default function MasteryTrackerPage({
   const [filterCategory, setFilterCategory] = useState('all');
   const [filterStatus, setFilterStatus] = useState('all');
   const [activeStageTrack, setActiveStageTrack] = useState(null);
-  const [viewMode, setViewMode] = useState('table'); // 'table' | 'grid'
+  const [viewMode, setViewMode] = useState('deck'); // 'deck' | 'matrix' | 'tree'
 
   // Compute status for each of the 27 levels:
   const getLevelStatus = (lvl) => {
@@ -75,7 +100,6 @@ export default function MasteryTrackerPage({
       const track = PROGRESSION_TRACKS[activeStageTrack];
       if (track) {
         const [startTopicIdx, endTopicIdx] = track.range;
-        // Check if level's topics overlap with the track range
         const levelTopicNums = lvl.topicIds.map(tId => TOPICS_BY_ID[tId]?.topicNum).filter(n => n !== undefined);
         const overlaps = levelTopicNums.some(num => num >= startTopicIdx && num <= endTopicIdx);
         if (!overlaps) return false;
@@ -153,9 +177,10 @@ export default function MasteryTrackerPage({
       tierNum: 1,
       title: 'Apprentice Voyager',
       range: 'L1 - L6',
-      color: '#f59e0b',
+      color: '#38bdf8',
       perk: 'CPython & Primitives Unlocked',
       minLevels: 0,
+      levels: [1, 2, 3, 4, 5, 6],
       isUnlocked: true,
       isCurrent: completedLevels < 7
     },
@@ -164,9 +189,10 @@ export default function MasteryTrackerPage({
       tierNum: 2,
       title: 'Systems Architect',
       range: 'L7 - L13',
-      color: '#38bdf8',
+      color: '#ffd43b',
       perk: 'OOP & Metaprogramming Cleared',
       minLevels: 7,
+      levels: [7, 8, 9, 10, 11, 12, 13],
       isUnlocked: completedLevels >= 7,
       isCurrent: completedLevels >= 7 && completedLevels < 14
     },
@@ -175,9 +201,10 @@ export default function MasteryTrackerPage({
       tierNum: 3,
       title: 'Python Grandmaster',
       range: 'L14 - L20',
-      color: '#ffd43b',
+      color: '#34d399',
       perk: 'Async, Concurrency & GIL Cleared',
       minLevels: 14,
+      levels: [14, 15, 16, 17, 18, 19, 20],
       isUnlocked: completedLevels >= 14,
       isCurrent: completedLevels >= 14 && completedLevels < 21
     },
@@ -189,6 +216,7 @@ export default function MasteryTrackerPage({
       color: '#c084fc',
       perk: 'Full Bytecode & Architecture Mastered',
       minLevels: 21,
+      levels: [21, 22, 23, 24, 25, 26, 27],
       isUnlocked: completedLevels >= 21,
       isCurrent: completedLevels >= 21
     }
@@ -298,105 +326,68 @@ export default function MasteryTrackerPage({
 
                 {/* Vertices & Hover Nodes */}
                 {radarDataPoints.map((pt, i) => {
-                  const isHovered = activePillarHover === pt.stat.id;
+                  const isHovered = activePillarHover === i;
                   return (
-                    <g
-                      key={pt.stat.id}
-                      onMouseEnter={() => setActivePillarHover(pt.stat.id)}
-                      onMouseLeave={() => setActivePillarHover(null)}
-                      style={{ cursor: 'pointer' }}
-                    >
+                    <g key={i}>
                       <circle
                         cx={pt.x}
                         cy={pt.y}
                         r={isHovered ? 6 : 4}
                         fill={pt.stat.color}
-                        stroke="#0f172a"
-                        strokeWidth="2"
-                        style={{
-                          transition: 'all 0.2s ease',
-                          filter: isHovered ? `drop-shadow(0 0 6px ${pt.stat.color})` : 'none'
-                        }}
+                        stroke="#ffffff"
+                        strokeWidth="1.5"
+                        style={{ cursor: 'pointer', transition: 'r 0.2s ease' }}
+                        onMouseEnter={() => setActivePillarHover(i)}
+                        onMouseLeave={() => setActivePillarHover(null)}
                       />
                     </g>
                   );
                 })}
               </svg>
+            </div>
 
-              {/* Dynamic Pillar Tooltip / Pill readout */}
-              <div className="radar-pillars-chips">
-                {pillarStats.map((p) => {
-                  const isHovered = activePillarHover === p.id;
-                  return (
-                    <div
-                      key={p.id}
-                      className={`radar-pillar-chip ${isHovered ? 'hovered' : ''}`}
-                      onMouseEnter={() => setActivePillarHover(p.id)}
-                      onMouseLeave={() => setActivePillarHover(null)}
-                      style={{ '--chip-accent': p.color }}
-                    >
-                      <span className="chip-dot" style={{ background: p.color }} />
-                      <span className="chip-name">{p.name}</span>
-                      <strong className="chip-pct">{p.percent}%</strong>
-                    </div>
-                  );
-                })}
-              </div>
+            {/* Pillar Legend Grid */}
+            <div className="radar-pillars-legend">
+              {pillarStats.map((p, i) => (
+                <div
+                  key={p.id}
+                  className={`radar-pillar-item ${activePillarHover === i ? 'hovered' : ''}`}
+                  onMouseEnter={() => setActivePillarHover(i)}
+                  onMouseLeave={() => setActivePillarHover(null)}
+                >
+                  <span className="pillar-dot" style={{ background: p.color }} />
+                  <span className="pillar-name">{p.name}</span>
+                  <span className="pillar-val">{p.percent}%</span>
+                </div>
+              ))}
             </div>
           </div>
 
-          {/* RIGHT: COMMAND TELEMETRY METRICS & TARGET POD */}
+          {/* RIGHT: OVERALL HUD STATS & OBJECTIVES */}
           <div className="telemetry-hud-card">
             <div className="telemetry-top-stats">
-              {/* Stat 1: Overall Mastery */}
-              <div className="hud-metric-pod primary-pod">
-                <div className="metric-pod-label">
-                  <Sparkles size={13} color="var(--py-yellow)" />
-                  <span>OVERALL MASTERY</span>
+              <div className="telemetry-stat-tile">
+                <span className="stat-tile-label">MASTERED MILESTONES</span>
+                <div className="stat-tile-val">
+                  <span className="val-accent"><AnimatedCounter value={completedLevels} /></span>
+                  <span className="val-total"> / {totalLevels}</span>
                 </div>
-                <div className="metric-pod-value highlight">
-                  <AnimatedCounter value={overallPercent} />%
-                </div>
-                <div className="pod-linear-track">
-                  <motion.div
-                    className="pod-linear-fill"
-                    initial={{ width: 0 }}
-                    animate={{ width: `${overallPercent}%` }}
-                    transition={{ duration: 1.2, ease: 'easeOut' }}
-                    style={{ background: 'linear-gradient(90deg, #38bdf8, #ffd43b)' }}
-                  />
-                </div>
+                <div className="stat-tile-sub">{overallPercent}% Complete</div>
               </div>
 
-              {/* Stat 2: Completed Levels */}
-              <div className="hud-metric-pod">
-                <div className="metric-pod-label">
-                  <CheckCircle2 size={13} color="#22c55e" />
-                  <span>LEVELS CLEARED</span>
+              <div className="telemetry-stat-tile">
+                <span className="stat-tile-label">IN FLIGHT</span>
+                <div className="stat-tile-val">
+                  <span className="val-learning"><AnimatedCounter value={inProgressLevels} /></span>
+                  <span className="val-total"> Active</span>
                 </div>
-                <div className="metric-pod-value">
-                  <AnimatedCounter value={completedLevels} />
-                  <span className="metric-denom"> / {totalLevels}</span>
-                </div>
-                <span className="pod-subtext">{totalLevels - completedLevels} levels remaining</span>
-              </div>
-
-              {/* Stat 3: In-Flight */}
-              <div className="hud-metric-pod">
-                <div className="metric-pod-label">
-                  <Clock size={13} color="#f59e0b" />
-                  <span>ACTIVE IN-FLIGHT</span>
-                </div>
-                <div className="metric-pod-value">
-                  <AnimatedCounter value={inProgressLevels} />
-                </div>
-                <span className="pod-subtext">Currently learning</span>
+                <div className="stat-tile-sub">Levels in Progress</div>
               </div>
             </div>
 
-            {/* NEXT TARGET MISSION BOX */}
-            <div className="hud-target-pod">
-              <div className="target-pod-header">
+            {/* NEXT LEVEL OBJECTIVE POD */}
+            <div className="next-objective-pod">
+              <div className="next-objective-header">
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
                   <Target size={15} color="var(--py-yellow)" />
                   <span className="target-badge-label">NEXT OBJECTIVE TARGET</span>
@@ -471,55 +462,138 @@ export default function MasteryTrackerPage({
         </div>
       </div>
 
-      {/* 2. RECOMMENDED LEARNING PROGRESSION (10 MILESTONES) */}
-      <div className="progression-milestones-section">
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem', flexWrap: 'wrap', gap: '0.75rem' }}>
-          <div className="section-title-row" style={{ margin: 0 }}>
-            <TrendingUp size={22} style={{ color: 'var(--py-blue-light)' }} />
+      {/* ══════════════════════════════════════════════════════════════════
+          2. THE COSMIC EXPEDITION RAIL (UNIQUE INTERACTIVE ORBITAL PIPELINE)
+          ══════════════════════════════════════════════════════════════════ */}
+      <div className="expedition-rail-section">
+        <div className="expedition-rail-header">
+          <div className="expedition-title-pack">
+            <div className="expedition-crest">
+              <Compass size={20} className="expedition-crest-icon" />
+            </div>
             <div>
-              <h2 style={{ fontSize: '1.4rem', fontWeight: 800 }}>Recommended Progression Tracks</h2>
-              <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Click any stage card to filter the 27 levels below</span>
+              <div className="expedition-kicker">INTERACTIVE EXPEDITION RAIL</div>
+              <h2 className="expedition-title">10-Stage Architectural Pipeline</h2>
             </div>
           </div>
-
-          {activeStageTrack !== null && (
-            <button
-              onClick={() => setActiveStageTrack(null)}
-              className="btn btn-secondary"
-              style={{ padding: '0.35rem 0.85rem', fontSize: '0.78rem', borderRadius: '8px' }}
-            >
-              Show All Stages
-            </button>
-          )}
-        </div>
-
-        <div className="progression-cards-grid">
-          {PROGRESSION_TRACKS.map((track, i) => {
-            const isSelected = activeStageTrack === i;
-            return (
-              <motion.div
-                key={i}
-                whileHover={{ y: -4, scale: 1.01 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={() => setActiveStageTrack(isSelected ? null : i)}
-                className={`progression-card ${isSelected ? 'active-filter' : ''}`}
-                style={{ cursor: 'pointer' }}
+          <div className="expedition-header-actions">
+            {activeStageTrack !== null ? (
+              <button
+                type="button"
+                onClick={() => setActiveStageTrack(null)}
+                className="expedition-reset-pill"
               >
-                <div className="progression-card-header">
-                  <span className="milestone-badge">Stage {i + 1}</span>
-                  <span className="levels-range">{track.levels}</span>
-                </div>
-                <h3 className="track-name">{track.name}</h3>
-                <p className="track-desc">{track.description}</p>
-              </motion.div>
-            );
-          })}
+                <span>Clear Stage Filter</span>
+                <X size={13} />
+              </button>
+            ) : (
+              <span className="expedition-guide-hint">Click any stage station to filter the 27 levels</span>
+            )}
+          </div>
         </div>
+
+        {/* Continuous Connecting Expedition Track */}
+        <div className="expedition-track-container">
+          {/* Subtle background connecting laser line */}
+          <div className="expedition-connecting-rail" />
+
+          <div className="expedition-stations-scroll">
+            {PROGRESSION_TRACKS.map((track, idx) => {
+              const cfg = STAGE_CONFIGS[idx] || STAGE_CONFIGS[0];
+              const IconComp = cfg.icon;
+              const isSelected = activeStageTrack === idx;
+
+              // Compute stage topic completion stats
+              const [startTopicIdx, endTopicIdx] = track.range;
+              const stageTopics = [];
+              for (let t = startTopicIdx; t <= endTopicIdx; t++) {
+                const found = Object.values(TOPICS_BY_ID).find(top => top.topicNum === t);
+                if (found) stageTopics.push(found);
+              }
+              const stageDone = stageTopics.filter(t => !!completedMap[t.id]).length;
+              const stagePercent = stageTopics.length > 0 ? Math.round((stageDone / stageTopics.length) * 100) : 0;
+
+              return (
+                <motion.div
+                  key={idx}
+                  whileHover={{ y: -6, scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={() => setActiveStageTrack(isSelected ? null : idx)}
+                  className={`expedition-station-node ${isSelected ? 'active-station' : ''}`}
+                  style={{ '--stage-accent': cfg.color, '--stage-glow': cfg.glow }}
+                >
+                  <div className="station-orbit-ring">
+                    <div className="station-icon-capsule">
+                      <IconComp size={18} />
+                    </div>
+                    {stagePercent === 100 && (
+                      <div className="station-mastered-beacon">✓</div>
+                    )}
+                  </div>
+
+                  <div className="station-milestone-badge">STAGE {idx + 1}</div>
+                  <h4 className="station-name">{track.name}</h4>
+                  <div className="station-codename">{cfg.codename}</div>
+
+                  <div className="station-progress-footer">
+                    <div className="station-progress-bar-wrap">
+                      <div
+                        className="station-progress-bar-fill"
+                        style={{ width: `${stagePercent}%`, background: cfg.color }}
+                      />
+                    </div>
+                    <span className="station-progress-caption">{track.levels}</span>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Active Stage Mission Briefing Drawer (Expands when a stage is active) */}
+        <AnimatePresence>
+          {activeStageTrack !== null && (
+            <motion.div
+              initial={{ opacity: 0, height: 0, y: -10 }}
+              animate={{ opacity: 1, height: 'auto', y: 0 }}
+              exit={{ opacity: 0, height: 0, y: -10 }}
+              transition={{ duration: 0.25 }}
+              className="stage-briefing-drawer"
+              style={{
+                borderColor: STAGE_CONFIGS[activeStageTrack]?.color || 'var(--py-blue)'
+              }}
+            >
+              <div className="briefing-content">
+                <div className="briefing-pill-row">
+                  <span className="briefing-stage-chip" style={{ background: `${STAGE_CONFIGS[activeStageTrack]?.color}22`, color: STAGE_CONFIGS[activeStageTrack]?.color }}>
+                    STAGE {activeStageTrack + 1} ACTIVE
+                  </span>
+                  <span className="briefing-range-tag">
+                    {PROGRESSION_TRACKS[activeStageTrack]?.levels}
+                  </span>
+                </div>
+                <h3 className="briefing-title">{PROGRESSION_TRACKS[activeStageTrack]?.name}</h3>
+                <p className="briefing-desc">{PROGRESSION_TRACKS[activeStageTrack]?.description}</p>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => setActiveStageTrack(null)}
+                className="briefing-dismiss-btn"
+              >
+                <span>Show All Stages</span>
+                <X size={14} />
+              </button>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
-      {/* 3. FILTER & SEARCH CONTROLS */}
+      {/* ══════════════════════════════════════════════════════════════════
+          3. HIGH-TECH COCKPIT FILTER & VIEW CONTROLS
+          ══════════════════════════════════════════════════════════════════ */}
       <div className="tracker-filter-bar">
-        {/* Search input */}
+        {/* Search input with modern radar styling */}
         <div className="filter-search-box">
           <Search size={16} color="var(--py-blue-light)" />
           <input
@@ -539,7 +613,7 @@ export default function MasteryTrackerPage({
           )}
         </div>
 
-        {/* View Switcher & Results Pill */}
+        {/* 3 Creative View Switcher & Results Pill */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
           <span style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', fontWeight: 600 }}>
             Showing <strong style={{ color: 'var(--py-yellow)' }}><AnimatedCounter value={filteredLevels.length} /></strong> of {totalLevels} Levels
@@ -547,20 +621,28 @@ export default function MasteryTrackerPage({
 
           <div className="mastery-view-switcher">
             <button
-              className={`mastery-view-btn ${viewMode === 'table' ? 'active' : ''}`}
-              onClick={() => setViewMode('table')}
-              title="Table View"
-            >
-              <TableIcon size={14} />
-              <span>Table</span>
-            </button>
-            <button
-              className={`mastery-view-btn ${viewMode === 'grid' ? 'active' : ''}`}
-              onClick={() => setViewMode('grid')}
-              title="Card Grid View"
+              className={`mastery-view-btn ${viewMode === 'deck' ? 'active' : ''}`}
+              onClick={() => setViewMode('deck')}
+              title="Holocron Deck View"
             >
               <LayoutGrid size={14} />
-              <span>Cards</span>
+              <span>Holocron Deck</span>
+            </button>
+            <button
+              className={`mastery-view-btn ${viewMode === 'matrix' ? 'active' : ''}`}
+              onClick={() => setViewMode('matrix')}
+              title="Cyber HUD Table View"
+            >
+              <TableIcon size={14} />
+              <span>Cyber HUD</span>
+            </button>
+            <button
+              className={`mastery-view-btn ${viewMode === 'tree' ? 'active' : ''}`}
+              onClick={() => setViewMode('tree')}
+              title="Constellation Skill Tree"
+            >
+              <GitBranch size={14} />
+              <span>Skill Tree</span>
             </button>
           </div>
 
@@ -624,17 +706,134 @@ export default function MasteryTrackerPage({
         </div>
       </div>
 
-      {/* 4. MASTERY MATRIX: TABLE VIEW */}
-      {viewMode === 'table' ? (
-        <div className="tracker-table-container">
-          <table className="mastery-table">
+      {/* ══════════════════════════════════════════════════════════════════
+          4. VIEW MODE 1: HOLOCRON DECK (GROUPED BY MASTERY TIERS)
+          ══════════════════════════════════════════════════════════════════ */}
+      {viewMode === 'deck' && (
+        <div className="holocron-deck-container">
+          {filteredLevels.length === 0 ? (
+            <div className="empty-mastery-state">
+              <Search size={36} color="var(--text-muted)" style={{ margin: '0 auto 0.75rem', display: 'block' }} />
+              <h3>No mastery levels match your search or filter</h3>
+              <p>Try resetting filters or searching for terms like "Functions", "OOP", or "CPython".</p>
+              <button onClick={resetFilters} className="btn btn-secondary">
+                Clear Filters
+              </button>
+            </div>
+          ) : (
+            TIERS.map((tier) => {
+              const tierLevels = filteredLevels.filter(lvl => tier.levels.includes(lvl.level));
+              if (tierLevels.length === 0) return null;
+
+              return (
+                <div key={tier.id} className="holocron-tier-block">
+                  <div className="tier-block-header">
+                    <div className="tier-emblem-badge" style={{ background: `${tier.color}15`, borderColor: `${tier.color}44`, color: tier.color }}>
+                      TIER {tier.tierNum}
+                    </div>
+                    <div>
+                      <h3 className="tier-block-title">{tier.title}</h3>
+                      <span className="tier-block-subtitle">{tier.perk} • ({tier.range})</span>
+                    </div>
+                  </div>
+
+                  <div className="holocron-grid">
+                    {tierLevels.map((lvl) => {
+                      const statusObj = getLevelStatus(lvl);
+                      const firstTopic = TOPICS_BY_ID[lvl.topicIds[0]];
+
+                      return (
+                        <motion.div
+                          key={lvl.level}
+                          whileHover={{ y: -5, scale: 1.015 }}
+                          className={`holocron-card status-${statusObj.status}`}
+                          style={{ '--card-accent': tier.color }}
+                        >
+                          <div className="holocron-card-top">
+                            <div className="holocron-level-badge">
+                              <span className="lvl-prefix">LVL</span>
+                              <span className="lvl-num">{String(lvl.level).padStart(2, '0')}</span>
+                            </div>
+
+                            <span className={`holocron-status-tag ${statusObj.status}`}>
+                              {statusObj.status === 'completed' && <Check size={11} />}
+                              {statusObj.status === 'learning' && <Clock size={11} />}
+                              {statusObj.status === 'not_started' && <Circle size={10} />}
+                              <span>{statusObj.label}</span>
+                            </span>
+                          </div>
+
+                          <div className="holocron-card-body">
+                            <span className="holocron-cat-pill">{lvl.category}</span>
+                            <h4 className="holocron-area-title">{lvl.area}</h4>
+                            <p className="holocron-desc">{lvl.description}</p>
+
+                            <div className="holocron-topic-chips">
+                              {lvl.topicIds.map((tId) => {
+                                const tObj = TOPICS_BY_ID[tId];
+                                const isDone = !!completedMap[tId];
+                                return (
+                                  <button
+                                    key={tId}
+                                    type="button"
+                                    onClick={() => onNavigateToTopic(tId)}
+                                    className={`holocron-chip ${isDone ? 'is-done' : ''}`}
+                                    title={`Study ${tObj ? tObj.title : tId}`}
+                                  >
+                                    {isDone && <Check size={10} />}
+                                    <span>{tObj ? tObj.title : tId}</span>
+                                  </button>
+                                );
+                              })}
+                            </div>
+                          </div>
+
+                          <div className="holocron-card-footer">
+                            <div className="holocron-progress-wrap">
+                              <div
+                                className="holocron-progress-fill"
+                                style={{
+                                  width: `${statusObj.percent}%`,
+                                  background: statusObj.status === 'completed' ? '#22c55e' : statusObj.status === 'learning' ? 'var(--py-yellow)' : 'rgba(255, 255, 255, 0.1)'
+                                }}
+                              />
+                            </div>
+
+                            {firstTopic && (
+                              <button
+                                type="button"
+                                onClick={() => onNavigateToTopic(firstTopic.id)}
+                                className="holocron-study-btn"
+                              >
+                                <span>{statusObj.status === 'completed' ? 'Review Level' : 'Launch Study'}</span>
+                                <ArrowRight size={13} />
+                              </button>
+                            )}
+                          </div>
+                        </motion.div>
+                      );
+                    })}
+                  </div>
+                </div>
+              );
+            })
+          )}
+        </div>
+      )}
+
+      {/* ══════════════════════════════════════════════════════════════════
+          5. VIEW MODE 2: CYBER HUD MATRIX (UPGRADED HIGH-TECH TABLE)
+          ══════════════════════════════════════════════════════════════════ */}
+      {viewMode === 'matrix' && (
+        <div className="tracker-table-container cyber-hud-table-wrapper">
+          <table className="mastery-table cyber-hud-table">
             <thead>
               <tr>
-                <th style={{ width: '80px', textAlign: 'center' }}>Level</th>
-                <th style={{ width: '220px' }}>Area & Domain</th>
-                <th>Syllabus Scope & Lessons Covered</th>
-                <th style={{ width: '150px', textAlign: 'center' }}>Status</th>
-                <th style={{ width: '130px', textAlign: 'right' }}>Action</th>
+                <th style={{ width: '90px', textAlign: 'center' }}>LEVEL</th>
+                <th style={{ width: '220px' }}>AREA & DOMAIN</th>
+                <th>SYLLABUS SCOPE & LESSONS COVERED</th>
+                <th style={{ width: '150px', textAlign: 'center' }}>TELEMETRY STATUS</th>
+                <th style={{ width: '140px', textAlign: 'right' }}>ACTION</th>
               </tr>
             </thead>
             <tbody>
@@ -658,16 +857,18 @@ export default function MasteryTrackerPage({
                       key={lvl.level}
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
-                      transition={{ duration: 0.2 }}
-                      className={`status-row-${statusObj.status}`}
+                      transition={{ duration: 0.15 }}
+                      className={`status-row-${statusObj.status} cyber-hud-row`}
                     >
                       <td className="level-col-cell">
-                        <span className="level-num-badge">L{lvl.level}</span>
+                        <div className="cyber-level-capsule">
+                          <span className="cyber-lvl-num">L{lvl.level}</span>
+                        </div>
                       </td>
 
                       <td className="area-col-cell">
-                        <strong>{lvl.area}</strong>
-                        <span className="area-cat-tag">{lvl.category}</span>
+                        <strong className="cyber-area-title">{lvl.area}</strong>
+                        <span className="cyber-cat-pill">{lvl.category}</span>
                       </td>
 
                       <td className="desc-col-cell">
@@ -695,10 +896,10 @@ export default function MasteryTrackerPage({
                       </td>
 
                       <td className="status-col-cell">
-                        <span className={`status-pill ${statusObj.status}`} style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}>
-                          {statusObj.status === 'completed' ? <CheckCircle2 size={12} /> : statusObj.status === 'learning' ? <Clock size={12} /> : <Circle size={11} />}
+                        <div className={`cyber-beacon-pill ${statusObj.status}`}>
+                          <span className="cyber-beacon-light" />
                           <span>{statusObj.label}</span>
-                        </span>
+                        </div>
                       </td>
 
                       <td className="action-col-cell">
@@ -706,7 +907,7 @@ export default function MasteryTrackerPage({
                           <button
                             type="button"
                             onClick={() => onNavigateToTopic(firstTopic.id)}
-                            className="study-level-btn"
+                            className="study-level-btn cyber-study-btn"
                           >
                             <span>{statusObj.status === 'completed' ? 'Review' : 'Study'}</span>
                             <ArrowRight size={14} />
@@ -720,81 +921,47 @@ export default function MasteryTrackerPage({
             </tbody>
           </table>
         </div>
-      ) : (
-        /* 5. MASTERY MATRIX: VISUAL CARD GRID VIEW */
-        <div className="mastery-grid-view">
-          {filteredLevels.map((lvl) => {
-            const statusObj = getLevelStatus(lvl);
-            const firstTopic = TOPICS_BY_ID[lvl.topicIds[0]];
+      )}
 
-            return (
-              <motion.div
-                key={lvl.level}
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3 }}
-                className={`mastery-grid-card status-${statusObj.status}`}
-              >
-                <div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.65rem' }}>
-                    <span className="level-num-badge">Level {lvl.level}</span>
-                    <span className={`status-pill ${statusObj.status}`} style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}>
-                      {statusObj.status === 'completed' ? <CheckCircle2 size={12} /> : statusObj.status === 'learning' ? <Clock size={12} /> : <Circle size={11} />}
-                      <span>{statusObj.label}</span>
-                    </span>
-                  </div>
+      {/* ══════════════════════════════════════════════════════════════════
+          6. VIEW MODE 3: CONSTELLATION SKILL TREE (INTERACTIVE NODE PATH)
+          ══════════════════════════════════════════════════════════════════ */}
+      {viewMode === 'tree' && (
+        <div className="constellation-tree-container">
+          <div className="constellation-tree-header">
+            <GitBranch size={18} color="var(--py-yellow)" />
+            <span>Interactive Sequential Milestone Path (Level 01 → Level 27)</span>
+          </div>
 
-                  <h3 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '0.2rem' }}>
-                    {lvl.area}
-                  </h3>
-                  <div style={{ fontSize: '0.72rem', color: 'var(--py-blue-light)', fontWeight: 700, textTransform: 'uppercase', marginBottom: '0.65rem' }}>
-                    {lvl.category}
-                  </div>
+          <div className="constellation-nodes-track">
+            {filteredLevels.map((lvl, index) => {
+              const statusObj = getLevelStatus(lvl);
+              const firstTopic = TOPICS_BY_ID[lvl.topicIds[0]];
 
-                  <p style={{ fontSize: '0.84rem', color: 'var(--text-secondary)', lineHeight: 1.5, marginBottom: '1rem' }}>
-                    {lvl.description}
-                  </p>
+              return (
+                <div key={lvl.level} className="constellation-node-wrapper">
+                  <motion.div
+                    whileHover={{ scale: 1.08 }}
+                    onClick={() => firstTopic && onNavigateToTopic(firstTopic.id)}
+                    className={`constellation-node-pill ${statusObj.status}`}
+                    title={`${lvl.area} - ${statusObj.label}`}
+                  >
+                    <div className="node-num">L{lvl.level}</div>
+                    <div className="node-area">{lvl.area}</div>
+                    <div className="node-indicator">
+                      {statusObj.status === 'completed' && '✓'}
+                      {statusObj.status === 'learning' && '●'}
+                      {statusObj.status === 'not_started' && '○'}
+                    </div>
+                  </motion.div>
 
-                  <div className="level-topics-tags" style={{ marginBottom: '1rem' }}>
-                    {lvl.topicIds.map((tId) => {
-                      const tObj = TOPICS_BY_ID[tId];
-                      const isDone = !!completedMap[tId];
-                      return (
-                        <button
-                          key={tId}
-                          type="button"
-                          onClick={() => onNavigateToTopic(tId)}
-                          className={`topic-tag-chip ${isDone ? 'done' : ''}`}
-                        >
-                          <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.25rem' }}>
-                            {isDone && <Check size={11} />}
-                            <span>{tObj ? tObj.title : tId}</span>
-                          </span>
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
-
-                <div style={{ paddingTop: '0.75rem', borderTop: '1px solid var(--border-color)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontWeight: 600 }}>
-                    {statusObj.completedCount} / {statusObj.totalCount} Lessons ({statusObj.percent}%)
-                  </span>
-
-                  {firstTopic && (
-                    <button
-                      type="button"
-                      onClick={() => onNavigateToTopic(firstTopic.id)}
-                      className="study-level-btn"
-                    >
-                      <span>{statusObj.status === 'completed' ? 'Review' : 'Study'}</span>
-                      <ArrowRight size={13} />
-                    </button>
+                  {index < filteredLevels.length - 1 && (
+                    <div className="constellation-link-beam" />
                   )}
                 </div>
-              </motion.div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       )}
     </motion.div>

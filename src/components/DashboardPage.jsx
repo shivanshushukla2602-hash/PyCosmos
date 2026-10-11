@@ -84,6 +84,8 @@ export default function DashboardPage({
       desc: 'Complete your 1st Python topic',
       Icon: Rocket,
       color: '#38bdf8',
+      rarity: 'COMMON',
+      xpReward: 250,
       unlocked: completedCount >= 1,
       progress: Math.min(100, (completedCount / 1) * 100)
     },
@@ -93,6 +95,8 @@ export default function DashboardPage({
       desc: 'Complete all 8 Foundation topics',
       Icon: Zap,
       color: '#ffd43b',
+      rarity: 'RARE',
+      xpReward: 500,
       unlocked: topics.filter((t) => t.category === 'Foundation').length > 0 && topics.filter((t) => t.category === 'Foundation').every((t) => completedMap[t.id]),
       progress: Math.round((topics.filter((t) => t.category === 'Foundation' && completedMap[t.id]).length / Math.max(1, topics.filter((t) => t.category === 'Foundation').length)) * 100)
     },
@@ -102,6 +106,8 @@ export default function DashboardPage({
       desc: 'Master Core Data Structures',
       Icon: Layers,
       color: '#a855f7',
+      rarity: 'RARE',
+      xpReward: 650,
       unlocked: topics.filter((t) => t.category === 'Core Data Structures').length > 0 && topics.filter((t) => t.category === 'Core Data Structures').every((t) => completedMap[t.id]),
       progress: Math.round((topics.filter((t) => t.category === 'Core Data Structures' && completedMap[t.id]).length / Math.max(1, topics.filter((t) => t.category === 'Core Data Structures').length)) * 100)
     },
@@ -111,6 +117,8 @@ export default function DashboardPage({
       desc: 'Achieve 80%+ quiz accuracy across ≥ 3 quizzes',
       Icon: Target,
       color: '#22c55e',
+      rarity: 'EPIC',
+      xpReward: 750,
       unlocked: quizAvg >= 80 && quizScores.length >= 3,
       progress: Math.min(100, Math.round((quizScores.length / 3) * 100))
     },
@@ -120,6 +128,8 @@ export default function DashboardPage({
       desc: 'Maintain an active 7-day study streak',
       Icon: Flame,
       color: '#fb923c',
+      rarity: 'EPIC',
+      xpReward: 800,
       unlocked: streakCount >= 7,
       progress: Math.min(100, Math.round((streakCount / 7) * 100))
     },
@@ -128,7 +138,9 @@ export default function DashboardPage({
       name: 'OOP Craftsman',
       desc: 'Master Classes, Protocols & Dunder methods',
       Icon: ShieldCheck,
-      color: '#ec4899',
+      color: '#3b82f6',
+      rarity: 'EPIC',
+      xpReward: 1000,
       unlocked: topics.filter((t) => t.category === 'OOP & Protocols').length > 0 && topics.filter((t) => t.category === 'OOP & Protocols').every((t) => completedMap[t.id]),
       progress: Math.round((topics.filter((t) => t.category === 'OOP & Protocols' && completedMap[t.id]).length / Math.max(1, topics.filter((t) => t.category === 'OOP & Protocols').length)) * 100)
     },
@@ -137,7 +149,9 @@ export default function DashboardPage({
       name: 'CPython Hacker',
       desc: 'Understand the GIL, bytecode & memory models',
       Icon: Cpu,
-      color: '#f97316',
+      color: '#f43f5e',
+      rarity: 'LEGENDARY',
+      xpReward: 1500,
       unlocked: topics.filter((t) => t.category === 'Python Internals').length > 0 && topics.filter((t) => t.category === 'Python Internals').every((t) => completedMap[t.id]),
       progress: Math.round((topics.filter((t) => t.category === 'Python Internals' && completedMap[t.id]).length / Math.max(1, topics.filter((t) => t.category === 'Python Internals').length)) * 100)
     },
@@ -147,6 +161,8 @@ export default function DashboardPage({
       desc: '100% completion of the full 51-topic curriculum',
       Icon: Trophy,
       color: '#eab308',
+      rarity: 'MYTHIC',
+      xpReward: 3000,
       unlocked: percentCompleted === 100,
       progress: percentCompleted
     }
@@ -441,95 +457,108 @@ export default function DashboardPage({
       {/* ═════════════════════════════════════════════════════════════════════
           7. COLLECTIBLE ACHIEVEMENTS & BADGES MATRIX
           ═════════════════════════════════════════════════════════════════════ */}
-      <div
-        className="section-card"
-        style={{
-          background: 'var(--bg-card)',
-          borderRadius: '18px',
-          border: '1px solid var(--border-color)',
-          padding: '1.75rem 2rem',
-          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.25)'
-        }}
-      >
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', flexWrap: 'wrap', gap: '0.75rem' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
-            <div style={{ width: '38px', height: '38px', borderRadius: '10px', background: 'rgba(234, 179, 8, 0.15)', border: '1px solid rgba(234, 179, 8, 0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#eab308' }}>
-              <Trophy size={20} />
+      {/* ═════════════════════════════════════════════════════════════════════
+          7. THE OBSIDIAN VAULT: 3D HOLOGRAPHIC ARTIFACT MEDALLIONS
+          ═════════════════════════════════════════════════════════════════════ */}
+      <div className="obsidian-vault-section">
+        <div className="obsidian-vault-banner">
+          <div className="vault-banner-left">
+            <div className="vault-emblem-halo">
+              <Trophy size={22} className="vault-emblem-icon" />
             </div>
             <div>
-              <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>
-                Achievements & Developer Badges
-              </h3>
-              <span style={{ fontSize: '0.82rem', color: 'var(--text-secondary)' }}>
-                {badges.filter((b) => b.unlocked).length} of {badges.length} Unlocked
+              <div className="vault-kicker">COLLECTIBLE DEVELOPER ARTIFACTS</div>
+              <h3 className="vault-title">The Obsidian Vault</h3>
+              <p className="vault-subtitle">
+                Cryptographic achievements minted as you master algorithms, architecture, and Python systems.
+              </p>
+            </div>
+          </div>
+
+          <div className="vault-banner-stats">
+            <div className="vault-unlocked-meter">
+              <span className="unlocked-count">
+                <strong>{badges.filter((b) => b.unlocked).length}</strong> / {badges.length} Unlocked
               </span>
+              <div className="vault-progress-track">
+                <div
+                  className="vault-progress-fill"
+                  style={{ width: `${(badges.filter((b) => b.unlocked).length / badges.length) * 100}%` }}
+                />
+              </div>
             </div>
           </div>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: '1rem' }}>
-          {badges.map((b) => (
-            <motion.div
-              key={b.id}
-              whileHover={{ y: -3, scale: 1.02 }}
-              onClick={() => setSelectedBadge(b)}
-              style={{
-                padding: '1.25rem',
-                borderRadius: '14px',
-                background: b.unlocked ? 'rgba(255, 255, 255, 0.03)' : 'rgba(0, 0, 0, 0.3)',
-                border: b.unlocked ? `1.5px solid ${b.color}55` : '1px solid rgba(255, 255, 255, 0.06)',
-                boxShadow: b.unlocked ? `0 0 18px ${b.color}22` : 'none',
-                cursor: 'pointer',
-                textAlign: 'center',
-                position: 'relative',
-                overflow: 'hidden'
-              }}
-            >
-              {b.unlocked && (
-                <div style={{ position: 'absolute', top: '8px', right: '8px', background: 'rgba(34, 197, 94, 0.2)', border: '1px solid rgba(34, 197, 94, 0.4)', color: '#4ade80', borderRadius: '9999px', padding: '0.1rem 0.4rem', fontSize: '0.65rem', fontWeight: 800 }}>
-                  UNLOCKED
-                </div>
-              )}
-
-              <div
-                style={{
-                  width: '44px',
-                  height: '44px',
-                  borderRadius: '12px',
-                  margin: '0.35rem auto 0.75rem',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  background: b.unlocked ? `${b.color}22` : 'rgba(255, 255, 255, 0.05)',
-                  border: `1px solid ${b.unlocked ? `${b.color}44` : 'rgba(255, 255, 255, 0.1)'}`,
-                  color: b.unlocked ? b.color : 'var(--text-muted)',
-                  filter: b.unlocked ? 'none' : 'grayscale(1) opacity(0.5)'
+        {/* 3D Holographic Medallions Grid */}
+        <div className="holographic-medallions-grid">
+          {badges.map((b) => {
+            const IconComponent = b.Icon;
+            return (
+              <motion.div
+                key={b.id}
+                whileHover={{ y: -6, scale: 1.025 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => {
+                  setSelectedBadge(b);
+                  if (b.unlocked) celebrate();
                 }}
+                className={`medallion-artifact-card ${b.unlocked ? 'is-unlocked' : 'is-locked'}`}
+                style={{ '--badge-color': b.color }}
               >
-                {b.Icon && <b.Icon size={22} />}
-              </div>
+                {/* Rarity Ribbon */}
+                <div className={`medallion-rarity-badge ${b.rarity.toLowerCase()}`}>
+                  {b.rarity}
+                </div>
 
-              <div style={{ fontSize: '0.98rem', fontWeight: 800, color: b.unlocked ? 'var(--text-primary)' : 'var(--text-muted)', marginBottom: '0.25rem' }}>
-                {b.name}
-              </div>
+                {/* 3D Crest Medallion */}
+                <div className="medallion-crest-frame">
+                  <div className="medallion-ambient-bloom" />
 
-              <div style={{ fontSize: '0.78rem', color: 'var(--text-secondary)', lineHeight: 1.45, marginBottom: '0.85rem' }}>
-                {b.desc}
-              </div>
+                  {/* Circular SVG Progress Ring surrounding the medallion */}
+                  <svg className="medallion-progress-ring" viewBox="0 0 76 76">
+                    <circle
+                      cx="38"
+                      cy="38"
+                      r="33"
+                      className="ring-bg"
+                    />
+                    <circle
+                      cx="38"
+                      cy="38"
+                      r="33"
+                      className="ring-fill"
+                      style={{
+                        strokeDasharray: 207.3,
+                        strokeDashoffset: 207.3 - (207.3 * (b.progress / 100)),
+                        stroke: b.unlocked ? b.color : 'rgba(255, 255, 255, 0.2)'
+                      }}
+                    />
+                  </svg>
 
-              {/* Progress sliver */}
-              <div style={{ width: '100%', height: '4px', background: 'rgba(255, 255, 255, 0.06)', borderRadius: '9999px', overflow: 'hidden' }}>
-                <div
-                  style={{
-                    width: `${b.progress}%`,
-                    height: '100%',
-                    background: b.unlocked ? b.color : 'rgba(255, 255, 255, 0.2)',
-                    borderRadius: '9999px'
-                  }}
-                />
-              </div>
-            </motion.div>
-          ))}
+                  <div className="medallion-core-emblem">
+                    {IconComponent && <IconComponent size={24} />}
+                  </div>
+
+                  {b.unlocked && (
+                    <div className="medallion-sparkle-star">✦</div>
+                  )}
+                </div>
+
+                {/* Info block */}
+                <h4 className="medallion-title">{b.name}</h4>
+                <p className="medallion-desc">{b.desc}</p>
+
+                {/* Bottom Footer with XP reward & Status */}
+                <div className="medallion-footer">
+                  <span className="medallion-xp-tag">+{b.xpReward} XP</span>
+                  <span className={`medallion-status-chip ${b.unlocked ? 'unlocked' : 'locked'}`}>
+                    {b.unlocked ? 'CLAIMED ✓' : `${Math.round(b.progress)}%`}
+                  </span>
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
 
@@ -757,6 +786,104 @@ export default function DashboardPage({
                 </div>
               </div>
 
+            </motion.div>
+          </motion.div>
+        )}
+
+        {/* ═════════════════════════════════════════════════════════════════════
+            INTERACTIVE 3D BADGE INSPECTION MODAL
+            ═════════════════════════════════════════════════════════════════════ */}
+        {selectedBadge && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="modal-backdrop"
+            onClick={() => setSelectedBadge(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0, y: 15 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0, y: 15 }}
+              transition={{ duration: 0.25 }}
+              className="badge-inspect-dialog"
+              onClick={(e) => e.stopPropagation()}
+              style={{ '--badge-theme': selectedBadge.color }}
+            >
+              <button
+                type="button"
+                className="badge-modal-close-btn"
+                onClick={() => setSelectedBadge(null)}
+              >
+                <X size={18} />
+              </button>
+
+              <div className="badge-inspect-core">
+                <div className={`inspect-rarity-pill ${selectedBadge.rarity.toLowerCase()}`}>
+                  {selectedBadge.rarity} ARTIFACT
+                </div>
+
+                <div className="inspect-medallion-3d">
+                  <div className="inspect-ambient-aura" />
+                  <div className="inspect-emblem-wrap">
+                    {selectedBadge.Icon && <selectedBadge.Icon size={48} />}
+                  </div>
+                </div>
+
+                <h3 className="inspect-badge-name">{selectedBadge.name}</h3>
+                <p className="inspect-badge-desc">{selectedBadge.desc}</p>
+
+                <div className="inspect-stats-row">
+                  <div className="inspect-stat-cell">
+                    <span className="stat-dim">REWARD</span>
+                    <strong className="stat-bright">+{selectedBadge.xpReward} XP</strong>
+                  </div>
+                  <div className="inspect-stat-cell">
+                    <span className="stat-dim">STATUS</span>
+                    <strong className="stat-bright" style={{ color: selectedBadge.unlocked ? '#22c55e' : 'var(--py-yellow)' }}>
+                      {selectedBadge.unlocked ? 'CLAIMED ✓' : `${Math.round(selectedBadge.progress)}% PROGRESS`}
+                    </strong>
+                  </div>
+                </div>
+
+                <div className="inspect-progress-card">
+                  <div className="progress-top-meta">
+                    <span>Unlock Requirement Progress</span>
+                    <span>{Math.round(selectedBadge.progress)}%</span>
+                  </div>
+                  <div className="inspect-progress-track">
+                    <div
+                      className="inspect-progress-fill"
+                      style={{ width: `${selectedBadge.progress}%`, background: selectedBadge.color }}
+                    />
+                  </div>
+                </div>
+
+                <div className="inspect-action-bar">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (navigator.clipboard) {
+                        navigator.clipboard.writeText(`Unlocked ${selectedBadge.name} on PyCosmos!`);
+                        setCopiedHash(true);
+                        setTimeout(() => setCopiedHash(false), 2000);
+                      }
+                    }}
+                    className="inspect-share-btn"
+                  >
+                    <Share2 size={14} />
+                    <span>{copiedHash ? 'Copied!' : 'Share Achievement'}</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setSelectedBadge(null)}
+                    className="btn btn-primary"
+                    style={{ padding: '0.5rem 1.25rem' }}
+                  >
+                    Close
+                  </button>
+                </div>
+              </div>
             </motion.div>
           </motion.div>
         )}

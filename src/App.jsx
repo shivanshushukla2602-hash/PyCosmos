@@ -282,12 +282,12 @@ export default function App() {
     showToast("Signed out successfully. See you soon!");
   };
 
-  // If not logged in, render AuthPage as the FIRST PAGE!
-  if (!currentUser) {
+  // If not logged in or viewing auth, render AuthPage!
+  if (!currentUser || currentView === 'auth') {
     return (
       <div className="app-container" style={{ position: 'relative' }}>
         <AmbientBackground />
-        <AuthPage onLogin={handleLogin} theme={theme} setTheme={setTheme} />
+        <AuthPage onLogin={(u) => { handleLogin(u); setCurrentView('home'); }} theme={theme} setTheme={setTheme} />
       </div>
     );
   }
