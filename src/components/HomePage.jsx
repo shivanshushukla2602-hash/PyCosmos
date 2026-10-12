@@ -21,6 +21,7 @@ import {
   GitBranch,
   Layers,
   Compass,
+  Globe,
   CheckSquare,
   FileText,
   RefreshCw,
@@ -1017,6 +1018,9 @@ export default function HomePage({
                   </div>
 
                   <span style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '0.35rem',
                     fontSize: '0.75rem',
                     padding: '0.2rem 0.6rem',
                     borderRadius: '9999px',
@@ -1025,7 +1029,8 @@ export default function HomePage({
                     border: '1px solid rgba(255,255,255,0.1)',
                     fontWeight: 700
                   }}>
-                    {qotd.isLiveApi ? '🌐 Live API' : '⚡ Daily Python Challenge'}
+                    {qotd.isLiveApi ? <Globe size={12} /> : <Zap size={12} />}
+                    <span>{qotd.isLiveApi ? 'Live API' : 'Daily Python Challenge'}</span>
                   </span>
                 </div>
 

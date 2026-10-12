@@ -44,63 +44,63 @@ import PyCosmosLogo from './PyCosmosLogo';
 
 const CATEGORY_META = {
   'Foundation': {
-    color: '#306998',
-    bg: 'rgba(48, 105, 152, 0.15)',
-    border: 'rgba(75, 139, 190, 0.35)',
+    color: '#0284c7',
+    bg: 'rgba(2, 132, 199, 0.08)',
+    border: 'rgba(2, 132, 199, 0.28)',
     icon: Terminal
   },
   'Core Data Structures': {
-    color: '#ffd43b',
-    bg: 'rgba(255, 212, 59, 0.15)',
-    border: 'rgba(255, 212, 59, 0.35)',
+    color: '#d97706',
+    bg: 'rgba(245, 158, 11, 0.08)',
+    border: 'rgba(245, 158, 11, 0.28)',
     icon: Layers
   },
   'Functions': {
-    color: '#2dd4bf',
-    bg: 'rgba(45, 212, 191, 0.15)',
-    border: 'rgba(45, 212, 191, 0.35)',
+    color: '#059669',
+    bg: 'rgba(16, 185, 129, 0.08)',
+    border: 'rgba(16, 185, 129, 0.28)',
     icon: Code2
   },
   'Practical Python': {
-    color: '#10b981',
-    bg: 'rgba(16, 185, 129, 0.15)',
-    border: 'rgba(16, 185, 129, 0.35)',
+    color: '#0891b2',
+    bg: 'rgba(6, 182, 212, 0.08)',
+    border: 'rgba(6, 182, 212, 0.28)',
     icon: GitBranch
   },
   'OOP & Protocols': {
-    color: '#ec4899',
-    bg: 'rgba(236, 72, 153, 0.15)',
-    border: 'rgba(236, 72, 153, 0.35)',
+    color: '#e11d48',
+    bg: 'rgba(244, 63, 94, 0.08)',
+    border: 'rgba(244, 63, 94, 0.28)',
     icon: Rocket
   },
   'Python Internals': {
-    color: '#f97316',
-    bg: 'rgba(249, 115, 22, 0.15)',
-    border: 'rgba(249, 115, 22, 0.35)',
+    color: '#ea580c',
+    bg: 'rgba(234, 88, 12, 0.08)',
+    border: 'rgba(234, 88, 12, 0.28)',
     icon: Cpu
   },
   'Standard Library': {
-    color: '#06b6d4',
-    bg: 'rgba(6, 182, 212, 0.15)',
-    border: 'rgba(6, 182, 212, 0.35)',
+    color: '#4f46e5',
+    bg: 'rgba(99, 102, 241, 0.08)',
+    border: 'rgba(99, 102, 241, 0.28)',
     icon: BookOpen
   },
   'Professional Python': {
-    color: '#eab308',
-    bg: 'rgba(234, 179, 8, 0.15)',
-    border: 'rgba(234, 179, 8, 0.35)',
+    color: '#7c3aed',
+    bg: 'rgba(124, 58, 237, 0.08)',
+    border: 'rgba(124, 58, 237, 0.28)',
     icon: Trophy
   },
   'Development & AI/ML': {
-    color: '#6366f1',
-    bg: 'rgba(99, 102, 241, 0.15)',
-    border: 'rgba(99, 102, 241, 0.35)',
+    color: '#c026d3',
+    bg: 'rgba(192, 38, 211, 0.08)',
+    border: 'rgba(192, 38, 211, 0.28)',
     icon: Sparkles
   },
   'Projects & Problem Solving': {
-    color: '#14b8a6',
-    bg: 'rgba(20, 184, 166, 0.15)',
-    border: 'rgba(20, 184, 166, 0.35)',
+    color: '#be123c',
+    bg: 'rgba(190, 18, 60, 0.08)',
+    border: 'rgba(190, 18, 60, 0.28)',
     icon: HelpCircle
   }
 };
@@ -623,7 +623,7 @@ export default function ChecklistPage({
                     <div className="projection-col">
                       <span className="projection-label">Target Completion</span>
                       <span className="projection-val target-date">
-                        {remainingTopics === 0 ? 'Achieved! 🏆' : projectedDateStr}
+                        {remainingTopics === 0 ? 'Achieved!' : projectedDateStr}
                       </span>
                     </div>
                   </div>

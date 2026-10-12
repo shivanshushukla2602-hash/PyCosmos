@@ -367,31 +367,74 @@ export default function TopicDetail({
       <div id="sec-overview" className="py-module-card">
         <div className="py-module-header">
           <div className="py-module-badge-icon">
-            <Lightbulb size={18} color="var(--py-yellow)" />
+            <Lightbulb size={20} color="var(--py-yellow)" />
           </div>
-          <div>
+          <div className="py-module-header-text">
+            <span className="py-module-step-pill">Sections 01 & 02</span>
             <h3 className="py-module-title">1. What is it? & 2. Why does it exist?</h3>
             <span className="py-module-subtitle">Foundational concept, mechanical definition, and engineering rationale</span>
           </div>
         </div>
 
         <div className="py-overview-dual-grid">
-          {/* Card A: What is it? */}
+          {/* Card A (Left Card): What is it? */}
           <div className="py-overview-box def-box">
+            <div className="overview-card-glow def-glow" />
+
             <div className="overview-box-header">
-              <span className="box-tag blue-tag">CORE DEFINITION</span>
+              <div className="box-tag-container">
+                <span className="box-tag blue-tag">
+                  <BookOpen size={12} />
+                  <span>CORE DEFINITION</span>
+                </span>
+                <span className="overview-step-chip">01</span>
+              </div>
+              <div className="overview-icon-wrapper blue-icon-wrapper">
+                <FileCode size={18} />
+              </div>
             </div>
-            <h4 className="overview-box-title">What is it?</h4>
-            <p className="overview-box-text">{topic.whatIsIt}</p>
+
+            <div className="overview-body">
+              <h4 className="overview-box-title">What is it?</h4>
+              <p className="overview-box-text">{topic.whatIsIt}</p>
+            </div>
+
+            <div className="overview-card-footer">
+              <div className="overview-footer-badge def-footer-badge">
+                <Sparkles size={13} />
+                <span>Foundational Architecture & Specification</span>
+              </div>
+            </div>
           </div>
 
-          {/* Card B: Why does it exist? */}
+          {/* Card B (Right Card): Why does it exist? */}
           <div className="py-overview-box rationale-box">
+            <div className="overview-card-glow rationale-glow" />
+
             <div className="overview-box-header">
-              <span className="box-tag yellow-tag">ENGINEERING RATIONALE</span>
+              <div className="box-tag-container">
+                <span className="box-tag yellow-tag">
+                  <Compass size={12} />
+                  <span>ENGINEERING RATIONALE</span>
+                </span>
+                <span className="overview-step-chip">02</span>
+              </div>
+              <div className="overview-icon-wrapper yellow-icon-wrapper">
+                <Cpu size={18} />
+              </div>
             </div>
-            <h4 className="overview-box-title">Why does it exist?</h4>
-            <p className="overview-box-text">{topic.whyDoesItExist}</p>
+
+            <div className="overview-body">
+              <h4 className="overview-box-title">Why does it exist?</h4>
+              <p className="overview-box-text">{topic.whyDoesItExist}</p>
+            </div>
+
+            <div className="overview-card-footer">
+              <div className="overview-footer-badge rationale-footer-badge">
+                <Zap size={13} />
+                <span>Design Tradeoffs & Core Engineering Motivation</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -518,7 +561,13 @@ export default function TopicDetail({
                   className={`py-tier-tab-btn ${isSelected ? 'active' : ''}`}
                 >
                   <span className="tier-tab-icon">
-                    {ex.level === 'Simple' ? '⚡' : ex.level === 'Intermediate' ? '⚙️' : '🔮'}
+                    {ex.level === 'Simple' ? (
+                      <Zap size={14} />
+                    ) : ex.level === 'Intermediate' ? (
+                      <Cpu size={14} />
+                    ) : (
+                      <Sparkles size={14} />
+                    )}
                   </span>
                   <span className="tier-tab-label">{ex.level}</span>
                   <span className="tier-tab-title">({ex.title.slice(0, 24)}...)</span>

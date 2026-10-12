@@ -25,7 +25,11 @@ import {
   Sliders,
   Clock,
   ChevronLeft,
-  Shield
+  Shield,
+  Globe,
+  Terminal,
+  Cpu,
+  GitBranch
 } from 'lucide-react';
 import { CATEGORIES } from '../data/topicsData';
 import { celebrate } from '../utils/celebrate';
@@ -296,15 +300,16 @@ export default function QuizPage({
           {/* HORIZONTAL DOMAIN CAROUSEL */}
           <div className="domain-carousel-track">
             {[
-              { id: 'all', label: 'All Domains', icon: '🪐' },
-              { id: 'Foundation', label: 'Syntax & Primitives', icon: '⚡' },
-              { id: 'Data Structures', label: 'Data Structures', icon: '📦' },
-              { id: 'Functions & Modules', label: 'Functions & OOP', icon: '🏛️' },
-              { id: 'Concurrency & Async', label: 'Async & Concurrency', icon: '🔀' },
-              { id: 'Internals & Performance', label: 'CPython Internals', icon: '⚙️' },
-              { id: 'Advanced Python', label: 'Metaprogramming', icon: '🔮' }
+              { id: 'all', label: 'All Domains', Icon: Globe },
+              { id: 'Foundation', label: 'Syntax & Primitives', Icon: Terminal },
+              { id: 'Data Structures', label: 'Data Structures', Icon: Layers },
+              { id: 'Functions & Modules', label: 'Functions & OOP', Icon: Code2 },
+              { id: 'Concurrency & Async', label: 'Async & Concurrency', Icon: GitBranch },
+              { id: 'Internals & Performance', label: 'CPython Internals', Icon: Cpu },
+              { id: 'Advanced Python', label: 'Metaprogramming', Icon: Sparkles }
             ].map((domain) => {
               const isSelected = selectedCategory === domain.id;
+              const DomainIcon = domain.Icon;
               return (
                 <motion.button
                   key={domain.id}
@@ -314,7 +319,9 @@ export default function QuizPage({
                   onClick={() => setSelectedCategory(domain.id)}
                   className={`domain-carousel-card ${isSelected ? 'active' : ''}`}
                 >
-                  <span className="domain-card-icon">{domain.icon}</span>
+                  <span className="domain-card-icon">
+                    <DomainIcon size={14} />
+                  </span>
                   <span className="domain-card-label">{domain.label}</span>
                   {isSelected && <span className="domain-active-glow" />}
                 </motion.button>
@@ -329,7 +336,7 @@ export default function QuizPage({
               onChange={(e) => setActiveTopicId(e.target.value)}
               className="studio-dropdown-input"
             >
-              <option value="all">🪐 All 51 Curriculum Topics (Comprehensive Mixed Drill)</option>
+              <option value="all">All 51 Curriculum Topics (Comprehensive Mixed Drill)</option>
               {availableTopics.map((t) => (
                 <option key={t.id} value={t.id}>
                   {t.title} ({t.category || 'Python'})

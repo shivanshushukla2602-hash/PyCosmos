@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Trophy,
@@ -59,6 +59,20 @@ const STAGE_CONFIGS = [
   { icon: Flag, color: '#facc15', glow: 'rgba(250, 204, 21, 0.35)', codename: 'Apex Engineering' },
 ];
 
+const CATEGORY_ITEMS = [
+  { id: 'all', label: 'All Areas' },
+  { id: 'Foundation', label: 'Foundation' },
+  { id: 'Core Data Structures', label: 'Core Data Structures' },
+  { id: 'Functions', label: 'Functions' },
+  { id: 'Practical Python', label: 'Practical Python' },
+  { id: 'OOP', label: 'OOP' },
+  { id: 'Python Internals', label: 'Python Internals' },
+  { id: 'Standard Library', label: 'Standard Library' },
+  { id: 'Professional Python', label: 'Professional Python' },
+  { id: 'Development', label: 'Development' },
+  { id: 'Projects + Problem Solving', label: 'Projects & Problems' }
+];
+
 export default function MasteryTrackerPage({
   completedMap = {},
   onNavigateToTopic,
@@ -84,7 +98,16 @@ export default function MasteryTrackerPage({
   const totalLevels = MASTERY_LEVELS.length; // 27
   const completedLevels = MASTERY_LEVELS.filter((lvl) => getLevelStatus(lvl).status === 'completed').length;
   const inProgressLevels = MASTERY_LEVELS.filter((lvl) => getLevelStatus(lvl).status === 'learning').length;
+  const notStartedLevels = totalLevels - completedLevels - inProgressLevels;
   const overallPercent = Math.round((completedLevels / totalLevels) * 100);
+
+  const categoryCounts = useMemo(() => {
+    const counts = { all: totalLevels };
+    MASTERY_LEVELS.forEach((lvl) => {
+      counts[lvl.category] = (counts[lvl.category] || 0) + 1;
+    });
+    return counts;
+  }, [totalLevels]);
 
   // Filter levels based on search, category, status, and activeStageTrack
   const filteredLevels = MASTERY_LEVELS.filter((lvl) => {
@@ -614,118 +637,228 @@ export default function MasteryTrackerPage({
       {/* ══════════════════════════════════════════════════════════════════
           3. HIGH-TECH COCKPIT FILTER & VIEW CONTROLS
           ══════════════════════════════════════════════════════════════════ */}
-      <div className="tracker-filter-bar">
-        {/* Search input with modern radar styling */}
-        <div className="filter-search-box">
-          <Search size={16} color="var(--py-blue-light)" />
-          <input
-            type="text"
-            placeholder="Search level or concept (e.g. OOP, Regex, Memory, Decorators)..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
-          {searchQuery && (
-            <button
-              onClick={() => setSearchQuery('')}
-              style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', display: 'flex', alignItems: 'center' }}
-              title="Clear search"
-            >
-              <X size={14} />
-            </button>
-          )}
-        </div>
-
-        {/* 3 Creative View Switcher & Results Pill */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
-          <span style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', fontWeight: 600 }}>
-            Showing <strong style={{ color: 'var(--py-yellow)' }}><AnimatedCounter value={filteredLevels.length} /></strong> of {totalLevels} Levels
-          </span>
-
-          <div className="mastery-view-switcher">
-            <button
-              className={`mastery-view-btn ${viewMode === 'deck' ? 'active' : ''}`}
-              onClick={() => setViewMode('deck')}
-              title="Holocron Deck View"
-            >
-              <LayoutGrid size={14} />
-              <span>Holocron Deck</span>
-            </button>
-            <button
-              className={`mastery-view-btn ${viewMode === 'matrix' ? 'active' : ''}`}
-              onClick={() => setViewMode('matrix')}
-              title="Cyber HUD Table View"
-            >
-              <TableIcon size={14} />
-              <span>Cyber HUD</span>
-            </button>
-            <button
-              className={`mastery-view-btn ${viewMode === 'tree' ? 'active' : ''}`}
-              onClick={() => setViewMode('tree')}
-              title="Constellation Skill Tree"
-            >
-              <GitBranch size={14} />
-              <span>Skill Tree</span>
-            </button>
+      <div className="tracker-filter-cockpit">
+        {/* Top Header Row: Search + Count Badge + View Switcher + Reset */}
+        <div className="cockpit-top-bar">
+          {/* Enhanced Search Input */}
+          <div className="cockpit-search-box">
+            <Search size={16} className="cockpit-search-icon" />
+            <input
+              type="text"
+              placeholder="Search 27 levels by concept, topic, or keyword (e.g. OOP, Regex, Memory)..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              aria-label="Search mastery levels"
+            />
+            {searchQuery && (
+              <button
+                type="button"
+                onClick={() => setSearchQuery('')}
+                className="cockpit-search-clear"
+                title="Clear search"
+                aria-label="Clear search query"
+              >
+                <X size={14} />
+              </button>
+            )}
           </div>
 
-          {isFilteringActive && (
-            <button
-              onClick={resetFilters}
-              className="btn btn-secondary"
-              style={{ padding: '0.35rem 0.75rem', fontSize: '0.78rem', borderRadius: '8px', display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}
-            >
-              <RotateCcw size={12} />
-              <span>Reset</span>
-            </button>
-          )}
+          {/* Controls Group */}
+          <div className="cockpit-controls-group">
+            {/* Live Count Pill */}
+            <div className="cockpit-count-badge">
+              <span className="count-dot" />
+              <span>
+                Showing <strong><AnimatedCounter value={filteredLevels.length} /></strong> of {totalLevels} Levels
+              </span>
+            </div>
+
+            {/* Segmented View Switcher */}
+            <div className="mastery-view-switcher" role="tablist" aria-label="View mode">
+              <button
+                type="button"
+                className={`mastery-view-btn ${viewMode === 'deck' ? 'active' : ''}`}
+                onClick={() => setViewMode('deck')}
+                title="Holocron Deck View"
+              >
+                <LayoutGrid size={14} />
+                <span>Holocron Deck</span>
+              </button>
+              <button
+                type="button"
+                className={`mastery-view-btn ${viewMode === 'matrix' ? 'active' : ''}`}
+                onClick={() => setViewMode('matrix')}
+                title="Cyber HUD Table View"
+              >
+                <TableIcon size={14} />
+                <span>Cyber HUD</span>
+              </button>
+              <button
+                type="button"
+                className={`mastery-view-btn ${viewMode === 'tree' ? 'active' : ''}`}
+                onClick={() => setViewMode('tree')}
+                title="Constellation Skill Tree"
+              >
+                <GitBranch size={14} />
+                <span>Skill Tree</span>
+              </button>
+            </div>
+
+            {/* Reset Filters Button */}
+            {isFilteringActive && (
+              <button
+                type="button"
+                onClick={resetFilters}
+                className="cockpit-reset-btn"
+                title="Reset all active filters"
+              >
+                <RotateCcw size={12} />
+                <span>Reset Filters</span>
+              </button>
+            )}
+          </div>
         </div>
 
-        {/* Category Filter Pills */}
-        <div className="filter-categories-pills" style={{ width: '100%', marginTop: '0.25rem' }}>
-          {['all', 'Foundation', 'Core Data Structures', 'Functions', 'Practical Python', 'OOP', 'Python Internals', 'Standard Library', 'Professional Python', 'Development', 'Projects + Problem Solving'].map((cat) => (
-            <button
-              key={cat}
-              className={`pill-btn ${filterCategory === cat ? 'active' : ''}`}
-              onClick={() => setFilterCategory(cat)}
-            >
-              {cat === 'all' ? 'All Areas' : cat}
-            </button>
-          ))}
+        {/* Divider */}
+        <div className="cockpit-divider" />
+
+        {/* Filter Rows Container */}
+        <div className="cockpit-filter-rows">
+          {/* Domain / Area Filter Row */}
+          <div className="cockpit-filter-row">
+            <div className="cockpit-row-label">
+              <Layers size={13} />
+              <span>Area / Domain</span>
+            </div>
+            <div className="cockpit-pills-list">
+              {CATEGORY_ITEMS.map((cat) => {
+                const count = categoryCounts[cat.id] || 0;
+                const isActive = filterCategory === cat.id;
+                return (
+                  <button
+                    key={cat.id}
+                    type="button"
+                    className={`cockpit-pill-btn ${isActive ? 'active' : ''}`}
+                    onClick={() => setFilterCategory(cat.id)}
+                  >
+                    <span>{cat.label}</span>
+                    <span className="cockpit-pill-count">{count}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Mastery Status Filter Row */}
+          <div className="cockpit-filter-row">
+            <div className="cockpit-row-label">
+              <Sliders size={13} />
+              <span>Status</span>
+            </div>
+            <div className="cockpit-pills-list">
+              <button
+                type="button"
+                className={`cockpit-pill-btn ${filterStatus === 'all' ? 'active' : ''}`}
+                onClick={() => setFilterStatus('all')}
+              >
+                <span>All Statuses</span>
+                <span className="cockpit-pill-count">{totalLevels}</span>
+              </button>
+              <button
+                type="button"
+                className={`cockpit-pill-btn status-completed ${filterStatus === 'completed' ? 'active' : ''}`}
+                onClick={() => setFilterStatus('completed')}
+              >
+                <CheckCircle2 size={13} className="status-icon" color={filterStatus === 'completed' ? '#ffffff' : '#22c55e'} />
+                <span>Completed</span>
+                <span className="cockpit-pill-count">{completedLevels}</span>
+              </button>
+              <button
+                type="button"
+                className={`cockpit-pill-btn status-learning ${filterStatus === 'learning' ? 'active' : ''}`}
+                onClick={() => setFilterStatus('learning')}
+              >
+                <Clock size={13} className="status-icon" color={filterStatus === 'learning' ? '#ffffff' : '#f59e0b'} />
+                <span>In Progress</span>
+                <span className="cockpit-pill-count">{inProgressLevels}</span>
+              </button>
+              <button
+                type="button"
+                className={`cockpit-pill-btn status-not-started ${filterStatus === 'not_started' ? 'active' : ''}`}
+                onClick={() => setFilterStatus('not_started')}
+              >
+                <Circle size={12} className="status-icon" color={filterStatus === 'not_started' ? '#ffffff' : '#8b949e'} />
+                <span>Not Started</span>
+                <span className="cockpit-pill-count">{notStartedLevels}</span>
+              </button>
+            </div>
+          </div>
         </div>
 
-        {/* Status Filter Pills */}
-        <div className="filter-categories-pills" style={{ width: '100%' }}>
-          <span style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase', marginRight: '0.25rem' }}>
-            Status:
-          </span>
-          <button
-            className={`pill-btn ${filterStatus === 'all' ? 'active' : ''}`}
-            onClick={() => setFilterStatus('all')}
-          >
-            All Statuses
-          </button>
-          <button
-            className={`pill-btn ${filterStatus === 'completed' ? 'active' : ''}`}
-            onClick={() => setFilterStatus('completed')}
-          >
-            <CheckCircle2 size={12} color="#22c55e" />
-            <span>Completed</span>
-          </button>
-          <button
-            className={`pill-btn ${filterStatus === 'learning' ? 'active' : ''}`}
-            onClick={() => setFilterStatus('learning')}
-          >
-            <Clock size={12} color="#f59e0b" />
-            <span>In Progress</span>
-          </button>
-          <button
-            className={`pill-btn ${filterStatus === 'not_started' ? 'active' : ''}`}
-            onClick={() => setFilterStatus('not_started')}
-          >
-            <Circle size={11} color="#8b949e" />
-            <span>Not Started</span>
-          </button>
-        </div>
+        {/* Active Filters Summary Strip */}
+        {isFilteringActive && (
+          <div className="cockpit-active-strip">
+            <div className="active-strip-label">
+              <Filter size={12} />
+              <span>Active filters:</span>
+            </div>
+            <div className="active-tags-list">
+              {searchQuery && (
+                <button
+                  type="button"
+                  onClick={() => setSearchQuery('')}
+                  className="active-tag-chip"
+                  title="Remove search query"
+                >
+                  <span>Search: "{searchQuery}"</span>
+                  <X size={11} />
+                </button>
+              )}
+              {filterCategory !== 'all' && (
+                <button
+                  type="button"
+                  onClick={() => setFilterCategory('all')}
+                  className="active-tag-chip"
+                  title="Clear domain filter"
+                >
+                  <span>Domain: {filterCategory}</span>
+                  <X size={11} />
+                </button>
+              )}
+              {filterStatus !== 'all' && (
+                <button
+                  type="button"
+                  onClick={() => setFilterStatus('all')}
+                  className="active-tag-chip"
+                  title="Clear status filter"
+                >
+                  <span>
+                    Status: {filterStatus === 'completed' ? 'Completed' : filterStatus === 'learning' ? 'In Progress' : 'Not Started'}
+                  </span>
+                  <X size={11} />
+                </button>
+              )}
+              {activeStageTrack !== null && (
+                <button
+                  type="button"
+                  onClick={() => setActiveStageTrack(null)}
+                  className="active-tag-chip"
+                  title="Clear stage filter"
+                >
+                  <span>Stage: {PROGRESSION_TRACKS[activeStageTrack]?.title || `Stage ${activeStageTrack + 1}`}</span>
+                  <X size={11} />
+                </button>
+              )}
+              <button
+                type="button"
+                onClick={resetFilters}
+                className="clear-all-filters-btn"
+              >
+                Clear all
+              </button>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* ══════════════════════════════════════════════════════════════════

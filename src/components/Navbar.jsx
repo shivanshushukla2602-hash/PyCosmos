@@ -232,8 +232,8 @@ export default function Navbar({
                   className="navbar-avatar-circle"
                   style={
                     currentUser.isAdmin
-                      ? { border: '1.5px solid var(--py-yellow)', background: 'rgba(255, 212, 59, 0.2)' }
-                      : {}
+                      ? { border: '1.5px solid #0284c7', background: 'rgba(2, 132, 199, 0.12)', color: '#0284c7' }
+                      : { color: '#0284c7' }
                   }
                 >
                   {currentUser.avatar || currentUser.name.slice(0, 2).toUpperCase()}

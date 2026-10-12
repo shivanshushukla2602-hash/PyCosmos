@@ -878,6 +878,8 @@ body.light-theme .mastery-view-btn.active {
 body.light-theme .mastery-view-switcher {
   background: #f1f5f9 !important;
   border-color: #e2e8f0 !important;
+  border-radius: 12px !important;
+  padding: 0.25rem !important;
 }
 
 /* Light Theme Subtopics & List Items */
@@ -4273,14 +4275,481 @@ body.light-theme .demo-avatar-circle {
   line-height: 1.5;
 }
 
-/* Filter controls */
+/* ══════════════════════════════════════════════════════════════════
+   HIGH-TECH MASTERY COCKPIT FILTER BAR & CONTROLS
+   ══════════════════════════════════════════════════════════════════ */
+
+.tracker-filter-cockpit,
 .tracker-filter-bar {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 1.35rem 1.6rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+  transition: all 0.25s ease;
+  backdrop-filter: blur(12px);
+}
+
+body.light-theme .tracker-filter-cockpit,
+body.light-theme .tracker-filter-bar {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 10px 28px -4px rgba(15, 23, 42, 0.05), 0 4px 12px -2px rgba(15, 23, 42, 0.03) !important;
+}
+
+/* Top Bar: Search + Right Controls */
+.cockpit-top-bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
   flex-wrap: wrap;
-  margin-bottom: 1.75rem;
+}
+
+.cockpit-search-box {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  background: rgba(13, 17, 23, 0.75);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 0.55rem 0.9rem;
+  flex: 1;
+  min-width: 280px;
+  transition: all 0.2s ease;
+}
+
+.cockpit-search-box:focus-within {
+  border-color: var(--py-blue-light);
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.18);
+}
+
+body.light-theme .cockpit-search-box {
+  background: #f8fafc;
+  border-color: #e2e8f0;
+}
+
+body.light-theme .cockpit-search-box:focus-within {
+  border-color: #0284c7;
+  box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.14);
+}
+
+.cockpit-search-icon {
+  color: var(--py-blue-light);
+  flex-shrink: 0;
+}
+
+body.light-theme .cockpit-search-icon {
+  color: #0284c7;
+}
+
+.cockpit-search-box input {
+  background: none;
+  border: none;
+  outline: none;
+  color: var(--text-primary);
+  font-size: 0.85rem;
+  font-weight: 500;
+  width: 100%;
+}
+
+body.light-theme .cockpit-search-box input {
+  color: #0f172a;
+}
+
+body.light-theme .cockpit-search-box input::placeholder {
+  color: #94a3b8;
+}
+
+.cockpit-search-clear {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.2rem;
+  border-radius: 6px;
+  transition: all 0.15s ease;
+}
+
+.cockpit-search-clear:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+body.light-theme .cockpit-search-clear:hover {
+  color: #0f172a;
+  background: #e2e8f0;
+}
+
+/* Controls Group */
+.cockpit-controls-group {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.cockpit-count-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.38rem 0.85rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-color);
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.cockpit-count-badge .count-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #38bdf8;
+  box-shadow: 0 0 8px #38bdf8;
+  animation: pulse 2s infinite;
+}
+
+.cockpit-count-badge strong {
+  color: var(--py-yellow);
+}
+
+body.light-theme .cockpit-count-badge {
+  background: #f1f5f9;
+  border-color: #e2e8f0;
+  color: #475569;
+}
+
+body.light-theme .cockpit-count-badge .count-dot {
+  background: #0284c7;
+  box-shadow: 0 0 6px rgba(2, 132, 199, 0.5);
+}
+
+body.light-theme .cockpit-count-badge strong {
+  color: #0284c7;
+}
+
+/* Reset Button */
+.cockpit-reset-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.38rem 0.85rem;
+  border-radius: 9999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  background: rgba(239, 68, 68, 0.12);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cockpit-reset-btn:hover {
+  background: rgba(239, 68, 68, 0.2);
+  color: #fca5a5;
+  transform: translateY(-1px);
+}
+
+body.light-theme .cockpit-reset-btn {
+  background: #fef2f2;
+  color: #dc2626;
+  border-color: #fecaca;
+}
+
+body.light-theme .cockpit-reset-btn:hover {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+/* Divider */
+.cockpit-divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.08) 15%, rgba(255, 255, 255, 0.08) 85%, transparent 100%);
+}
+
+body.light-theme .cockpit-divider {
+  background: linear-gradient(90deg, transparent 0%, #e2e8f0 15%, #e2e8f0 85%, transparent 100%);
+}
+
+/* Filter Rows */
+.cockpit-filter-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.cockpit-filter-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  flex-wrap: nowrap;
+}
+
+@media (max-width: 768px) {
+  .cockpit-filter-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+.cockpit-row-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  min-width: 110px;
+  padding-top: 0.4rem;
+  flex-shrink: 0;
+}
+
+body.light-theme .cockpit-row-label {
+  color: #64748b;
+}
+
+.cockpit-pills-list {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+  flex: 1;
+}
+
+/* Cockpit Pill Buttons & Legacy Pill Buttons */
+.cockpit-pill-btn,
+.pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.38rem 0.85rem;
+  border-radius: 9999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+}
+
+.cockpit-pill-btn:hover,
+.pill-btn:hover {
+  background: rgba(255, 255, 255, 0.09);
+  color: var(--text-primary);
+  border-color: rgba(255, 255, 255, 0.18);
+  transform: translateY(-1px);
+}
+
+.cockpit-pill-btn.active,
+.pill-btn.active {
+  background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
+  color: #0b1120;
+  border-color: transparent;
+  font-weight: 700;
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.35);
+  transform: translateY(-1px);
+}
+
+.cockpit-pill-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 0.08rem 0.45rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-muted);
+  min-width: 18px;
+  line-height: 1.2;
+}
+
+.cockpit-pill-btn.active .cockpit-pill-count {
+  background: rgba(0, 0, 0, 0.2);
+  color: #0b1120;
+}
+
+/* Light Theme Pill Buttons */
+body.light-theme .cockpit-pill-btn,
+body.light-theme .pill-btn {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  color: #475569;
+}
+
+body.light-theme .cockpit-pill-btn:hover,
+body.light-theme .pill-btn:hover {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+  color: #0f172a;
+}
+
+body.light-theme .cockpit-pill-btn .cockpit-pill-count {
+  background: #e2e8f0;
+  color: #64748b;
+}
+
+body.light-theme .cockpit-pill-btn.active,
+body.light-theme .pill-btn.active {
+  background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%) !important;
+  border-color: transparent !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.28) !important;
+}
+
+body.light-theme .cockpit-pill-btn.active .cockpit-pill-count {
+  background: rgba(255, 255, 255, 0.25) !important;
+  color: #ffffff !important;
+}
+
+/* Status Specific Pill Styles */
+.cockpit-pill-btn.status-completed:hover {
+  border-color: rgba(34, 197, 94, 0.4);
+}
+
+.cockpit-pill-btn.status-completed.active {
+  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%) !important;
+  color: #ffffff !important;
+  border-color: transparent !important;
+  box-shadow: 0 4px 14px rgba(34, 197, 94, 0.32) !important;
+}
+
+.cockpit-pill-btn.status-learning:hover {
+  border-color: rgba(245, 158, 11, 0.4);
+}
+
+.cockpit-pill-btn.status-learning.active {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
+  color: #ffffff !important;
+  border-color: transparent !important;
+  box-shadow: 0 4px 14px rgba(245, 158, 11, 0.32) !important;
+}
+
+.cockpit-pill-btn.status-not-started:hover {
+  border-color: rgba(148, 163, 184, 0.4);
+}
+
+.cockpit-pill-btn.status-not-started.active {
+  background: linear-gradient(135deg, #64748b 0%, #475569 100%) !important;
+  color: #ffffff !important;
+  border-color: transparent !important;
+  box-shadow: 0 4px 14px rgba(100, 116, 139, 0.32) !important;
+}
+
+.cockpit-pill-btn .status-icon {
+  flex-shrink: 0;
+}
+
+/* Active Filter Summary Strip */
+.cockpit-active-strip {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding-top: 0.75rem;
+  border-top: 1px dashed rgba(255, 255, 255, 0.08);
+  flex-wrap: wrap;
+}
+
+body.light-theme .cockpit-active-strip {
+  border-top-color: #e2e8f0;
+}
+
+.active-strip-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+body.light-theme .active-strip-label {
+  color: #64748b;
+}
+
+.active-tags-list {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.active-tag-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.24rem 0.65rem;
+  border-radius: 9999px;
+  font-size: 0.73rem;
+  font-weight: 600;
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  color: #38bdf8;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.active-tag-chip:hover {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: rgba(239, 68, 68, 0.35);
+  color: #f87171;
+}
+
+body.light-theme .active-tag-chip {
+  background: #f0f9ff;
+  border-color: #bae6fd;
+  color: #0369a1;
+}
+
+body.light-theme .active-tag-chip:hover {
+  background: #fef2f2;
+  border-color: #fecaca;
+  color: #dc2626;
+}
+
+.clear-all-filters-btn {
+  background: none;
+  border: none;
+  font-size: 0.73rem;
+  font-weight: 700;
+  color: var(--py-yellow);
+  cursor: pointer;
+  padding: 0.2rem 0.45rem;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.15s ease;
+}
+
+body.light-theme .clear-all-filters-btn {
+  color: #0284c7;
+}
+
+.clear-all-filters-btn:hover {
+  color: #ef4444;
+}
+
+/* Legacy filter categories container */
+.filter-categories-pills {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex-wrap: wrap;
 }
 
 .filter-search-box {
@@ -4289,7 +4758,7 @@ body.light-theme .demo-avatar-circle {
   gap: 0.6rem;
   background: var(--bg-card);
   border: 1px solid var(--border-color);
-  border-radius: 10px;
+  border-radius: 12px;
   padding: 0.55rem 0.85rem;
   flex: 1;
   min-width: 260px;
@@ -4302,39 +4771,6 @@ body.light-theme .demo-avatar-circle {
   color: var(--text-primary);
   font-size: 0.85rem;
   width: 100%;
-}
-
-.filter-categories-pills {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  flex-wrap: wrap;
-}
-
-.pill-btn {
-  padding: 0.4rem 0.8rem;
-  border-radius: 8px;
-  font-size: 0.78rem;
-  font-weight: 600;
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
-  color: var(--text-secondary);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 0.35rem;
-  transition: all 0.15s ease;
-}
-
-.pill-btn:hover {
-  background: rgba(255, 255, 255, 0.05);
-  color: var(--text-primary);
-}
-
-.pill-btn.active {
-  background: var(--py-blue);
-  color: #ffffff;
-  border-color: var(--py-blue-light);
 }
 
 /* Mastery Matrix Table */
@@ -4492,7 +4928,7 @@ body.light-theme .demo-avatar-circle {
   align-items: center;
   background: rgba(13, 17, 23, 0.85);
   border: 1px solid var(--border-color);
-  border-radius: 10px;
+  border-radius: 12px;
   padding: 0.25rem;
   gap: 0.25rem;
 }
@@ -4501,8 +4937,8 @@ body.light-theme .demo-avatar-circle {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  padding: 0.35rem 0.75rem;
-  border-radius: 7px;
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
   font-size: 0.8rem;
   font-weight: 700;
   border: none;
@@ -7726,18 +8162,23 @@ body.light-theme .footer-attribution strong {
   flex-direction: column;
 }
 
-.kinetic-stage-card:hover {
-  border-color: var(--stage-accent);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4), 0 0 16px rgba(56, 189, 248, 0.15);
-}
-
 .kinetic-stage-card.is-focused {
-  border-color: var(--py-yellow);
-  box-shadow: 0 0 20px rgba(255, 212, 59, 0.2);
+  border-color: var(--stage-accent, var(--py-yellow));
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.22), 0 4px 12px rgba(0, 0, 0, 0.25);
 }
 
 .kinetic-stage-card.is-complete {
   border-color: rgba(34, 197, 94, 0.5);
+}
+
+/* Universal hover state - identical elevation and accent across all cards */
+.kinetic-stage-card:hover,
+.kinetic-stage-card.is-focused:hover,
+.kinetic-stage-card.is-complete:hover {
+  border-color: var(--stage-accent) !important;
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.45), 0 0 20px rgba(56, 189, 248, 0.2) !important;
+  background: rgba(20, 28, 44, 0.95);
+  z-index: 5;
 }
 
 .stage-card-watermark {
@@ -9082,7 +9523,6 @@ body.light-theme .quiz-studio-console-banner {
 
 body.light-theme .velocity-chart-wrapper,
 body.light-theme .velocity-chip,
-body.light-theme .kinetic-stage-card,
 body.light-theme .stage-scrubber-panel,
 body.light-theme .radar-chart-card,
 body.light-theme .hud-metric-pod,
@@ -9098,6 +9538,43 @@ body.light-theme .difficulty-dial-card,
 body.light-theme .slider-telemetry-readout {
   background: #f8fafc;
   border-color: #e2e8f0;
+}
+
+/* Light Theme Stepper Stage Cards */
+body.light-theme .kinetic-stage-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+}
+
+body.light-theme .kinetic-stage-card.is-focused {
+  background: #ffffff;
+  border-color: var(--stage-accent, #0284c7) !important;
+  box-shadow: 0 4px 16px -2px rgba(15, 23, 42, 0.08), 0 0 0 2px rgba(56, 189, 248, 0.22);
+}
+
+body.light-theme .kinetic-stage-card.is-complete {
+  border-color: rgba(34, 197, 94, 0.55);
+}
+
+/* Universal Light Theme Hover State - IDENTICAL across all cards! */
+body.light-theme .kinetic-stage-card:hover,
+body.light-theme .kinetic-stage-card.is-focused:hover,
+body.light-theme .kinetic-stage-card.is-complete:hover {
+  background: #ffffff !important;
+  border-color: var(--stage-accent, #0284c7) !important;
+  box-shadow: 0 18px 36px -6px rgba(15, 23, 42, 0.13), 0 8px 16px -4px rgba(15, 23, 42, 0.06), 0 0 18px rgba(56, 189, 248, 0.16) !important;
+  z-index: 5;
+}
+
+body.light-theme .stage-meta-pill {
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  color: #475569;
+}
+
+body.light-theme .stage-card-footer {
+  border-top: 1px solid #e2e8f0;
 }
 
 body.light-theme .stage-card-watermark {
@@ -9662,68 +10139,329 @@ body.light-theme .horizon-range-slider {
   display: block;
 }
 
-/* ── MODULE 1: DUAL OVERVIEW GRID ── */
+/* ── MODULE 1: DUAL OVERVIEW GRID (LEFT & RIGHT CARDS) ── */
 .py-overview-dual-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1.25rem;
+  gap: 1.5rem;
+  margin-top: 0.5rem;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 860px) {
   .py-overview-dual-grid {
     grid-template-columns: 1fr;
+    gap: 1.25rem;
   }
 }
 
 .py-overview-box {
-  background: rgba(10, 14, 20, 0.6);
+  position: relative;
+  border-radius: 18px;
+  padding: 1.6rem 1.6rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.25rem;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Dark Mode Card Styling */
+.py-overview-box {
+  background: linear-gradient(145deg, rgba(17, 24, 39, 0.95), rgba(12, 17, 29, 0.95));
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 14px;
-  padding: 1.25rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
 }
 
+.py-overview-box:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+}
+
+/* Light Mode Card Styling */
+body.light-theme .py-overview-box {
+  background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%) !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 10px 28px -4px rgba(15, 23, 42, 0.05), 0 4px 10px -2px rgba(15, 23, 42, 0.03) !important;
+}
+
+body.light-theme .py-overview-box:hover {
+  transform: translateY(-4px);
+  border-left-color: #cbd5e1 !important;
+  border-right-color: #cbd5e1 !important;
+  border-bottom-color: #cbd5e1 !important;
+  box-shadow: 0 18px 38px -4px rgba(15, 23, 42, 0.11), 0 6px 16px -2px rgba(15, 23, 42, 0.05) !important;
+}
+
+/* Card Glow Ambient Accents */
+.overview-card-glow {
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(40px);
+  opacity: 0.15;
+  transition: opacity 0.3s ease;
+}
+
+.py-overview-box:hover .overview-card-glow {
+  opacity: 0.3;
+}
+
+.def-glow {
+  background: #38bdf8;
+}
+
+.rationale-glow {
+  background: #f59e0b;
+}
+
+/* Left Card: Core Definition Accent */
 .py-overview-box.def-box {
-  border-left: 3px solid var(--py-blue-light);
+  border-top: 3px solid #0284c7;
 }
 
+body.light-theme .py-overview-box.def-box {
+  border-top: 3px solid #0284c7 !important;
+}
+
+body.light-theme .py-overview-box.def-box:hover {
+  border-left-color: #93c5fd !important;
+  border-right-color: #93c5fd !important;
+  border-bottom-color: #93c5fd !important;
+  border-top: 3px solid #0284c7 !important;
+  box-shadow: 0 18px 38px -4px rgba(2, 132, 199, 0.12), 0 6px 16px -2px rgba(15, 23, 42, 0.05) !important;
+}
+
+/* Right Card: Engineering Rationale Accent */
 .py-overview-box.rationale-box {
-  border-left: 3px solid var(--py-yellow);
+  border-top: 3px solid #f59e0b;
 }
 
+body.light-theme .py-overview-box.rationale-box {
+  border-top: 3px solid #f59e0b !important;
+}
+
+body.light-theme .py-overview-box.rationale-box:hover {
+  border-left-color: #fde68a !important;
+  border-right-color: #fde68a !important;
+  border-bottom-color: #fde68a !important;
+  border-top: 3px solid #f59e0b !important;
+  box-shadow: 0 18px 38px -4px rgba(245, 158, 11, 0.14), 0 6px 16px -2px rgba(15, 23, 42, 0.05) !important;
+}
+
+/* Header within each Box */
 .overview-box-header {
-  margin-bottom: 0.65rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.box-tag-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .box-tag {
-  font-size: 0.65rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.7rem;
   font-weight: 800;
-  letter-spacing: 0.06em;
-  padding: 0.15rem 0.45rem;
-  border-radius: 4px;
+  letter-spacing: 0.05em;
+  padding: 0.22rem 0.65rem;
+  border-radius: 9999px;
+  text-transform: uppercase;
 }
 
 .box-tag.blue-tag {
-  background: rgba(48, 105, 152, 0.2);
-  color: var(--py-blue-light);
+  background: rgba(56, 189, 248, 0.12);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.25);
+}
+
+body.light-theme .box-tag.blue-tag {
+  background: #eff6ff !important;
+  color: #0284c7 !important;
+  border: 1px solid #bfdbfe !important;
 }
 
 .box-tag.yellow-tag {
-  background: rgba(255, 212, 59, 0.15);
-  color: var(--py-yellow);
+  background: rgba(245, 158, 11, 0.12);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.25);
+}
+
+body.light-theme .box-tag.yellow-tag {
+  background: #fefce8 !important;
+  color: #b45309 !important;
+  border: 1px solid #fde047 !important;
+}
+
+.overview-step-chip {
+  font-size: 0.68rem;
+  font-weight: 800;
+  font-family: var(--font-mono, monospace);
+  padding: 0.15rem 0.45rem;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-muted);
+}
+
+body.light-theme .overview-step-chip {
+  background: #f1f5f9;
+  color: #64748b;
+}
+
+.overview-icon-wrapper {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.py-overview-box:hover .overview-icon-wrapper {
+  transform: scale(1.08);
+}
+
+.blue-icon-wrapper {
+  background: rgba(56, 189, 248, 0.12);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.22);
+}
+
+body.light-theme .blue-icon-wrapper {
+  background: #eff6ff;
+  color: #0284c7;
+  border: 1px solid #bfdbfe;
+}
+
+.yellow-icon-wrapper {
+  background: rgba(245, 158, 11, 0.12);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.22);
+}
+
+body.light-theme .yellow-icon-wrapper {
+  background: #fefce8;
+  color: #d97706;
+  border: 1px solid #fef08a;
+}
+
+/* Body Content */
+.overview-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  flex: 1;
 }
 
 .overview-box-title {
-  font-size: 1rem;
+  font-size: 1.25rem;
   font-weight: 800;
+  margin: 0;
+  line-height: 1.25;
   color: var(--text-primary);
-  margin: 0 0 0.4rem;
+  letter-spacing: -0.01em;
+  text-transform: none !important;
+}
+
+.def-box .overview-box-title {
+  color: #38bdf8;
+}
+
+body.light-theme .def-box .overview-box-title {
+  color: #0369a1 !important;
+}
+
+.rationale-box .overview-box-title {
+  color: var(--py-yellow, #fbbf24);
+}
+
+body.light-theme .rationale-box .overview-box-title {
+  color: #b45309 !important;
 }
 
 .overview-box-text {
-  font-size: 0.9rem;
+  font-size: 0.94rem;
   color: var(--text-secondary);
-  line-height: 1.6;
+  line-height: 1.7;
   margin: 0;
+  font-weight: 450;
+}
+
+body.light-theme .overview-box-text {
+  color: #334155 !important;
+}
+
+/* Footer Insight Pill */
+.overview-card-footer {
+  margin-top: auto;
+  padding-top: 0.85rem;
+  border-top: 1px dashed rgba(255, 255, 255, 0.08);
+}
+
+body.light-theme .overview-card-footer {
+  border-top-color: #e2e8f0;
+}
+
+.overview-footer-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.74rem;
+  font-weight: 600;
+  padding: 0.26rem 0.65rem;
+  border-radius: 9999px;
+}
+
+.def-footer-badge {
+  background: rgba(56, 189, 248, 0.08);
+  color: #7dd3fc;
+  border: 1px solid rgba(56, 189, 248, 0.18);
+}
+
+body.light-theme .def-footer-badge {
+  background: #eff6ff !important;
+  color: #0369a1 !important;
+  border: 1px solid #bfdbfe !important;
+}
+
+.rationale-footer-badge {
+  background: rgba(245, 158, 11, 0.08);
+  color: #fde047;
+  border: 1px solid rgba(245, 158, 11, 0.18);
+}
+
+body.light-theme .rationale-footer-badge {
+  background: #fefce8 !important;
+  color: #b45309 !important;
+  border: 1px solid #fef08a !important;
+}
+
+/* Step pill in module header */
+.py-module-step-pill {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--py-blue-light);
+  margin-bottom: 0.2rem;
+}
+
+body.light-theme .py-module-step-pill {
+  color: #0284c7;
 }
 
 /* ── MODULE 2: CODE STUDIO FRAME ── */
@@ -12065,6 +12803,821 @@ body.light-theme .horizon-range-slider {
   background: rgba(229, 168, 0, 0.15);
   color: #b45309;
 }
+
+/* ══════════════════════════════════════════════════════════════════
+   LEARN PAGE & SIDEBAR LIGHT THEME HARMONY
+   ══════════════════════════════════════════════════════════════════ */
+
+/* Sidebar in Light Theme */
+body.light-theme .py-sidebar-container {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.05), 0 4px 12px -2px rgba(15, 23, 42, 0.03) !important;
+  scrollbar-color: #cbd5e1 transparent !important;
+}
+
+body.light-theme .py-sidebar-top-deck {
+  border-bottom: 1px solid #f1f5f9 !important;
+}
+
+body.light-theme .py-sidebar-title {
+  color: #0f172a !important;
+}
+
+body.light-theme .py-sidebar-tagline {
+  color: #64748b !important;
+}
+
+body.light-theme .py-sidebar-counter-chip {
+  background: #fefce8 !important;
+  border-color: #fef08a !important;
+  color: #b45309 !important;
+}
+
+body.light-theme .py-sidebar-global-track {
+  background: #f1f5f9 !important;
+}
+
+body.light-theme .py-sidebar-global-fill {
+  background: linear-gradient(90deg, #0284c7, #38bdf8) !important;
+}
+
+body.light-theme .py-sidebar-search-box {
+  background: #f8fafc !important;
+  border: 1px solid #e2e8f0 !important;
+}
+
+body.light-theme .py-sidebar-search-box:focus-within {
+  border-color: #0284c7 !important;
+  box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.12) !important;
+}
+
+body.light-theme .py-sidebar-search-input {
+  color: #0f172a !important;
+}
+
+body.light-theme .py-sidebar-search-input::placeholder {
+  color: #94a3b8 !important;
+}
+
+body.light-theme .py-sidebar-clear-btn {
+  color: #64748b !important;
+}
+
+body.light-theme .py-sidebar-clear-btn:hover {
+  color: #0f172a !important;
+}
+
+body.light-theme .py-sidebar-category-header {
+  color: #1e293b !important;
+}
+
+body.light-theme .py-sidebar-category-header:hover {
+  background: #f8fafc !important;
+}
+
+body.light-theme .py-cat-title {
+  color: #1e293b !important;
+}
+
+body.light-theme .py-cat-count {
+  color: #64748b !important;
+}
+
+body.light-theme .py-cat-mini-bar {
+  background: #e2e8f0 !important;
+}
+
+body.light-theme .py-cat-mini-fill {
+  background: #0284c7 !important;
+}
+
+body.light-theme .py-sidebar-topic-list {
+  border-left-color: #e2e8f0 !important;
+}
+
+body.light-theme .py-sidebar-topic-item {
+  color: #475569 !important;
+}
+
+body.light-theme .py-sidebar-topic-item:hover {
+  background: #f1f5f9 !important;
+  color: #0f172a !important;
+}
+
+body.light-theme .py-sidebar-topic-item.is-active {
+  background: #eff6ff !important;
+  border-left-color: #0284c7 !important;
+}
+
+body.light-theme .py-sidebar-topic-item.is-active .py-topic-title-label {
+  color: #0284c7 !important;
+  font-weight: 700 !important;
+}
+
+body.light-theme .py-topic-title-label {
+  color: #334155 !important;
+}
+
+body.light-theme .py-topic-ref-tag {
+  background: #f1f5f9 !important;
+  color: #64748b !important;
+  border: 1px solid #e2e8f0 !important;
+}
+
+/* Top Navigation / Breadcrumbs in Light Theme */
+body.light-theme .nav-arrow-btn {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  color: #334155 !important;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.04) !important;
+}
+
+body.light-theme .nav-arrow-btn:hover:not(:disabled) {
+  background: #f8fafc !important;
+  color: #0f172a !important;
+  border-color: #cbd5e1 !important;
+}
+
+/* Hero Card in Light Theme */
+body.light-theme .py-topic-hero-card {
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 55%, #eff6ff 100%) !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 12px 35px -5px rgba(15, 23, 42, 0.06), 0 4px 12px -2px rgba(15, 23, 42, 0.03) !important;
+}
+
+body.light-theme .py-topic-headline {
+  color: #0f172a !important;
+}
+
+body.light-theme .py-topic-summary {
+  color: #475569 !important;
+  font-weight: 500 !important;
+}
+
+body.light-theme .py-category-badge {
+  background: #eff6ff !important;
+  border-color: #bae6fd !important;
+  color: #0284c7 !important;
+}
+
+body.light-theme .py-level-badge {
+  background: #fefce8 !important;
+  border-color: #fef08a !important;
+  color: #b45309 !important;
+}
+
+body.light-theme .py-core-badge {
+  background: #fffbeb !important;
+  border-color: #fde68a !important;
+  color: #d97706 !important;
+}
+
+body.light-theme .py-doc-badge {
+  background: #f1f5f9 !important;
+  border-color: #e2e8f0 !important;
+  color: #64748b !important;
+}
+
+body.light-theme .py-btn-secondary {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  color: #334155 !important;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.03) !important;
+}
+
+body.light-theme .py-btn-secondary:hover {
+  background: #f8fafc !important;
+  color: #0f172a !important;
+  border-color: #cbd5e1 !important;
+}
+
+body.light-theme .py-btn-secondary.is-bookmarked {
+  background: #fefce8 !important;
+  border-color: #fde047 !important;
+  color: #b45309 !important;
+}
+
+body.light-theme .py-master-btn {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 14px rgba(245, 158, 11, 0.3) !important;
+}
+
+body.light-theme .py-master-btn.is-completed {
+  background: linear-gradient(135deg, #16a34a 0%, #15803d 100%) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 14px rgba(22, 163, 74, 0.3) !important;
+}
+
+/* Jump Nav Bar in Light Theme */
+body.light-theme .py-section-jump-nav-bar {
+  background: rgba(255, 255, 255, 0.96) !important;
+  backdrop-filter: blur(12px) !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 8px 24px -4px rgba(15, 23, 42, 0.05) !important;
+}
+
+body.light-theme .jump-nav-label {
+  color: #64748b !important;
+}
+
+body.light-theme .py-jump-pill {
+  background: #f8fafc !important;
+  border: 1px solid #e2e8f0 !important;
+  color: #475569 !important;
+}
+
+body.light-theme .py-jump-pill:hover {
+  background: #f1f5f9 !important;
+  color: #0f172a !important;
+  border-color: #cbd5e1 !important;
+}
+
+body.light-theme .py-jump-pill.highlight-pill {
+  background: #fefce8 !important;
+  border-color: #fde047 !important;
+  color: #b45309 !important;
+}
+
+/* Module Cards in Light Theme */
+body.light-theme .py-module-card {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.05), 0 4px 12px -2px rgba(15, 23, 42, 0.03) !important;
+}
+
+body.light-theme .py-module-header {
+  border-bottom: 1px solid #f1f5f9 !important;
+}
+
+body.light-theme .py-module-badge-icon {
+  background: #eff6ff !important;
+  border: 1px solid #bfdbfe !important;
+  color: #0284c7 !important;
+}
+
+body.light-theme .py-module-title {
+  color: #0f172a !important;
+}
+
+body.light-theme .py-module-subtitle {
+  color: #64748b !important;
+}
+
+/* Syntax Tab Switcher in Light Theme */
+body.light-theme .py-syntax-switcher-bar {
+  background: #f1f5f9 !important;
+  border: 1px solid #e2e8f0 !important;
+}
+
+body.light-theme .py-tab-btn {
+  color: #64748b !important;
+}
+
+body.light-theme .py-tab-btn:hover {
+  color: #0f172a !important;
+}
+
+body.light-theme .py-tab-btn.active {
+  background: #ffffff !important;
+  color: #0284c7 !important;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08) !important;
+}
+
+/* ── MODULE 3: CPYTHON INTERNALS & ARCHITECTURE (Section 5) ── */
+body.light-theme .py-pipeline-intro-bar {
+  background: #eff6ff !important;
+  border: 1px solid #bfdbfe !important;
+  box-shadow: 0 2px 8px rgba(2, 132, 199, 0.05) !important;
+}
+
+body.light-theme .pipeline-intro-text {
+  color: #0369a1 !important;
+  font-weight: 700 !important;
+}
+
+body.light-theme .py-pipeline-step-card {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04) !important;
+}
+
+body.light-theme .py-pipeline-step-card:hover,
+body.light-theme .py-pipeline-step-card.hovered {
+  border-color: #0284c7 !important;
+  box-shadow: 0 10px 25px -4px rgba(2, 132, 199, 0.15), 0 0 0 1px #0284c7 !important;
+  transform: translateY(-3px);
+}
+
+body.light-theme .pipeline-phase-badge {
+  color: #0284c7 !important;
+  background: #eff6ff !important;
+  border: 1px solid #bfdbfe !important;
+}
+
+body.light-theme .pipeline-dot-indicator {
+  background: #0284c7 !important;
+}
+
+body.light-theme .pipeline-step-title {
+  color: #0f172a !important;
+}
+
+body.light-theme .pipeline-step-desc {
+  color: #475569 !important;
+}
+
+body.light-theme .py-raw-internals-box {
+  background: #f8fafc !important;
+  border: 1px solid #e2e8f0 !important;
+}
+
+body.light-theme .py-raw-internals-box pre {
+  color: #0369a1 !important;
+}
+
+/* Architecture Diagram in Section 5 */
+body.light-theme .py-diagram-container {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05) !important;
+}
+
+body.light-theme .py-diagram-title {
+  color: #0f172a !important;
+}
+
+body.light-theme .py-diagram-tag {
+  color: #0284c7 !important;
+  background: #eff6ff !important;
+  border: 1px solid #bfdbfe !important;
+}
+
+body.light-theme .py-diagram-svg-wrapper {
+  background: #090e1a !important;
+  border: 1px solid #1e293b !important;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+}
+
+body.light-theme .py-diagram-footer {
+  border-top: 1px solid #e2e8f0 !important;
+}
+
+body.light-theme .diagram-pill-btn {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  color: #334155 !important;
+}
+
+body.light-theme .diagram-pill-btn.active {
+  background: #0284c7 !important;
+  color: #ffffff !important;
+  border-color: #0284c7 !important;
+}
+
+body.light-theme .diagram-desc-text {
+  color: #475569 !important;
+}
+
+/* ── MODULE 4: GRADUATED CODE STUDIO (Section 6) ── */
+body.light-theme .py-example-tier-tabs {
+  background: #f1f5f9 !important;
+  border: 1px solid #e2e8f0 !important;
+}
+
+body.light-theme .py-tier-tab-btn {
+  color: #64748b !important;
+}
+
+body.light-theme .py-tier-tab-btn:hover {
+  color: #0f172a !important;
+}
+
+body.light-theme .py-tier-tab-btn.active {
+  background: #ffffff !important;
+  color: #0f172a !important;
+  box-shadow: 0 3px 10px rgba(15, 23, 42, 0.08) !important;
+  border-color: #cbd5e1 !important;
+}
+
+body.light-theme .active-tier-pill {
+  color: #0284c7 !important;
+  background: #eff6ff !important;
+  border: 1px solid #bfdbfe !important;
+}
+
+body.light-theme .active-example-heading {
+  color: #0f172a !important;
+}
+
+body.light-theme .py-example-explanation-card {
+  background: #fefce8 !important;
+  border: 1px solid #fef08a !important;
+  color: #713f12 !important;
+}
+
+/* ── MODULE 5: COMMON MISTAKES & GOTCHAS LAB (Section 7) ── */
+body.light-theme .py-mistake-box {
+  background: #f8fafc !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.03) !important;
+}
+
+body.light-theme .py-mistake-title {
+  color: #0f172a !important;
+}
+
+body.light-theme .py-split-col {
+  background: #ffffff !important;
+}
+
+body.light-theme .wrong-col {
+  background: #fff1f2 !important;
+  border: 1.5px solid #fecdd3 !important;
+}
+
+body.light-theme .wrong-label {
+  color: #be123c !important;
+  font-weight: 700 !important;
+}
+
+body.light-theme .wrong-col .py-split-pre,
+body.light-theme .wrong-col .py-split-pre code {
+  color: #9f1239 !important;
+  font-weight: 600 !important;
+}
+
+body.light-theme .correct-col {
+  background: #f0fdf4 !important;
+  border: 1.5px solid #bbf7d0 !important;
+}
+
+body.light-theme .correct-label {
+  color: #15803d !important;
+  font-weight: 700 !important;
+}
+
+body.light-theme .correct-col .py-split-pre,
+body.light-theme .correct-col .py-split-pre code {
+  color: #14532d !important;
+  font-weight: 600 !important;
+}
+
+body.light-theme .py-why-fails-callout {
+  background: #fffbeb !important;
+  border: 1px solid #fde68a !important;
+  color: #78350f !important;
+}
+
+/* ── MODULE 6: HEAD-TO-HEAD COMPARISONS (Section 8) ── */
+body.light-theme .py-diff-card {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04) !important;
+}
+
+body.light-theme .diff-pill.pill-a {
+  background: #eff6ff !important;
+  color: #0284c7 !important;
+  border: 1px solid #bfdbfe !important;
+}
+
+body.light-theme .diff-pill.pill-b {
+  background: #fefce8 !important;
+  color: #b45309 !important;
+  border: 1px solid #fef08a !important;
+}
+
+body.light-theme .diff-versus-text {
+  color: #94a3b8 !important;
+  font-weight: 800 !important;
+}
+
+body.light-theme .py-diff-title {
+  color: #0f172a !important;
+}
+
+body.light-theme .py-diff-points li {
+  color: #334155 !important;
+}
+
+body.light-theme .diff-bullet-marker {
+  background: #0284c7 !important;
+}
+
+/* ── MODULE 7: REAL-WORLD BLUEPRINT (Section 9) ── */
+body.light-theme .py-industry-blueprint-box {
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%) !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04) !important;
+}
+
+body.light-theme .blueprint-tag {
+  background: #eff6ff !important;
+  color: #0284c7 !important;
+  border: 1px solid #bfdbfe !important;
+}
+
+body.light-theme .blueprint-body-text {
+  color: #334155 !important;
+}
+
+/* ── MODULE 8: SENIOR INTERVIEW Q&A (Section 10) ── */
+body.light-theme .py-interview-card {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04) !important;
+}
+
+body.light-theme .interview-q-badge {
+  background: #eff6ff !important;
+  color: #0284c7 !important;
+  border: 1px solid #bfdbfe !important;
+}
+
+body.light-theme .interview-q-title {
+  color: #0f172a !important;
+}
+
+body.light-theme .interview-trap-box {
+  background: #fffbeb !important;
+  border: 1px solid #fde68a !important;
+  color: #78350f !important;
+}
+
+body.light-theme .interview-ans-box {
+  color: #334155 !important;
+}
+
+/* ── MODULE 9: SUBTOPICS CHECKLIST ── */
+body.light-theme .py-subtopics-interactive-deck {
+  gap: 0.75rem !important;
+}
+
+body.light-theme .py-subtopic-chip {
+  background: #f8fafc !important;
+  border: 1.5px solid #e2e8f0 !important;
+  color: #475569 !important;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.03) !important;
+}
+
+body.light-theme .py-subtopic-chip:hover {
+  background: #ffffff !important;
+  border-color: #0284c7 !important;
+  color: #0f172a !important;
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.12) !important;
+}
+
+body.light-theme .py-subtopic-chip.status-completed {
+  background: #f0fdf4 !important;
+  border-color: #86efac !important;
+  color: #15803d !important;
+}
+
+body.light-theme .py-subtopic-chip.status-learning {
+  background: #fefce8 !important;
+  border-color: #fde047 !important;
+  color: #b45309 !important;
+}
+
+body.light-theme .py-subtopic-counter {
+  background: #eff6ff !important;
+  border: 1px solid #bfdbfe !important;
+  color: #0284c7 !important;
+}
+
+/* ── MODULE 10: PRACTICE QUIZ ASSESSMENT CARD (Section 11) ── */
+body.light-theme .py-quiz-assessment-card {
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 55%, #fefce8 100%) !important;
+  border: 1.5px solid #fde047 !important;
+  box-shadow: 0 12px 35px -5px rgba(245, 158, 11, 0.12), 0 4px 12px -2px rgba(15, 23, 42, 0.03) !important;
+}
+
+body.light-theme .quiz-assessment-badge-icon {
+  background: #fefce8 !important;
+  border: 1px solid #fde047 !important;
+  color: #b45309 !important;
+}
+
+body.light-theme .quiz-assessment-title {
+  color: #0f172a !important;
+}
+
+body.light-theme .quiz-assessment-desc {
+  color: #475569 !important;
+}
+
+/* ==========================================================================
+   COMPREHENSIVE LIGHT THEME STUDIO, REVISION SHEET & PLAYGROUND UPGRADES
+   ========================================================================== */
+
+/* 1. CODE STUDIO & SNIPPET BLOCKS (Image 1 & Image 2) */
+body.light-theme .py-code-studio-frame {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05) !important;
+}
+
+body.light-theme .py-code-studio-bar {
+  background: #f8fafc !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+}
+
+body.light-theme .studio-filename-tag {
+  color: #475569 !important;
+}
+
+body.light-theme .studio-lang-badge {
+  background: #eff6ff !important;
+  color: #0284c7 !important;
+  border: 1px solid #bfdbfe !important;
+}
+
+body.light-theme .py-copy-btn {
+  color: #64748b !important;
+}
+
+body.light-theme .py-copy-btn:hover {
+  color: #0f172a !important;
+  background: #e2e8f0 !important;
+}
+
+body.light-theme .py-code-gutter {
+  background: #f8fafc !important;
+  border-right: 1px solid #e2e8f0 !important;
+}
+
+body.light-theme .gutter-line-num {
+  color: #94a3b8 !important;
+}
+
+body.light-theme .py-code-pre {
+  color: #0f172a !important;
+  background: #ffffff !important;
+}
+
+body.light-theme .py-example-explanation-card strong {
+  color: #b45309 !important;
+}
+
+body.light-theme .py-example-explanation-card svg {
+  color: #b45309 !important;
+}
+
+/* 2. PYTHON PLAYGROUND & CODE SANDBOX (Image 3) */
+body.light-theme .code-sandbox-panel {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 10px 28px -4px rgba(15, 23, 42, 0.06), 0 4px 10px -2px rgba(15, 23, 42, 0.03) !important;
+}
+
+body.light-theme .sandbox-toolbar {
+  background: #f8fafc !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+}
+
+body.light-theme .editor-lang-badge {
+  background: #eff6ff !important;
+  color: #0284c7 !important;
+  border: 1px solid #bfdbfe !important;
+}
+
+body.light-theme .sandbox-btn.secondary {
+  background: #ffffff !important;
+  color: #334155 !important;
+  border: 1px solid #cbd5e1 !important;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05) !important;
+}
+
+body.light-theme .sandbox-btn.secondary:hover {
+  background: #f1f5f9 !important;
+  color: #0f172a !important;
+}
+
+body.light-theme .sandbox-btn.run-btn {
+  background: linear-gradient(135deg, #0284c7, #0369a1) !important;
+  color: #ffffff !important;
+  box-shadow: 0 2px 8px rgba(2, 132, 199, 0.3) !important;
+}
+
+body.light-theme .editor-workspace {
+  background: #ffffff !important;
+}
+
+body.light-theme .line-numbers-col {
+  background: #f8fafc !important;
+  color: #94a3b8 !important;
+  border-right: 1px solid #e2e8f0 !important;
+}
+
+body.light-theme .editor-textarea-modern {
+  background: #ffffff !important;
+  color: #0f172a !important;
+}
+
+body.light-theme .editor-textarea-modern::placeholder {
+  color: #94a3b8 !important;
+}
+
+body.light-theme .terminal-output-container {
+  background: #f8fafc !important;
+  border-top: 1px solid #e2e8f0 !important;
+}
+
+body.light-theme .terminal-header {
+  color: #0369a1 !important;
+}
+
+body.light-theme .terminal-text {
+  color: #0f172a !important;
+}
+
+body.light-theme .terminal-text.error {
+  color: #dc2626 !important;
+}
+
+body.light-theme .terminal-idle-text {
+  color: #64748b !important;
+}
+
+body.light-theme .blinking-cursor {
+  color: #0284c7 !important;
+}
+
+/* 3. HIGH-YIELD REVISION SHEET CHECKLIST ITEMS (Image 4) */
+body.light-theme .py-revision-item {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04) !important;
+  transition: all 0.2s ease !important;
+}
+
+body.light-theme .py-revision-item:hover {
+  border-color: #cbd5e1 !important;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.08) !important;
+  transform: translateY(-1px);
+}
+
+body.light-theme .py-revision-bullet {
+  background: #fefce8 !important;
+  border: 1px solid #fef08a !important;
+}
+
+body.light-theme .py-revision-text {
+  color: #1e293b !important;
+  font-weight: 500 !important;
+}
+
+/* 4. NAVBAR AVATAR SS TEXT IN BLUE (Image 7) */
+.navbar-avatar-circle {
+  color: #0284c7 !important;
+}
+
+body.light-theme .navbar-avatar-circle {
+  background: #eff6ff !important;
+  border-color: #bae6fd !important;
+  color: #0284c7 !important;
+}
+
+/* 5. QUIZ DOMAIN CARDS & DROPDOWNS (Image 6) */
+body.light-theme .domain-carousel-card {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  color: #475569 !important;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04) !important;
+}
+
+body.light-theme .domain-carousel-card:hover {
+  background: #f8fafc !important;
+  color: #0f172a !important;
+  border-color: #cbd5e1 !important;
+}
+
+body.light-theme .domain-carousel-card.active {
+  background: #eff6ff !important;
+  border-color: #0284c7 !important;
+  color: #0284c7 !important;
+  box-shadow: 0 2px 8px rgba(2, 132, 199, 0.15) !important;
+}
+
+body.light-theme .domain-card-icon {
+  color: #0284c7 !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+body.light-theme .studio-dropdown-input {
+  background: #ffffff !important;
+  border: 1px solid #cbd5e1 !important;
+  color: #0f172a !important;
+}
+
+/* 6. CHECKLIST PAGE CATEGORY CARDS IN LIGHT THEME (Image 5) */
+body.light-theme .category-progress-track {
+  background: #e2e8f0 !important;
+}
+
 
 
 
