@@ -541,9 +541,10 @@ export default function QuizPage({
               type="button"
               className="btn btn-primary btn-lg"
               onClick={handleRefreshSameSettings}
+              style={{ color: '#ffffff' }}
             >
-              <RotateCcw size={18} />
-              <span>Try Another Set (Auto-Generated)</span>
+              <RotateCcw size={18} color="#ffffff" style={{ color: '#ffffff', stroke: '#ffffff' }} />
+              <span style={{ color: '#ffffff' }}>Try Another Set (Auto-Generated)</span>
             </button>
 
             {activeTopic && (
@@ -797,9 +798,10 @@ export default function QuizPage({
                     setShowHint(false);
                   }}
                   disabled={!isAnswered}
+                  style={{ color: '#ffffff', fontWeight: 700 }}
                 >
-                  <span>Next Question</span>
-                  <ArrowRight size={16} />
+                  <span style={{ color: '#ffffff' }}>Next Question</span>
+                  <ArrowRight size={16} color="#ffffff" style={{ color: '#ffffff', stroke: '#ffffff' }} />
                 </button>
               ) : (
                 <button

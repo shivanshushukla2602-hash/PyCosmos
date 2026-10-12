@@ -647,7 +647,42 @@ body.light-theme .drawer-panel {
 /* ══════════════════════════════════════════════════════════════════════════
    2. BUTTON SYSTEM (YELLOW ACTION & BLUE STRUCTURE)
    ══════════════════════════════════════════════════════════════════════════ */
-.btn-primary, button.btn-primary, .button-primary {
+.btn-primary, button.btn-primary, .button-primary, button.btn.btn-primary {
+  background: linear-gradient(135deg, var(--py-blue), #1d4ed8);
+  color: #ffffff !important;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 0.95rem;
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1.6rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.28);
+  text-decoration: none;
+  user-select: none;
+}
+
+.btn-primary:hover, button.btn-primary:hover, .button-primary:hover, button.btn.btn-primary:hover {
+  background: linear-gradient(135deg, #1d4ed8, #1e40af);
+  color: #ffffff !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+}
+
+.btn-primary span,
+button.btn-primary span,
+.btn-primary svg,
+button.btn-primary svg {
+  color: #ffffff !important;
+  stroke: #ffffff;
+}
+
+.btn-yellow, button.btn-yellow, .button-yellow {
   background-color: var(--py-yellow);
   color: var(--text-dark);
   font-family: var(--font-sans);
@@ -667,7 +702,7 @@ body.light-theme .drawer-panel {
   user-select: none;
 }
 
-.btn-primary:hover, button.btn-primary:hover, .button-primary:hover {
+.btn-yellow:hover, button.btn-yellow:hover, .button-yellow:hover {
   background-color: var(--py-yellow-soft);
   transform: translateY(-2px);
   box-shadow: var(--shadow-yellow-glow);
@@ -875,6 +910,37 @@ body.light-theme .mastery-view-btn.active {
   color: #ffffff !important;
 }
 
+body.light-theme .btn-primary,
+body.light-theme button.btn-primary,
+body.light-theme button.btn.btn-primary,
+body.light-theme .card-footer-nav .btn-primary,
+body.light-theme .card-footer-nav button.btn-primary {
+  background: linear-gradient(135deg, #1d4ed8, #2563eb) !important;
+  color: #ffffff !important;
+  border: none !important;
+  box-shadow: 0 4px 14px rgba(29, 78, 216, 0.28) !important;
+}
+
+body.light-theme .btn-primary:hover,
+body.light-theme button.btn-primary:hover,
+body.light-theme button.btn.btn-primary:hover,
+body.light-theme .card-footer-nav .btn-primary:hover,
+body.light-theme .card-footer-nav button.btn-primary:hover {
+  background: linear-gradient(135deg, #1e40af, #1d4ed8) !important;
+  color: #ffffff !important;
+  box-shadow: 0 6px 18px rgba(29, 78, 216, 0.38) !important;
+}
+
+body.light-theme .btn-primary span,
+body.light-theme button.btn-primary span,
+body.light-theme .btn-primary svg,
+body.light-theme button.btn-primary svg,
+body.light-theme .card-footer-nav .btn-primary span,
+body.light-theme .card-footer-nav .btn-primary svg {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+}
+
 body.light-theme .mastery-view-switcher {
   background: #f1f5f9 !important;
   border-color: #e2e8f0 !important;
@@ -1013,10 +1079,18 @@ body.light-theme .heatmap-cell.level-4 { background-color: #216e39 !important; }
   transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
 }
 
-.btn-primary {
+.btn-primary, button.btn-primary {
   background: linear-gradient(135deg, var(--py-blue), #23527c);
-  color: white;
+  color: #ffffff !important;
   box-shadow: 0 4px 12px rgba(48, 105, 152, 0.3);
+}
+
+.btn-primary span,
+button.btn-primary span,
+.btn-primary svg,
+button.btn-primary svg {
+  color: #ffffff !important;
+  stroke: #ffffff;
 }
 
 .btn-yellow {
