@@ -282,21 +282,23 @@ export default function MasteryTrackerPage({
               <svg width="270" height="270" viewBox="0 0 270 270" className="radar-svg">
                 <defs>
                   <linearGradient id="radarPolyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="rgba(56, 189, 248, 0.45)" />
+                    <stop offset="0%" stopColor="rgba(48, 105, 152, 0.45)" />
                     <stop offset="50%" stopColor="rgba(255, 212, 59, 0.35)" />
-                    <stop offset="100%" stopColor="rgba(192, 132, 252, 0.4)" />
+                    <stop offset="100%" stopColor="rgba(34, 197, 94, 0.4)" />
                   </linearGradient>
-                  <filter id="radarGlow" x="-20%" y="-20%" width="140%" height="140%">
-                    <feGaussianBlur stdDeviation="3" result="blur" />
-                    <feComposite in="SourceGraphic" in2="blur" operator="over" />
-                  </filter>
+                  <radialGradient id="radarBaseGrad" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stopColor="rgba(48, 105, 152, 0.08)" />
+                    <stop offset="100%" stopColor="rgba(48, 105, 152, 0.01)" />
+                  </radialGradient>
                 </defs>
 
-                {/* Concentric Grid Hexagons */}
-                <polygon points={getHexPoints(0.25)} fill="none" stroke="rgba(255, 255, 255, 0.05)" strokeWidth="1" />
-                <polygon points={getHexPoints(0.5)} fill="none" stroke="rgba(255, 255, 255, 0.07)" strokeWidth="1" strokeDasharray="3 3" />
-                <polygon points={getHexPoints(0.75)} fill="none" stroke="rgba(255, 255, 255, 0.09)" strokeWidth="1" />
-                <polygon points={getHexPoints(1.0)} fill="none" stroke="rgba(56, 189, 248, 0.22)" strokeWidth="1.5" />
+                {/* Base Background Hexagon */}
+                <polygon points={getHexPoints(1.0)} fill="url(#radarBaseGrad)" stroke="#306998" strokeWidth="1.5" strokeOpacity="0.3" />
+
+                {/* Inner Concentric Grid Hexagons */}
+                <polygon points={getHexPoints(0.75)} fill="none" stroke="#94a3b8" strokeWidth="1" strokeDasharray="3 3" strokeOpacity="0.4" />
+                <polygon points={getHexPoints(0.5)} fill="none" stroke="#94a3b8" strokeWidth="1" strokeDasharray="3 3" strokeOpacity="0.4" />
+                <polygon points={getHexPoints(0.25)} fill="none" stroke="#94a3b8" strokeWidth="1" strokeOpacity="0.4" />
 
                 {/* Axis Spokes from center to outer vertices */}
                 {radarDataPoints.map((pt, i) => (
@@ -306,8 +308,9 @@ export default function MasteryTrackerPage({
                     y1={radarCY}
                     x2={radarCX + radarR * Math.cos(pt.angle)}
                     y2={radarCY + radarR * Math.sin(pt.angle)}
-                    stroke="rgba(255, 255, 255, 0.08)"
+                    stroke="#94a3b8"
                     strokeWidth="1"
+                    strokeOpacity="0.35"
                   />
                 ))}
 
@@ -315,9 +318,8 @@ export default function MasteryTrackerPage({
                 <motion.polygon
                   points={radarPolygonStr}
                   fill="url(#radarPolyGrad)"
-                  stroke="#38bdf8"
+                  stroke="#306998"
                   strokeWidth="2.5"
-                  filter="url(#radarGlow)"
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 1.2, ease: 'easeOut' }}
@@ -332,11 +334,11 @@ export default function MasteryTrackerPage({
                       <circle
                         cx={pt.x}
                         cy={pt.y}
-                        r={isHovered ? 6 : 4}
+                        r={isHovered ? 7 : 5}
                         fill={pt.stat.color}
                         stroke="#ffffff"
-                        strokeWidth="1.5"
-                        style={{ cursor: 'pointer', transition: 'r 0.2s ease' }}
+                        strokeWidth="2"
+                        style={{ cursor: 'pointer', transition: 'r 0.2s ease', filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.15))' }}
                         onMouseEnter={() => setActivePillarHover(i)}
                         onMouseLeave={() => setActivePillarHover(null)}
                       />
@@ -355,9 +357,17 @@ export default function MasteryTrackerPage({
                   onMouseEnter={() => setActivePillarHover(i)}
                   onMouseLeave={() => setActivePillarHover(null)}
                 >
-                  <span className="pillar-dot" style={{ background: p.color }} />
-                  <span className="pillar-name">{p.name}</span>
-                  <span className="pillar-val">{p.percent}%</span>
+                  <div className="pillar-header-row">
+                    <span className="pillar-dot" style={{ background: p.color }} />
+                    <span className="pillar-name">{p.name}</span>
+                    <span className="pillar-val">{p.percent}%</span>
+                  </div>
+                  <div className="pillar-bar-track">
+                    <div
+                      className="pillar-bar-fill"
+                      style={{ width: `${Math.max(p.percent, 3)}%`, background: p.color }}
+                    />
+                  </div>
                 </div>
               ))}
             </div>
@@ -367,21 +377,33 @@ export default function MasteryTrackerPage({
           <div className="telemetry-hud-card">
             <div className="telemetry-top-stats">
               <div className="telemetry-stat-tile">
-                <span className="stat-tile-label">MASTERED MILESTONES</span>
+                <div className="stat-tile-top">
+                  <span className="stat-tile-label">MASTERED MILESTONES</span>
+                  <Award size={16} color="var(--py-blue)" />
+                </div>
                 <div className="stat-tile-val">
                   <span className="val-accent"><AnimatedCounter value={completedLevels} /></span>
                   <span className="val-total"> / {totalLevels}</span>
+                </div>
+                <div className="stat-progress-track">
+                  <div className="stat-progress-fill" style={{ width: `${overallPercent}%`, background: 'var(--py-blue)' }} />
                 </div>
                 <div className="stat-tile-sub">{overallPercent}% Complete</div>
               </div>
 
               <div className="telemetry-stat-tile">
-                <span className="stat-tile-label">IN FLIGHT</span>
+                <div className="stat-tile-top">
+                  <span className="stat-tile-label">IN FLIGHT ACTIVE</span>
+                  <Flame size={16} color="#b45309" />
+                </div>
                 <div className="stat-tile-val">
                   <span className="val-learning"><AnimatedCounter value={inProgressLevels} /></span>
                   <span className="val-total"> Active</span>
                 </div>
-                <div className="stat-tile-sub">Levels in Progress</div>
+                <div className="stat-progress-track">
+                  <div className="stat-progress-fill" style={{ width: `${(inProgressLevels / totalLevels) * 100}%`, background: '#f59e0b' }} />
+                </div>
+                <div className="stat-tile-sub">{inProgressLevels} Levels in Progress</div>
               </div>
             </div>
 
@@ -389,7 +411,7 @@ export default function MasteryTrackerPage({
             <div className="next-objective-pod">
               <div className="next-objective-header">
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
-                  <Target size={15} color="var(--py-yellow)" />
+                  <Target size={16} color="#b45309" />
                   <span className="target-badge-label">NEXT OBJECTIVE TARGET</span>
                 </div>
                 {nextTargetLevel && (
@@ -409,12 +431,12 @@ export default function MasteryTrackerPage({
                     className="target-jump-btn"
                   >
                     <span>Focus on Level {nextTargetLevel.level}</span>
-                    <ArrowRight size={13} />
+                    <ArrowRight size={14} />
                   </button>
                 </div>
               ) : (
                 <div className="target-pod-body">
-                  <h4 className="target-topic-title" style={{ color: '#22c55e' }}>All 27 Milestones Mastered!</h4>
+                  <h4 className="target-topic-title" style={{ color: '#16a34a' }}>All 27 Milestones Mastered!</h4>
                   <p className="target-topic-desc">You have achieved supreme Python engineering mastery across all domains.</p>
                 </div>
               )}
