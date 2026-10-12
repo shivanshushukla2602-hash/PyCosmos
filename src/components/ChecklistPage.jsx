@@ -44,93 +44,93 @@ import PyCosmosLogo from './PyCosmosLogo';
 
 const CATEGORY_META = {
   'Foundation': {
-    color: '#1d4ed8',
+    color: '#1d4ed8', // Python Blue
     bg: '#eff6ff',
-    border: '#93c5fd',
+    border: '#bfdbfe',
     iconBg: '#dbeafe',
     badgeBg: '#dbeafe',
     gradient: 'linear-gradient(90deg, #1d4ed8, #3b82f6)',
     icon: Terminal
   },
   'Core Data Structures': {
-    color: '#b45309',
+    color: '#b45309', // Python Yellow / Gold
     bg: '#fffbeb',
-    border: '#fcd34d',
+    border: '#fde68a',
     iconBg: '#fef3c7',
     badgeBg: '#fef3c7',
     gradient: 'linear-gradient(90deg, #b45309, #f59e0b)',
     icon: Layers
   },
   'Functions': {
-    color: '#047857',
-    bg: '#ecfdf5',
-    border: '#6ee7b7',
-    iconBg: '#d1fae5',
-    badgeBg: '#d1fae5',
-    gradient: 'linear-gradient(90deg, #047857, #10b981)',
+    color: '#2563eb', // Python Blue
+    bg: '#f0f7ff',
+    border: '#93c5fd',
+    iconBg: '#e0f2fe',
+    badgeBg: '#e0f2fe',
+    gradient: 'linear-gradient(90deg, #2563eb, #60a5fa)',
     icon: Code2
   },
   'Practical Python': {
-    color: '#0284c7',
+    color: '#ca8a04', // Python Yellow / Gold
+    bg: '#fefce8',
+    border: '#fef08a',
+    iconBg: '#fef9c3',
+    badgeBg: '#fef9c3',
+    gradient: 'linear-gradient(90deg, #ca8a04, #eab308)',
+    icon: GitBranch
+  },
+  'OOP & Protocols': {
+    color: '#306998', // Python Classic Blue
+    bg: '#f1f7fc',
+    border: '#bcd9ef',
+    iconBg: '#d8ecf8',
+    badgeBg: '#d8ecf8',
+    gradient: 'linear-gradient(90deg, #306998, #4b8bbe)',
+    icon: Rocket
+  },
+  'Python Internals': {
+    color: '#d97706', // Python Rich Gold
+    bg: '#fff7ed',
+    border: '#fdba74',
+    iconBg: '#ffedd5',
+    badgeBg: '#ffedd5',
+    gradient: 'linear-gradient(90deg, #d97706, #f59e0b)',
+    icon: Cpu
+  },
+  'Standard Library': {
+    color: '#1e40af', // Python Deep Blue
+    bg: '#eef2ff',
+    border: '#a5b4fc',
+    iconBg: '#e0e7ff',
+    badgeBg: '#e0e7ff',
+    gradient: 'linear-gradient(90deg, #1e40af, #3b82f6)',
+    icon: BookOpen
+  },
+  'Professional Python': {
+    color: '#a16207', // Python Honeycomb Gold
+    bg: '#fef9c3',
+    border: '#fde047',
+    iconBg: '#fef08a',
+    badgeBg: '#fef08a',
+    gradient: 'linear-gradient(90deg, #a16207, #eab308)',
+    icon: Trophy
+  },
+  'Development & AI/ML': {
+    color: '#0284c7', // Python Sky Blue
     bg: '#f0f9ff',
     border: '#7dd3fc',
     iconBg: '#e0f2fe',
     badgeBg: '#e0f2fe',
     gradient: 'linear-gradient(90deg, #0284c7, #38bdf8)',
-    icon: GitBranch
-  },
-  'OOP & Protocols': {
-    color: '#be123c',
-    bg: '#fff1f2',
-    border: '#fda4af',
-    iconBg: '#ffe4e6',
-    badgeBg: '#ffe4e6',
-    gradient: 'linear-gradient(90deg, #be123c, #f43f5e)',
-    icon: Rocket
-  },
-  'Python Internals': {
-    color: '#c2410c',
-    bg: '#fff7ed',
-    border: '#fdba74',
-    iconBg: '#ffedd5',
-    badgeBg: '#ffedd5',
-    gradient: 'linear-gradient(90deg, #c2410c, #f97316)',
-    icon: Cpu
-  },
-  'Standard Library': {
-    color: '#4338ca',
-    bg: '#eef2ff',
-    border: '#a5b4fc',
-    iconBg: '#e0e7ff',
-    badgeBg: '#e0e7ff',
-    gradient: 'linear-gradient(90deg, #4338ca, #6366f1)',
-    icon: BookOpen
-  },
-  'Professional Python': {
-    color: '#6d28d9',
-    bg: '#f5f3ff',
-    border: '#c4b5fd',
-    iconBg: '#ede9fe',
-    badgeBg: '#ede9fe',
-    gradient: 'linear-gradient(90deg, #6d28d9, #8b5cf6)',
-    icon: Trophy
-  },
-  'Development & AI/ML': {
-    color: '#a21caf',
-    bg: '#fdf4ff',
-    border: '#f0abfc',
-    iconBg: '#fae8ff',
-    badgeBg: '#fae8ff',
-    gradient: 'linear-gradient(90deg, #a21caf, #d946ef)',
     icon: Sparkles
   },
   'Projects & Problem Solving': {
-    color: '#0f766e',
-    bg: '#f0fdfa',
-    border: '#5eead4',
-    iconBg: '#ccfbf1',
-    badgeBg: '#ccfbf1',
-    gradient: 'linear-gradient(90deg, #0f766e, #14b8a6)',
+    color: '#c2410c', // Python Sunburst Gold
+    bg: '#fff7ed',
+    border: '#fed7aa',
+    iconBg: '#ffedd5',
+    badgeBg: '#ffedd5',
+    gradient: 'linear-gradient(90deg, #c2410c, #f59e0b)',
     icon: HelpCircle
   }
 };
@@ -511,13 +511,13 @@ export default function ChecklistPage({
                       <svg width="138" height="138" viewBox="0 0 138 138" className="health-donut-svg">
                         <defs>
                           <linearGradient id="donutDoneGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stopColor="#38bdf8" />
+                            <stop offset="0%" stopColor="#306998" />
                             <stop offset="100%" stopColor="#22c55e" />
                           </linearGradient>
                         </defs>
 
                         {/* Background track */}
-                        <circle cx="69" cy="69" r={donutR} fill="none" stroke="rgba(255, 255, 255, 0.06)" strokeWidth="11" />
+                        <circle cx="69" cy="69" r={donutR} fill="none" stroke="var(--donut-track-bg, #e2e8f0)" strokeWidth="11" />
 
                         {/* Mastered Segment (Green/Cyan) */}
                         <motion.circle
@@ -582,7 +582,7 @@ export default function ChecklistPage({
                         </div>
                       </div>
                       <div className="segment-legend-row">
-                        <span className="segment-dot-indicator" style={{ background: 'rgba(255, 255, 255, 0.25)' }} />
+                        <span className="segment-dot-indicator" style={{ background: '#94a3b8' }} />
                         <div className="segment-legend-text">
                           <span className="segment-name">Unstarted</span>
                           <strong className="segment-num">{totalSubtopicsCount - completedSubtopicsCount - learningSubtopicsCount} subtopics</strong>

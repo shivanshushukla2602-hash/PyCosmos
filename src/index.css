@@ -9848,7 +9848,6 @@ body.light-theme .footer-attribution strong {
 body.light-theme .cosmic-velocity-horizon-card,
 body.light-theme .kinetic-stage-carousel-container,
 body.light-theme .radar-telemetry-command-banner,
-body.light-theme .checklist-health-station-card,
 body.light-theme .quiz-studio-console-banner {
   background: #ffffff;
   border-color: #e2e8f0;
@@ -9863,15 +9862,280 @@ body.light-theme .hud-metric-pod,
 body.light-theme .hud-target-pod,
 body.light-theme .holographic-tier-belt,
 body.light-theme .holographic-tier-card,
-body.light-theme .health-donut-pod,
-body.light-theme .sprint-pace-pod,
-body.light-theme .pace-projection-banner,
-body.light-theme .trio-pod-item,
 body.light-theme .studio-block,
 body.light-theme .difficulty-dial-card,
 body.light-theme .slider-telemetry-readout {
   background: #f8fafc;
   border-color: #e2e8f0;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   LIGHT THEME: CREATIVE CHECKLIST HEALTH & SPRINT SIMULATOR OVERHAUL
+   ═══════════════════════════════════════════════════════════════════════════ */
+body.light-theme .checklist-health-station-card {
+  background: linear-gradient(165deg, #ffffff 0%, #f8fafc 60%, #eff6ff 100%) !important;
+  border: 1.5px solid #e2e8f0 !important;
+  border-radius: 24px !important;
+  padding: 1.85rem !important;
+  box-shadow: 0 16px 40px -10px rgba(15, 23, 42, 0.08), 0 2px 8px -2px rgba(15, 23, 42, 0.04) !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+body.light-theme .checklist-health-station-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #306998 0%, #ffd43b 50%, #306998 100%) !important;
+  border-radius: 24px 24px 0 0;
+}
+
+body.light-theme .health-donut-pod {
+  background: #ffffff !important;
+  border: 1.5px solid #e2e8f0 !important;
+  border-radius: 18px !important;
+  padding: 1.35rem 1.6rem !important;
+  box-shadow: 0 4px 18px -2px rgba(15, 23, 42, 0.05) !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+body.light-theme .health-donut-pod:hover {
+  box-shadow: 0 8px 26px -4px rgba(15, 23, 42, 0.09) !important;
+}
+
+body.light-theme .donut-pod-header {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.6rem !important;
+}
+
+body.light-theme .donut-pod-title {
+  color: #0f172a !important;
+  font-size: 0.92rem !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.01em !important;
+}
+
+body.light-theme .donut-grade-badge {
+  color: #b45309 !important;
+  background: #fef3c7 !important;
+  border: 1px solid #fde68a !important;
+  font-size: 0.76rem !important;
+  font-weight: 800 !important;
+  padding: 0.15rem 0.55rem !important;
+  border-radius: 6px !important;
+}
+
+body.light-theme .donut-percent-num {
+  color: #0f172a !important;
+  font-size: 1.55rem !important;
+  font-weight: 900 !important;
+  letter-spacing: -0.02em !important;
+}
+
+body.light-theme .donut-sub-label {
+  color: #64748b !important;
+  font-size: 0.65rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.08em !important;
+}
+
+body.light-theme .segment-legend-row {
+  background: #f8fafc !important;
+  padding: 0.45rem 0.75rem !important;
+  border-radius: 10px !important;
+  border: 1px solid #f1f5f9 !important;
+  transition: background 0.15s ease !important;
+}
+
+body.light-theme .segment-legend-row:hover {
+  background: #f1f5f9 !important;
+}
+
+body.light-theme .segment-name {
+  color: #64748b !important;
+  font-size: 0.74rem !important;
+  font-weight: 600 !important;
+}
+
+body.light-theme .segment-num {
+  color: #0f172a !important;
+  font-size: 0.82rem !important;
+  font-weight: 800 !important;
+}
+
+/* Sprint Velocity Pace Simulator Pod */
+body.light-theme .sprint-pace-pod {
+  background: #ffffff !important;
+  border: 1.5px solid #e2e8f0 !important;
+  border-radius: 18px !important;
+  padding: 1.35rem 1.6rem !important;
+  box-shadow: 0 4px 18px -2px rgba(15, 23, 42, 0.05) !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+body.light-theme .sprint-pace-pod:hover {
+  box-shadow: 0 8px 26px -4px rgba(15, 23, 42, 0.09) !important;
+}
+
+body.light-theme .sprint-pod-title {
+  color: #0f172a !important;
+  font-size: 0.92rem !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.01em !important;
+}
+
+body.light-theme .sprint-time-tag {
+  color: #b45309 !important;
+  background: #fffbeb !important;
+  border: 1px solid #fde68a !important;
+  font-size: 0.76rem !important;
+  font-weight: 800 !important;
+  padding: 0.2rem 0.65rem !important;
+  border-radius: 8px !important;
+}
+
+body.light-theme .pace-question-text {
+  color: #64748b !important;
+  font-weight: 700 !important;
+  font-size: 0.84rem !important;
+}
+
+body.light-theme .pace-active-display {
+  color: #0f172a !important;
+  font-size: 0.88rem !important;
+}
+
+body.light-theme .pace-active-display strong {
+  color: #1d4ed8 !important;
+  font-weight: 900 !important;
+  font-size: 0.95rem !important;
+}
+
+body.light-theme .pace-tick-chip {
+  background: #f8fafc !important;
+  border: 1.5px solid #e2e8f0 !important;
+  color: #64748b !important;
+  font-size: 0.75rem !important;
+  font-weight: 700 !important;
+  padding: 0.25rem 0.65rem !important;
+  border-radius: 8px !important;
+  transition: all 0.15s ease !important;
+}
+
+body.light-theme .pace-tick-chip:hover {
+  background: #eff6ff !important;
+  border-color: #bfdbfe !important;
+  color: #1d4ed8 !important;
+}
+
+body.light-theme .pace-tick-chip.active {
+  background: #eff6ff !important;
+  border-color: #3b82f6 !important;
+  color: #1d4ed8 !important;
+  font-weight: 800 !important;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.18) !important;
+}
+
+body.light-theme .pace-projection-banner {
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%) !important;
+  border: 1.5px solid #e2e8f0 !important;
+  border-radius: 14px !important;
+  padding: 0.85rem 1.15rem !important;
+}
+
+body.light-theme .projection-label {
+  color: #64748b !important;
+  font-size: 0.72rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.04em !important;
+}
+
+body.light-theme .projection-val {
+  color: #0f172a !important;
+  font-size: 0.95rem !important;
+  font-weight: 800 !important;
+}
+
+body.light-theme .projection-val.highlight {
+  color: #1d4ed8 !important;
+}
+
+body.light-theme .projection-val.target-date {
+  color: #059669 !important;
+}
+
+body.light-theme .projection-divider {
+  background: #cbd5e1 !important;
+  width: 1.5px !important;
+}
+
+/* Light Theme Trio Status Pods */
+body.light-theme .trio-pod-item {
+  background: #ffffff !important;
+  border: 1.5px solid #e2e8f0 !important;
+  border-radius: 16px !important;
+  padding: 1rem 1.25rem !important;
+  box-shadow: 0 4px 16px -2px rgba(15, 23, 42, 0.04) !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+body.light-theme .trio-pod-item:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 10px 24px -4px rgba(15, 23, 42, 0.08) !important;
+}
+
+body.light-theme .trio-pod-item.gold-pod {
+  border-left: 5px solid #f59e0b !important;
+}
+
+body.light-theme .trio-pod-item.gold-pod .trio-pod-icon {
+  background: #fef3c7 !important;
+  border: 1.5px solid #fde68a !important;
+  border-radius: 12px !important;
+}
+
+body.light-theme .trio-pod-item.emerald-pod {
+  border-left: 5px solid #1d4ed8 !important;
+}
+
+body.light-theme .trio-pod-item.emerald-pod .trio-pod-icon {
+  background: #eff6ff !important;
+  border: 1.5px solid #bfdbfe !important;
+  border-radius: 12px !important;
+}
+
+body.light-theme .trio-pod-item.amber-pod {
+  border-left: 5px solid #ea580c !important;
+}
+
+body.light-theme .trio-pod-item.amber-pod .trio-pod-icon {
+  background: #ffedd5 !important;
+  border: 1.5px solid #fed7aa !important;
+  border-radius: 12px !important;
+}
+
+body.light-theme .trio-pod-label {
+  color: #64748b !important;
+  font-size: 0.72rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.05em !important;
+}
+
+body.light-theme .trio-pod-val {
+  color: #0f172a !important;
+  font-size: 1.2rem !important;
+  font-weight: 900 !important;
+}
+
+body.light-theme .trio-pod-val small {
+  color: #94a3b8 !important;
+  font-size: 0.85rem !important;
+  font-weight: 600 !important;
 }
 
 /* Light Theme Stepper Stage Cards */
