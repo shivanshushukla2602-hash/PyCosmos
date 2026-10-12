@@ -44,92 +44,82 @@ import PyCosmosLogo from './PyCosmosLogo';
 
 const CATEGORY_META = {
   'Foundation': {
-    color: '#1d4ed8', // Python Blue
-    bg: '#eff6ff',
-    border: '#bfdbfe',
-    iconBg: '#dbeafe',
-    badgeBg: '#dbeafe',
+    color: '#1d4ed8', // Python Classic Blue
+    border: 'rgba(29, 78, 216, 0.22)',
+    iconBg: 'rgba(29, 78, 216, 0.08)',
+    badgeBg: 'rgba(29, 78, 216, 0.08)',
     gradient: 'linear-gradient(90deg, #1d4ed8, #3b82f6)',
     icon: Terminal
   },
   'Core Data Structures': {
-    color: '#b45309', // Python Yellow / Gold
-    bg: '#fffbeb',
-    border: '#fde68a',
-    iconBg: '#fef3c7',
-    badgeBg: '#fef3c7',
+    color: '#b45309', // Python Amber Gold
+    border: 'rgba(180, 83, 9, 0.22)',
+    iconBg: 'rgba(180, 83, 9, 0.08)',
+    badgeBg: 'rgba(180, 83, 9, 0.08)',
     gradient: 'linear-gradient(90deg, #b45309, #f59e0b)',
     icon: Layers
   },
   'Functions': {
-    color: '#2563eb', // Python Blue
-    bg: '#f0f7ff',
-    border: '#93c5fd',
-    iconBg: '#e0f2fe',
-    badgeBg: '#e0f2fe',
+    color: '#2563eb', // Python Vibrant Blue
+    border: 'rgba(37, 99, 235, 0.22)',
+    iconBg: 'rgba(37, 99, 235, 0.08)',
+    badgeBg: 'rgba(37, 99, 235, 0.08)',
     gradient: 'linear-gradient(90deg, #2563eb, #60a5fa)',
     icon: Code2
   },
   'Practical Python': {
-    color: '#ca8a04', // Python Yellow / Gold
-    bg: '#fefce8',
-    border: '#fef08a',
-    iconBg: '#fef9c3',
-    badgeBg: '#fef9c3',
+    color: '#ca8a04', // Python Sunflower Gold
+    border: 'rgba(202, 138, 4, 0.22)',
+    iconBg: 'rgba(202, 138, 4, 0.08)',
+    badgeBg: 'rgba(202, 138, 4, 0.08)',
     gradient: 'linear-gradient(90deg, #ca8a04, #eab308)',
     icon: GitBranch
   },
   'OOP & Protocols': {
-    color: '#306998', // Python Classic Blue
-    bg: '#f1f7fc',
-    border: '#bcd9ef',
-    iconBg: '#d8ecf8',
-    badgeBg: '#d8ecf8',
+    color: '#306998', // Python Heritage Blue
+    border: 'rgba(48, 105, 152, 0.22)',
+    iconBg: 'rgba(48, 105, 152, 0.08)',
+    badgeBg: 'rgba(48, 105, 152, 0.08)',
     gradient: 'linear-gradient(90deg, #306998, #4b8bbe)',
     icon: Rocket
   },
   'Python Internals': {
-    color: '#d97706', // Python Rich Gold
-    bg: '#fff7ed',
-    border: '#fdba74',
-    iconBg: '#ffedd5',
-    badgeBg: '#ffedd5',
+    color: '#d97706', // Python Rich Amber
+    border: 'rgba(217, 119, 6, 0.22)',
+    iconBg: 'rgba(217, 119, 6, 0.08)',
+    badgeBg: 'rgba(217, 119, 6, 0.08)',
     gradient: 'linear-gradient(90deg, #d97706, #f59e0b)',
     icon: Cpu
   },
   'Standard Library': {
-    color: '#1e40af', // Python Deep Blue
-    bg: '#eef2ff',
-    border: '#a5b4fc',
-    iconBg: '#e0e7ff',
-    badgeBg: '#e0e7ff',
+    color: '#1e40af', // Python Navy Blue
+    border: 'rgba(30, 64, 175, 0.22)',
+    iconBg: 'rgba(30, 64, 175, 0.08)',
+    badgeBg: 'rgba(30, 64, 175, 0.08)',
     gradient: 'linear-gradient(90deg, #1e40af, #3b82f6)',
     icon: BookOpen
   },
   'Professional Python': {
     color: '#a16207', // Python Honeycomb Gold
-    bg: '#fef9c3',
-    border: '#fde047',
-    iconBg: '#fef08a',
-    badgeBg: '#fef08a',
+    border: 'rgba(161, 98, 7, 0.22)',
+    iconBg: 'rgba(161, 98, 7, 0.08)',
+    badgeBg: 'rgba(161, 98, 7, 0.08)',
     gradient: 'linear-gradient(90deg, #a16207, #eab308)',
     icon: Trophy
   },
   'Development & AI/ML': {
-    color: '#0284c7', // Python Sky Blue
-    bg: '#f0f9ff',
-    border: '#7dd3fc',
-    iconBg: '#e0f2fe',
-    badgeBg: '#e0f2fe',
+    color: '#0284c7', // Python Sapphire Blue
+    border: 'rgba(2, 132, 199, 0.22)',
+    iconBg: 'rgba(2, 132, 199, 0.08)',
+    badgeBg: 'rgba(2, 132, 199, 0.08)',
     gradient: 'linear-gradient(90deg, #0284c7, #38bdf8)',
     icon: Sparkles
   },
   'Projects & Problem Solving': {
     color: '#c2410c', // Python Sunburst Gold
-    bg: '#fff7ed',
-    border: '#fed7aa',
-    iconBg: '#ffedd5',
-    badgeBg: '#ffedd5',
+    border: 'rgba(194, 65, 12, 0.22)',
+    iconBg: 'rgba(194, 65, 12, 0.08)',
+    badgeBg: 'rgba(194, 65, 12, 0.08)',
     gradient: 'linear-gradient(90deg, #c2410c, #f59e0b)',
     icon: HelpCircle
   }
@@ -845,10 +835,9 @@ export default function ChecklistPage({
 
           const meta = CATEGORY_META[cat] || {
             color: '#1d4ed8',
-            bg: '#eff6ff',
-            border: '#93c5fd',
-            iconBg: '#dbeafe',
-            badgeBg: '#dbeafe',
+            border: 'rgba(29, 78, 216, 0.22)',
+            iconBg: 'rgba(29, 78, 216, 0.08)',
+            badgeBg: 'rgba(29, 78, 216, 0.08)',
             gradient: 'linear-gradient(90deg, #1d4ed8, #3b82f6)',
             icon: Terminal
           };
@@ -862,62 +851,68 @@ export default function ChecklistPage({
             <motion.div
               key={cat}
               layout
+              className="checklist-category-card"
               style={{
-                marginBottom: '1.75rem',
+                marginBottom: '1.25rem',
                 background: 'var(--bg-card)',
-                borderRadius: '18px',
-                border: `1.5px solid ${meta.border}`,
-                borderLeft: `6px solid ${meta.color}`,
+                borderRadius: '16px',
+                border: '1px solid var(--border-color)',
+                borderLeft: `4px solid ${meta.color}`,
                 overflow: 'hidden',
-                boxShadow: '0 4px 20px -2px rgba(15, 23, 42, 0.07)'
+                boxShadow: '0 1px 3px 0 rgba(15, 23, 42, 0.04), 0 4px 12px -2px rgba(15, 23, 42, 0.03)'
               }}
             >
               {/* Category Header */}
               <div
+                className="checklist-category-header"
+                onClick={() => toggleCategoryCollapse(cat)}
                 style={{
-                  padding: '1.25rem 1.75rem',
-                  background: meta.bg,
-                  transition: 'background 0.2s ease'
+                  padding: '1.2rem 1.6rem',
+                  cursor: 'pointer',
+                  borderBottom: !isCollapsed ? '1px solid var(--border-color)' : 'none'
                 }}
               >
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.85rem' }}>
-                  <div
-                    onClick={() => toggleCategoryCollapse(cat)}
-                    style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', cursor: 'pointer', flex: 1, minWidth: '220px' }}
-                  >
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flex: 1, minWidth: '220px' }}>
                     <div style={{
-                      width: '44px',
-                      height: '44px',
-                      borderRadius: '12px',
+                      width: '42px',
+                      height: '42px',
+                      borderRadius: '11px',
                       background: meta.iconBg,
-                      border: `1.5px solid ${meta.border}`,
+                      border: `1px solid ${meta.border}`,
                       color: meta.color,
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
                       flexShrink: 0,
-                      boxShadow: '0 2px 6px rgba(15, 23, 42, 0.04)'
+                      boxShadow: `0 2px 6px ${meta.iconBg}`
                     }}>
-                      <Icon size={22} />
+                      <Icon size={21} />
                     </div>
                     <div>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                        <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
+                        <h3 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0, letterSpacing: '-0.015em' }}>
                           {cat}
                         </h3>
                         {isCategoryAllDone && (
-                          <span style={{ fontSize: '0.72rem', background: '#dcfce7', color: '#15803d', padding: '0.15rem 0.55rem', borderRadius: '9999px', fontWeight: 700, border: '1px solid #86efac', display: 'inline-flex', alignItems: 'center', gap: '0.25rem' }}>
+                          <span style={{ fontSize: '0.72rem', background: '#ecfdf5', color: '#059669', padding: '0.15rem 0.55rem', borderRadius: '9999px', fontWeight: 700, border: '1px solid #a7f3d0', display: 'inline-flex', alignItems: 'center', gap: '0.25rem' }}>
                             <CheckCircle2 size={11} /> 100% Mastered
                           </span>
                         )}
                       </div>
-                      <span style={{ fontSize: '0.82rem', color: 'var(--text-secondary)' }}>
-                        {catTopics.length} topic{catTopics.length !== 1 ? 's' : ''} ({catCompleted}/{catTopics.length} completed)
-                      </span>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', marginTop: '0.2rem' }}>
+                        <span style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', fontWeight: 500 }}>
+                          {catTopics.length} topic{catTopics.length !== 1 ? 's' : ''}
+                        </span>
+                        <span style={{ color: 'var(--border-color)', fontSize: '0.75rem' }}>•</span>
+                        <span style={{ fontSize: '0.82rem', color: catCompleted > 0 ? meta.color : 'var(--text-muted)', fontWeight: 600 }}>
+                          {catCompleted} of {catTopics.length} completed
+                        </span>
+                      </div>
                     </div>
                   </div>
 
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
                     {/* Category Batch Action Button */}
                     <button
                       type="button"
@@ -927,6 +922,16 @@ export default function ChecklistPage({
                         handleToggleCategoryAll(catTopics, !isCategoryAllDone);
                       }}
                       title={isCategoryAllDone ? "Reset this category" : "Mark all topics in this category complete"}
+                      style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '0.35rem',
+                        padding: '0.35rem 0.75rem',
+                        borderRadius: '8px',
+                        fontSize: '0.78rem',
+                        fontWeight: 600,
+                        cursor: 'pointer'
+                      }}
                     >
                       {isCategoryAllDone ? (
                         <>
@@ -942,12 +947,12 @@ export default function ChecklistPage({
                     </button>
 
                     <span style={{
-                      fontSize: '0.86rem',
-                      fontWeight: 800,
-                      color: meta.color,
-                      background: meta.badgeBg,
-                      border: `1px solid ${meta.border}`,
-                      padding: '0.2rem 0.65rem',
+                      fontSize: '0.82rem',
+                      fontWeight: 700,
+                      color: catPercent === 100 ? '#059669' : catPercent > 0 ? meta.color : 'var(--text-muted)',
+                      background: catPercent === 100 ? '#ecfdf5' : catPercent > 0 ? meta.badgeBg : 'var(--bg-main)',
+                      border: `1px solid ${catPercent === 100 ? '#a7f3d0' : catPercent > 0 ? meta.border : 'var(--border-color)'}`,
+                      padding: '0.22rem 0.65rem',
                       borderRadius: '9999px',
                       fontFamily: 'var(--font-mono)'
                     }}>
@@ -957,21 +962,41 @@ export default function ChecklistPage({
                     <motion.div
                       animate={{ rotate: isCollapsed ? -90 : 0 }}
                       transition={{ duration: 0.2 }}
-                      onClick={() => toggleCategoryCollapse(cat)}
-                      style={{ cursor: 'pointer', display: 'flex', padding: '0.2rem' }}
+                      className="cat-collapse-toggle"
+                      style={{
+                        width: '30px',
+                        height: '30px',
+                        borderRadius: '8px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        cursor: 'pointer',
+                        flexShrink: 0
+                      }}
                     >
-                      <ChevronDown size={20} />
+                      <ChevronDown size={17} />
                     </motion.div>
                   </div>
                 </div>
 
                 {/* Category Progress Track Bar */}
-                <div className="category-progress-track" style={{ background: meta.iconBg }}>
+                <div
+                  className="category-progress-track"
+                  style={{
+                    height: '4px',
+                    borderRadius: '9999px',
+                    marginTop: '0.9rem',
+                    overflow: 'hidden'
+                  }}
+                >
                   <div
                     className="category-progress-fill"
                     style={{
+                      height: '100%',
                       width: `${catPercent}%`,
-                      background: catPercent === 100 ? '#22c55e' : meta.gradient
+                      background: catPercent === 100 ? '#10b981' : meta.gradient,
+                      borderRadius: '9999px',
+                      transition: 'width 0.4s cubic-bezier(0.16, 1, 0.3, 1)'
                     }}
                   />
                 </div>
@@ -1005,6 +1030,7 @@ export default function ChecklistPage({
                       return (
                         <motion.div
                           key={topic.id}
+                          className="checklist-topic-row"
                           whileHover={{ y: -2 }}
                           transition={{ duration: 0.15 }}
                           style={{

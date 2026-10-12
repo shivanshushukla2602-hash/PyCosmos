@@ -14212,8 +14212,81 @@ body.light-theme .studio-dropdown-input {
 }
 
 /* 6. CHECKLIST PAGE CATEGORY CARDS IN LIGHT THEME */
+body.light-theme .checklist-category-card {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0;
+  border-top: 1px solid #e2e8f0 !important;
+  border-right: 1px solid #e2e8f0 !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+  box-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.04), 0 4px 12px -2px rgba(15, 23, 42, 0.03) !important;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease !important;
+}
+
+body.light-theme .checklist-category-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px -4px rgba(15, 23, 42, 0.08), 0 4px 8px -2px rgba(15, 23, 42, 0.03) !important;
+  border-top-color: #cbd5e1 !important;
+  border-right-color: #cbd5e1 !important;
+  border-bottom-color: #cbd5e1 !important;
+}
+
+body.light-theme .checklist-category-header {
+  background: #ffffff !important;
+  transition: background-color 0.15s ease !important;
+}
+
+body.light-theme .checklist-category-header:hover {
+  background: #fbfcfe !important;
+}
+
+body.light-theme .cat-batch-btn {
+  background: #f8fafc !important;
+  border: 1px solid #e2e8f0 !important;
+  color: #475569 !important;
+  transition: all 0.15s ease !important;
+}
+
+body.light-theme .cat-batch-btn:hover {
+  background: #f1f5f9 !important;
+  color: #0f172a !important;
+  border-color: #cbd5e1 !important;
+  transform: translateY(-1px);
+}
+
+body.light-theme .cat-collapse-toggle {
+  background: #f8fafc !important;
+  border: 1px solid #e2e8f0 !important;
+  color: #64748b !important;
+  transition: all 0.15s ease !important;
+}
+
+body.light-theme .cat-collapse-toggle:hover {
+  background: #f1f5f9 !important;
+  color: #0f172a !important;
+  border-color: #cbd5e1 !important;
+}
+
 body.light-theme .category-progress-track {
-  background: rgba(15, 23, 42, 0.06);
+  background: #f1f5f9 !important;
+}
+
+body.light-theme .checklist-topic-row {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03) !important;
+  transition: all 0.18s ease !important;
+}
+
+body.light-theme .checklist-topic-row:hover {
+  background: #f8fafc !important;
+  border-color: #cbd5e1 !important;
+  box-shadow: 0 4px 12px -2px rgba(15, 23, 42, 0.06) !important;
+}
+
+body.light-theme .topic-badge-num {
+  background: #f1f5f9 !important;
+  border: 1px solid #e2e8f0 !important;
+  color: #64748b !important;
 }
 
 /* 7. LIGHT MODE HERO TERMINAL & INTERACTIVE PLAYGROUND (Image 1 & Image 2) */
