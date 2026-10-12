@@ -408,17 +408,7 @@ export default function HomePage({
               </div>
 
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                <div style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '0.45rem',
-                  fontSize: '0.75rem',
-                  color: '#39d353',
-                  background: 'rgba(35, 134, 54, 0.15)',
-                  padding: '0.2rem 0.65rem',
-                  borderRadius: '9999px',
-                  fontWeight: 700
-                }}>
+                <div className="terminal-wasm-pill">
                   <span className="live-pulse-dot" />
                   <Terminal size={12} />
                   <span>Python 3.11 WASM</span>
@@ -448,41 +438,16 @@ export default function HomePage({
                     initial={{ opacity: 0, y: 10, scale: 0.98 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                    style={{
-                      marginTop: '1.25rem',
-                      padding: '0.75rem 1rem',
-                      background: 'rgba(13, 17, 23, 0.9)',
-                      borderRadius: '10px',
-                      borderLeft: '4px solid #38bdf8',
-                      border: '1px solid rgba(56, 189, 248, 0.25)',
-                      fontFamily: 'var(--font-mono)',
-                      fontSize: '0.86rem',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      flexWrap: 'wrap',
-                      gap: '0.5rem'
-                    }}
+                    className="hero-output-drawer"
                   >
                     <div>
-                      <span style={{ color: '#8b949e', marginRight: '0.5rem' }}>Output &gt;&gt;</span>
-                      <span style={{ color: '#fde047', fontWeight: 700 }}>{heroSnippet.defaultOutput}</span>
+                      <span className="hero-output-label">Output &gt;&gt;</span>
+                      <span className="hero-output-text">{heroSnippet.defaultOutput}</span>
                     </div>
 
                     <button
                       onClick={() => handleSelectHeroSnippet(heroTypewriterIdx)}
-                      style={{
-                        background: 'transparent',
-                        border: 'none',
-                        color: 'var(--text-muted)',
-                        fontSize: '0.75rem',
-                        cursor: 'pointer',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '0.3rem',
-                        padding: '0.2rem 0.5rem',
-                        borderRadius: '4px'
-                      }}
+                      className="hero-replay-btn"
                       title="Replay animation"
                     >
                       <RotateCcw size={12} />
@@ -699,12 +664,10 @@ export default function HomePage({
               </motion.div>
             </RevealItem>
           </RevealGroup>
-        </section>
-
-        {/* 3. LIVE INTERACTIVE CODE PLAYGROUND */}
+        </section>        {/* 3. LIVE INTERACTIVE CODE PLAYGROUND */}
         <section style={{ marginBottom: '4rem' }}>
           <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', color: '#39d353', fontWeight: 800, fontSize: '0.85rem', letterSpacing: '0.05em', marginBottom: '0.4rem', background: 'rgba(35, 134, 54, 0.15)', padding: '0.25rem 0.75rem', borderRadius: '9999px', border: '1px solid rgba(35, 134, 54, 0.3)' }}>
+            <div className="home-playground-badge">
               <Zap size={16} />
               <span>INTERACTIVE CODE PLAYGROUND</span>
             </div>
@@ -713,28 +676,9 @@ export default function HomePage({
             </h2>
           </div>
 
-          <div
-            className="section-card"
-            style={{
-              background: '#161b22',
-              border: '1.5px solid var(--border-color)',
-              borderRadius: '20px',
-              padding: 0,
-              overflow: 'hidden',
-              boxShadow: '0 12px 40px rgba(0, 0, 0, 0.4)'
-            }}
-          >
+          <div className="home-interactive-playground">
             {/* Header Tabs & Run Button */}
-            <div style={{
-              display: 'flex',
-              alignItems: 'center',
-              justify: 'space-between',
-              padding: '0.75rem 1.25rem',
-              background: '#0d1117',
-              borderBottom: '1px solid #30363d',
-              flexWrap: 'wrap',
-              gap: '0.75rem'
-            }}>
+            <div className="playground-toolbar">
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                 <div style={{ display: 'flex', gap: '0.4rem' }}>
                   <div className="traffic-dot" style={{ background: '#ff5f56' }} />
@@ -747,17 +691,7 @@ export default function HomePage({
                     <button
                       key={snip.id}
                       onClick={() => handleSnippetTabChange(idx)}
-                      style={{
-                        padding: '0.3rem 0.7rem',
-                        borderRadius: '6px',
-                        fontSize: '0.8rem',
-                        fontFamily: 'var(--font-mono)',
-                        border: 'none',
-                        cursor: 'pointer',
-                        background: activeSnippetIdx === idx ? '#21262d' : 'transparent',
-                        color: activeSnippetIdx === idx ? 'var(--py-yellow)' : '#8b949e',
-                        fontWeight: activeSnippetIdx === idx ? 700 : 500
-                      }}
+                      className={`playground-tab-btn ${activeSnippetIdx === idx ? 'active' : ''}`}
                     >
                       {snip.title}
                     </button>
@@ -769,19 +703,7 @@ export default function HomePage({
                 <button
                   onClick={handleCopyCode}
                   title="Copy code to clipboard"
-                  style={{
-                    background: 'rgba(255, 255, 255, 0.05)',
-                    border: '1px solid #30363d',
-                    borderRadius: '6px',
-                    color: copiedCode ? '#39d353' : '#8b949e',
-                    padding: '0.4rem 0.65rem',
-                    fontSize: '0.78rem',
-                    cursor: 'pointer',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.35rem',
-                    transition: 'all 0.15s ease'
-                  }}
+                  className={`playground-action-btn ${copiedCode ? 'copied' : ''}`}
                 >
                   {copiedCode ? <CheckCheck size={13} /> : <Copy size={13} />}
                   <span>{copiedCode ? 'Copied' : 'Copy'}</span>
@@ -790,19 +712,7 @@ export default function HomePage({
                 <button
                   onClick={handleResetCode}
                   title="Reset code to original snippet"
-                  style={{
-                    background: 'rgba(255, 255, 255, 0.05)',
-                    border: '1px solid #30363d',
-                    borderRadius: '6px',
-                    color: '#8b949e',
-                    padding: '0.4rem 0.65rem',
-                    fontSize: '0.78rem',
-                    cursor: 'pointer',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.35rem',
-                    transition: 'all 0.15s ease'
-                  }}
+                  className="playground-action-btn"
                 >
                   <RotateCcw size={13} />
                   <span>Reset</span>
@@ -812,14 +722,13 @@ export default function HomePage({
                   {...BUTTON_HOVER_VARIANT}
                   onClick={handleRunPlaygroundCode}
                   disabled={isExecuting}
-                  className="btn btn-yellow"
+                  className="btn btn-yellow playground-run-btn"
                   style={{
                     padding: '0.45rem 1.2rem',
                     fontSize: '0.85rem',
                     display: 'flex',
                     alignItems: 'center',
-                    gap: '0.4rem',
-                    boxShadow: '0 0 15px rgba(255, 212, 59, 0.35)'
+                    gap: '0.4rem'
                   }}
                 >
                   {isExecuting ? (
@@ -833,7 +742,7 @@ export default function HomePage({
             </div>
 
             {/* Editable Textarea Code Input */}
-            <div style={{ padding: '1.25rem', background: '#090d16' }}>
+            <div className="playground-editor-area">
               <div style={{ position: 'relative' }}>
                 <textarea
                   value={editableCode}
@@ -854,84 +763,33 @@ export default function HomePage({
                   spellCheck="false"
                   autoCapitalize="off"
                   autoComplete="off"
-                  style={{
-                    width: '100%',
-                    background: 'transparent',
-                    border: 'none',
-                    outline: 'none',
-                    color: '#f0f6fc',
-                    fontFamily: 'var(--font-mono)',
-                    fontSize: '0.92rem',
-                    lineHeight: '1.65',
-                    resize: 'vertical',
-                    tabSize: 4
-                  }}
+                  className="playground-textarea"
                   placeholder="Write any Python code here and click Run Code..."
                 />
               </div>
 
               {/* Output Panel with Real Console Diagnostics */}
-              <div style={{
-                marginTop: '1.25rem',
-                background: '#0a0e17',
-                borderRadius: '12px',
-                border: isOutputError ? '1px solid rgba(239, 68, 68, 0.4)' : '1px solid rgba(57, 211, 83, 0.3)',
-                borderLeft: isOutputError ? '4px solid #ef4444' : '4px solid #39d353',
-                fontFamily: 'var(--font-mono)',
-                fontSize: '0.88rem',
-                overflow: 'hidden'
-              }}>
-                <div style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  padding: '0.55rem 1rem',
-                  background: 'rgba(0,0,0,0.3)',
-                  borderBottom: '1px solid rgba(255,255,255,0.06)'
-                }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#8b949e', fontSize: '0.78rem' }}>
-                    <Terminal size={13} color={isOutputError ? '#ef4444' : '#39d353'} />
-                    <span>Console Output &gt;&gt;</span>
-                    <span style={{
-                      fontSize: '0.7rem',
-                      padding: '0.15rem 0.55rem',
-                      borderRadius: '9999px',
-                      background: isOutputError ? 'rgba(239, 68, 68, 0.15)' : 'rgba(57, 211, 83, 0.15)',
-                      color: isOutputError ? '#f87171' : '#4ade80',
-                      fontWeight: 600,
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '0.3rem'
-                    }}>
-                      <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: isOutputError ? '#ef4444' : '#22c55e' }} />
+              <div className={`playground-console-box ${isOutputError ? 'error' : 'success'}`}>
+                <div className="playground-console-header">
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.78rem' }}>
+                    <Terminal size={13} className={`console-terminal-icon ${isOutputError ? 'error' : 'success'}`} />
+                    <span className="console-output-label">Console Output &gt;&gt;</span>
+                    <span className={`console-status-pill ${isOutputError ? 'error' : 'success'}`}>
+                      <span className={`console-status-dot ${isOutputError ? 'error' : 'success'}`} />
                       {compilerStatus || (isOutputError ? 'Error' : 'CPython 3.12 (WASM)')}
                     </span>
                   </div>
 
                   <button
                     onClick={() => setPlaygroundOutput('')}
-                    style={{
-                      background: 'transparent',
-                      border: 'none',
-                      color: '#8b949e',
-                      fontSize: '0.75rem',
-                      cursor: 'pointer',
-                      padding: '0.2rem 0.5rem'
-                    }}
+                    className="console-clear-btn"
                   >
                     Clear
                   </button>
                 </div>
 
-                <div style={{
-                  padding: '0.9rem 1.15rem',
-                  color: isOutputError ? '#fca5a5' : '#4ade80',
-                  fontWeight: '500',
-                  whiteSpace: 'pre-wrap',
-                  minHeight: '44px',
-                  lineHeight: '1.6'
-                }}>
-                  {playgroundOutput || <span style={{ color: '#6e7681', fontStyle: 'italic' }}>Output is empty. Click "Run Code" above.</span>}
+                <div className={`playground-console-text ${isOutputError ? 'error' : 'success'}`}>
+                  {playgroundOutput || <span className="playground-output-empty">Output is empty. Click "Run Code" above.</span>}
                 </div>
               </div>
             </div>
