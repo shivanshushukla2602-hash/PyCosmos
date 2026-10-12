@@ -856,7 +856,9 @@ export default function ChecklistPage({
                 marginBottom: '1.25rem',
                 background: 'var(--bg-card)',
                 borderRadius: '16px',
-                border: '1px solid var(--border-color)',
+                borderTop: '1px solid var(--border-color)',
+                borderRight: '1px solid var(--border-color)',
+                borderBottom: '1px solid var(--border-color)',
                 borderLeft: `4px solid ${meta.color}`,
                 overflow: 'hidden',
                 boxShadow: '0 1px 3px 0 rgba(15, 23, 42, 0.04), 0 4px 12px -2px rgba(15, 23, 42, 0.03)'
