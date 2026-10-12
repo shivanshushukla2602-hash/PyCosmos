@@ -1519,15 +1519,15 @@ body.light-theme .stepper-progress-bar-bg {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  background: linear-gradient(135deg, rgba(17, 26, 39, 0.95), rgba(10, 16, 24, 0.95));
+  background: #ffffff;
   border-left: 6px solid var(--level-color);
-  border-top: 1px solid var(--border-color);
-  border-right: 1px solid var(--border-color);
-  border-bottom: 1px solid var(--border-color);
+  border-top: 1.5px solid var(--border-color);
+  border-right: 1.5px solid var(--border-color);
+  border-bottom: 1.5px solid var(--border-color);
   border-radius: var(--radius-lg);
   padding: 1.75rem 2rem;
   margin-bottom: 2.5rem;
-  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.3), 0 0 20px -8px var(--level-color);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
   position: relative;
   overflow: hidden;
 }
@@ -1540,7 +1540,7 @@ body.light-theme .stepper-progress-bar-bg {
   width: 200px;
   height: 100%;
   background: linear-gradient(90deg, var(--level-color), transparent);
-  opacity: 0.1;
+  opacity: 0.06;
   pointer-events: none;
 }
 
@@ -1800,13 +1800,12 @@ body.light-theme .stepper-progress-bar-bg {
 
 /* ROADMAP FILTER & SEARCH CONTROLS */
 .roadmap-filter-card {
-  background: rgba(22, 27, 34, 0.75);
-  border: 1px solid var(--border-color);
-  backdrop-filter: blur(14px);
+  background: #ffffff;
+  border: 1.5px solid var(--border-color);
   border-radius: var(--radius-xl);
   padding: 1.25rem 1.5rem;
   margin-bottom: 2.25rem;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -1824,8 +1823,8 @@ body.light-theme .stepper-progress-bar-bg {
   display: flex;
   align-items: center;
   gap: 0.65rem;
-  background: rgba(13, 17, 23, 0.85);
-  border: 1px solid var(--border-color);
+  background: #f8fafc;
+  border: 1.5px solid var(--border-color);
   border-radius: 12px;
   padding: 0.6rem 1rem;
   flex: 1;
@@ -1834,8 +1833,8 @@ body.light-theme .stepper-progress-bar-bg {
 }
 
 .roadmap-search-box:focus-within {
-  border-color: #38bdf8;
-  box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
+  border-color: var(--py-blue);
+  box-shadow: 0 0 15px rgba(48, 105, 152, 0.15);
 }
 
 .roadmap-search-input {
@@ -1859,26 +1858,28 @@ body.light-theme .stepper-progress-bar-bg {
   border-radius: 9999px;
   font-size: 0.8rem;
   font-weight: 700;
-  border: 1px solid var(--border-color);
-  background: rgba(13, 17, 23, 0.6);
+  border: 1.5px solid var(--border-color);
+  background: #ffffff;
   color: var(--text-secondary);
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.02);
 }
 
 .roadmap-filter-pill:hover {
   color: var(--text-primary);
-  border-color: rgba(255, 255, 255, 0.2);
+  border-color: var(--py-blue);
+  background: rgba(48, 105, 152, 0.05);
 }
 
 .roadmap-filter-pill.active {
-  background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(245, 158, 11, 0.2));
-  border-color: #38bdf8;
+  background: var(--py-blue);
+  border-color: var(--py-blue);
   color: #ffffff;
-  box-shadow: 0 0 15px rgba(56, 189, 248, 0.25);
+  box-shadow: 0 2px 10px rgba(48, 105, 152, 0.25);
 }
 
 /* ROADMAP TOPICS DRAWER INSIDE NODE CARD */
@@ -6189,12 +6190,12 @@ body.light-theme .demo-avatar-circle {
 /* 5. Serpentine Curriculum Pathway */
 .serpentine-pathway-container {
   position: relative;
-  background: rgba(22, 27, 34, 0.65);
-  border: 1px solid var(--border-color);
-  backdrop-filter: blur(14px);
+  background: #ffffff;
+  border: 1.5px solid rgba(48, 105, 152, 0.16);
   border-radius: 24px;
   padding: 2.25rem 1.5rem;
   margin-bottom: 2.5rem;
+  box-shadow: 0 10px 30px rgba(48, 105, 152, 0.06);
   overflow: hidden;
 }
 
@@ -6272,7 +6273,9 @@ body.light-theme .demo-avatar-circle {
 }
 
 .qotd-inner-content {
-  background: #161b22;
+  background: #ffffff;
+  border: 1.5px solid rgba(48, 105, 152, 0.16);
+  box-shadow: 0 10px 30px rgba(48, 105, 152, 0.06);
   border-radius: 22px;
   padding: 2.25rem;
 }
@@ -7552,42 +7555,44 @@ body.light-theme .footer-attribution strong {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #ffffff;
+  border: 1.5px solid var(--border-color);
   border-radius: 9999px;
-  padding: 0.35rem 0.75rem 0.35rem 0.4rem;
-  color: var(--text-secondary);
+  padding: 0.4rem 0.85rem 0.4rem 0.5rem;
+  color: var(--text-primary);
   cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
   transition: all 0.2s ease;
 }
 
 .constellation-node-pill:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: #f8fafc;
   border-color: var(--stage-accent);
   color: var(--text-primary);
+  box-shadow: 0 4px 12px rgba(48, 105, 152, 0.1);
 }
 
 .constellation-node-pill.is-active {
   border-color: var(--py-yellow);
-  background: rgba(255, 212, 59, 0.08);
+  background: rgba(229, 168, 0, 0.08);
 }
 
 .constellation-node-pill.is-complete {
-  border-color: #22c55e;
-  background: rgba(34, 197, 94, 0.08);
+  border-color: #16a34a;
+  background: rgba(22, 163, 74, 0.08);
 }
 
 .node-pill-glyph {
-  width: 24px;
-  height: 24px;
+  width: 26px;
+  height: 26px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(48, 105, 152, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.7rem;
+  font-size: 0.72rem;
   font-weight: 800;
-  color: var(--text-primary);
+  color: var(--py-blue);
 }
 
 .node-pill-info {
@@ -10675,8 +10680,8 @@ body.light-theme .horizon-range-slider {
 
 .expedition-station-node {
   flex: 0 0 175px;
-  background: rgba(13, 23, 38, 0.85);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #ffffff;
+  border: 1.5px solid var(--border-color);
   border-radius: 14px;
   padding: 1.15rem 1rem;
   cursor: pointer;
@@ -10684,17 +10689,19 @@ body.light-theme .horizon-range-slider {
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
   flex-direction: column;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
 .expedition-station-node:hover {
   border-color: var(--stage-accent);
+  background: #f8fafc;
   box-shadow: 0 8px 24px var(--stage-glow);
 }
 
 .expedition-station-node.active-station {
-  background: rgba(16, 32, 56, 0.95);
+  background: #f0f7ff;
   border-color: var(--stage-accent);
-  box-shadow: 0 0 28px var(--stage-glow);
+  box-shadow: 0 0 24px var(--stage-glow);
   transform: translateY(-4px);
 }
 
@@ -10702,7 +10709,7 @@ body.light-theme .horizon-range-slider {
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(48, 105, 152, 0.08);
   border: 2px solid var(--stage-accent);
   display: flex;
   align-items: center;
@@ -10889,15 +10896,14 @@ body.light-theme .horizon-range-slider {
 }
 
 .holocron-card {
-  background: rgba(13, 23, 38, 0.75);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #ffffff;
+  border: 1.5px solid var(--border-color);
   border-radius: 16px;
   padding: 1.35rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
   position: relative;
   overflow: hidden;
   transition: all 0.25s ease;
@@ -10905,7 +10911,8 @@ body.light-theme .horizon-range-slider {
 
 .holocron-card:hover {
   border-color: var(--card-accent);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 10px 28px rgba(48, 105, 152, 0.12);
+  transform: translateY(-3px);
 }
 
 .holocron-card-top {
@@ -11071,15 +11078,19 @@ body.light-theme .horizon-range-slider {
    CYBER HUD MATRIX TABLE
    ========================================================================== */
 .cyber-hud-table-wrapper {
-  border: 1px solid rgba(56, 189, 248, 0.25);
-  background: rgba(10, 18, 30, 0.95);
+  border: 1.5px solid var(--border-color);
+  background: #ffffff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
 }
 
 .cyber-hud-table th {
-  background: rgba(16, 28, 48, 0.95);
-  color: var(--py-blue-light);
+  background: #f8fafc;
+  color: var(--py-blue);
   letter-spacing: 0.08em;
-  font-size: 0.72rem;
+  font-size: 0.74rem;
+  border-bottom: 1.5px solid var(--border-color);
 }
 
 .cyber-hud-row:hover td {
@@ -11207,8 +11218,8 @@ body.light-theme .horizon-range-slider {
 
 .constellation-node-pill {
   padding: 0.65rem 0.95rem;
-  background: rgba(13, 23, 38, 0.9);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #ffffff;
+  border: 1.5px solid var(--border-color);
   border-radius: 12px;
   cursor: pointer;
   display: flex;
@@ -11216,22 +11227,25 @@ body.light-theme .horizon-range-slider {
   align-items: center;
   gap: 0.2rem;
   min-width: 100px;
+  color: var(--text-primary);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
   transition: all 0.2s ease;
 }
 
 .constellation-node-pill:hover {
-  border-color: var(--py-yellow);
-  box-shadow: 0 0 16px rgba(255, 212, 59, 0.25);
+  border-color: var(--py-blue);
+  background: #f8fafc;
+  box-shadow: 0 4px 14px rgba(48, 105, 152, 0.12);
 }
 
 .constellation-node-pill.completed {
-  border-color: #22c55e;
-  background: rgba(34, 197, 94, 0.12);
+  border-color: #16a34a;
+  background: rgba(22, 163, 74, 0.08);
 }
 
 .constellation-node-pill.learning {
-  border-color: var(--py-yellow);
-  background: rgba(255, 212, 59, 0.12);
+  border-color: #e5a800;
+  background: rgba(229, 168, 0, 0.08);
 }
 
 .node-num {
@@ -11366,8 +11380,8 @@ body.light-theme .horizon-range-slider {
 }
 
 .medallion-artifact-card {
-  background: rgba(13, 23, 38, 0.75);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #ffffff;
+  border: 1px solid var(--border-color);
   border-radius: 16px;
   padding: 1.5rem 1.25rem;
   display: flex;
@@ -11377,17 +11391,19 @@ body.light-theme .horizon-range-slider {
   position: relative;
   overflow: hidden;
   cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .medallion-artifact-card:hover {
   border-color: var(--badge-color);
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4), 0 0 24px var(--badge-color) 33;
+  box-shadow: 0 12px 28px rgba(48, 105, 152, 0.12), 0 0 0 1px var(--badge-color);
+  transform: translateY(-2px);
 }
 
 .medallion-artifact-card.is-unlocked {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, rgba(13, 23, 38, 0.9) 100%);
-  border-color: rgba(255, 255, 255, 0.15);
+  background: #ffffff;
+  border-color: rgba(48, 105, 152, 0.25);
 }
 
 .medallion-rarity-badge {
@@ -11402,11 +11418,11 @@ body.light-theme .horizon-range-slider {
   text-transform: uppercase;
 }
 
-.medallion-rarity-badge.common { background: rgba(56, 189, 248, 0.15); color: #38bdf8; }
-.medallion-rarity-badge.rare { background: rgba(255, 212, 59, 0.15); color: #ffd43b; }
-.medallion-rarity-badge.epic { background: rgba(168, 85, 247, 0.15); color: #c084fc; }
-.medallion-rarity-badge.legendary { background: rgba(244, 63, 94, 0.15); color: #fb7185; }
-.medallion-rarity-badge.mythic { background: rgba(234, 179, 8, 0.2); color: #facc15; }
+.medallion-rarity-badge.common { background: rgba(48, 105, 152, 0.1); color: #205075; }
+.medallion-rarity-badge.rare { background: rgba(229, 168, 0, 0.15); color: #b45309; }
+.medallion-rarity-badge.epic { background: rgba(147, 51, 234, 0.12); color: #7e22ce; }
+.medallion-rarity-badge.legendary { background: rgba(225, 29, 72, 0.12); color: #be123c; }
+.medallion-rarity-badge.mythic { background: rgba(234, 179, 8, 0.2); color: #a16207; }
 
 .medallion-crest-frame {
   position: relative;
@@ -11426,7 +11442,7 @@ body.light-theme .horizon-range-slider {
 
 .ring-bg {
   fill: none;
-  stroke: rgba(255, 255, 255, 0.06);
+  stroke: #e2e8f0;
   stroke-width: 4;
 }
 
@@ -11442,7 +11458,8 @@ body.light-theme .horizon-range-slider {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.04);
+  background: #f8fafc;
+  border: 1px solid var(--border-color);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -11483,14 +11500,14 @@ body.light-theme .horizon-range-slider {
   align-items: center;
   justify-content: space-between;
   padding-top: 0.75rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-top: 1px solid var(--border-color);
 }
 
 .medallion-xp-tag {
   font-size: 0.74rem;
   font-weight: 800;
   font-family: var(--font-mono);
-  color: var(--py-yellow);
+  color: #b45309;
 }
 
 .medallion-status-chip {
@@ -11501,25 +11518,25 @@ body.light-theme .horizon-range-slider {
 }
 
 .medallion-status-chip.unlocked {
-  background: rgba(34, 197, 94, 0.15);
-  color: #4ade80;
+  background: rgba(22, 163, 74, 0.12);
+  color: #15803d;
 }
 
 .medallion-status-chip.locked {
-  background: rgba(255, 255, 255, 0.05);
-  color: var(--text-muted);
+  background: #f1f5f9;
+  color: #64748b;
 }
 
 /* Badge Inspect Modal */
 .badge-inspect-dialog {
-  background: #0d1726;
+  background: #ffffff;
   border: 1px solid var(--badge-theme);
   border-radius: 20px;
   padding: 2.25rem;
   max-width: 440px;
   width: 90%;
   position: relative;
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5), 0 0 32px var(--badge-theme) 44;
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.15), 0 0 24px rgba(48, 105, 152, 0.1);
 }
 
 .badge-modal-close-btn {
@@ -11545,7 +11562,7 @@ body.light-theme .horizon-range-slider {
   letter-spacing: 0.08em;
   padding: 0.2rem 0.65rem;
   border-radius: 9999px;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(48, 105, 152, 0.08);
   color: var(--badge-theme);
   border: 1px solid var(--badge-theme);
   margin-bottom: 1rem;
@@ -11555,14 +11572,14 @@ body.light-theme .horizon-range-slider {
   width: 90px;
   height: 90px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.04);
+  background: #f8fafc;
   border: 2px solid var(--badge-theme);
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--badge-theme);
   margin-bottom: 1.25rem;
-  box-shadow: 0 0 24px var(--badge-theme) 44;
+  box-shadow: 0 8px 24px rgba(48, 105, 152, 0.15);
 }
 
 .inspect-badge-name {
@@ -11588,8 +11605,8 @@ body.light-theme .horizon-range-slider {
 }
 
 .inspect-stat-cell {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
   border-radius: 10px;
   padding: 0.65rem 0.85rem;
   display: flex;
@@ -11611,8 +11628,8 @@ body.light-theme .horizon-range-slider {
 
 .inspect-progress-card {
   width: 100%;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
   border-radius: 10px;
   padding: 0.85rem;
   margin-bottom: 1.5rem;
@@ -11629,7 +11646,7 @@ body.light-theme .horizon-range-slider {
 .inspect-progress-track {
   width: 100%;
   height: 6px;
-  background: rgba(255, 255, 255, 0.06);
+  background: #e2e8f0;
   border-radius: 9999px;
   overflow: hidden;
 }
@@ -11654,7 +11671,7 @@ body.light-theme .horizon-range-slider {
   gap: 0.45rem;
   padding: 0.5rem 1rem;
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.05);
+  background: #f1f5f9;
   border: 1px solid var(--border-color);
   color: var(--text-primary);
   font-size: 0.82rem;
@@ -11663,28 +11680,28 @@ body.light-theme .horizon-range-slider {
 }
 
 /* ==========================================================================
-   DEVELOPER AUTH GATEWAY (UPGRADED AUTH PAGE)
+   DEVELOPER AUTH GATEWAY (LIGHT MODE NATIVE)
    ========================================================================== */
 .py-auth-gateway-root {
-  background: radial-gradient(circle at 50% 20%, rgba(48, 105, 152, 0.15) 0%, rgba(10, 14, 23, 0.98) 70%);
+  background: linear-gradient(180deg, #F8FAFC 0%, #FFFFFF 50%, #F1F5F9 100%);
 }
 
 .auth-mesh-grid-overlay {
   position: absolute;
   inset: 0;
-  background-image: linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-                    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-image: linear-gradient(rgba(48, 105, 152, 0.04) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(48, 105, 152, 0.04) 1px, transparent 1px);
   background-size: 48px 48px;
   pointer-events: none;
 }
 
 .py-auth-cosmic-grid {
-  grid-template-columns: 1.1fr 0.9fr;
+  grid-template-columns: 1fr;
 }
 
 .py-auth-showcase-deck {
-  background: rgba(11, 20, 36, 0.85);
-  border-color: rgba(56, 189, 248, 0.25);
+  background: #ffffff;
+  border-color: #e2e8f0;
 }
 
 .py-auth-crest-wrap {
@@ -11694,7 +11711,7 @@ body.light-theme .horizon-range-slider {
 }
 
 .py-auth-crest-glow {
-  filter: drop-shadow(0 0 16px rgba(56, 189, 248, 0.4));
+  filter: drop-shadow(0 4px 12px rgba(48, 105, 152, 0.2));
 }
 
 .py-auth-headline {
@@ -11704,8 +11721,7 @@ body.light-theme .horizon-range-slider {
 }
 
 .py-gold-text {
-  color: var(--py-yellow);
-  text-shadow: 0 0 24px rgba(255, 212, 59, 0.35);
+  color: #b45309;
 }
 
 .py-persona-switcher-strip {
@@ -11729,8 +11745,8 @@ body.light-theme .horizon-range-slider {
   gap: 0.35rem;
   padding: 0.3rem 0.65rem;
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
   color: var(--text-secondary);
   font-size: 0.74rem;
   font-weight: 700;
@@ -11739,20 +11755,20 @@ body.light-theme .horizon-range-slider {
 }
 
 .persona-strip-pill:hover {
-  background: rgba(56, 189, 248, 0.12);
+  background: rgba(48, 105, 152, 0.08);
   color: var(--text-primary);
 }
 
 .persona-strip-pill.active {
-  background: rgba(56, 189, 248, 0.2);
-  border-color: var(--py-blue-light);
-  color: #38bdf8;
+  background: rgba(48, 105, 152, 0.12);
+  border-color: var(--py-blue);
+  color: var(--py-blue);
 }
 
 .py-auth-terminal-studio {
-  background: #080f1a;
-  border: 1px solid rgba(56, 189, 248, 0.25);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 12px 32px rgba(48, 105, 152, 0.06);
 }
 
 .terminal-file-badge {
@@ -11769,13 +11785,13 @@ body.light-theme .horizon-range-slider {
   align-items: center;
   justify-content: space-between;
   padding: 0.55rem 0.95rem;
-  background: rgba(13, 23, 38, 0.95);
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  background: #f8fafc;
+  border-top: 1px solid #e2e8f0;
   font-size: 0.72rem;
 }
 
 .terminal-footer-chip {
-  color: #22c55e;
+  color: #15803d;
   font-family: var(--font-mono);
   font-weight: 700;
 }
@@ -11786,10 +11802,9 @@ body.light-theme .horizon-range-slider {
 }
 
 .py-auth-terminal-card {
-  background: rgba(13, 23, 38, 0.9);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 212, 59, 0.2);
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.45);
+  background: #ffffff;
+  border: 1.5px solid #e2e8f0;
+  box-shadow: 0 16px 48px rgba(48, 105, 152, 0.08);
 }
 
 .py-auth-badge-chip {
@@ -11798,19 +11813,19 @@ body.light-theme .horizon-range-slider {
   gap: 0.35rem;
   padding: 0.2rem 0.65rem;
   border-radius: 9999px;
-  background: rgba(255, 212, 59, 0.1);
-  border: 1px solid rgba(255, 212, 59, 0.25);
+  background: rgba(229, 168, 0, 0.12);
+  border: 1px solid rgba(229, 168, 0, 0.25);
   font-size: 0.72rem;
   font-weight: 800;
-  color: var(--py-yellow);
+  color: #b45309;
   text-transform: uppercase;
   letter-spacing: 0.06em;
 }
 
 .py-auth-submit-gradient {
-  background: linear-gradient(135deg, var(--py-blue) 0%, #1e40af 100%);
-  border: 1px solid rgba(56, 189, 248, 0.4);
-  box-shadow: 0 4px 18px rgba(48, 105, 152, 0.35);
+  background: linear-gradient(135deg, var(--py-blue) 0%, #1d4ed8 100%);
+  border: 1px solid rgba(48, 105, 152, 0.4);
+  box-shadow: 0 4px 18px rgba(48, 105, 152, 0.25);
   padding: 0.85rem;
   font-size: 0.92rem;
   font-weight: 800;
@@ -11825,8 +11840,8 @@ body.light-theme .horizon-range-slider {
 }
 
 .py-auth-submit-gradient:hover:not(:disabled) {
-  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
-  box-shadow: 0 6px 24px rgba(56, 189, 248, 0.45);
+  background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+  box-shadow: 0 6px 24px rgba(48, 105, 152, 0.35);
   transform: translateY(-1px);
 }
 
@@ -11837,7 +11852,7 @@ body.light-theme .horizon-range-slider {
 .password-strength-track {
   width: 100%;
   height: 4px;
-  background: rgba(255, 255, 255, 0.06);
+  background: #e2e8f0;
   border-radius: 9999px;
   overflow: hidden;
   margin-top: 0.4rem;
@@ -11857,18 +11872,17 @@ body.light-theme .horizon-range-slider {
   width: 52px;
   height: 52px;
   border-radius: 50%;
-  background: rgba(255, 212, 59, 0.12);
-  border: 1.5px solid rgba(255, 212, 59, 0.35);
+  background: rgba(229, 168, 0, 0.12);
+  border: 1.5px solid rgba(229, 168, 0, 0.35);
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 auto 1rem;
-  box-shadow: 0 0 20px rgba(255, 212, 59, 0.25);
 }
 
 .py-otp-card {
-  background: rgba(13, 23, 38, 0.9);
-  border: 1px solid rgba(56, 189, 248, 0.3);
+  background: #f8fafc;
+  border: 1px solid rgba(48, 105, 152, 0.2);
   border-radius: 12px;
   padding: 0.85rem 1rem;
   margin-bottom: 1.25rem;
@@ -11878,7 +11892,7 @@ body.light-theme .horizon-range-slider {
   font-size: 1.5rem;
   font-weight: 900;
   font-family: var(--font-mono);
-  color: var(--py-yellow);
+  color: #b45309;
   letter-spacing: 0.2em;
 }
 
@@ -11892,47 +11906,47 @@ body.light-theme .horizon-range-slider {
 .otp-digit-box {
   width: 46px;
   height: 52px;
-  background: rgba(13, 23, 38, 0.9);
-  border: 1.5px solid rgba(255, 255, 255, 0.1);
+  background: #ffffff;
+  border: 1.5px solid #cbd5e1;
   border-radius: 10px;
   text-align: center;
   font-size: 1.3rem;
   font-weight: 800;
   font-family: var(--font-mono);
-  color: var(--text-primary);
+  color: #0f172a;
   transition: all 0.2s ease;
 }
 
 .otp-digit-box:focus {
   outline: none;
-  border-color: var(--py-yellow);
-  box-shadow: 0 0 16px rgba(255, 212, 59, 0.3);
+  border-color: var(--py-blue);
+  box-shadow: 0 0 0 3px rgba(48, 105, 152, 0.15);
 }
 
 .otp-digit-box.filled {
-  border-color: #38bdf8;
-  color: var(--py-yellow);
+  border-color: var(--py-blue);
+  color: var(--py-blue);
 }
 
 .py-auth-demo-deck {
   margin-top: 1.75rem;
   padding-top: 1.25rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-top: 1px solid #e2e8f0;
 }
 
 .demo-instant-tag {
   font-size: 0.65rem;
   font-weight: 800;
   font-family: var(--font-mono);
-  color: var(--py-yellow);
-  background: rgba(255, 212, 59, 0.1);
+  color: #b45309;
+  background: rgba(229, 168, 0, 0.12);
   padding: 0.15rem 0.45rem;
   border-radius: 4px;
 }
 
 .py-demo-card {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
   border-radius: 12px;
   padding: 0.75rem 0.85rem;
   display: flex;
@@ -11944,8 +11958,8 @@ body.light-theme .horizon-range-slider {
 }
 
 .py-demo-card:hover {
-  background: rgba(56, 189, 248, 0.1);
-  border-color: var(--py-blue-light);
+  background: rgba(48, 105, 152, 0.08);
+  border-color: var(--py-blue);
   transform: translateY(-2px);
 }
 
@@ -11960,7 +11974,7 @@ body.light-theme .horizon-range-slider {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 12px rgba(48, 105, 152, 0.4);
+  box-shadow: 0 2px 8px rgba(48, 105, 152, 0.25);
 }
 
 .demo-card-name-row {
@@ -11974,8 +11988,8 @@ body.light-theme .horizon-range-slider {
   font-weight: 800;
   padding: 0.1rem 0.35rem;
   border-radius: 4px;
-  background: rgba(255, 212, 59, 0.15);
-  color: var(--py-yellow);
+  background: rgba(229, 168, 0, 0.15);
+  color: #b45309;
 }
 
 

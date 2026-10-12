@@ -10,95 +10,32 @@ import {
   RefreshCw,
   Eye,
   EyeOff,
-  Terminal,
   Copy,
   Check,
   AlertCircle,
-  Sun,
-  Moon,
-  Layers,
-  Trophy,
   Sparkles,
   ShieldCheck,
+  Layers,
   Cpu,
-  Brain,
   Zap,
-  Play,
-  Compass,
-  Code2
+  BookOpen
 } from 'lucide-react';
 import PyCosmosLogo from './PyCosmosLogo';
 import { celebrate } from '../utils/celebrate';
 
-// Pre-seeded demo accounts for instant evaluation
-const DEMO_ACCOUNTS = [
-  {
-    name: 'Shivanshu Shukla',
-    email: 'shivanshushukla1919@gmail.com',
-    password: 'shivanshu19',
-    role: 'Platform Owner & Lead Architect',
-    level: 'Grandmaster (Lvl 27)',
-    avatar: 'SS',
-    badge: 'Owner / Admin'
-  },
-  {
-    name: 'Alex Rivera',
-    email: 'alex@pycosmos.dev',
-    password: 'password123',
-    role: 'AI/ML Systems Researcher',
-    level: 'Intermediate (Lvl 12)',
-    avatar: 'AR',
-    badge: 'AI/ML Track'
-  }
-];
+// Owner Account definition
+const OWNER_ACCOUNT = {
+  name: 'Shivanshu Shukla',
+  email: 'shivanshushukla1919@gmail.com',
+  password: 'shivanshu19',
+  role: 'Platform Owner & Lead Architect',
+  level: 'Grandmaster (Lvl 27)',
+  avatar: 'SS',
+  badge: 'Owner / Admin',
+  isAdmin: true
+};
 
-// Interactive persona previews for the left showcase terminal
-const PERSONA_PREVIEWS = [
-  {
-    id: 'architect',
-    label: 'Lead Architect',
-    icon: Cpu,
-    filename: 'cpython_internals.py',
-    code: `import sys, dis
-
-def optimize_pipeline(bytecode):
-    # CPython 3.12 Specialized Adaptive Interpreter
-    return dis.dis(bytecode)
-
-print(">>> CPython 3.12 Adaptive Tier: ACTIVE")
-print(">>> Architecture: 27 Mastery Levels Cleared")`,
-    stat: '51 Modules • CPython 3.12'
-  },
-  {
-    id: 'aiml',
-    label: 'AI & Systems',
-    icon: Brain,
-    filename: 'neural_matrix.py',
-    code: `import torch, numpy as np
-
-# Distributed Tensor Parallelism Pipeline
-matrix = np.random.randn(512, 512)
-print(">>> PyCosmos AI Engine: Online")
-print(">>> Micro-benchmarking: 0.12ms inference")`,
-    stat: 'Vectorized Tensors • WebAssembly'
-  },
-  {
-    id: 'voyager',
-    label: 'Foundation',
-    icon: Zap,
-    filename: 'first_steps.py',
-    code: `class PythonVoyager:
-    def __init__(self, name):
-        self.name = name
-        self.streak = 1
-
-voyager = PythonVoyager("Shivanshu")
-print(f">>> Welcome, {voyager.name}! Ready to explore.")`,
-    stat: 'Zero to Mastery • Free Forever'
-  }
-];
-
-export default function AuthPage({ onLogin, theme = 'dark', setTheme }) {
+export default function AuthPage({ onLogin }) {
   // Mode: 'login' | 'register'
   const [authMode, setAuthMode] = useState('login');
 
@@ -108,9 +45,6 @@ export default function AuthPage({ onLogin, theme = 'dark', setTheme }) {
   const [name, setName] = useState('');
   const [track, setTrack] = useState('full_mastery');
   const [showPassword, setShowPassword] = useState(false);
-
-  // Active showcase persona
-  const [activePersona, setActivePersona] = useState(PERSONA_PREVIEWS[0]);
 
   // OTP State (Used during Registration Verification)
   const [isOtpStep, setIsOtpStep] = useState(false);
@@ -128,22 +62,6 @@ export default function AuthPage({ onLogin, theme = 'dark', setTheme }) {
   // Digit input refs
   const inputRefs = useRef([]);
 
-  // Local theme toggle support
-  const handleToggleTheme = () => {
-    if (setTheme) {
-      setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
-    } else {
-      const isLight = document.body.classList.contains('light-theme');
-      if (isLight) {
-        document.body.classList.remove('light-theme');
-      } else {
-        document.body.classList.add('light-theme');
-      }
-    }
-  };
-
-  const isCurrentLight = theme === 'light' || (typeof document !== 'undefined' && document.body.classList.contains('light-theme'));
-
   // Timer countdown effect for OTP resend
   useEffect(() => {
     let interval = null;
@@ -159,14 +77,14 @@ export default function AuthPage({ onLogin, theme = 'dark', setTheme }) {
 
   // Password Strength calculation
   const getPasswordStrength = (pass) => {
-    if (!pass) return { score: 0, label: 'Empty', color: 'rgba(255,255,255,0.1)' };
+    if (!pass) return { score: 0, label: 'Empty', color: '#e2e8f0' };
     if (pass.length < 6) return { score: 25, label: 'Too short', color: '#ef4444' };
     let score = 50;
     if (pass.length >= 8) score += 20;
     if (/[0-9]/.test(pass)) score += 15;
     if (/[^A-Za-z0-9]/.test(pass)) score += 15;
-    if (score >= 90) return { score: 100, label: 'Hardened', color: '#22c55e' };
-    if (score >= 70) return { score: 75, label: 'Strong', color: 'var(--py-yellow)' };
+    if (score >= 90) return { score: 100, label: 'Hardened', color: '#16a34a' };
+    if (score >= 70) return { score: 75, label: 'Strong', color: '#e5a800' };
     return { score: 50, label: 'Moderate', color: '#f59e0b' };
   };
 
@@ -181,7 +99,7 @@ export default function AuthPage({ onLogin, theme = 'dark', setTheme }) {
     setOtpTimer(60);
     setIsTimerActive(true);
     setErrorMsg('');
-    setSuccessMsg(`Verification code dispatched to ${targetEmail}`);
+    setSuccessMsg(`Verification code sent to ${targetEmail}`);
     setTimeout(() => {
       if (inputRefs.current[0]) {
         inputRefs.current[0].focus();
@@ -208,725 +126,984 @@ export default function AuthPage({ onLogin, theme = 'dark', setTheme }) {
         accounts = [];
       }
 
-      // Check against stored accounts and demo accounts
-      const allAccounts = [...accounts, ...DEMO_ACCOUNTS];
+      // Check against stored accounts and owner account
+      const allAccounts = [OWNER_ACCOUNT, ...accounts];
       const foundUser = allAccounts.find(
         (acc) => acc.email.toLowerCase() === cleanEmail
       );
 
       if (!foundUser) {
-        setErrorMsg('Account not found with this email. Please switch to Create Account.');
+        setErrorMsg('No account found with this email. Please switch to Create Account.');
         return;
       }
 
-      if (foundUser.password && foundUser.password !== password) {
-        setErrorMsg('Invalid password. Please verify your credentials or select a demo account.');
+      if (foundUser.password !== password) {
+        setErrorMsg('Invalid password. Please check your credentials and retry.');
         return;
       }
 
       // Successful login
       celebrate();
-      const sessionUser = {
-        name: foundUser.name,
-        email: foundUser.email,
-        role: foundUser.role || 'Python Engineer',
-        level: foundUser.level || 'Beginner (Lvl 1)',
-        avatar: foundUser.avatar || foundUser.name.slice(0, 2).toUpperCase(),
-        token: `pyx_${Date.now()}`
-      };
-
-      onLogin(sessionUser);
+      onLogin(foundUser);
     }, 450);
   };
 
-  // 2. New User Registration Request (Initiates OTP Verification)
+  // 2. New User Registration Request
   const handleRegisterSubmit = (e) => {
     e.preventDefault();
     setErrorMsg('');
 
     if (!name.trim()) {
-      setErrorMsg('Please enter your full name.');
+      setErrorMsg('Please enter your full developer name.');
       return;
     }
     if (!email.trim() || !email.includes('@')) {
-      setErrorMsg('Please enter a valid email address.');
+      setErrorMsg('Please enter a valid developer email address.');
       return;
     }
     if (password.length < 6) {
-      setErrorMsg('Password must be at least 6 characters.');
+      setErrorMsg('Password must be at least 6 characters long.');
       return;
     }
 
-    setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
-      triggerOtpGeneration(email.trim());
-    }, 400);
+    // Check if account already exists
+    let existing = [];
+    try {
+      const stored = localStorage.getItem('pyradox_registered_users');
+      existing = stored ? JSON.parse(stored) : [];
+    } catch {
+      existing = [];
+    }
+
+    if (existing.some((u) => u.email.toLowerCase() === email.trim().toLowerCase())) {
+      setErrorMsg('An account with this email already exists. Please sign in instead.');
+      return;
+    }
+
+    // Transition to OTP verification step
+    triggerOtpGeneration(email.trim());
   };
 
-  // 3. OTP Digit Change Handler
+  // 3. Handle Digit input for OTP
   const handleOtpChange = (index, value) => {
-    if (!/^\d*$/.test(value)) return;
-
+    const cleanVal = value.replace(/[^0-9]/g, '');
     const newDigits = [...otpDigits];
-    newDigits[index] = value.slice(-1);
+    newDigits[index] = cleanVal.slice(-1);
     setOtpDigits(newDigits);
 
-    // Auto-focus next input
-    if (value && index < 5 && inputRefs.current[index + 1]) {
+    if (cleanVal && index < 5 && inputRefs.current[index + 1]) {
       inputRefs.current[index + 1].focus();
     }
   };
 
-  // OTP Keydown (Backspace navigation)
   const handleOtpKeyDown = (index, e) => {
-    if (e.key === 'Backspace' && !otpDigits[index] && index > 0) {
+    if (e.key === 'Backspace' && !otpDigits[index] && index > 0 && inputRefs.current[index - 1]) {
       inputRefs.current[index - 1].focus();
     }
   };
 
-  // OTP Paste Handler
   const handleOtpPaste = (e) => {
     e.preventDefault();
-    const pasteData = e.clipboardData.getData('text').trim();
-    if (/^\d{6}$/.test(pasteData)) {
-      const digits = pasteData.split('');
-      setOtpDigits(digits);
-      inputRefs.current[5]?.focus();
+    const pasted = e.clipboardData.getData('text').replace(/[^0-9]/g, '').slice(0, 6);
+    if (!pasted) return;
+    const newDigits = [...otpDigits];
+    for (let i = 0; i < pasted.length; i++) {
+      newDigits[i] = pasted[i];
+    }
+    setOtpDigits(newDigits);
+    const focusTarget = Math.min(pasted.length, 5);
+    if (inputRefs.current[focusTarget]) {
+      inputRefs.current[focusTarget].focus();
     }
   };
 
-  // 4. Verify OTP and Enter PyCosmos
-  const handleVerifyOtp = (e) => {
-    e?.preventDefault();
-    const enteredOtp = otpDigits.join('');
+  // 4. Verify OTP and finalize account creation
+  const handleVerifyOtp = () => {
+    const entered = otpDigits.join('');
+    if (entered.length < 6) {
+      setErrorMsg('Please enter the full 6-digit verification code.');
+      return;
+    }
 
-    if (enteredOtp.length !== 6) {
-      setErrorMsg('Please enter all 6 digits of the code.');
+    if (entered !== generatedOtp && entered !== '123456') {
+      setErrorMsg('Verification code mismatch. Please check the simulated OTP code.');
       return;
     }
 
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
-      if (enteredOtp !== generatedOtp && enteredOtp !== '123456') {
-        setErrorMsg('Invalid code. Please use the simulated code provided below.');
-        return;
-      }
 
       const newUser = {
         name: name.trim(),
-        email: email.trim().toLowerCase(),
+        email: email.trim(),
         password: password,
-        role: track === 'ai_ml' ? 'AI/ML Python Specialist' : 'Python Full Stack Pro',
-        level: 'Apprentice (Lvl 1)',
-        avatar: name.trim().slice(0, 2).toUpperCase() || 'PF',
-        createdAt: new Date().toISOString()
+        role: track === 'ai_systems' ? 'AI Systems Specialist' : 'Full-Stack Python Engineer',
+        level: 'Novice Voyager (Lvl 01)',
+        avatar: name.trim().slice(0, 2).toUpperCase() || 'PY',
+        track: track,
+        registeredAt: new Date().toISOString()
       };
 
       try {
         const stored = localStorage.getItem('pyradox_registered_users');
         const list = stored ? JSON.parse(stored) : [];
-        const filtered = list.filter((u) => u.email !== newUser.email);
-        localStorage.setItem('pyradox_registered_users', JSON.stringify([...filtered, newUser]));
+        list.push(newUser);
+        localStorage.setItem('pyradox_registered_users', JSON.stringify(list));
       } catch (err) {
-        console.error('Failed to save user', err);
+        console.error(err);
       }
 
       celebrate();
-      onLogin({
-        ...newUser,
-        token: `pyx_${Date.now()}`
-      });
-    }, 500);
+      onLogin(newUser);
+    }, 450);
   };
 
-  // One-click demo sign-in
-  const handleQuickDemoLogin = (account) => {
-    setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
-      celebrate();
-      onLogin({
-        name: account.name,
-        email: account.email,
-        role: account.role,
-        level: account.level,
-        avatar: account.avatar,
-        token: `pyx_demo_${Date.now()}`
-      });
-    }, 300);
-  };
-
-  const copySimulatedOtp = () => {
+  // Copy simulated OTP helper
+  const handleCopySimulatedOtp = () => {
+    if (!generatedOtp) return;
     navigator.clipboard.writeText(generatedOtp);
     setCopiedOtp(true);
     setTimeout(() => setCopiedOtp(false), 2000);
   };
 
-  const autoFillOtp = () => {
-    if (generatedOtp) {
-      setOtpDigits(generatedOtp.split(''));
-      inputRefs.current[5]?.focus();
-    }
-  };
-
   return (
-    <div className="auth-page-root py-auth-gateway-root">
-      {/* Background Ambient Aura */}
-      <div className="auth-ambient-glow" />
-      <div className="auth-mesh-grid-overlay" />
+    <div
+      className="auth-light-page-wrapper"
+      style={{
+        minHeight: '100vh',
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        background: 'linear-gradient(180deg, #F8FAFC 0%, #FFFFFF 50%, #F1F5F9 100%)',
+        padding: '2.5rem 1.25rem',
+        boxSizing: 'border-box',
+        position: 'relative'
+      }}
+    >
+      {/* Subtle Python brand ambient background blooms */}
+      <div
+        style={{
+          position: 'absolute',
+          top: '5%',
+          left: '15%',
+          width: '420px',
+          height: '420px',
+          borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(48, 105, 152, 0.12) 0%, transparent 70%)',
+          filter: 'blur(70px)',
+          pointerEvents: 'none'
+        }}
+      />
+      <div
+        style={{
+          position: 'absolute',
+          bottom: '10%',
+          right: '15%',
+          width: '380px',
+          height: '380px',
+          borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(255, 212, 59, 0.16) 0%, transparent 70%)',
+          filter: 'blur(75px)',
+          pointerEvents: 'none'
+        }}
+      />
 
-      <div className="auth-portal-wrapper">
-        <div className="auth-portal-grid py-auth-cosmic-grid">
-          
-          {/* ══════════════════════════════════════════════════════════════════
-              LEFT COLUMN: BESPOKE DEVELOPER WORKSPACE & INTERACTIVE SIMULATOR
-              ══════════════════════════════════════════════════════════════════ */}
-          <motion.div
-            className="auth-showcase-panel py-auth-showcase-deck"
-            initial={{ opacity: 0, x: -24 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.45, ease: 'easeOut' }}
+      <div style={{ width: '100%', maxWidth: '480px', position: 'relative', zIndex: 2 }}>
+        {/* Brand Header */}
+        <div style={{ textAlign: 'center', marginBottom: '1.75rem' }}>
+          <div style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', marginBottom: '0.85rem' }}>
+            <PyCosmosLogo size={56} />
+          </div>
+          <h1
+            style={{
+              fontSize: '2rem',
+              fontWeight: 900,
+              color: '#0A1018',
+              letterSpacing: '-0.025em',
+              margin: '0 0 0.35rem 0'
+            }}
           >
-            <div>
-              {/* Brand Crest & Title */}
-              <div className="auth-showcase-brand py-auth-crest-wrap">
-                <div className="py-auth-crest-glow">
-                  <PyCosmosLogo size={42} animated={true} />
-                </div>
-                <div>
-                  <div className="auth-showcase-logo-text">
-                    <span className="brand-blue">Py</span>
-                    <span className="brand-yellow">Cosmos</span>
-                  </div>
-                  <div className="auth-showcase-tagline">UNIVERSE OF PYTHON • DEVELOPER GATEWAY</div>
+            Py<span style={{ color: '#306998' }}>Cosmos</span>
+          </h1>
+          <p
+            style={{
+              fontSize: '0.92rem',
+              color: '#475569',
+              margin: '0 0 0.85rem 0',
+              fontWeight: 500
+            }}
+          >
+            Universe of Python • Architectural Learning Gateway
+          </p>
+          <div
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.4rem',
+              background: 'rgba(48, 105, 152, 0.08)',
+              border: '1px solid rgba(48, 105, 152, 0.2)',
+              color: '#205075',
+              padding: '0.25rem 0.75rem',
+              borderRadius: '9999px',
+              fontSize: '0.76rem',
+              fontWeight: 700
+            }}
+          >
+            <Sparkles size={12} color="#e5a800" />
+            <span>Python 3.12 Engine • Zero Setup WASM</span>
+          </div>
+        </div>
+
+        {/* Clean Auth Card */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.35 }}
+          style={{
+            background: '#FFFFFF',
+            border: '1.5px solid #E2E8F0',
+            borderRadius: '24px',
+            boxShadow: '0 12px 36px -8px rgba(48, 105, 152, 0.1), 0 4px 12px -2px rgba(0, 0, 0, 0.04)',
+            padding: '2.25rem 2.25rem',
+            boxSizing: 'border-box'
+          }}
+        >
+          {/* Segmented Switcher (Sign In vs Create Account) */}
+          {!isOtpStep && (
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: '1fr 1fr',
+                gap: '0.35rem',
+                background: '#F1F5F9',
+                border: '1px solid #E2E8F0',
+                borderRadius: '14px',
+                padding: '0.35rem',
+                marginBottom: '1.75rem'
+              }}
+            >
+              <button
+                type="button"
+                onClick={() => {
+                  setAuthMode('login');
+                  setErrorMsg('');
+                  setSuccessMsg('');
+                }}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '0.45rem',
+                  padding: '0.65rem 1rem',
+                  borderRadius: '10px',
+                  fontSize: '0.88rem',
+                  fontWeight: 700,
+                  cursor: 'pointer',
+                  border: 'none',
+                  background: authMode === 'login' ? '#FFFFFF' : 'transparent',
+                  color: authMode === 'login' ? '#0A1018' : '#64748B',
+                  boxShadow: authMode === 'login' ? '0 2px 8px rgba(0, 0, 0, 0.06)' : 'none',
+                  transition: 'all 0.2s ease'
+                }}
+              >
+                <KeyRound size={15} color={authMode === 'login' ? '#306998' : '#64748B'} />
+                <span>Sign In</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setAuthMode('register');
+                  setErrorMsg('');
+                  setSuccessMsg('');
+                }}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '0.45rem',
+                  padding: '0.65rem 1rem',
+                  borderRadius: '10px',
+                  fontSize: '0.88rem',
+                  fontWeight: 700,
+                  cursor: 'pointer',
+                  border: 'none',
+                  background: authMode === 'register' ? '#FFFFFF' : 'transparent',
+                  color: authMode === 'register' ? '#0A1018' : '#64748B',
+                  boxShadow: authMode === 'register' ? '0 2px 8px rgba(0, 0, 0, 0.06)' : 'none',
+                  transition: 'all 0.2s ease'
+                }}
+              >
+                <User size={15} color={authMode === 'register' ? '#e5a800' : '#64748B'} />
+                <span>Create Account</span>
+              </button>
+            </div>
+          )}
+
+          {/* Error & Success Alerts */}
+          <AnimatePresence>
+            {errorMsg && (
+              <motion.div
+                initial={{ opacity: 0, y: -8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.55rem',
+                  background: 'rgba(239, 68, 68, 0.08)',
+                  border: '1px solid rgba(239, 68, 68, 0.25)',
+                  color: '#b91c1c',
+                  padding: '0.75rem 1rem',
+                  borderRadius: '12px',
+                  fontSize: '0.84rem',
+                  fontWeight: 600,
+                  marginBottom: '1.25rem'
+                }}
+              >
+                <AlertCircle size={16} style={{ flexShrink: 0 }} />
+                <span>{errorMsg}</span>
+              </motion.div>
+            )}
+
+            {successMsg && (
+              <motion.div
+                initial={{ opacity: 0, y: -8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.55rem',
+                  background: 'rgba(22, 163, 74, 0.08)',
+                  border: '1px solid rgba(22, 163, 74, 0.25)',
+                  color: '#15803d',
+                  padding: '0.75rem 1rem',
+                  borderRadius: '12px',
+                  fontSize: '0.84rem',
+                  fontWeight: 600,
+                  marginBottom: '1.25rem'
+                }}
+              >
+                <CheckCircle2 size={16} style={{ flexShrink: 0 }} />
+                <span>{successMsg}</span>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* Form 1: Sign In */}
+          {!isOtpStep && authMode === 'login' && (
+            <form onSubmit={handleLoginSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.15rem' }}>
+              <div>
+                <label
+                  style={{
+                    display: 'block',
+                    fontSize: '0.8rem',
+                    fontWeight: 700,
+                    color: '#334155',
+                    marginBottom: '0.4rem',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.04em'
+                  }}
+                >
+                  Developer Email
+                </label>
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.65rem',
+                    background: '#F8FAFC',
+                    border: '1.5px solid #CBD5E1',
+                    borderRadius: '12px',
+                    padding: '0.75rem 1rem',
+                    transition: 'border-color 0.2s ease, box-shadow 0.2s ease'
+                  }}
+                >
+                  <Mail size={16} color="#64748B" />
+                  <input
+                    type="email"
+                    required
+                    placeholder="e.g. alex@pythonist.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    style={{
+                      background: 'transparent',
+                      border: 'none',
+                      outline: 'none',
+                      fontSize: '0.92rem',
+                      color: '#0A1018',
+                      width: '100%',
+                      fontFamily: 'inherit'
+                    }}
+                  />
                 </div>
               </div>
 
-              {/* Main Headline */}
-              <div className="auth-showcase-hero">
-                <h1 className="auth-showcase-heading py-auth-headline">
-                  Master Python with <span className="py-gold-text">Architectural Precision</span>
-                </h1>
-                <p className="auth-showcase-subheading">
-                  From fundamental CPython bytecode execution to asynchronous concurrency and production AI systems. Built specifically for engineers who demand genuine technical depth.
+              <div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.4rem' }}>
+                  <label
+                    style={{
+                      fontSize: '0.8rem',
+                      fontWeight: 700,
+                      color: '#334155',
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.04em'
+                    }}
+                  >
+                    Password
+                  </label>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setAuthMode('register');
+                      setErrorMsg('');
+                    }}
+                    style={{
+                      background: 'none',
+                      border: 'none',
+                      fontSize: '0.78rem',
+                      color: '#306998',
+                      fontWeight: 700,
+                      cursor: 'pointer'
+                    }}
+                  >
+                    Need an account?
+                  </button>
+                </div>
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.65rem',
+                    background: '#F8FAFC',
+                    border: '1.5px solid #CBD5E1',
+                    borderRadius: '12px',
+                    padding: '0.75rem 1rem',
+                    transition: 'border-color 0.2s ease, box-shadow 0.2s ease'
+                  }}
+                >
+                  <Lock size={16} color="#64748B" />
+                  <input
+                    type={showPassword ? 'text' : 'password'}
+                    required
+                    placeholder="Enter your security password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    style={{
+                      background: 'transparent',
+                      border: 'none',
+                      outline: 'none',
+                      fontSize: '0.92rem',
+                      color: '#0A1018',
+                      width: '100%',
+                      fontFamily: 'inherit'
+                    }}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#64748B', display: 'flex', padding: 0 }}
+                  >
+                    {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                  </button>
+                </div>
+              </div>
+
+              <button
+                type="submit"
+                disabled={isLoading}
+                style={{
+                  marginTop: '0.5rem',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '0.5rem',
+                  background: 'linear-gradient(135deg, #306998 0%, #205075 100%)',
+                  color: '#FFFFFF',
+                  padding: '0.85rem 1.25rem',
+                  borderRadius: '12px',
+                  fontSize: '0.96rem',
+                  fontWeight: 800,
+                  border: 'none',
+                  cursor: isLoading ? 'default' : 'pointer',
+                  boxShadow: '0 4px 16px rgba(48, 105, 152, 0.3)',
+                  transition: 'all 0.2s ease'
+                }}
+              >
+                {isLoading ? (
+                  <span>Authenticating...</span>
+                ) : (
+                  <>
+                    <span>Enter PyCosmos Platform</span>
+                    <ArrowRight size={17} />
+                  </>
+                )}
+              </button>
+            </form>
+          )}
+
+          {/* Form 2: Create Account */}
+          {!isOtpStep && authMode === 'register' && (
+            <form onSubmit={handleRegisterSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.15rem' }}>
+              <div>
+                <label
+                  style={{
+                    display: 'block',
+                    fontSize: '0.8rem',
+                    fontWeight: 700,
+                    color: '#334155',
+                    marginBottom: '0.4rem',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.04em'
+                  }}
+                >
+                  Full Name
+                </label>
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.65rem',
+                    background: '#F8FAFC',
+                    border: '1.5px solid #CBD5E1',
+                    borderRadius: '12px',
+                    padding: '0.75rem 1rem'
+                  }}
+                >
+                  <User size={16} color="#64748B" />
+                  <input
+                    type="text"
+                    required
+                    placeholder="e.g. Shivanshu Shukla"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    style={{
+                      background: 'transparent',
+                      border: 'none',
+                      outline: 'none',
+                      fontSize: '0.92rem',
+                      color: '#0A1018',
+                      width: '100%',
+                      fontFamily: 'inherit'
+                    }}
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label
+                  style={{
+                    display: 'block',
+                    fontSize: '0.8rem',
+                    fontWeight: 700,
+                    color: '#334155',
+                    marginBottom: '0.4rem',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.04em'
+                  }}
+                >
+                  Developer Email
+                </label>
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.65rem',
+                    background: '#F8FAFC',
+                    border: '1.5px solid #CBD5E1',
+                    borderRadius: '12px',
+                    padding: '0.75rem 1rem'
+                  }}
+                >
+                  <Mail size={16} color="#64748B" />
+                  <input
+                    type="email"
+                    required
+                    placeholder="e.g. dev@pythonist.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    style={{
+                      background: 'transparent',
+                      border: 'none',
+                      outline: 'none',
+                      fontSize: '0.92rem',
+                      color: '#0A1018',
+                      width: '100%',
+                      fontFamily: 'inherit'
+                    }}
+                  />
+                </div>
+              </div>
+
+              <div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.4rem' }}>
+                  <label
+                    style={{
+                      fontSize: '0.8rem',
+                      fontWeight: 700,
+                      color: '#334155',
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.04em'
+                    }}
+                  >
+                    Password
+                  </label>
+                  {password && (
+                    <span style={{ fontSize: '0.76rem', fontWeight: 800, color: passwordStrength.color }}>
+                      {passwordStrength.label}
+                    </span>
+                  )}
+                </div>
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.65rem',
+                    background: '#F8FAFC',
+                    border: '1.5px solid #CBD5E1',
+                    borderRadius: '12px',
+                    padding: '0.75rem 1rem'
+                  }}
+                >
+                  <Lock size={16} color="#64748B" />
+                  <input
+                    type={showPassword ? 'text' : 'password'}
+                    required
+                    placeholder="Create a strong password (6+ chars)"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    style={{
+                      background: 'transparent',
+                      border: 'none',
+                      outline: 'none',
+                      fontSize: '0.92rem',
+                      color: '#0A1018',
+                      width: '100%',
+                      fontFamily: 'inherit'
+                    }}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#64748B', display: 'flex', padding: 0 }}
+                  >
+                    {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                  </button>
+                </div>
+                {/* Strength Meter Bar */}
+                {password && (
+                  <div style={{ height: '4px', background: '#E2E8F0', borderRadius: '9999px', marginTop: '0.4rem', overflow: 'hidden' }}>
+                    <div
+                      style={{
+                        height: '100%',
+                        width: `${passwordStrength.score}%`,
+                        background: passwordStrength.color,
+                        transition: 'all 0.3s ease'
+                      }}
+                    />
+                  </div>
+                )}
+              </div>
+
+              {/* Track Selector */}
+              <div>
+                <label
+                  style={{
+                    display: 'block',
+                    fontSize: '0.8rem',
+                    fontWeight: 700,
+                    color: '#334155',
+                    marginBottom: '0.4rem',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.04em'
+                  }}
+                >
+                  Curriculum Track Focus
+                </label>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.65rem' }}>
+                  <button
+                    type="button"
+                    onClick={() => setTrack('full_mastery')}
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'flex-start',
+                      padding: '0.75rem 0.85rem',
+                      borderRadius: '12px',
+                      border: track === 'full_mastery' ? '1.5px solid #306998' : '1.5px solid #E2E8F0',
+                      background: track === 'full_mastery' ? 'rgba(48, 105, 152, 0.06)' : '#FFFFFF',
+                      cursor: 'pointer',
+                      textAlign: 'left',
+                      transition: 'all 0.2s ease'
+                    }}
+                  >
+                    <span style={{ fontSize: '0.84rem', fontWeight: 800, color: '#0A1018', display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+                      <Layers size={14} color="#306998" /> 51 Topics Track
+                    </span>
+                    <span style={{ fontSize: '0.74rem', color: '#64748B', marginTop: '0.2rem' }}>
+                      Syntax to Architecture
+                    </span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setTrack('ai_systems')}
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'flex-start',
+                      padding: '0.75rem 0.85rem',
+                      borderRadius: '12px',
+                      border: track === 'ai_systems' ? '1.5px solid #e5a800' : '1.5px solid #E2E8F0',
+                      background: track === 'ai_systems' ? 'rgba(255, 212, 59, 0.08)' : '#FFFFFF',
+                      cursor: 'pointer',
+                      textAlign: 'left',
+                      transition: 'all 0.2s ease'
+                    }}
+                  >
+                    <span style={{ fontSize: '0.84rem', fontWeight: 800, color: '#0A1018', display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+                      <Cpu size={14} color="#e5a800" /> AI & Systems Track
+                    </span>
+                    <span style={{ fontSize: '0.74rem', color: '#64748B', marginTop: '0.2rem' }}>
+                      PyTorch & Fast APIs
+                    </span>
+                  </button>
+                </div>
+              </div>
+
+              <button
+                type="submit"
+                disabled={isLoading}
+                style={{
+                  marginTop: '0.5rem',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '0.5rem',
+                  background: 'linear-gradient(135deg, #306998 0%, #205075 100%)',
+                  color: '#FFFFFF',
+                  padding: '0.85rem 1.25rem',
+                  borderRadius: '12px',
+                  fontSize: '0.96rem',
+                  fontWeight: 800,
+                  border: 'none',
+                  cursor: isLoading ? 'default' : 'pointer',
+                  boxShadow: '0 4px 16px rgba(48, 105, 152, 0.3)',
+                  transition: 'all 0.2s ease'
+                }}
+              >
+                <span>Continue & Verify Identity</span>
+                <ArrowRight size={17} />
+              </button>
+            </form>
+          )}
+
+          {/* Form 3: OTP Verification Keypad */}
+          {isOtpStep && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.98 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.25 }}
+              style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}
+            >
+              <div style={{ textAlign: 'center' }}>
+                <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#0A1018', margin: '0 0 0.35rem 0' }}>
+                  Verify Developer Identity
+                </h3>
+                <p style={{ fontSize: '0.85rem', color: '#64748B', margin: 0 }}>
+                  Enter the 6-digit cryptographic code sent to <strong style={{ color: '#0A1018' }}>{email}</strong>
                 </p>
               </div>
 
-              {/* Interactive Persona Tabs for Live Terminal Code Preview */}
-              <div className="py-persona-switcher-strip">
-                <span className="persona-strip-label">PREVIEW TRACK:</span>
-                {PERSONA_PREVIEWS.map((p) => (
-                  <button
-                    key={p.id}
-                    type="button"
-                    onClick={() => setActivePersona(p)}
-                    className={`persona-strip-pill ${activePersona.id === p.id ? 'active' : ''}`}
-                  >
-                    <p.icon size={12} />
-                    <span>{p.label}</span>
-                  </button>
+              {/* Simulated Code Pill with Copy Helper */}
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  background: '#F1F5F9',
+                  border: '1px solid #CBD5E1',
+                  borderRadius: '12px',
+                  padding: '0.65rem 1rem'
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <ShieldCheck size={16} color="#306998" />
+                  <span style={{ fontSize: '0.8rem', color: '#475569', fontWeight: 600 }}>Simulated OTP:</span>
+                  <span style={{ fontSize: '0.95rem', fontWeight: 900, fontFamily: 'var(--font-mono)', color: '#306998', letterSpacing: '0.1em' }}>
+                    {generatedOtp}
+                  </span>
+                </div>
+                <button
+                  type="button"
+                  onClick={handleCopySimulatedOtp}
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '0.3rem',
+                    background: '#FFFFFF',
+                    border: '1px solid #CBD5E1',
+                    borderRadius: '8px',
+                    padding: '0.3rem 0.65rem',
+                    fontSize: '0.74rem',
+                    fontWeight: 700,
+                    color: '#334155',
+                    cursor: 'pointer'
+                  }}
+                >
+                  {copiedOtp ? <Check size={13} color="#16a34a" /> : <Copy size={13} />}
+                  <span>{copiedOtp ? 'Copied' : 'Copy'}</span>
+                </button>
+              </div>
+
+              {/* 6 Digit Inputs */}
+              <div
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(6, 1fr)',
+                  gap: '0.5rem'
+                }}
+                onPaste={handleOtpPaste}
+              >
+                {otpDigits.map((digit, idx) => (
+                  <input
+                    key={idx}
+                    ref={(el) => (inputRefs.current[idx] = el)}
+                    type="text"
+                    inputMode="numeric"
+                    maxLength={1}
+                    value={digit}
+                    onChange={(e) => handleOtpChange(idx, e.target.value)}
+                    onKeyDown={(e) => handleOtpKeyDown(idx, e)}
+                    style={{
+                      width: '100%',
+                      height: '52px',
+                      textAlign: 'center',
+                      fontSize: '1.35rem',
+                      fontWeight: 800,
+                      fontFamily: 'var(--font-mono)',
+                      background: digit ? 'rgba(48, 105, 152, 0.05)' : '#F8FAFC',
+                      border: digit ? '2px solid #306998' : '1.5px solid #CBD5E1',
+                      borderRadius: '12px',
+                      color: '#0A1018',
+                      outline: 'none',
+                      boxSizing: 'border-box'
+                    }}
+                    autoFocus={idx === 0}
+                  />
                 ))}
               </div>
 
-              {/* macOS Style Interactive Code Studio Preview */}
-              <div className="auth-showcase-terminal py-auth-terminal-studio">
-                <div className="terminal-header-bar">
-                  <div className="terminal-dots">
-                    <span className="dot dot-red" />
-                    <span className="dot dot-yellow" />
-                    <span className="dot dot-green" />
-                  </div>
-                  <div className="terminal-file-badge">
-                    <Code2 size={12} color="var(--py-blue-light)" />
-                    <span>{activePersona.filename}</span>
-                  </div>
-                  <span className="terminal-env-badge">CPython 3.12.7 VM</span>
-                </div>
-                <div className="terminal-body-code">
-                  <pre style={{ margin: 0, whiteSpace: 'pre-wrap', fontFamily: 'inherit' }}>
-                    {activePersona.code}
-                  </pre>
-                </div>
-                <div className="terminal-footer-meta">
-                  <span className="terminal-footer-chip">✓ {activePersona.stat}</span>
-                  <span className="terminal-footer-latency">⚡ 0.0ms WebAssembly Sandbox</span>
-                </div>
-              </div>
-            </div>
+              {/* Controls: Resend & Edit Email */}
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: '0.8rem' }}>
+                {isTimerActive ? (
+                  <span style={{ color: '#64748B' }}>
+                    Resend code in <strong style={{ color: '#e5a800' }}>{otpTimer}s</strong>
+                  </span>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => triggerOtpGeneration(email)}
+                    style={{
+                      background: 'none',
+                      border: 'none',
+                      color: '#306998',
+                      fontWeight: 700,
+                      cursor: 'pointer',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '0.3rem',
+                      padding: 0
+                    }}
+                  >
+                    <RefreshCw size={13} />
+                    <span>Resend Code</span>
+                  </button>
+                )}
 
-            {/* Platform Highlights */}
-            <div className="auth-showcase-highlights py-auth-highlights-grid">
-              <div className="showcase-highlight-item">
-                <div className="highlight-icon-wrap" style={{ background: 'rgba(56, 189, 248, 0.15)', color: '#38bdf8' }}>
-                  <Layers size={16} />
-                </div>
-                <div>
-                  <div className="highlight-title">51-Topic Structured Curriculum</div>
-                  <div className="highlight-desc">Zero guesswork with sequenced milestones from Foundation to AI</div>
-                </div>
-              </div>
-
-              <div className="showcase-highlight-item">
-                <div className="highlight-icon-wrap" style={{ background: 'rgba(255, 212, 59, 0.15)', color: 'var(--py-yellow)' }}>
-                  <Cpu size={16} />
-                </div>
-                <div>
-                  <div className="highlight-title">CPython Internals & Bytecode</div>
-                  <div className="highlight-desc">Learn how Python compiles source into AST, opcodes, and ceval.c loops</div>
-                </div>
-              </div>
-
-              <div className="showcase-highlight-item">
-                <div className="highlight-icon-wrap" style={{ background: 'rgba(52, 211, 153, 0.15)', color: '#34d399' }}>
-                  <Trophy size={16} />
-                </div>
-                <div>
-                  <div className="highlight-title">27-Level Mastery Accreditation</div>
-                  <div className="highlight-desc">Earn cryptographic milestones and verified developer credentials</div>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* ══════════════════════════════════════════════════════════════════
-              RIGHT COLUMN: ULTRA-PREMIUM AUTHENTICATION TERMINAL
-              ══════════════════════════════════════════════════════════════════ */}
-          <motion.div
-            className="auth-card-modern py-auth-terminal-card"
-            initial={{ opacity: 0, x: 24 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.45, delay: 0.08, ease: 'easeOut' }}
-          >
-            {/* Top Bar: Mode Indicator + Theme Toggle */}
-            <div className="auth-card-top-row">
-              <div className="py-auth-badge-chip">
-                <Sparkles size={12} color="var(--py-yellow)" />
-                <span>
-                  {isOtpStep ? 'Security Keypad' : authMode === 'login' ? 'Authentication Gate' : 'New Developer Registration'}
-                </span>
+                <button
+                  type="button"
+                  onClick={() => setIsOtpStep(false)}
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    color: '#64748B',
+                    fontWeight: 600,
+                    cursor: 'pointer',
+                    padding: 0
+                  }}
+                >
+                  Edit Email
+                </button>
               </div>
 
               <button
                 type="button"
-                onClick={handleToggleTheme}
-                className="auth-theme-btn"
-                title={isCurrentLight ? 'Switch to Dark Mode' : 'Switch to Light Mode'}
+                onClick={handleVerifyOtp}
+                disabled={isLoading || otpDigits.join('').length !== 6}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '0.5rem',
+                  background: 'linear-gradient(135deg, #306998 0%, #205075 100%)',
+                  color: '#FFFFFF',
+                  padding: '0.85rem 1.25rem',
+                  borderRadius: '12px',
+                  fontSize: '0.96rem',
+                  fontWeight: 800,
+                  border: 'none',
+                  cursor: isLoading || otpDigits.join('').length !== 6 ? 'default' : 'pointer',
+                  opacity: otpDigits.join('').length === 6 ? 1 : 0.65,
+                  boxShadow: '0 4px 16px rgba(48, 105, 152, 0.3)',
+                  transition: 'all 0.2s ease'
+                }}
               >
-                {isCurrentLight ? <Moon size={15} /> : <Sun size={15} />}
+                {isLoading ? (
+                  <span>Verifying Code...</span>
+                ) : (
+                  <>
+                    <span>Complete Registration & Enter</span>
+                    <CheckCircle2 size={17} />
+                  </>
+                )}
               </button>
-            </div>
+            </motion.div>
+          )}
+        </motion.div>
 
-            {/* Mode Switcher Tabs (Sign In vs Create Account) */}
-            {!isOtpStep && (
-              <div className="auth-segmented-tabs py-auth-tab-switch">
-                <button
-                  type="button"
-                  className={`auth-segmented-btn ${authMode === 'login' ? 'active' : ''}`}
-                  onClick={() => {
-                    setAuthMode('login');
-                    setErrorMsg('');
-                    setSuccessMsg('');
-                  }}
-                >
-                  <KeyRound size={14} />
-                  <span>Sign In</span>
-                </button>
-
-                <button
-                  type="button"
-                  className={`auth-segmented-btn ${authMode === 'register' ? 'active' : ''}`}
-                  onClick={() => {
-                    setAuthMode('register');
-                    setErrorMsg('');
-                    setSuccessMsg('');
-                  }}
-                >
-                  <User size={14} />
-                  <span>Create Account</span>
-                </button>
-              </div>
-            )}
-
-            {/* Inline Error & Success Alerts */}
-            <AnimatePresence>
-              {errorMsg && (
-                <motion.div
-                  initial={{ opacity: 0, y: -6 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -6 }}
-                  className="auth-alert error-alert"
-                >
-                  <AlertCircle size={15} style={{ flexShrink: 0 }} />
-                  <span>{errorMsg}</span>
-                </motion.div>
-              )}
-
-              {successMsg && (
-                <motion.div
-                  initial={{ opacity: 0, y: -6 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -6 }}
-                  className="auth-alert success-alert"
-                >
-                  <CheckCircle2 size={15} style={{ flexShrink: 0 }} />
-                  <span>{successMsg}</span>
-                </motion.div>
-              )}
-            </AnimatePresence>
-
-            {/* ─── FORM 1: LOGIN ─── */}
-            {!isOtpStep && authMode === 'login' && (
-              <form onSubmit={handleLoginSubmit} style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
-                <div style={{ marginBottom: '1.25rem' }}>
-                  <h2 style={{ fontSize: '1.4rem', fontWeight: 900, color: 'var(--text-primary)', marginBottom: '0.25rem' }}>
-                    Welcome Back, Engineer
-                  </h2>
-                  <p style={{ fontSize: '0.84rem', color: 'var(--text-secondary)' }}>
-                    Enter your credentials to resume your personalized Python journey.
-                  </p>
-                </div>
-
-                <div className="auth-field-group">
-                  <label className="auth-label">Developer Email</label>
-                  <div className="auth-input-wrapper">
-                    <Mail size={16} className="auth-input-icon" />
-                    <input
-                      type="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      placeholder="e.g. shivanshushukla1919@gmail.com"
-                      required
-                      className="auth-input"
-                    />
-                  </div>
-                </div>
-
-                <div className="auth-field-group">
-                  <div className="auth-label-row">
-                    <label className="auth-label" style={{ marginBottom: 0 }}>Password</label>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setAuthMode('register');
-                        setErrorMsg('');
-                      }}
-                      className="auth-link-subtle"
-                    >
-                      Need an account?
-                    </button>
-                  </div>
-                  <div className="auth-input-wrapper">
-                    <Lock size={16} className="auth-input-icon" />
-                    <input
-                      type={showPassword ? 'text' : 'password'}
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      placeholder="Enter your security password"
-                      required
-                      className="auth-input"
-                    />
-                    <button
-                      type="button"
-                      onClick={() => setShowPassword(!showPassword)}
-                      className="auth-password-toggle"
-                      title={showPassword ? 'Hide password' : 'Show password'}
-                    >
-                      {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
-                    </button>
-                  </div>
-                </div>
-
-                <button
-                  type="submit"
-                  disabled={isLoading || !email || !password}
-                  className="auth-submit-btn py-auth-submit-gradient"
-                >
-                  {isLoading ? (
-                    <span>Authenticating Session...</span>
-                  ) : (
-                    <>
-                      <span>Enter PyCosmos Platform</span>
-                      <ArrowRight size={16} />
-                    </>
-                  )}
-                </button>
-              </form>
-            )}
-
-            {/* ─── FORM 2: REGISTER ─── */}
-            {!isOtpStep && authMode === 'register' && (
-              <form onSubmit={handleRegisterSubmit} style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
-                <div style={{ marginBottom: '1.25rem' }}>
-                  <h2 style={{ fontSize: '1.4rem', fontWeight: 900, color: 'var(--text-primary)', marginBottom: '0.25rem' }}>
-                    Create Developer Profile
-                  </h2>
-                  <p style={{ fontSize: '0.84rem', color: 'var(--text-secondary)' }}>
-                    Initialize your telemetry tracking, sandbox history, and mastery certifications.
-                  </p>
-                </div>
-
-                <div className="auth-field-group">
-                  <label className="auth-label">Full Name</label>
-                  <div className="auth-input-wrapper">
-                    <User size={16} className="auth-input-icon" />
-                    <input
-                      type="text"
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
-                      placeholder="e.g. Shivanshu Shukla"
-                      required
-                      className="auth-input"
-                    />
-                  </div>
-                </div>
-
-                <div className="auth-field-group">
-                  <label className="auth-label">Developer Email</label>
-                  <div className="auth-input-wrapper">
-                    <Mail size={16} className="auth-input-icon" />
-                    <input
-                      type="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      placeholder="e.g. dev@pythonist.com"
-                      required
-                      className="auth-input"
-                    />
-                  </div>
-                </div>
-
-                <div className="auth-field-group">
-                  <div className="auth-label-row">
-                    <label className="auth-label" style={{ marginBottom: 0 }}>Password</label>
-                    {password && (
-                      <span className="password-strength-tag" style={{ color: passwordStrength.color, fontSize: '0.72rem', fontWeight: 700 }}>
-                        {passwordStrength.label}
-                      </span>
-                    )}
-                  </div>
-                  <div className="auth-input-wrapper">
-                    <Lock size={16} className="auth-input-icon" />
-                    <input
-                      type={showPassword ? 'text' : 'password'}
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      placeholder="Minimum 6 characters"
-                      required
-                      className="auth-input"
-                    />
-                    <button
-                      type="button"
-                      onClick={() => setShowPassword(!showPassword)}
-                      className="auth-password-toggle"
-                      title={showPassword ? 'Hide password' : 'Show password'}
-                    >
-                      {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
-                    </button>
-                  </div>
-                  {/* Dynamic Password Strength Track */}
-                  {password && (
-                    <div className="password-strength-track">
-                      <div
-                        className="password-strength-fill"
-                        style={{ width: `${passwordStrength.score}%`, background: passwordStrength.color }}
-                      />
-                    </div>
-                  )}
-                </div>
-
-                <div className="auth-field-group">
-                  <label className="auth-label">Curriculum Track Focus</label>
-                  <div className="auth-track-selector py-auth-track-grid">
-                    <button
-                      type="button"
-                      className={`track-pill-btn ${track === 'full_mastery' ? 'active' : ''}`}
-                      onClick={() => setTrack('full_mastery')}
-                    >
-                      <Layers size={14} />
-                      <div style={{ textAlign: 'left' }}>
-                        <div style={{ fontWeight: 800 }}>Full 51 Topics</div>
-                        <div style={{ fontSize: '0.68rem', opacity: 0.75 }}>Syntax to Production</div>
-                      </div>
-                    </button>
-                    <button
-                      type="button"
-                      className={`track-pill-btn ${track === 'ai_ml' ? 'active' : ''}`}
-                      onClick={() => setTrack('ai_ml')}
-                    >
-                      <Brain size={14} />
-                      <div style={{ textAlign: 'left' }}>
-                        <div style={{ fontWeight: 800 }}>AI, ML & Systems</div>
-                        <div style={{ fontSize: '0.68rem', opacity: 0.75 }}>PyTorch & Fast APIs</div>
-                      </div>
-                    </button>
-                  </div>
-                </div>
-
-                <button
-                  type="submit"
-                  disabled={isLoading || !email || !password || !name}
-                  className="auth-submit-btn py-auth-submit-gradient"
-                >
-                  {isLoading ? (
-                    <span>Dispatched Security Code...</span>
-                  ) : (
-                    <>
-                      <span>Continue & Verify Identity</span>
-                      <ArrowRight size={16} />
-                    </>
-                  )}
-                </button>
-              </form>
-            )}
-
-            {/* ─── FORM 3: OTP VERIFICATION STEP ─── */}
-            {isOtpStep && (
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3 }}
-                className="auth-otp-section"
-              >
-                <div className="otp-icon-ring py-otp-beacon">
-                  <KeyRound size={24} style={{ color: 'var(--py-yellow)' }} />
-                </div>
-                
-                <h2 style={{ fontSize: '1.35rem', fontWeight: 900, color: 'var(--text-primary)', marginBottom: '0.25rem' }}>
-                  Verify Developer Email
-                </h2>
-                <p style={{ fontSize: '0.84rem', color: 'var(--text-secondary)', marginBottom: '1.25rem' }}>
-                  Enter the 6-digit cryptographic verification code sent to <strong style={{ color: 'var(--py-yellow)' }}>{email}</strong>
-                </p>
-
-                {/* Simulated Dispatch Card */}
-                <div className="otp-simulation-card py-otp-card">
-                  <div className="sim-top-row">
-                    <span className="sim-badge">
-                      <CheckCircle2 size={13} />
-                      <span>Security Dispatch Active</span>
-                    </span>
-                    <div className="sim-actions">
-                      <button
-                        type="button"
-                        onClick={autoFillOtp}
-                        className="sim-btn"
-                      >
-                        ⚡ Auto-Fill
-                      </button>
-                      <button
-                        type="button"
-                        onClick={copySimulatedOtp}
-                        className="sim-btn"
-                      >
-                        {copiedOtp ? <Check size={12} /> : <Copy size={12} />}
-                        <span>{copiedOtp ? 'Copied' : 'Copy'}</span>
-                      </button>
-                    </div>
-                  </div>
-
-                  <div className="sim-code-row">
-                    <span className="sim-code-display py-otp-display">{generatedOtp}</span>
-                  </div>
-                </div>
-
-                {/* 6 Digit Inputs */}
-                <div className="otp-inputs-grid py-otp-grid" onPaste={handleOtpPaste}>
-                  {otpDigits.map((digit, idx) => (
-                    <input
-                      key={idx}
-                      ref={(el) => (inputRefs.current[idx] = el)}
-                      type="text"
-                      inputMode="numeric"
-                      maxLength={1}
-                      value={digit}
-                      onChange={(e) => handleOtpChange(idx, e.target.value)}
-                      onKeyDown={(e) => handleOtpKeyDown(idx, e)}
-                      className={`otp-digit-box ${digit ? 'filled' : ''}`}
-                      autoFocus={idx === 0}
-                    />
-                  ))}
-                </div>
-
-                {/* Resend & Back controls */}
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: '0.78rem', marginTop: '0.85rem' }}>
-                  {isTimerActive ? (
-                    <span style={{ color: 'var(--text-muted)' }}>
-                      Resend code in <strong style={{ color: 'var(--py-yellow)' }}>{otpTimer}s</strong>
-                    </span>
-                  ) : (
-                    <button
-                      type="button"
-                      onClick={() => triggerOtpGeneration(email)}
-                      className="auth-link-subtle"
-                      style={{ display: 'inline-flex', alignItems: 'center', gap: '0.25rem' }}
-                    >
-                      <RefreshCw size={12} />
-                      <span>Resend Security Code</span>
-                    </button>
-                  )}
-
-                  <button
-                    type="button"
-                    onClick={() => setIsOtpStep(false)}
-                    className="auth-link-subtle"
-                  >
-                    Edit Email Address
-                  </button>
-                </div>
-
-                <button
-                  type="button"
-                  onClick={handleVerifyOtp}
-                  disabled={isLoading || otpDigits.join('').length !== 6}
-                  className="auth-submit-btn py-auth-submit-gradient"
-                  style={{ marginTop: '1.25rem' }}
-                >
-                  {isLoading ? (
-                    <span>Verifying Cryptographic Code...</span>
-                  ) : (
-                    <>
-                      <span>Complete Registration & Enter</span>
-                      <CheckCircle2 size={16} />
-                    </>
-                  )}
-                </button>
-              </motion.div>
-            )}
-
-            {/* Instant Demo Access (Elevated Cyber Credentials) */}
-            <div className="auth-demo-footer py-auth-demo-deck">
-              <div className="demo-footer-title">
-                <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}>
-                  <ShieldCheck size={14} color="var(--py-yellow)" />
-                  <span>Verified Developer Passwords</span>
-                </span>
-                <span className="demo-instant-tag">1-CLICK INSTANT ENTRY</span>
-              </div>
-              <div className="demo-buttons-grid">
-                {DEMO_ACCOUNTS.map((acc, index) => (
-                  <button
-                    key={index}
-                    type="button"
-                    onClick={() => handleQuickDemoLogin(acc)}
-                    className="demo-card-btn py-demo-card"
-                    title={`Instant login as ${acc.name}`}
-                  >
-                    <div className="demo-avatar-circle py-avatar-glow">{acc.avatar}</div>
-                    <div className="demo-card-info">
-                      <div className="demo-card-name-row">
-                        <span className="demo-card-name">{acc.name}</span>
-                        <span className="demo-badge-pill">{acc.badge}</span>
-                      </div>
-                      <div className="demo-card-role">{acc.role} • {acc.level}</div>
-                    </div>
-                  </button>
-                ))}
-              </div>
-            </div>
-          </motion.div>
-
+        {/* 1-Click Fast Pass for Platform Owner Only (Shivanshu Shukla) */}
+        <div style={{ marginTop: '1.5rem', textAlign: 'center' }}>
+          <button
+            type="button"
+            onClick={() => {
+              celebrate();
+              onLogin(OWNER_ACCOUNT);
+            }}
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.45rem',
+              background: '#FFFFFF',
+              border: '1.5px dashed rgba(48, 105, 152, 0.35)',
+              color: '#205075',
+              padding: '0.45rem 1.1rem',
+              borderRadius: '9999px',
+              fontSize: '0.78rem',
+              fontWeight: 700,
+              cursor: 'pointer',
+              boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)',
+              transition: 'all 0.2s ease'
+            }}
+            title="Platform Owner 1-Click Instant Access"
+          >
+            <ShieldCheck size={14} color="#e5a800" />
+            <span>Owner 1-Click Access (Shivanshu Shukla)</span>
+          </button>
         </div>
       </div>
     </div>

@@ -30,25 +30,16 @@ const OWNER_ADMIN_USER = {
 };
 
 export default function App() {
-  // Authentication State: Auto-authenticated as Platform Owner by default
+  // Authentication State: null by default if not previously logged in
   const [currentUser, setCurrentUser] = useState(() => {
     try {
       const savedUser = localStorage.getItem('pyradox_current_user');
       if (savedUser) {
-        const parsed = JSON.parse(savedUser);
-        // If an account is already logged in, preserve it, or upgrade if it's the owner's email
-        if (parsed.email === 'shivanshushukla1919@gmail.com' || parsed.name === 'Shivansh Shukla') {
-          const updated = { ...OWNER_ADMIN_USER, ...parsed, name: 'Shivanshu Shukla' };
-          localStorage.setItem('pyradox_current_user', JSON.stringify(updated));
-          return updated;
-        }
-        return parsed;
+        return JSON.parse(savedUser);
       }
-      // Auto-authenticate website owner by default so they never have to create account or log in
-      localStorage.setItem('pyradox_current_user', JSON.stringify(OWNER_ADMIN_USER));
-      return OWNER_ADMIN_USER;
+      return null;
     } catch {
-      return OWNER_ADMIN_USER;
+      return null;
     }
   });
 
@@ -94,7 +85,7 @@ export default function App() {
   const [quizMode, setQuizMode] = useState('topic'); // 'topic' | 'live_api' | 'full'
 
   const [searchQuery, setSearchQuery] = useState('');
-  const [theme, setTheme] = useState(() => localStorage.getItem('pyradox_theme') || 'dark');
+  const [theme, setTheme] = useState('light');
   const [isBookmarksOpen, setIsBookmarksOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState(null);
 
@@ -197,17 +188,12 @@ export default function App() {
     }
   });
 
-  // Theme effect
+  // Permanent Light Theme effect (Dark mode removed from website)
   useEffect(() => {
-    if (theme === 'light') {
-      document.body.classList.add('light-theme');
-      document.body.classList.remove('dark-theme');
-    } else {
-      document.body.classList.add('dark-theme');
-      document.body.classList.remove('light-theme');
-    }
-    localStorage.setItem('pyradox_theme', theme);
-  }, [theme]);
+    document.body.classList.add('light-theme');
+    document.body.classList.remove('dark-theme');
+    localStorage.setItem('pyradox_theme', 'light');
+  }, []);
 
   // Handle Mark Complete toggle
   const handleToggleComplete = (topicId) => {
@@ -279,6 +265,7 @@ export default function App() {
     } catch (err) {
       console.error(err);
     }
+    setCurrentView('auth');
     showToast("Signed out successfully. See you soon!");
   };
 

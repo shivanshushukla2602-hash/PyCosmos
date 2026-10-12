@@ -12,8 +12,8 @@ const pulseVariant = {
   pulse: {
     scale: [1, 1.05, 1],
     boxShadow: [
-      "0 0 0 0 rgba(34,197,94,0.5)",
-      "0 0 0 10px rgba(34,197,94,0)",
+      "0 0 0 0 rgba(22,163,74,0.4)",
+      "0 0 0 10px rgba(22,163,74,0)",
     ],
     transition: { duration: 0.5 },
   },
@@ -27,30 +27,30 @@ export function QuizOption({ label, state, onClick, disabled }) {
       disabled={disabled}
       variants={state === "wrong" ? shakeVariant : pulseVariant}
       animate={state === "wrong" ? "shake" : state === "correct" ? "pulse" : ""}
-      whileHover={!disabled ? { scale: 1.01, borderColor: "var(--py-blue-light)" } : {}}
+      whileHover={!disabled ? { scale: 1.01, borderColor: "var(--py-blue)" } : {}}
       whileTap={!disabled ? { scale: 0.98 } : {}}
       style={{
         width: "100%",
         textAlign: "left",
-        padding: "0.9rem 1.25rem",
+        padding: "0.95rem 1.25rem",
         borderRadius: "var(--radius-md)",
-        border: "1px solid",
-        borderColor: state === "correct" ? "#22c55e" : state === "wrong" ? "#da3633" : "var(--border-color)",
-        backgroundColor: state === "correct" ? "rgba(34, 197, 94, 0.2)" : state === "wrong" ? "rgba(218, 54, 51, 0.2)" : "var(--bg-card)",
-        color: state === "correct" ? "#4ade80" : state === "wrong" ? "#f87171" : "var(--text-primary)",
-        fontSize: "1rem",
+        border: "1.5px solid",
+        borderColor: state === "correct" ? "#16a34a" : state === "wrong" ? "#dc2626" : "var(--border-color)",
+        backgroundColor: state === "correct" ? "rgba(22, 163, 74, 0.1)" : state === "wrong" ? "rgba(220, 38, 38, 0.1)" : "#ffffff",
+        color: state === "correct" ? "#15803d" : state === "wrong" ? "#b91c1c" : "var(--text-primary)",
+        fontSize: "0.98rem",
         fontWeight: "600",
         cursor: disabled ? "default" : "pointer",
         display: "flex",
         alignItems: "center",
-        justify: "space-between",
+        justifyContent: "space-between",
+        boxShadow: "0 2px 8px rgba(0, 0, 0, 0.03)",
         transition: "all 0.2s ease"
       }}
     >
       <span>{label}</span>
-      {state === "correct" && <CheckCircle2 size={18} style={{ color: "#4ade80", flexShrink: 0 }} />}
-      {state === "wrong" && <XCircle size={18} style={{ color: "#f87171", flexShrink: 0 }} />}
+      {state === "correct" && <CheckCircle2 size={18} style={{ color: "#16a34a", flexShrink: 0 }} />}
+      {state === "wrong" && <XCircle size={18} style={{ color: "#dc2626", flexShrink: 0 }} />}
     </motion.button>
   );
 }
-

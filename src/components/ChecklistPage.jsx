@@ -119,7 +119,13 @@ export default function ChecklistPage({
   const totalTopics = topics.length;
   const percentCompleted = totalTopics > 0 ? Math.round((completedCount / totalTopics) * 100) : 0;
 
-  const [collapsedCategories, setCollapsedCategories] = useState({});
+  const [collapsedCategories, setCollapsedCategories] = useState(() => {
+    const allCollapsed = {};
+    CATEGORIES.forEach((cat) => {
+      allCollapsed[cat] = true;
+    });
+    return allCollapsed;
+  });
   const [showResetModal, setShowResetModal] = useState(false);
   const [copiedExport, setCopiedExport] = useState(false);
 

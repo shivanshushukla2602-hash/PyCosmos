@@ -217,33 +217,6 @@ export default function Navbar({
             )}
           </motion.button>
 
-          {/* Theme Toggle (Light / Dark) */}
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-            className="navbar-icon-btn theme-toggle-btn"
-            title={`Switch to ${theme === 'dark' ? 'Light' : 'Dark'} Mode`}
-            type="button"
-            aria-label="Toggle Theme"
-          >
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={theme}
-                initial={{ rotate: -90, opacity: 0 }}
-                animate={{ rotate: 0, opacity: 1 }}
-                exit={{ rotate: 90, opacity: 0 }}
-                transition={{ duration: 0.18 }}
-                style={{ display: 'flex' }}
-              >
-                {theme === 'dark' ? (
-                  <Sun size={17} style={{ color: 'var(--py-yellow)' }} />
-                ) : (
-                  <Moon size={17} style={{ color: 'var(--py-blue)' }} />
-                )}
-              </motion.div>
-            </AnimatePresence>
-          </motion.button>
 
           {/* User Profile Pill & Dropdown */}
           {currentUser && (
@@ -340,8 +313,15 @@ export default function Navbar({
                         onSignOut();
                       }}
                       className="dropdown-item signout-item"
+                      style={{
+                        color: '#dc2626',
+                        fontWeight: 700,
+                        background: 'rgba(220, 38, 38, 0.08)',
+                        borderRadius: '8px',
+                        marginTop: '0.35rem'
+                      }}
                     >
-                      <LogOut size={15} />
+                      <LogOut size={15} style={{ color: '#dc2626' }} />
                       <span>Sign Out</span>
                     </button>
                   </motion.div>

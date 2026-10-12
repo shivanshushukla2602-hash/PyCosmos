@@ -552,7 +552,7 @@ export default function HomePage({
               {/* Base Track */}
               <path
                 d="M 10 12 C 250 4, 350 20, 500 12 C 650 4, 750 20, 990 12"
-                stroke="rgba(255, 255, 255, 0.12)"
+                stroke="rgba(48, 105, 152, 0.15)"
                 strokeWidth="6"
                 strokeLinecap="round"
                 fill="none"
@@ -586,17 +586,17 @@ export default function HomePage({
                     onClick={() => onNavigate('roadmap')}
                     className="milestone-node-card"
                     style={{
-                      background: isCurrent ? lvl.bg : 'rgba(13, 17, 23, 0.7)',
-                      border: `1.5px solid ${isCurrent ? lvl.color : 'rgba(255, 255, 255, 0.1)'}`,
-                      boxShadow: isCurrent ? `0 0 25px ${lvl.bg}, 0 8px 20px rgba(0, 0, 0, 0.4)` : 'none'
+                      background: isCurrent ? lvl.bg : '#ffffff',
+                      border: `1.5px solid ${isCurrent ? lvl.color : 'var(--border-color)'}`,
+                      boxShadow: isCurrent ? `0 6px 20px ${lvl.bg}, 0 2px 10px rgba(0, 0, 0, 0.05)` : '0 2px 10px rgba(0, 0, 0, 0.04)'
                     }}
                   >
                     <div
                       className="milestone-node-badge"
                       style={{
-                        background: isCurrent ? lvl.color : 'var(--bg-sidebar)',
-                        color: isCurrent ? '#0d1117' : lvl.color,
-                        boxShadow: isCurrent ? `0 0 15px ${lvl.color}` : 'none'
+                        background: isCurrent ? lvl.color : 'rgba(48, 105, 152, 0.1)',
+                        color: isCurrent ? '#ffffff' : lvl.color,
+                        boxShadow: isCurrent ? `0 2px 10px ${lvl.color}` : 'none'
                       }}
                     >
                       {isCurrent && <div className="milestone-active-pulse" />}
@@ -663,7 +663,7 @@ export default function HomePage({
               <motion.div {...HOVER_LIFT_VARIANT} className="stat-card">
                 <div style={{ position: 'relative', width: '52px', height: '52px', margin: '0 auto 0.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <svg width="52" height="52" style={{ transform: 'rotate(-90deg)', position: 'absolute' }}>
-                    <circle cx="26" cy="26" r="21" stroke="rgba(255,255,255,0.1)" strokeWidth="4" fill="transparent" />
+                    <circle cx="26" cy="26" r="21" stroke="rgba(48, 105, 152, 0.15)" strokeWidth="4" fill="transparent" />
                     <motion.circle
                       cx="26"
                       cy="26"
@@ -1415,28 +1415,55 @@ export default function HomePage({
         {/* 8. FOOTER CTA BAND */}
         <section>
           <div
-            className="section-card"
+            className="section-card cta-light-banner"
             style={{
-              background: 'linear-gradient(135deg, rgba(48, 105, 152, 0.3) 0%, rgba(255, 212, 59, 0.2) 100%)',
-              border: '1.5px solid var(--py-blue-light)',
+              background: 'linear-gradient(135deg, #f0f7ff 0%, #ffffff 50%, #fffdf0 100%)',
+              border: '1.5px solid rgba(48, 105, 152, 0.22)',
               borderRadius: '24px',
-              padding: '3rem 2rem',
+              padding: '3.25rem 2rem',
               textAlign: 'center',
-              boxShadow: '0 12px 40px rgba(0, 0, 0, 0.3)'
+              boxShadow: '0 12px 36px rgba(48, 105, 152, 0.08)',
+              position: 'relative',
+              overflow: 'hidden'
             }}
           >
-            <h2 style={{ fontSize: '2rem', fontWeight: 900, color: 'var(--text-primary)', marginBottom: '0.6rem' }}>
-              Ready to level up your Python skills?
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: 'rgba(48, 105, 152, 0.1)', color: 'var(--py-blue)', padding: '0.35rem 0.95rem', borderRadius: '9999px', fontSize: '0.82rem', fontWeight: 800, marginBottom: '1rem' }}>
+              <Sparkles size={14} color="var(--py-yellow)" />
+              <span>OFFICIAL PYTHON CURRICULUM ACCELERATOR</span>
+            </div>
+            <h2 style={{ fontSize: '2.25rem', fontWeight: 900, color: 'var(--text-primary)', marginBottom: '0.75rem', letterSpacing: '-0.02em' }}>
+              Ready to Master Python Architecture?
             </h2>
-            <p style={{ color: 'var(--text-secondary)', fontSize: '1rem', maxWidth: '600px', margin: '0 auto 1.75rem' }}>
-              Join thousands of developers mastering Python with visual roadmaps, interactive WASM sandboxes, and daily preparation tracking.
+            <p style={{ color: 'var(--text-secondary)', fontSize: '1.02rem', maxWidth: '620px', margin: '0 auto 1.5rem', lineHeight: 1.6 }}>
+              Join engineers mastering Python with interactive WASM sandboxes, visual concept maps, and progressive verification drills.
             </p>
+
+            <div style={{ display: 'flex', justifyContent: 'center', gap: '1.5rem', flexWrap: 'wrap', marginBottom: '2rem' }}>
+              <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.88rem', color: 'var(--text-secondary)', fontWeight: 600 }}>
+                <CheckCircle2 size={16} color="#16a34a" /> 51 In-depth Modules
+              </span>
+              <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.88rem', color: 'var(--text-secondary)', fontWeight: 600 }}>
+                <CheckCircle2 size={16} color="#16a34a" /> Zero-Setup In-Browser Sandbox
+              </span>
+              <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.88rem', color: 'var(--text-secondary)', fontWeight: 600 }}>
+                <CheckCircle2 size={16} color="#16a34a" /> 27-Level Mastery Matrix
+              </span>
+            </div>
 
             <motion.button
               {...BUTTON_HOVER_VARIANT}
               className="btn btn-yellow btn-shimmer-wrap"
               onClick={() => onNavigate('learn')}
-              style={{ padding: '0.85rem 2rem', fontSize: '1rem', borderRadius: '12px' }}
+              style={{
+                padding: '0.95rem 2.5rem',
+                fontSize: '1.05rem',
+                borderRadius: '14px',
+                fontWeight: 800,
+                background: 'linear-gradient(135deg, #ffd43b 0%, #facc15 100%)',
+                color: '#0a1018',
+                boxShadow: '0 8px 24px rgba(234, 179, 8, 0.35)',
+                cursor: 'pointer'
+              }}
             >
               <Rocket size={20} />
               <span>Start Free Learning Now</span>
