@@ -44,63 +44,93 @@ import PyCosmosLogo from './PyCosmosLogo';
 
 const CATEGORY_META = {
   'Foundation': {
-    color: '#0284c7',
-    bg: 'rgba(2, 132, 199, 0.08)',
-    border: 'rgba(2, 132, 199, 0.28)',
+    color: '#1d4ed8',
+    bg: '#eff6ff',
+    border: '#93c5fd',
+    iconBg: '#dbeafe',
+    badgeBg: '#dbeafe',
+    gradient: 'linear-gradient(90deg, #1d4ed8, #3b82f6)',
     icon: Terminal
   },
   'Core Data Structures': {
-    color: '#d97706',
-    bg: 'rgba(245, 158, 11, 0.08)',
-    border: 'rgba(245, 158, 11, 0.28)',
+    color: '#b45309',
+    bg: '#fffbeb',
+    border: '#fcd34d',
+    iconBg: '#fef3c7',
+    badgeBg: '#fef3c7',
+    gradient: 'linear-gradient(90deg, #b45309, #f59e0b)',
     icon: Layers
   },
   'Functions': {
-    color: '#059669',
-    bg: 'rgba(16, 185, 129, 0.08)',
-    border: 'rgba(16, 185, 129, 0.28)',
+    color: '#047857',
+    bg: '#ecfdf5',
+    border: '#6ee7b7',
+    iconBg: '#d1fae5',
+    badgeBg: '#d1fae5',
+    gradient: 'linear-gradient(90deg, #047857, #10b981)',
     icon: Code2
   },
   'Practical Python': {
-    color: '#0891b2',
-    bg: 'rgba(6, 182, 212, 0.08)',
-    border: 'rgba(6, 182, 212, 0.28)',
+    color: '#0284c7',
+    bg: '#f0f9ff',
+    border: '#7dd3fc',
+    iconBg: '#e0f2fe',
+    badgeBg: '#e0f2fe',
+    gradient: 'linear-gradient(90deg, #0284c7, #38bdf8)',
     icon: GitBranch
   },
   'OOP & Protocols': {
-    color: '#e11d48',
-    bg: 'rgba(244, 63, 94, 0.08)',
-    border: 'rgba(244, 63, 94, 0.28)',
+    color: '#be123c',
+    bg: '#fff1f2',
+    border: '#fda4af',
+    iconBg: '#ffe4e6',
+    badgeBg: '#ffe4e6',
+    gradient: 'linear-gradient(90deg, #be123c, #f43f5e)',
     icon: Rocket
   },
   'Python Internals': {
-    color: '#ea580c',
-    bg: 'rgba(234, 88, 12, 0.08)',
-    border: 'rgba(234, 88, 12, 0.28)',
+    color: '#c2410c',
+    bg: '#fff7ed',
+    border: '#fdba74',
+    iconBg: '#ffedd5',
+    badgeBg: '#ffedd5',
+    gradient: 'linear-gradient(90deg, #c2410c, #f97316)',
     icon: Cpu
   },
   'Standard Library': {
-    color: '#4f46e5',
-    bg: 'rgba(99, 102, 241, 0.08)',
-    border: 'rgba(99, 102, 241, 0.28)',
+    color: '#4338ca',
+    bg: '#eef2ff',
+    border: '#a5b4fc',
+    iconBg: '#e0e7ff',
+    badgeBg: '#e0e7ff',
+    gradient: 'linear-gradient(90deg, #4338ca, #6366f1)',
     icon: BookOpen
   },
   'Professional Python': {
-    color: '#7c3aed',
-    bg: 'rgba(124, 58, 237, 0.08)',
-    border: 'rgba(124, 58, 237, 0.28)',
+    color: '#6d28d9',
+    bg: '#f5f3ff',
+    border: '#c4b5fd',
+    iconBg: '#ede9fe',
+    badgeBg: '#ede9fe',
+    gradient: 'linear-gradient(90deg, #6d28d9, #8b5cf6)',
     icon: Trophy
   },
   'Development & AI/ML': {
-    color: '#c026d3',
-    bg: 'rgba(192, 38, 211, 0.08)',
-    border: 'rgba(192, 38, 211, 0.28)',
+    color: '#a21caf',
+    bg: '#fdf4ff',
+    border: '#f0abfc',
+    iconBg: '#fae8ff',
+    badgeBg: '#fae8ff',
+    gradient: 'linear-gradient(90deg, #a21caf, #d946ef)',
     icon: Sparkles
   },
   'Projects & Problem Solving': {
-    color: '#be123c',
-    bg: 'rgba(190, 18, 60, 0.08)',
-    border: 'rgba(190, 18, 60, 0.28)',
+    color: '#0f766e',
+    bg: '#f0fdfa',
+    border: '#5eead4',
+    iconBg: '#ccfbf1',
+    badgeBg: '#ccfbf1',
+    gradient: 'linear-gradient(90deg, #0f766e, #14b8a6)',
     icon: HelpCircle
   }
 };
@@ -814,9 +844,12 @@ export default function ChecklistPage({
           if (catTopics.length === 0) return null;
 
           const meta = CATEGORY_META[cat] || {
-            color: '#4b8bbe',
-            bg: 'rgba(75, 139, 190, 0.15)',
-            border: 'rgba(75, 139, 190, 0.35)',
+            color: '#1d4ed8',
+            bg: '#eff6ff',
+            border: '#93c5fd',
+            iconBg: '#dbeafe',
+            badgeBg: '#dbeafe',
+            gradient: 'linear-gradient(90deg, #1d4ed8, #3b82f6)',
             icon: Terminal
           };
           const Icon = meta.icon;
@@ -834,8 +867,9 @@ export default function ChecklistPage({
                 background: 'var(--bg-card)',
                 borderRadius: '18px',
                 border: `1.5px solid ${meta.border}`,
+                borderLeft: `6px solid ${meta.color}`,
                 overflow: 'hidden',
-                boxShadow: '0 6px 24px rgba(0, 0, 0, 0.28)'
+                boxShadow: '0 4px 20px -2px rgba(15, 23, 42, 0.07)'
               }}
             >
               {/* Category Header */}
@@ -851,7 +885,19 @@ export default function ChecklistPage({
                     onClick={() => toggleCategoryCollapse(cat)}
                     style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', cursor: 'pointer', flex: 1, minWidth: '220px' }}
                   >
-                    <div style={{ width: '42px', height: '42px', borderRadius: '12px', background: meta.border, color: meta.color, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                    <div style={{
+                      width: '44px',
+                      height: '44px',
+                      borderRadius: '12px',
+                      background: meta.iconBg,
+                      border: `1.5px solid ${meta.border}`,
+                      color: meta.color,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      flexShrink: 0,
+                      boxShadow: '0 2px 6px rgba(15, 23, 42, 0.04)'
+                    }}>
                       <Icon size={22} />
                     </div>
                     <div>
@@ -860,7 +906,7 @@ export default function ChecklistPage({
                           {cat}
                         </h3>
                         {isCategoryAllDone && (
-                          <span style={{ fontSize: '0.72rem', background: 'rgba(34, 197, 94, 0.18)', color: '#4ade80', padding: '0.15rem 0.5rem', borderRadius: '9999px', fontWeight: 700, border: '1px solid rgba(34, 197, 94, 0.4)', display: 'inline-flex', alignItems: 'center', gap: '0.25rem' }}>
+                          <span style={{ fontSize: '0.72rem', background: '#dcfce7', color: '#15803d', padding: '0.15rem 0.55rem', borderRadius: '9999px', fontWeight: 700, border: '1px solid #86efac', display: 'inline-flex', alignItems: 'center', gap: '0.25rem' }}>
                             <CheckCircle2 size={11} /> 100% Mastered
                           </span>
                         )}
@@ -889,13 +935,22 @@ export default function ChecklistPage({
                         </>
                       ) : (
                         <>
-                          <CheckCheck size={12} color="#34d399" />
+                          <CheckCheck size={12} color="#059669" />
                           <span>Complete All</span>
                         </>
                       )}
                     </button>
 
-                    <span style={{ fontSize: '0.92rem', fontWeight: 800, color: meta.color, fontFamily: 'var(--font-mono)' }}>
+                    <span style={{
+                      fontSize: '0.86rem',
+                      fontWeight: 800,
+                      color: meta.color,
+                      background: meta.badgeBg,
+                      border: `1px solid ${meta.border}`,
+                      padding: '0.2rem 0.65rem',
+                      borderRadius: '9999px',
+                      fontFamily: 'var(--font-mono)'
+                    }}>
                       {catPercent}%
                     </span>
 
@@ -911,12 +966,12 @@ export default function ChecklistPage({
                 </div>
 
                 {/* Category Progress Track Bar */}
-                <div className="category-progress-track">
+                <div className="category-progress-track" style={{ background: meta.iconBg }}>
                   <div
                     className="category-progress-fill"
                     style={{
                       width: `${catPercent}%`,
-                      background: catPercent === 100 ? '#22c55e' : `linear-gradient(90deg, ${meta.color}, var(--py-yellow))`
+                      background: catPercent === 100 ? '#22c55e' : meta.gradient
                     }}
                   />
                 </div>

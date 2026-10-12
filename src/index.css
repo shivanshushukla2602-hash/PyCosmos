@@ -13873,9 +13873,9 @@ body.light-theme .studio-dropdown-input {
   color: #0f172a !important;
 }
 
-/* 6. CHECKLIST PAGE CATEGORY CARDS IN LIGHT THEME (Image 5) */
+/* 6. CHECKLIST PAGE CATEGORY CARDS IN LIGHT THEME */
 body.light-theme .category-progress-track {
-  background: #e2e8f0 !important;
+  background: rgba(15, 23, 42, 0.06);
 }
 
 /* 7. LIGHT MODE HERO TERMINAL & INTERACTIVE PLAYGROUND (Image 1 & Image 2) */
