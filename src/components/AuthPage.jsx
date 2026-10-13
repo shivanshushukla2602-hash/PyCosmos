@@ -21,6 +21,7 @@ import {
   BookOpen
 } from 'lucide-react';
 import PyCosmosLogo from './PyCosmosLogo';
+import HeartLogo from './HeartLogo';
 import { celebrate } from '../utils/celebrate';
 
 // Owner Account definition
@@ -1148,6 +1149,19 @@ export default function AuthPage({ onLogin, initialMode = 'register', theme, set
             <ShieldCheck size={14} color="#e5a800" />
             <span>Owner 1-Click Access (Shivanshu Shukla)</span>
           </button>
+        </div>
+
+        {/* Consistent PyCosmos Footer Attribution on Auth Page */}
+        <div className="footer-bottom-centered" style={{ marginTop: '2.5rem' }}>
+          <div className="footer-attribution">
+            <span className="footer-built-blue">Built with</span>
+            <HeartLogo size={26} />
+            <span className="footer-built-blue">by</span>
+            <strong className="footer-author-yellow">Shivanshu Shukla</strong>
+          </div>
+          <div className="footer-copyright">
+            &copy; {new Date().getFullYear()} PyCosmos. All rights reserved.
+          </div>
         </div>
       </div>
     </div>

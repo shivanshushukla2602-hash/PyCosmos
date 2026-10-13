@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  Heart,
   Map,
   BookOpen,
   CheckSquare,
@@ -12,6 +11,7 @@ import {
   ArrowRight
 } from 'lucide-react';
 import PyCosmosLogo from './PyCosmosLogo';
+import HeartLogo from './HeartLogo';
 
 export default function Footer({ onNavigate }) {
   const scrollToTop = () => {
@@ -148,16 +148,11 @@ export default function Footer({ onNavigate }) {
         {/* Divider */}
         <div className="footer-divider" />
 
-        {/* Bottom Bar: Centered Built with Love by Shivanshu Shukla */}
+        {/* Bottom Bar: Centered Built with Python Heart Logo by Shivanshu Shukla */}
         <div className="footer-bottom-centered">
           <div className="footer-attribution">
             <span className="footer-built-blue">Built with</span>
-            <Heart
-              size={16}
-              className="footer-heart-icon"
-              fill="#ef4444"
-              color="#ef4444"
-            />
+            <HeartLogo size={26} />
             <span className="footer-built-blue">by</span>
             <strong className="footer-author-yellow">Shivanshu Shukla</strong>
           </div>
