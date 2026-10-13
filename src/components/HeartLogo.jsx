@@ -1,15 +1,20 @@
 import React from 'react';
 
 /**
- * PyCosmos Python Heart Logo
- * -------------------------
- * A custom-crafted brand emblem combining the iconic Python dual-serpent identity
- * into a harmonious heart shape:
- * - Left lobe: Python Blue (#306998 -> #387EB8) with golden eye dot (#FFD43B)
- * - Right lobe: Python Yellow (#FFE873 -> #FFD43B / #E5A800) with blue eye dot (#306998)
- * - Center dividing seam & cosmic pulse effect
+ * PyCosmos Python Heart Shape Print
+ * ---------------------------------
+ * A clean, classic, elegant heart shape emblem:
+ * - Left half: Authentic Python Blue (#4B8BBE -> #306998)
+ * - Right half: Authentic Python Yellow (#FFE873 -> #FFD43B -> #E5A800)
+ * - Fine center seam dividing the two lobes
+ * - Subtle inner highlight stroke
+ * - Pure heart geometry, no emoji eyes or circles
  */
 export default function HeartLogo({ size = 26, className = '', animated = true }) {
+  // Classic filled heart vector path (24x24 viewBox)
+  const heartPath =
+    "M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z";
+
   return (
     <span
       className={`pycosmos-heart-logo-wrap ${animated ? 'animated-heart-logo' : ''} ${className}`}
@@ -23,12 +28,12 @@ export default function HeartLogo({ size = 26, className = '', animated = true }
         height: size,
         flexShrink: 0
       }}
-      title="PyCosmos Heart Logo"
+      title="PyCosmos Python Heart"
     >
       <svg
         width={size}
         height={size}
-        viewBox="0 0 32 32"
+        viewBox="0 0 24 24"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         style={{
@@ -37,48 +42,59 @@ export default function HeartLogo({ size = 26, className = '', animated = true }
         }}
       >
         <defs>
-          {/* Python Blue Gradient */}
-          <linearGradient id="pyHeartBlue" x1="4" y1="4" x2="16" y2="28" gradientUnits="userSpaceOnUse">
+          <linearGradient id="pyHeartBlue" x1="2" y1="3" x2="12" y2="21.35" gradientUnits="userSpaceOnUse">
             <stop offset="0%" stopColor="#4B8BBE" />
-            <stop offset="55%" stopColor="#306998" />
+            <stop offset="60%" stopColor="#306998" />
             <stop offset="100%" stopColor="#205075" />
           </linearGradient>
 
-          {/* Python Yellow Gradient */}
-          <linearGradient id="pyHeartYellow" x1="28" y1="4" x2="16" y2="28" gradientUnits="userSpaceOnUse">
+          <linearGradient id="pyHeartYellow" x1="22" y1="3" x2="12" y2="21.35" gradientUnits="userSpaceOnUse">
             <stop offset="0%" stopColor="#FFE873" />
             <stop offset="50%" stopColor="#FFD43B" />
             <stop offset="100%" stopColor="#E5A800" />
           </linearGradient>
+
+          <clipPath id="pyHeartClipLeft">
+            <rect x="0" y="0" width="12" height="24" />
+          </clipPath>
+
+          <clipPath id="pyHeartClipRight">
+            <rect x="12" y="0" width="12" height="24" />
+          </clipPath>
         </defs>
 
-        {/* Left Serpent Lobe (Python Blue) */}
+        {/* Left Lobe (Python Blue) */}
         <path
-          d="M 16 8.5 C 16 4.2 11 3 7.5 6 C 3.2 9.5 3.8 16.5 16 27.5 Z"
+          d={heartPath}
           fill="url(#pyHeartBlue)"
+          clipPath="url(#pyHeartClipLeft)"
         />
 
-        {/* Right Serpent Lobe (Python Yellow) */}
+        {/* Right Lobe (Python Yellow) */}
         <path
-          d="M 16 8.5 C 16 4.2 21 3 24.5 6 C 28.8 9.5 28.2 16.5 16 27.5 Z"
+          d={heartPath}
           fill="url(#pyHeartYellow)"
+          clipPath="url(#pyHeartClipRight)"
         />
 
-        {/* Center Dimensional Seam */}
-        <path
-          d="M 16 8.5 L 16 27.5"
+        {/* Delicate Center Seam */}
+        <line
+          x1="12"
+          y1="5.1"
+          x2="12"
+          y2="21.35"
           stroke="rgba(255, 255, 255, 0.85)"
-          strokeWidth="0.8"
+          strokeWidth="0.6"
           strokeLinecap="round"
         />
 
-        {/* Yellow Eye on Blue Serpent */}
-        <circle cx="9.4" cy="8.2" r="1.6" fill="#FFD43B" />
-        <circle cx="9.4" cy="8.2" r="0.6" fill="#FFFFFF" opacity="0.85" />
-
-        {/* Blue Eye on Yellow Serpent */}
-        <circle cx="22.6" cy="8.2" r="1.6" fill="#306998" />
-        <circle cx="22.6" cy="8.2" r="0.6" fill="#FFFFFF" opacity="0.85" />
+        {/* Subtle Inner Highlight Stroke */}
+        <path
+          d={heartPath}
+          stroke="rgba(255, 255, 255, 0.35)"
+          strokeWidth="0.5"
+          fill="none"
+        />
       </svg>
     </span>
   );
