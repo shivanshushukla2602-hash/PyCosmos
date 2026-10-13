@@ -372,7 +372,7 @@ export default function RoadmapProgressHeader({ categories, completedMap }) {
                 transition={{ duration: 0.15 }}
                 className="chart-hover-popover"
                 style={{
-                  left: `${((hoveredStage - 1) / (levelStats.length - 1)) * 84 + 8}%`,
+                  left: `clamp(145px, ${((hoveredStage - 1) / (levelStats.length - 1)) * 82 + 9}%, calc(100% - 145px))`,
                   borderTopColor: levelStats[hoveredStage - 1]?.color || '#306998'
                 }}
               >
@@ -414,8 +414,6 @@ export default function RoadmapProgressHeader({ categories, completedMap }) {
               <motion.button
                 key={stat.levelNum}
                 type="button"
-                whileHover={{ y: -2 }}
-                whileTap={{ scale: 0.98 }}
                 onClick={() => scrollToStage(stat.id)}
                 onMouseEnter={() => setHoveredStage(stat.levelNum)}
                 onMouseLeave={() => setHoveredStage(null)}
