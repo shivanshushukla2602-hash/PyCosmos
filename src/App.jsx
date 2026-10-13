@@ -357,6 +357,7 @@ export default function App() {
               onNavigateToTopic={handleSelectTopicAndNavigate}
               subtopicStatusMap={subtopicStatusMap}
               onToggleSubtopicStatus={handleToggleSubtopicStatus}
+              onShowToast={showToast}
             />
           )}
 

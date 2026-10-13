@@ -77,13 +77,46 @@ export default function MasteryTrackerPage({
   completedMap = {},
   onNavigateToTopic,
   subtopicStatusMap = {},
-  onToggleSubtopicStatus
+  onToggleSubtopicStatus,
+  onShowToast
 }) {
   const [searchQuery, setSearchQuery] = useState('');
   const [filterCategory, setFilterCategory] = useState('all');
   const [filterStatus, setFilterStatus] = useState('all');
   const [activeStageTrack, setActiveStageTrack] = useState(null);
   const [viewMode, setViewMode] = useState('deck'); // 'deck' | 'matrix' | 'tree'
+  const [focusedLevelNum, setFocusedLevelNum] = useState(null);
+
+  const handleFocusOnLevel = (targetLvl) => {
+    if (!targetLvl) return;
+
+    // Reset filters that could hide target level
+    setSearchQuery('');
+    setFilterCategory('all');
+    setFilterStatus('all');
+    setActiveStageTrack(null);
+    setFocusedLevelNum(targetLvl.level);
+
+    if (onShowToast) {
+      onShowToast(`Focusing on Level ${targetLvl.level}: ${targetLvl.area}`);
+    }
+
+    setTimeout(() => {
+      const el = document.getElementById(`level-card-${targetLvl.level}`);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } else {
+        const container = document.querySelector('.holocron-deck-container, .tracker-filter-cockpit');
+        if (container) {
+          container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+    }, 100);
+
+    setTimeout(() => {
+      setFocusedLevelNum(null);
+    }, 4500);
+  };
 
   // Compute status for each of the 27 levels:
   const getLevelStatus = (lvl) => {
@@ -446,16 +479,42 @@ export default function MasteryTrackerPage({
                 <div className="target-pod-body">
                   <h4 className="target-topic-title">{nextTargetLevel.area}</h4>
                   <p className="target-topic-desc">{nextTargetLevel.description}</p>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setSearchQuery(nextTargetLevel.area);
-                    }}
-                    className="target-jump-btn"
-                  >
-                    <span>Focus on Level {nextTargetLevel.level}</span>
-                    <ArrowRight size={14} />
-                  </button>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', flexWrap: 'wrap', marginTop: '0.85rem' }}>
+                    <button
+                      type="button"
+                      onClick={() => handleFocusOnLevel(nextTargetLevel)}
+                      className="target-jump-btn"
+                      title={`Jump and focus directly on Level ${nextTargetLevel.level}`}
+                    >
+                      <span>Focus on Level {nextTargetLevel.level}</span>
+                      <ArrowRight size={14} />
+                    </button>
+                    {nextTargetLevel.topicIds?.[0] && (
+                      <button
+                        type="button"
+                        onClick={() => onNavigateToTopic(nextTargetLevel.topicIds[0])}
+                        style={{
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '0.35rem',
+                          background: '#FFFFFF',
+                          border: '1.5px solid rgba(48, 105, 152, 0.25)',
+                          color: '#205075',
+                          padding: '0.5rem 0.95rem',
+                          borderRadius: '8px',
+                          fontSize: '0.82rem',
+                          fontWeight: 700,
+                          cursor: 'pointer',
+                          boxShadow: '0 1px 3px rgba(0, 0, 0, 0.04)',
+                          transition: 'all 0.2s ease'
+                        }}
+                        title={`Start studying topic for Level ${nextTargetLevel.level}`}
+                      >
+                        <BookOpen size={13} color="#306998" />
+                        <span>Start Topic</span>
+                      </button>
+                    )}
+                  </div>
                 </div>
               ) : (
                 <div className="target-pod-body">
@@ -605,26 +664,58 @@ export default function MasteryTrackerPage({
               transition={{ duration: 0.25 }}
               className="stage-briefing-drawer"
               style={{
-                borderColor: STAGE_CONFIGS[activeStageTrack]?.color || 'var(--py-blue)'
+                borderLeftColor: STAGE_CONFIGS[activeStageTrack]?.color || '#306998'
               }}
             >
-              <div className="briefing-content">
-                <div className="briefing-pill-row">
-                  <span className="briefing-stage-chip" style={{ background: `${STAGE_CONFIGS[activeStageTrack]?.color}22`, color: STAGE_CONFIGS[activeStageTrack]?.color }}>
-                    STAGE {activeStageTrack + 1} ACTIVE
-                  </span>
-                  <span className="briefing-range-tag">
-                    {PROGRESSION_TRACKS[activeStageTrack]?.levels}
-                  </span>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1.15rem', flex: 1, minWidth: 0 }}>
+                {(() => {
+                  const StageIcon = STAGE_CONFIGS[activeStageTrack]?.icon || Flame;
+                  const stageCol = STAGE_CONFIGS[activeStageTrack]?.color || '#306998';
+                  return (
+                    <div
+                      style={{
+                        width: '46px',
+                        height: '46px',
+                        borderRadius: '13px',
+                        background: `${stageCol}18`,
+                        border: `1.5px solid ${stageCol}35`,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        color: stageCol,
+                        flexShrink: 0
+                      }}
+                    >
+                      <StageIcon size={22} />
+                    </div>
+                  );
+                })()}
+                <div className="briefing-content" style={{ minWidth: 0 }}>
+                  <div className="briefing-pill-row">
+                    <span
+                      className="briefing-stage-chip"
+                      style={{
+                        background: `${STAGE_CONFIGS[activeStageTrack]?.color}15`,
+                        color: STAGE_CONFIGS[activeStageTrack]?.color,
+                        borderColor: `${STAGE_CONFIGS[activeStageTrack]?.color}40`
+                      }}
+                    >
+                      STAGE {activeStageTrack + 1} ACTIVE
+                    </span>
+                    <span className="briefing-range-tag">
+                      {PROGRESSION_TRACKS[activeStageTrack]?.levels}
+                    </span>
+                  </div>
+                  <h3 className="briefing-title">{PROGRESSION_TRACKS[activeStageTrack]?.name}</h3>
+                  <p className="briefing-desc">{PROGRESSION_TRACKS[activeStageTrack]?.description}</p>
                 </div>
-                <h3 className="briefing-title">{PROGRESSION_TRACKS[activeStageTrack]?.name}</h3>
-                <p className="briefing-desc">{PROGRESSION_TRACKS[activeStageTrack]?.description}</p>
               </div>
 
               <button
                 type="button"
                 onClick={() => setActiveStageTrack(null)}
                 className="briefing-dismiss-btn"
+                title="Clear stage filter and view all stages"
               >
                 <span>Show All Stages</span>
                 <X size={14} />
@@ -900,8 +991,9 @@ export default function MasteryTrackerPage({
                       return (
                         <motion.div
                           key={lvl.level}
+                          id={`level-card-${lvl.level}`}
                           whileHover={{ y: -5, scale: 1.015 }}
-                          className={`holocron-card status-${statusObj.status}`}
+                          className={`holocron-card status-${statusObj.status} ${focusedLevelNum === lvl.level ? 'is-focused-target' : ''}`}
                           style={{ '--card-accent': tier.color }}
                         >
                           <div className="holocron-card-top">
@@ -1010,10 +1102,11 @@ export default function MasteryTrackerPage({
                   return (
                     <motion.tr
                       key={lvl.level}
+                      id={`level-card-${lvl.level}`}
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       transition={{ duration: 0.15 }}
-                      className={`status-row-${statusObj.status} cyber-hud-row`}
+                      className={`status-row-${statusObj.status} cyber-hud-row ${focusedLevelNum === lvl.level ? 'is-focused-target' : ''}`}
                     >
                       <td className="level-col-cell">
                         <div className="cyber-level-capsule">
@@ -1094,7 +1187,7 @@ export default function MasteryTrackerPage({
               const firstTopic = TOPICS_BY_ID[lvl.topicIds[0]];
 
               return (
-                <div key={lvl.level} className="constellation-node-wrapper">
+                <div key={lvl.level} id={`level-card-${lvl.level}`} className={`constellation-node-wrapper ${focusedLevelNum === lvl.level ? 'is-focused-target' : ''}`}>
                   <motion.div
                     whileHover={{ scale: 1.08 }}
                     onClick={() => firstTopic && onNavigateToTopic(firstTopic.id)}
