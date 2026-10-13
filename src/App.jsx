@@ -47,7 +47,12 @@ export default function App() {
     try {
       const params = new URLSearchParams(window.location.search);
       const urlView = params.get('view');
-      if (urlView) return urlView;
+      const savedUser = localStorage.getItem('pyradox_current_user');
+      // If user is already authenticated and expressly visiting a valid subview other than mastery or auth, respect it;
+      // otherwise, always default to 'home' when the website is loaded.
+      if (savedUser && urlView && urlView !== 'auth' && urlView !== 'mastery') {
+        return urlView;
+      }
     } catch {}
     return 'home';
   });
@@ -254,6 +259,13 @@ export default function App() {
     } catch (err) {
       console.error(err);
     }
+    setCurrentView('home');
+    try {
+      const url = new URL(window.location);
+      url.searchParams.delete('view');
+      url.searchParams.delete('topic');
+      window.history.replaceState({}, '', url);
+    } catch {}
     showToast(`Welcome to PyCosmos, ${user.name.split(' ')[0]}.`);
   };
 
@@ -266,15 +278,29 @@ export default function App() {
       console.error(err);
     }
     setCurrentView('auth');
+    try {
+      const url = new URL(window.location);
+      url.searchParams.delete('view');
+      url.searchParams.delete('topic');
+      window.history.replaceState({}, '', url);
+    } catch {}
     showToast("Signed out successfully. See you soon!");
   };
 
-  // If not logged in or viewing auth, render AuthPage!
+  // If not logged in or viewing auth, render AuthPage as the FIRST GATEWAY (Signup by default)!
   if (!currentUser || currentView === 'auth') {
     return (
       <div className="app-container" style={{ position: 'relative' }}>
         <AmbientBackground />
-        <AuthPage onLogin={(u) => { handleLogin(u); setCurrentView('home'); }} theme={theme} setTheme={setTheme} />
+        <AuthPage
+          initialMode="register"
+          onLogin={(u) => {
+            handleLogin(u);
+            setCurrentView('home');
+          }}
+          theme={theme}
+          setTheme={setTheme}
+        />
       </div>
     );
   }

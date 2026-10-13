@@ -35,9 +35,9 @@ const OWNER_ACCOUNT = {
   isAdmin: true
 };
 
-export default function AuthPage({ onLogin }) {
-  // Mode: 'login' | 'register'
-  const [authMode, setAuthMode] = useState('login');
+export default function AuthPage({ onLogin, initialMode = 'register', theme, setTheme }) {
+  // Mode: 'login' | 'register' (Defaults to 'register' / Signup page)
+  const [authMode, setAuthMode] = useState(initialMode);
 
   // Form Fields
   const [email, setEmail] = useState('');
@@ -388,34 +388,6 @@ export default function AuthPage({ onLogin }) {
               <button
                 type="button"
                 onClick={() => {
-                  setAuthMode('login');
-                  setErrorMsg('');
-                  setSuccessMsg('');
-                }}
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: '0.45rem',
-                  padding: '0.65rem 1rem',
-                  borderRadius: '10px',
-                  fontSize: '0.88rem',
-                  fontWeight: 700,
-                  cursor: 'pointer',
-                  border: 'none',
-                  background: authMode === 'login' ? '#FFFFFF' : 'transparent',
-                  color: authMode === 'login' ? '#0A1018' : '#64748B',
-                  boxShadow: authMode === 'login' ? '0 2px 8px rgba(0, 0, 0, 0.06)' : 'none',
-                  transition: 'all 0.2s ease'
-                }}
-              >
-                <KeyRound size={15} color={authMode === 'login' ? '#306998' : '#64748B'} />
-                <span>Sign In</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => {
                   setAuthMode('register');
                   setErrorMsg('');
                   setSuccessMsg('');
@@ -439,6 +411,34 @@ export default function AuthPage({ onLogin }) {
               >
                 <User size={15} color={authMode === 'register' ? '#e5a800' : '#64748B'} />
                 <span>Create Account</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setAuthMode('login');
+                  setErrorMsg('');
+                  setSuccessMsg('');
+                }}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '0.45rem',
+                  padding: '0.65rem 1rem',
+                  borderRadius: '10px',
+                  fontSize: '0.88rem',
+                  fontWeight: 700,
+                  cursor: 'pointer',
+                  border: 'none',
+                  background: authMode === 'login' ? '#FFFFFF' : 'transparent',
+                  color: authMode === 'login' ? '#0A1018' : '#64748B',
+                  boxShadow: authMode === 'login' ? '0 2px 8px rgba(0, 0, 0, 0.06)' : 'none',
+                  transition: 'all 0.2s ease'
+                }}
+              >
+                <KeyRound size={15} color={authMode === 'login' ? '#306998' : '#64748B'} />
+                <span>Sign In</span>
               </button>
             </div>
           )}
@@ -643,6 +643,28 @@ export default function AuthPage({ onLogin }) {
                   </>
                 )}
               </button>
+              <div style={{ textAlign: 'center', marginTop: '0.4rem', fontSize: '0.84rem', color: '#64748B' }}>
+                Don't have an account yet?{' '}
+                <button
+                  type="button"
+                  onClick={() => {
+                    setAuthMode('register');
+                    setErrorMsg('');
+                    setSuccessMsg('');
+                  }}
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    color: '#306998',
+                    fontWeight: 700,
+                    cursor: 'pointer',
+                    textDecoration: 'underline',
+                    padding: 0
+                  }}
+                >
+                  Create Account
+                </button>
+              </div>
             </form>
           )}
 
@@ -899,6 +921,28 @@ export default function AuthPage({ onLogin }) {
                 <span>Continue & Verify Identity</span>
                 <ArrowRight size={17} />
               </button>
+              <div style={{ textAlign: 'center', marginTop: '0.4rem', fontSize: '0.84rem', color: '#64748B' }}>
+                Already have an account?{' '}
+                <button
+                  type="button"
+                  onClick={() => {
+                    setAuthMode('login');
+                    setErrorMsg('');
+                    setSuccessMsg('');
+                  }}
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    color: '#306998',
+                    fontWeight: 700,
+                    cursor: 'pointer',
+                    textDecoration: 'underline',
+                    padding: 0
+                  }}
+                >
+                  Sign In
+                </button>
+              </div>
             </form>
           )}
 
