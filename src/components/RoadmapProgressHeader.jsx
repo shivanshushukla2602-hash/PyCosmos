@@ -362,16 +362,18 @@ export default function RoadmapProgressHeader({ categories, completedMap }) {
           </svg>
 
           {/* Interactive Floating Hover Telemetry Card */}
+          {/* Interactive Floating Hover Telemetry Card */}
           <AnimatePresence>
             {hoveredStage !== null && (
               <motion.div
-                initial={{ opacity: 0, y: 8, scale: 0.95 }}
+                initial={{ opacity: 0, y: 6, scale: 0.98 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: 4, scale: 0.95 }}
+                exit={{ opacity: 0, y: 4, scale: 0.98 }}
                 transition={{ duration: 0.15 }}
                 className="chart-hover-popover"
                 style={{
-                  left: `${((hoveredStage - 1) / (levelStats.length - 1)) * 88 + 6}%`
+                  left: `${((hoveredStage - 1) / (levelStats.length - 1)) * 84 + 8}%`,
+                  borderTopColor: levelStats[hoveredStage - 1]?.color || '#306998'
                 }}
               >
                 {(() => {
@@ -379,7 +381,7 @@ export default function RoadmapProgressHeader({ categories, completedMap }) {
                   return (
                     <div>
                       <div className="popover-header">
-                        <span className="popover-badge" style={{ background: `${s.color}25`, color: s.color }}>
+                        <span className="popover-badge" style={{ background: `${s.color}15`, color: s.color, border: `1px solid ${s.color}35` }}>
                           Stage {s.levelNum}
                         </span>
                         <span className="popover-percent">{s.percent}%</span>
@@ -406,17 +408,18 @@ export default function RoadmapProgressHeader({ categories, completedMap }) {
             const romanNums = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];
             const isCompleted = stat.percent === 100;
             const isInProgress = stat.percent > 0 && !isCompleted;
+            const isHovered = hoveredStage === stat.levelNum;
 
             return (
               <motion.button
                 key={stat.levelNum}
                 type="button"
-                whileHover={{ y: -3, scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                whileHover={{ y: -2 }}
+                whileTap={{ scale: 0.98 }}
                 onClick={() => scrollToStage(stat.id)}
                 onMouseEnter={() => setHoveredStage(stat.levelNum)}
                 onMouseLeave={() => setHoveredStage(null)}
-                className={`constellation-node-pill ${isCompleted ? 'is-complete' : isInProgress ? 'is-active' : ''}`}
+                className={`constellation-node-pill ${isCompleted ? 'is-complete' : isInProgress ? 'is-active' : ''} ${isHovered ? 'is-hovered-stage' : ''}`}
                 style={{
                   '--stage-accent': stat.color
                 }}
