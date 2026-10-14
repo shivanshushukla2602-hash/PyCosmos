@@ -46,12 +46,25 @@ export default function App() {
 
   const [currentView, setCurrentView] = useState(() => {
     try {
+      const savedUser = localStorage.getItem('pyradox_current_user');
+      // 1. If not logged in yet -> ALWAYS open the signup page ('auth')
+      if (!savedUser) {
+        return 'auth';
+      }
+
       const params = new URLSearchParams(window.location.search);
       const urlView = params.get('view');
-      const savedUser = localStorage.getItem('pyradox_current_user');
-      // If user is already authenticated and expressly visiting a valid subview other than auth, respect it;
-      // otherwise, default to 'home' when the website is loaded.
-      if (savedUser && urlView && urlView !== 'auth') {
+
+      // 2. If logged in:
+      // When searching or loading the site URL, or if urlView is 'mastery', 'auth', or empty:
+      // ALWAYS load the Home page!
+      if (!urlView || urlView === 'mastery' || urlView === 'auth') {
+        return 'home';
+      }
+
+      // If user visited with explicit intent to a valid subview:
+      const validSubviews = ['roadmap', 'learn', 'checklist', 'quizzes', 'dashboard', 'resources'];
+      if (validSubviews.includes(urlView)) {
         return urlView;
       }
     } catch {}
@@ -67,6 +80,24 @@ export default function App() {
     return TOPICS[0]?.id || 'setup-and-fundamentals';
   });
 
+  // Strip legacy or autocompleted '?view=mastery' immediately so browser address bar stays clean
+  useEffect(() => {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('view') === 'mastery' || params.get('view') === 'auth' || !currentUser) {
+        const url = new URL(window.location);
+        if (params.get('view') === 'mastery' || params.get('view') === 'auth') {
+          url.searchParams.delete('view');
+        }
+        if (!currentUser) {
+          url.searchParams.delete('view');
+          url.searchParams.delete('topic');
+        }
+        window.history.replaceState({}, '', url);
+      }
+    } catch {}
+  }, [currentUser]);
+
   // Always scroll to the start of the page whenever switching sections
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
@@ -74,7 +105,8 @@ export default function App() {
     if (document.body) document.body.scrollTop = 0;
     try {
       const url = new URL(window.location);
-      if (currentView !== 'home') {
+      // Keep URL clean on home, mastery, and auth so browser URL bar never autocompletes into mastery
+      if (currentView !== 'home' && currentView !== 'mastery' && currentView !== 'auth') {
         url.searchParams.set('view', currentView);
       } else {
         url.searchParams.delete('view');

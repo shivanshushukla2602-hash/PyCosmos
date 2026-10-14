@@ -63,6 +63,13 @@ export default function AuthPage({ onLogin, initialMode = 'register', theme, set
   // Digit input refs
   const inputRefs = useRef([]);
 
+  // Synchronize authMode whenever initialMode is supplied/updated
+  useEffect(() => {
+    if (initialMode) {
+      setAuthMode(initialMode);
+    }
+  }, [initialMode]);
+
   // Timer countdown effect for OTP resend
   useEffect(() => {
     let interval = null;
