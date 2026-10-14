@@ -7629,11 +7629,11 @@ body.light-theme .footer-brand-badge {
   align-items: center;
   justify-content: center;
   gap: 0.65rem;
-  font-family: 'Cinzel', 'Syne', serif;
-  font-size: 1.35rem;
-  font-weight: 700;
+  font-family: 'Plus Jakarta Sans', 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
   text-align: center;
-  letter-spacing: 0.05em;
+  letter-spacing: -0.015em;
   padding: 0.2rem 0.5rem;
   background: transparent !important;
   border: none !important;
@@ -7649,15 +7649,15 @@ body.light-theme .footer-brand-badge {
 
 .footer-built-blue {
   color: #306998 !important; /* Authentic Python Logo Blue */
-  font-family: 'Cinzel', 'Syne', serif;
-  font-weight: 700;
-  letter-spacing: 0.04em;
+  font-family: 'Plus Jakarta Sans', 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.015em;
 }
 
 body.light-theme .footer-built-blue {
   color: #306998 !important;
-  font-family: 'Cinzel', 'Syne', serif;
-  font-weight: 700;
+  font-family: 'Plus Jakarta Sans', 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 600;
 }
 
 /* Python Heart Logo pulse animation */
@@ -7689,26 +7689,26 @@ body.light-theme .footer-built-blue {
   100% { transform: scale(1.1) rotate(0deg); }
 }
 
-/* Python Yellow Author Branding with Cinematic Typography */
+/* Python Yellow Author Branding with Modern High-Tech Typography */
 .footer-author-yellow,
 .footer-attribution strong {
-  color: #E5A800 !important; /* Authentic Python Logo Yellow */
-  font-family: 'Cinzel', 'Syne', serif;
+  color: #D99B00 !important; /* High-contrast authentic Python Logo Gold-Yellow */
+  font-family: 'Plus Jakarta Sans', 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   font-weight: 800;
-  letter-spacing: 0.05em;
+  letter-spacing: -0.015em;
   text-shadow: none !important;
   transition: all 0.2s ease;
 }
 
 .footer-author-yellow:hover {
-  color: #FFD43B !important;
-  text-shadow: 0 0 16px rgba(255, 212, 59, 0.4) !important;
+  color: #E5A800 !important;
+  text-shadow: 0 0 16px rgba(229, 168, 0, 0.35) !important;
 }
 
 body.light-theme .footer-author-yellow,
 body.light-theme .footer-attribution strong {
-  color: #E5A800 !important; /* Authentic Python Logo Yellow */
-  font-family: 'Cinzel', 'Syne', serif;
+  color: #D99B00 !important;
+  font-family: 'Plus Jakarta Sans', 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   font-weight: 800;
   text-shadow: none !important;
 }
