@@ -1,11 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 
 export default function AmbientBackground() {
   const [mousePos, setMousePos] = useState({ x: 600, y: 300 });
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const rafRef = useRef(null);
 
   useEffect(() => {
+    const checkMobile = () => {
+      const mobile = window.innerWidth <= 768 || window.matchMedia('(pointer: coarse)').matches;
+      setIsMobile(mobile);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile, { passive: true });
+
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     setPrefersReducedMotion(mediaQuery.matches);
 
@@ -13,25 +22,75 @@ export default function AmbientBackground() {
     mediaQuery.addEventListener('change', handleChange);
 
     const handleMouseMove = (e) => {
-      if (!mediaQuery.matches) {
-        // Capped mouse offset for subtle parallax shift (~15px max)
+      if (mediaQuery.matches || window.innerWidth <= 768) return;
+      if (rafRef.current) return;
+      rafRef.current = requestAnimationFrame(() => {
         const xOffset = (e.clientX - window.innerWidth / 2) * 0.02;
         const yOffset = (e.clientY - window.innerHeight / 2) * 0.02;
         setMousePos({ x: e.clientX, y: e.clientY, offsetX: xOffset, offsetY: yOffset });
-      }
+        rafRef.current = null;
+      });
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
 
     return () => {
+      window.removeEventListener('resize', checkMobile);
       mediaQuery.removeEventListener('change', handleChange);
       window.removeEventListener('mousemove', handleMouseMove);
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
   }, []);
 
   const parallaxX = mousePos.offsetX || 0;
   const parallaxY = mousePos.offsetY || 0;
 
+  // Mobile / Small Screen: Static, ultra-lightweight hardware-accelerated CSS background
+  if (isMobile) {
+    return (
+      <div
+        style={{
+          position: 'fixed',
+          inset: 0,
+          zIndex: 0,
+          pointerEvents: 'none',
+          overflow: 'hidden',
+          background: 'var(--bg-main)',
+          transform: 'translateZ(0)'
+        }}
+      >
+        {/* Subtle static gradient orbs with zero CPU animation overhead */}
+        <div
+          style={{
+            position: 'absolute',
+            top: '-5%',
+            left: '10%',
+            width: '280px',
+            height: '280px',
+            borderRadius: '50%',
+            background: 'radial-gradient(circle, rgba(48, 105, 152, 0.12) 0%, transparent 70%)',
+            filter: 'blur(40px)',
+            pointerEvents: 'none'
+          }}
+        />
+        <div
+          style={{
+            position: 'absolute',
+            top: '40%',
+            right: '5%',
+            width: '240px',
+            height: '240px',
+            borderRadius: '50%',
+            background: 'radial-gradient(circle, rgba(255, 212, 59, 0.08) 0%, transparent 70%)',
+            filter: 'blur(45px)',
+            pointerEvents: 'none'
+          }}
+        />
+      </div>
+    );
+  }
+
+  // Desktop: Full ambient depth experience with throttled parallax
   return (
     <div
       style={{
@@ -40,7 +99,8 @@ export default function AmbientBackground() {
         zIndex: 0,
         pointerEvents: 'none',
         overflow: 'hidden',
-        background: 'var(--bg-main)'
+        background: 'var(--bg-main)',
+        transform: 'translateZ(0)'
       }}
     >
       {/* 1. Layered Depth Gradient Mesh Blobs (Muted Blue, Muted Amber, Muted Purple) */}
@@ -66,7 +126,9 @@ export default function AmbientBackground() {
               height: '560px',
               borderRadius: '50%',
               background: 'radial-gradient(circle, rgba(48, 105, 152, 0.16) 0%, transparent 70%)',
-              filter: 'blur(75px)'
+              filter: 'blur(75px)',
+              willChange: 'transform',
+              transform: 'translateZ(0)'
             }}
           />
 
@@ -90,7 +152,9 @@ export default function AmbientBackground() {
               height: '520px',
               borderRadius: '50%',
               background: 'radial-gradient(circle, rgba(255, 212, 59, 0.12) 0%, transparent 70%)',
-              filter: 'blur(80px)'
+              filter: 'blur(80px)',
+              willChange: 'transform',
+              transform: 'translateZ(0)'
             }}
           />
 
@@ -113,7 +177,9 @@ export default function AmbientBackground() {
               height: '480px',
               borderRadius: '50%',
               background: 'radial-gradient(circle, rgba(75, 139, 190, 0.14) 0%, transparent 70%)',
-              filter: 'blur(85px)'
+              filter: 'blur(85px)',
+              willChange: 'transform',
+              transform: 'translateZ(0)'
             }}
           />
         </>
@@ -150,17 +216,6 @@ export default function AmbientBackground() {
           }}
         />
       )}
-
-      {/* Faint Noise Texture Overlay */}
-      <div
-        style={{
-          position: 'absolute',
-          inset: 0,
-          opacity: 0.025,
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
-          backgroundRepeat: 'repeat'
-        }}
-      />
     </div>
   );
 }

@@ -41,6 +41,7 @@ import { CATEGORIES } from '../data/topicsData';
 import { celebrate } from '../utils/celebrate';
 import { AnimatedCounter } from './AnimatedCounter';
 import PyCosmosLogo from './PyCosmosLogo';
+import ScrollRevealSection from './ScrollRevealSection';
 
 const CATEGORY_META = {
   'Foundation': {
@@ -487,7 +488,7 @@ export default function ChecklistPage({
           const learningRatio = totalSubtopicsCount > 0 ? learningSubtopicsCount / totalSubtopicsCount : 0;
 
           return (
-            <div className="checklist-health-station-card">
+            <ScrollRevealSection className="checklist-health-station-card">
               <div className="health-station-grid">
                 {/* LEFT POD: MULTI-SEGMENT DONUT HEALTH GAUGE */}
                 <div className="health-donut-pod">
@@ -618,8 +619,10 @@ export default function ChecklistPage({
                             type="button"
                             onClick={() => setStudyPace(p)}
                             className={`pace-tick-chip ${studyPace === p ? 'active' : ''}`}
+                            aria-label={`${p} ${p === 1 ? 'topic' : 'topics'} per day`}
                           >
-                            {p} {p === 1 ? 'topic' : 'topics'}
+                            <span className="desktop-only">{p} {p === 1 ? 'topic' : 'topics'}</span>
+                            <span className="mobile-only">{p}</span>
                           </button>
                         ))}
                       </div>
@@ -688,7 +691,7 @@ export default function ChecklistPage({
                   </div>
                 </div>
               </div>
-            </div>
+            </ScrollRevealSection>
           );
         })()}
 

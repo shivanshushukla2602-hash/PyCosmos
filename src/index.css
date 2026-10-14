@@ -10692,6 +10692,188 @@ body.light-theme .trio-pod-val small {
   font-weight: 600 !important;
 }
 
+/* ═══════════════════════════════════════════════════════════════════════════
+   RESPONSIVE CHECKLIST HEALTH & SPRINT CALCULATOR PODS
+   ═══════════════════════════════════════════════════════════════════════════ */
+@media (max-width: 900px) {
+  .health-station-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.25rem !important;
+  }
+}
+
+@media (max-width: 680px) {
+  .checklist-health-station-card,
+  body.light-theme .checklist-health-station-card {
+    padding: 1.15rem 0.95rem !important;
+    border-radius: 18px !important;
+    margin-bottom: 1.5rem !important;
+  }
+  .health-donut-pod,
+  body.light-theme .health-donut-pod,
+  .sprint-pace-pod,
+  body.light-theme .sprint-pace-pod {
+    padding: 1.1rem 0.95rem !important;
+    border-radius: 14px !important;
+  }
+  .donut-chart-flex {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 1.15rem !important;
+  }
+  .donut-svg-wrapper {
+    margin: 0 auto;
+  }
+  .donut-segment-legend {
+    width: 100% !important;
+    gap: 0.5rem !important;
+  }
+  .segment-legend-row,
+  body.light-theme .segment-legend-row {
+    padding: 0.5rem 0.75rem !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  .segment-legend-text {
+    flex: 1 !important;
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+  }
+  .sprint-pod-header {
+    flex-wrap: wrap !important;
+    gap: 0.5rem !important;
+  }
+  .sprint-pod-title,
+  body.light-theme .sprint-pod-title {
+    font-size: 0.85rem !important;
+  }
+  .sprint-time-tag,
+  body.light-theme .sprint-time-tag {
+    font-size: 0.72rem !important;
+    padding: 0.15rem 0.5rem !important;
+  }
+  .pace-ticks-row {
+    display: flex !important;
+    gap: 0.35rem !important;
+    justify-content: space-between !important;
+  }
+  .pace-tick-chip,
+  body.light-theme .pace-tick-chip {
+    flex: 1 !important;
+    text-align: center !important;
+    padding: 0.35rem 0.2rem !important;
+    font-size: 0.8rem !important;
+    min-width: 0 !important;
+  }
+  .pace-projection-banner,
+  body.light-theme .pace-projection-banner {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 0.75rem 0.6rem !important;
+    padding: 0.85rem 0.95rem !important;
+  }
+  .projection-divider {
+    display: none !important;
+  }
+  .projection-col:nth-child(5) {
+    grid-column: span 2 !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+    padding-top: 0.55rem !important;
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+  }
+  body.light-theme .projection-col:nth-child(5) {
+    border-top: 1px solid #e2e8f0 !important;
+  }
+  .checklist-trio-pods {
+    grid-template-columns: 1fr !important;
+    gap: 0.65rem !important;
+  }
+  body.light-theme .trio-pod-item {
+    padding: 0.8rem 1rem !important;
+  }
+}
+
+@media (max-width: 420px) {
+  .checklist-health-station-card,
+  body.light-theme .checklist-health-station-card {
+    padding: 0.85rem 0.65rem !important;
+    border-radius: 14px !important;
+  }
+  .health-donut-pod,
+  body.light-theme .health-donut-pod,
+  .sprint-pace-pod,
+  body.light-theme .sprint-pace-pod {
+    padding: 0.85rem 0.75rem !important;
+    border-radius: 12px !important;
+  }
+  .pace-projection-banner,
+  body.light-theme .pace-projection-banner {
+    padding: 0.75rem 0.7rem !important;
+  }
+  .projection-val,
+  body.light-theme .projection-val {
+    font-size: 0.86rem !important;
+  }
+  .projection-label,
+  body.light-theme .projection-label {
+    font-size: 0.65rem !important;
+  }
+  .donut-svg-wrapper {
+    width: 124px !important;
+    height: 124px !important;
+  }
+  .health-donut-svg {
+    width: 124px !important;
+    height: 124px !important;
+  }
+  .donut-percent-num,
+  body.light-theme .donut-percent-num {
+    font-size: 1.35rem !important;
+  }
+}
+
+@media (max-width: 330px) {
+  .checklist-health-station-card,
+  body.light-theme .checklist-health-station-card {
+    padding: 0.65rem 0.45rem !important;
+  }
+  .health-donut-pod,
+  body.light-theme .health-donut-pod,
+  .sprint-pace-pod,
+  body.light-theme .sprint-pace-pod {
+    padding: 0.75rem 0.55rem !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   SMOOTH SCROLL REVEAL & MOBILE PERFORMANCE ENHANCEMENTS
+   ═══════════════════════════════════════════════════════════════════════════ */
+.scroll-reveal-section {
+  position: relative;
+}
+
+@media (max-width: 768px) {
+  body, html {
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .sticky-top-progress {
+    top: 45px !important;
+  }
+  
+  .sticky-top-progress-inner {
+    padding: 0.4rem 0.75rem !important;
+    gap: 0.5rem !important;
+  }
+}
+
+
+
 /* Light Theme Stepper Stage Cards */
 body.light-theme .kinetic-stage-card {
   background: #f8fafc;

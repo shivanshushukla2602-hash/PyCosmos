@@ -39,6 +39,7 @@ import { HOVER_LIFT_VARIANT, BUTTON_HOVER_VARIANT } from '../utils/motionVariant
 import { runPythonCode } from '../services/pythonCompiler';
 import { fetchProblemOfTheDay } from '../services/questionApiService';
 import { celebrate } from '../utils/celebrate';
+import ScrollRevealSection from './ScrollRevealSection';
 
 
 
@@ -484,7 +485,7 @@ export default function HomePage({
 
       <div className="home-content-container">
         {/* 2. "YOUR JOURNEY SO FAR" SERPENTINE ROADMAP SECTION */}
-        <section style={{ marginBottom: '4.5rem' }}>
+        <ScrollRevealSection style={{ marginBottom: '4.5rem' }}>
           <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.45rem', color: 'var(--py-blue-light)', fontWeight: 800, fontSize: '0.85rem', letterSpacing: '0.06em', marginBottom: '0.45rem', background: 'rgba(48, 105, 152, 0.15)', padding: '0.3rem 0.85rem', borderRadius: '9999px', border: '1px solid rgba(48, 105, 152, 0.3)' }}>
               <Compass size={16} />
@@ -664,8 +665,10 @@ export default function HomePage({
               </motion.div>
             </RevealItem>
           </RevealGroup>
-        </section>        {/* 3. LIVE INTERACTIVE CODE PLAYGROUND */}
-        <section style={{ marginBottom: '4rem' }}>
+        </ScrollRevealSection>
+
+        {/* 3. LIVE INTERACTIVE CODE PLAYGROUND */}
+        <ScrollRevealSection style={{ marginBottom: '4rem' }}>
           <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
             <div className="home-playground-badge">
               <Zap size={16} />
@@ -794,10 +797,10 @@ export default function HomePage({
               </div>
             </div>
           </div>
-        </section>
+        </ScrollRevealSection>
 
         {/* 4. "TODAY'S FOCUS" SMART CARD */}
-        <section style={{ marginBottom: '4rem' }}>
+        <ScrollRevealSection style={{ marginBottom: '4rem' }}>
           <div
             className="section-card"
             style={{
@@ -851,10 +854,10 @@ export default function HomePage({
               </motion.button>
             </div>
           </div>
-        </section>
+        </ScrollRevealSection>
 
         {/* 5. ELEVATED QUESTION OF THE DAY */}
-        <section style={{ marginBottom: '4rem' }}>
+        <ScrollRevealSection style={{ marginBottom: '4rem' }}>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -1002,11 +1005,11 @@ export default function HomePage({
               )}
             </div>
           </motion.div>
-        </section>
+        </ScrollRevealSection>
 
         {/* 6. RECENT ACTIVITY / CONTINUE WHERE YOU LEFT OFF */}
         {recentTopicsList.length > 0 && (
-          <section style={{ marginBottom: '4rem' }}>
+          <ScrollRevealSection style={{ marginBottom: '4rem' }}>
             <div style={{ marginBottom: '1.5rem' }}>
               <h2 style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '0.2rem' }}>
                 Recently Viewed Lessons
@@ -1051,11 +1054,11 @@ export default function HomePage({
                 </motion.div>
               ))}
             </div>
-          </section>
+          </ScrollRevealSection>
         )}
 
         {/* 7. REBUILT FEATURE CARDS SHOWCASE (2x2 GRID) */}
-        <section style={{ marginBottom: '5rem' }}>
+        <ScrollRevealSection style={{ marginBottom: '5rem' }}>
           <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.45rem', color: 'var(--py-yellow)', fontWeight: 800, fontSize: '0.85rem', letterSpacing: '0.05em', marginBottom: '0.5rem', background: 'rgba(232, 185, 35, 0.12)', padding: '0.3rem 0.85rem', borderRadius: '9999px', border: '1px solid rgba(232, 185, 35, 0.3)' }}>
               <Sparkles size={16} color="var(--py-yellow)" />
@@ -1273,10 +1276,10 @@ export default function HomePage({
               </motion.div>
             </RevealItem>
           </RevealGroup>
-        </section>
+        </ScrollRevealSection>
 
         {/* 8. FOOTER CTA BAND */}
-        <section>
+        <ScrollRevealSection>
           <div
             className="section-card cta-light-banner"
             style={{
@@ -1333,7 +1336,7 @@ export default function HomePage({
               <ArrowRight size={18} />
             </motion.button>
           </div>
-        </section>
+        </ScrollRevealSection>
       </div>
     </div>
   );
