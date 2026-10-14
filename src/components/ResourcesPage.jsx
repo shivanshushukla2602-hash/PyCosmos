@@ -290,7 +290,7 @@ export default function ResourcesPage() {
           </span>
         </motion.div>
 
-        <h1 style={{ fontSize: '2.4rem', fontWeight: 900, marginBottom: '0.4rem', color: 'var(--text-primary)' }}>
+        <h1 style={{ fontSize: 'clamp(1.6rem, 5vw, 2.4rem)', fontWeight: 900, marginBottom: '0.4rem', color: 'var(--text-primary)', wordBreak: 'break-word' }}>
           Curated Python <span className="forge-gradient-text">Resources & Tooling</span>
         </h1>
         <p style={{ color: 'var(--text-secondary)', fontSize: '0.96rem', maxWidth: '640px', margin: '0 auto 1.5rem', lineHeight: 1.5 }}>
@@ -394,7 +394,7 @@ export default function ResourcesPage() {
         ) : (
           <motion.div
             layout
-            style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '1.25rem' }}
+            className="resources-cards-grid"
           >
             {filteredItems.map((item, idx) => {
               const Icon = item.icon || BookOpen;

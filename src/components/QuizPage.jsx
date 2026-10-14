@@ -231,7 +231,7 @@ export default function QuizPage({
             </span>
           </motion.div>
 
-          <h1 style={{ fontSize: '2.3rem', fontWeight: 900, marginBottom: '0.35rem', color: 'var(--text-primary)' }}>
+          <h1 style={{ fontSize: 'clamp(1.5rem, 4.5vw, 2.3rem)', fontWeight: 900, marginBottom: '0.35rem', color: 'var(--text-primary)', wordBreak: 'break-word' }}>
             Python Interactive <span className="forge-gradient-text">Practice & Quizzes</span>
           </h1>
           <p style={{ color: 'var(--text-secondary)', fontSize: '0.94rem', margin: 0 }}>

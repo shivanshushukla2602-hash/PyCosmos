@@ -73,56 +73,89 @@ export default function Sidebar({
   const totalTopicsCount = topics.length;
   const overallPercent = totalTopicsCount > 0 ? Math.round((totalCompleted / totalTopicsCount) * 100) : 0;
 
+  const [isMobileExpanded, setIsMobileExpanded] = useState(false);
+
   return (
-    <aside className="py-sidebar-container no-print">
-      {/* ── TOP HEADER & PROGRESS ── */}
-      <div className="py-sidebar-top-deck">
-        <div className="py-sidebar-brand-row">
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.55rem' }}>
-            <PyCosmosLogo size={24} animated={false} />
-            <div>
-              <span className="py-sidebar-title">Python Curriculum</span>
-              <span className="py-sidebar-tagline">51 In-Depth Modules</span>
+    <aside className={`py-sidebar-container no-print ${isMobileExpanded ? 'is-mobile-expanded' : ''}`}>
+      {/* ── MOBILE ACCORDION TRIGGER (Visible on screens <=960px) ── */}
+      <div className="py-sidebar-mobile-header">
+        <button
+          type="button"
+          className="py-sidebar-mobile-toggle-btn"
+          onClick={() => setIsMobileExpanded(!isMobileExpanded)}
+          aria-expanded={isMobileExpanded}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
+            <PyCosmosLogo size={26} animated={false} />
+            <div style={{ textAlign: 'left' }}>
+              <div style={{ fontSize: '0.88rem', fontWeight: 800, color: 'var(--text-primary)' }}>
+                Curriculum Modules ({totalCompleted} / {totalTopicsCount})
+              </div>
+              <div style={{ fontSize: '0.74rem', color: 'var(--py-yellow)', fontWeight: 600 }}>
+                {isMobileExpanded ? 'Tap to close modules list ▴' : 'Tap to select from 51 Python topics ▾'}
+              </div>
             </div>
           </div>
-          <span className="py-sidebar-counter-chip">
-            <strong>{totalCompleted}</strong> / {totalTopicsCount}
-          </span>
-        </div>
-
-        {/* Global Mini Progress Bar */}
-        <div className="py-sidebar-global-track">
-          <div
-            className="py-sidebar-global-fill"
-            style={{ width: `${overallPercent}%` }}
+          <ChevronDown
+            size={18}
+            style={{
+              transform: isMobileExpanded ? 'rotate(180deg)' : 'none',
+              transition: 'transform 0.25s ease',
+              color: 'var(--text-secondary)'
+            }}
           />
-        </div>
-
-        {/* Search Input Box */}
-        <div className="py-sidebar-search-box">
-          <Search size={14} color="var(--text-muted)" />
-          <input
-            type="text"
-            className="py-sidebar-search-input"
-            placeholder="Search topic or concept..."
-            value={localSearch}
-            onChange={(e) => handleSearchChange(e.target.value)}
-          />
-          {localSearch && (
-            <button
-              type="button"
-              className="py-sidebar-clear-btn"
-              onClick={() => handleSearchChange('')}
-              title="Clear search"
-            >
-              <X size={13} />
-            </button>
-          )}
-        </div>
+        </button>
       </div>
 
-      {/* ── CATEGORIES & TOPICS ACCORDION ── */}
-      <div className="py-sidebar-tree-body">
+      <div className={`py-sidebar-collapsible-wrapper ${isMobileExpanded ? 'is-expanded' : ''}`}>
+        {/* ── TOP HEADER & PROGRESS ── */}
+        <div className="py-sidebar-top-deck">
+          <div className="py-sidebar-brand-row">
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.55rem' }}>
+              <PyCosmosLogo size={24} animated={false} />
+              <div>
+                <span className="py-sidebar-title">Python Curriculum</span>
+                <span className="py-sidebar-tagline">51 In-Depth Modules</span>
+              </div>
+            </div>
+            <span className="py-sidebar-counter-chip">
+              <strong>{totalCompleted}</strong> / {totalTopicsCount}
+            </span>
+          </div>
+
+          {/* Global Mini Progress Bar */}
+          <div className="py-sidebar-global-track">
+            <div
+              className="py-sidebar-global-fill"
+              style={{ width: `${overallPercent}%` }}
+            />
+          </div>
+
+          {/* Search Input Box */}
+          <div className="py-sidebar-search-box">
+            <Search size={14} color="var(--text-muted)" />
+            <input
+              type="text"
+              className="py-sidebar-search-input"
+              placeholder="Search topic or concept..."
+              value={localSearch}
+              onChange={(e) => handleSearchChange(e.target.value)}
+            />
+            {localSearch && (
+              <button
+                type="button"
+                className="py-sidebar-clear-btn"
+                onClick={() => handleSearchChange('')}
+                title="Clear search"
+              >
+                <X size={13} />
+              </button>
+            )}
+          </div>
+        </div>
+
+        {/* ── CATEGORIES & TOPICS ACCORDION ── */}
+        <div className="py-sidebar-tree-body">
         {CATEGORIES.map((category) => {
           const categoryTopics = filteredTopics.filter((t) => t.category === category);
           if (categoryTopics.length === 0 && query) return null;
@@ -185,7 +218,11 @@ export default function Sidebar({
                           whileHover={{ x: 2 }}
                           transition={{ duration: 0.12 }}
                           className={`py-sidebar-topic-item ${isActive ? 'is-active' : ''}`}
-                          onClick={() => onSelectTopic(topic.id)}
+                          onClick={() => {
+                            onSelectTopic(topic.id);
+                            setIsMobileExpanded(false);
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                          }}
                         >
                           {/* Completion Toggle Dot */}
                           <div
@@ -221,6 +258,7 @@ export default function Sidebar({
             </div>
           );
         })}
+      </div>
       </div>
     </aside>
   );

@@ -314,8 +314,8 @@ export default function MasteryTrackerPage({
             </span>
           </motion.div>
 
-          <h1 style={{ fontSize: '2.4rem', fontWeight: 900, margin: '0.1rem 0 0.4rem', color: 'var(--text-primary)' }}>
-            Python <span className="forge-gradient-text">Mastery Tracker</span>
+          <h1 style={{ fontSize: 'clamp(1.6rem, 4.5vw, 2.4rem)', fontWeight: 900, margin: '0.1rem 0 0.4rem', color: 'var(--text-primary)', wordBreak: 'break-word' }}>
+            Python <span className="forge-gradient-text" style={{ display: 'inline-block' }}>Mastery Tracker</span>
           </h1>
           <p style={{ maxWidth: '780px', lineHeight: 1.55, color: 'var(--text-secondary)', fontSize: '0.92rem', margin: 0 }}>
             Systematic progression across all 27 technical milestones—from fundamental CPython execution mechanics to asynchronous concurrency and production architectures.

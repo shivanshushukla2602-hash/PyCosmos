@@ -60,8 +60,10 @@ export default function GitHubHeatmap({ completedMap = {} }) {
         background: 'var(--bg-card)',
         borderRadius: '18px',
         border: '1px solid var(--border-color)',
-        padding: '1.5rem 1.75rem',
-        boxShadow: '0 4px 20px rgba(0, 0, 0, 0.25)'
+        padding: 'clamp(1rem, 3vw, 1.75rem)',
+        boxShadow: '0 4px 20px rgba(0, 0, 0, 0.25)',
+        width: '100%',
+        boxSizing: 'border-box'
       }}
     >
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem', flexWrap: 'wrap', gap: '0.75rem' }}>
@@ -88,17 +90,18 @@ export default function GitHubHeatmap({ completedMap = {} }) {
         </div>
       </div>
 
-      {/* Heatmap Area */}
-      <div style={{ overflowX: 'auto', paddingBottom: '0.5rem' }}>
-        {/* Month labels */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', maxWidth: '100%', paddingLeft: '32px', marginBottom: '0.4rem', fontSize: '0.72rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>
-          {months.map((m) => (
-            <span key={m}>{m}</span>
-          ))}
-        </div>
+      {/* Heatmap Area with Smooth Touch Horizontal Scroll */}
+      <div style={{ overflowX: 'auto', WebkitOverflowScrolling: 'touch', paddingBottom: '0.5rem', width: '100%' }}>
+        <div style={{ minWidth: '380px' }}>
+          {/* Month labels */}
+          <div style={{ display: 'flex', justifyContent: 'space-between', maxWidth: '100%', paddingLeft: '32px', marginBottom: '0.4rem', fontSize: '0.72rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>
+            {months.map((m) => (
+              <span key={m}>{m}</span>
+            ))}
+          </div>
 
-        {/* Matrix Grid with Day Labels */}
-        <div style={{ display: 'flex', gap: '8px', alignItems: 'flex-start' }}>
+          {/* Matrix Grid with Day Labels */}
+          <div style={{ display: 'flex', gap: '8px', alignItems: 'flex-start' }}>
           {/* Day of Week Labels */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', fontSize: '0.68rem', color: 'var(--text-muted)', width: '24px', textAlign: 'right', lineHeight: '13px' }}>
             {weekDays.map((d, i) => (
@@ -155,6 +158,7 @@ export default function GitHubHeatmap({ completedMap = {} }) {
           </div>
         </div>
       </div>
+    </div>
 
       {/* Legend & Stats Footer */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '1rem', paddingTop: '0.85rem', borderTop: '1px solid rgba(255, 255, 255, 0.06)', flexWrap: 'wrap', gap: '0.75rem' }}>

@@ -209,8 +209,8 @@ export default function DashboardPage({
             </span>
           </motion.div>
 
-          <h1 style={{ fontSize: '2.4rem', fontWeight: 900, marginBottom: '0.35rem', color: 'var(--text-primary)' }}>
-            Welcome back, <span className="forge-gradient-text">{userName}</span>
+          <h1 style={{ fontSize: 'clamp(1.5rem, 4.5vw, 2.4rem)', fontWeight: 900, marginBottom: '0.35rem', color: 'var(--text-primary)', wordBreak: 'break-word' }}>
+            Welcome back, <span className="forge-gradient-text" style={{ display: 'inline-block' }}>{userName}</span>
           </h1>
           <p style={{ color: 'var(--text-secondary)', fontSize: '0.94rem', margin: 0, maxWidth: '640px', lineHeight: 1.5 }}>
             "Beautiful is better than ugly. Explicit is better than implicit. Simple is better than complex." — <em>The Zen of Python (PEP 20)</em>
@@ -218,7 +218,7 @@ export default function DashboardPage({
         </div>
 
         {/* Global Progress Ring & Level Indicator */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', background: 'var(--bg-card)', padding: '0.85rem 1.35rem', borderRadius: '18px', border: '1px solid var(--border-color)', boxShadow: '0 4px 20px rgba(0, 0, 0, 0.25)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', background: 'var(--bg-card)', padding: '0.85rem 1.35rem', borderRadius: '18px', border: '1px solid var(--border-color)', boxShadow: '0 4px 20px rgba(0, 0, 0, 0.25)', maxWidth: '100%', boxSizing: 'border-box' }}>
           <ProgressRing percentage={percentCompleted} size={78} stroke={7} />
           <div>
             <div style={{ fontSize: '0.74rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--text-muted)' }}>
@@ -245,7 +245,7 @@ export default function DashboardPage({
       {/* ═════════════════════════════════════════════════════════════════════
           2. TOP SUMMARY METRICS DECK
           ═════════════════════════════════════════════════════════════════════ */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem', marginBottom: '2.25rem' }}>
+      <div className="dashboard-metrics-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 220px), 1fr))', gap: '1rem', marginBottom: '2.25rem' }}>
         <motion.div whileHover={{ y: -3 }} className="tracker-stat-box" style={{ borderLeft: '4px solid var(--py-yellow)' }}>
           <span className="stat-label">Course Completed</span>
           <span className="stat-val highlight">

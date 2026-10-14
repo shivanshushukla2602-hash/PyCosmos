@@ -384,8 +384,8 @@ export default function ChecklistPage({
               </span>
             </motion.div>
 
-            <h1 style={{ fontSize: '2.4rem', fontWeight: 900, marginBottom: '0.4rem', color: 'var(--text-primary)' }}>
-              Complete Python <span className="forge-gradient-text">Preparation Checklist</span>
+            <h1 style={{ fontSize: 'clamp(1.5rem, 4.5vw, 2.4rem)', fontWeight: 900, marginBottom: '0.4rem', color: 'var(--text-primary)', wordBreak: 'break-word' }}>
+              Complete Python <span className="forge-gradient-text" style={{ display: 'inline-block' }}>Preparation Checklist</span>
             </h1>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', flexWrap: 'wrap', color: 'var(--text-secondary)', fontSize: '0.84rem', marginTop: '0.4rem' }}>
               <span style={{ fontWeight: 600 }}>States:</span>

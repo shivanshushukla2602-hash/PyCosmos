@@ -17,6 +17,7 @@ import { TOPICS } from './data/topicsData';
 import { Check } from 'lucide-react';
 import PageTransition from './components/PageTransition';
 import Footer from './components/Footer';
+import ScrollToTopButton from './components/ScrollToTopButton';
 
 // Platform Owner & Admin Profile
 const OWNER_ADMIN_USER = {
@@ -48,9 +49,9 @@ export default function App() {
       const params = new URLSearchParams(window.location.search);
       const urlView = params.get('view');
       const savedUser = localStorage.getItem('pyradox_current_user');
-      // If user is already authenticated and expressly visiting a valid subview other than mastery or auth, respect it;
-      // otherwise, always default to 'home' when the website is loaded.
-      if (savedUser && urlView && urlView !== 'auth' && urlView !== 'mastery') {
+      // If user is already authenticated and expressly visiting a valid subview other than auth, respect it;
+      // otherwise, default to 'home' when the website is loaded.
+      if (savedUser && urlView && urlView !== 'auth') {
         return urlView;
       }
     } catch {}
@@ -460,6 +461,9 @@ export default function App() {
           <span>{toastMessage}</span>
         </div>
       )}
+
+      {/* FLOATING SCROLL TO TOP BUTTON (ACTIVE ON ALL PAGES) */}
+      <ScrollToTopButton />
     </div>
   );
 }

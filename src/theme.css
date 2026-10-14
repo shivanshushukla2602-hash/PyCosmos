@@ -85,6 +85,30 @@
   --page-pad-x: 2rem;
 }
 
+@media (max-width: 1024px) {
+  :root {
+    --page-pad-x: 1.5rem;
+    --page-pad-top: 2rem;
+    --page-pad-bottom: 3.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --page-pad-x: 1rem;
+    --page-pad-top: 1.5rem;
+    --page-pad-bottom: 2.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --page-pad-x: 0.75rem;
+    --page-pad-top: 1rem;
+    --page-pad-bottom: 2.25rem;
+  }
+}
+
 body,
 body.light-theme {
   background-color: var(--bg-main);

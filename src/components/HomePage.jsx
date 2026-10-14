@@ -312,21 +312,20 @@ export default function HomePage({
     <div style={{ position: 'relative' }}>
       {/* 1. FULL-VIEWPORT HERO SECTION WITH KINETIC ANIMATIONS */}
       <section
+        className="hero-section"
         style={{
-          minHeight: '86vh',
+          minHeight: '84vh',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
           textAlign: 'center',
-          padding: '2.5rem 2rem 2.5rem',
-          position: 'relative'
+          position: 'relative',
+          width: '100%'
         }}
       >
-
-
         {/* Hero Content Center */}
-        <div style={{ maxWidth: '940px', zIndex: 3 }}>
+        <div style={{ maxWidth: '940px', width: '100%', zIndex: 3, boxSizing: 'border-box' }}>
           {/* Unmistakable PyCosmos Python Snake Emblem & Bloom */}
           <motion.div
             initial={{ opacity: 0, scale: 0.75, y: -20 }}
@@ -344,8 +343,9 @@ export default function HomePage({
           </motion.div>
 
           <h1 className="hero-title">
-            Master Python Programming <br />
-            <span className="forge-gradient-text">A Whole Universe of Python</span> in One Place
+            <span>Master Python Programming</span>{' '}
+            <span className="forge-gradient-text" style={{ display: 'inline' }}>A Whole Universe of Python</span>{' '}
+            <span>in One Place</span>
           </h1>
 
           <p className="hero-subtitle">
@@ -358,7 +358,7 @@ export default function HomePage({
               {...BUTTON_HOVER_VARIANT}
               className="btn btn-yellow btn-shimmer-wrap"
               onClick={() => onNavigate('roadmap')}
-              style={{ padding: '0.9rem 2.1rem', fontSize: '1.02rem', borderRadius: '14px' }}
+              style={{ borderRadius: '14px' }}
             >
               <Map size={20} />
               <span>Explore Skill Roadmap</span>
@@ -375,7 +375,7 @@ export default function HomePage({
               {...BUTTON_HOVER_VARIANT}
               className="btn btn-secondary btn-secondary-glow"
               onClick={() => onNavigate('learn')}
-              style={{ padding: '0.9rem 2.1rem', fontSize: '1.02rem', borderRadius: '14px' }}
+              style={{ borderRadius: '14px' }}
             >
               <Code size={20} />
               <span>{completedCount > 0 ? 'Continue Learning' : 'Start Basics'}</span>
@@ -386,15 +386,15 @@ export default function HomePage({
           <div className="hero-code-terminal-card">
             {/* macOS Titlebar & Tabs */}
             <div className="terminal-titlebar">
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                <div style={{ display: 'flex', gap: '0.45rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', minWidth: 0, overflowX: 'auto', scrollbarWidth: 'none' }}>
+                <div style={{ display: 'flex', gap: '0.45rem', flexShrink: 0 }}>
                   <div className="traffic-dot" style={{ background: '#ff5f56' }} />
                   <div className="traffic-dot" style={{ background: '#ffbd2e' }} />
                   <div className="traffic-dot" style={{ background: '#27c93f' }} />
                 </div>
 
                 {/* Snippet Switcher Tabs */}
-                <div style={{ display: 'flex', gap: '0.35rem', marginLeft: '0.5rem' }}>
+                <div style={{ display: 'flex', gap: '0.35rem', marginLeft: '0.25rem', flexShrink: 0 }}>
                   {PLAYGROUND_SNIPPETS.map((snip, idx) => (
                     <button
                       key={snip.id}
@@ -407,7 +407,7 @@ export default function HomePage({
                 </div>
               </div>
 
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexShrink: 0 }}>
                 <div className="terminal-wasm-pill">
                   <span className="live-pulse-dot" />
                   <Terminal size={12} />
@@ -426,7 +426,7 @@ export default function HomePage({
               </div>
 
               {/* Code Content */}
-              <div style={{ flex: 1, overflowX: 'auto' }}>
+              <div style={{ flex: 1, overflowX: 'auto', minWidth: 0 }}>
                 <pre style={{ margin: 0, whiteSpace: 'pre-wrap', wordBreak: 'break-word', fontFamily: 'inherit' }}>
                   {heroFullText.slice(0, heroTypedChars)}
                   {!heroTypingDone && <span className="blinking-cursor">|</span>}
@@ -537,7 +537,7 @@ export default function HomePage({
             </svg>
 
             {/* 5 Milestone Node Cards */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '1rem', position: 'relative', zIndex: 2 }}>
+            <div className="serpentine-pathway-cards-grid">
               {JOURNEY_LEVELS.map((lvl) => {
                 const isCurrent = (percentCompleted < 20 && lvl.level === 1) ||
                   (percentCompleted >= 20 && percentCompleted < 40 && lvl.level === 2) ||

@@ -8,7 +8,8 @@ import {
   FileCode,
   Compass,
   Trophy,
-  ArrowRight
+  ArrowRight,
+  ArrowUp
 } from 'lucide-react';
 import PyCosmosLogo from './PyCosmosLogo';
 import HeartLogo from './HeartLogo';
@@ -143,6 +144,19 @@ export default function Footer({ onNavigate }) {
             </div>
           </div>
 
+        </div>
+
+        {/* Back to Top Quick Action */}
+        <div style={{ display: 'flex', justifyContent: 'center', margin: '2rem 0 1.25rem' }}>
+          <button
+            type="button"
+            onClick={scrollToTop}
+            className="footer-scroll-top-btn"
+            title="Scroll to top of the page"
+          >
+            <ArrowUp size={15} />
+            <span>Back to Top</span>
+          </button>
         </div>
 
         {/* Divider */}
