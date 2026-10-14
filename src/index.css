@@ -7630,8 +7630,8 @@ body.light-theme .footer-brand-badge {
   justify-content: center;
   gap: 0.65rem;
   font-family: 'Plus Jakarta Sans', 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: 1.25rem;
-  font-weight: 600;
+  font-size: 1.3rem;
+  font-weight: 800;
   text-align: center;
   letter-spacing: -0.015em;
   padding: 0.2rem 0.5rem;
@@ -7650,14 +7650,14 @@ body.light-theme .footer-brand-badge {
 .footer-built-blue {
   color: #306998 !important; /* Authentic Python Logo Blue */
   font-family: 'Plus Jakarta Sans', 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  font-weight: 600;
+  font-weight: 800;
   letter-spacing: -0.015em;
 }
 
 body.light-theme .footer-built-blue {
   color: #306998 !important;
   font-family: 'Plus Jakarta Sans', 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  font-weight: 600;
+  font-weight: 800;
 }
 
 /* Python Heart Logo pulse animation */
@@ -7694,7 +7694,7 @@ body.light-theme .footer-built-blue {
 .footer-attribution strong {
   color: #D99B00 !important; /* High-contrast authentic Python Logo Gold-Yellow */
   font-family: 'Plus Jakarta Sans', 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  font-weight: 800;
+  font-weight: 900;
   letter-spacing: -0.015em;
   text-shadow: none !important;
   transition: all 0.2s ease;
@@ -7709,22 +7709,22 @@ body.light-theme .footer-author-yellow,
 body.light-theme .footer-attribution strong {
   color: #D99B00 !important;
   font-family: 'Plus Jakarta Sans', 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  font-weight: 800;
+  font-weight: 900;
   text-shadow: none !important;
 }
 
 .footer-copyright {
-  font-family: 'Outfit', 'Inter', sans-serif;
-  font-size: 0.82rem;
-  font-weight: 500;
-  color: var(--text-muted);
+  font-family: 'Plus Jakarta Sans', 'Outfit', 'Inter', sans-serif;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: #64748B;
   letter-spacing: 0.01em;
   text-align: center;
 }
 
 @media (max-width: 640px) {
   .footer-attribution {
-    font-size: 1.05rem;
+    font-size: 1.12rem;
     gap: 0.45rem;
     padding: 0.35rem 0.85rem;
   }
