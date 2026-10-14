@@ -227,6 +227,8 @@ export default function Navbar({
                 className="navbar-user-pill"
                 aria-expanded={isUserMenuOpen}
                 aria-haspopup="true"
+                aria-label="User profile and settings"
+                title={currentUser.name}
               >
                 <div
                   className="navbar-avatar-circle"
@@ -249,7 +251,7 @@ export default function Navbar({
                     {currentUser.isAdmin ? 'Owner / Admin' : currentUser.level || 'Mastery'}
                   </span>
                 </div>
-                <ChevronDown size={14} style={{ color: 'var(--text-secondary)' }} />
+                <ChevronDown size={14} className="navbar-user-chevron desktop-only" style={{ color: 'var(--text-secondary)' }} />
               </button>
 
               {/* Dropdown User Menu */}
@@ -336,6 +338,7 @@ export default function Navbar({
             className="navbar-icon-btn mobile-menu-btn mobile-only"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle Mobile Menu"
+            title={isMobileMenuOpen ? "Close menu" : "Open navigation menu"}
           >
             {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>

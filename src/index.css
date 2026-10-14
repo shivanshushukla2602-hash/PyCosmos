@@ -664,6 +664,11 @@ body.light-theme .drawer-panel {
   display: none !important;
 }
 
+/* Mobile hamburger button should never shrink or be pushed out */
+.mobile-menu-btn {
+  flex-shrink: 0 !important;
+}
+
 @media (max-width: 1024px) {
   .desktop-only {
     display: none !important;
@@ -671,6 +676,196 @@ body.light-theme .drawer-panel {
   .mobile-only {
     display: flex !important;
   }
+  .navbar-floating-bar {
+    padding: 0.45rem 1rem;
+    gap: 0.6rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar-floating-bar {
+    padding: 0.4rem 0.75rem;
+    gap: 0.5rem;
+  }
+  .brand {
+    gap: 0.5rem;
+  }
+  .brand-name {
+    font-size: 1.2rem;
+  }
+  .navbar-controls-right {
+    gap: 0.4rem;
+  }
+  .navbar-mobile-drawer {
+    width: calc(100% - 1rem);
+    margin: 0.35rem auto 0.65rem;
+    border-radius: 14px;
+  }
+  .mobile-drawer-inner {
+    padding: 0.5rem;
+    gap: 0.25rem;
+  }
+  .mobile-nav-item {
+    padding: 0.65rem 0.85rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .navbar-floating-bar {
+    padding: 0.35rem 0.55rem;
+    gap: 0.35rem;
+  }
+  .brand {
+    gap: 0.45rem;
+    min-width: 0;
+    flex-shrink: 1;
+  }
+  .brand-name {
+    font-size: 1.12rem;
+  }
+  /* Convert user pill to a sleek circular avatar button on mobile */
+  .navbar-user-pill,
+  body.light-theme .navbar-user-pill {
+    padding: 0 !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+  .navbar-avatar-circle {
+    width: 32px;
+    height: 32px;
+    border-radius: 9px;
+  }
+  .navbar-icon-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 9px;
+  }
+  .streak-badge {
+    height: 32px;
+    padding: 0 0.45rem;
+    border-radius: 9px;
+    box-sizing: border-box;
+  }
+  .navbar-controls-right {
+    gap: 0.35rem;
+    flex-shrink: 0;
+  }
+  .navbar-user-dropdown {
+    right: -4px;
+    max-width: calc(100vw - 16px);
+    width: 230px;
+  }
+  .streak-popover {
+    right: -30px;
+    max-width: calc(100vw - 20px);
+    width: 230px;
+  }
+}
+
+@media (max-width: 400px) {
+  .navbar-floating-bar {
+    padding: 0.3rem 0.4rem;
+    gap: 0.25rem;
+  }
+  .brand {
+    gap: 0.35rem;
+  }
+  .brand .pycosmos-brand-mark,
+  .brand .pyforge-brand-mark {
+    width: 28px !important;
+    height: 28px !important;
+  }
+  .brand-name {
+    font-size: 1.05rem;
+  }
+  .navbar-controls-right {
+    gap: 0.26rem;
+  }
+  .navbar-icon-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+  }
+  .navbar-icon-btn svg {
+    width: 15px;
+    height: 15px;
+  }
+  .navbar-avatar-circle {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    font-size: 0.7rem;
+  }
+  .streak-badge {
+    height: 30px;
+    padding: 0 0.35rem;
+    border-radius: 8px;
+  }
+  .streak-badge svg {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+@media (max-width: 330px) {
+  .navbar-floating-bar {
+    padding: 0.25rem 0.25rem;
+    gap: 0.2rem;
+  }
+  .brand .pycosmos-brand-mark,
+  .brand .pyforge-brand-mark {
+    width: 24px !important;
+    height: 24px !important;
+  }
+  .brand-name {
+    font-size: 0.95rem;
+  }
+  .navbar-controls-right {
+    gap: 0.2rem;
+  }
+  .navbar-icon-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 7px;
+  }
+  .navbar-avatar-circle {
+    width: 28px;
+    height: 28px;
+    border-radius: 7px;
+    font-size: 0.68rem;
+  }
+  .streak-badge {
+    height: 28px;
+    padding: 0 0.28rem;
+    border-radius: 7px;
+  }
+}
+
+body.light-theme .navbar-mobile-drawer {
+  background: #ffffff !important;
+  border-color: #e2e8f0 !important;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.12) !important;
+}
+
+body.light-theme .mobile-nav-item {
+  color: #475569;
+}
+
+body.light-theme .mobile-nav-item:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+body.light-theme .mobile-nav-item.active {
+  background: rgba(2, 132, 199, 0.1);
+  color: #0284c7;
+  font-weight: 700;
+}
+
+body.light-theme .mobile-nav-item.active .mobile-nav-active-dot {
+  background: #0284c7;
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
